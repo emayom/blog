@@ -1,9 +1,17 @@
 name: Deploy
 
 on:
+  # 기본 브랜치에 대한 푸시 이벤트 발생 시 실행
   push:
-    branches:
-      - main
+    branches: ["main"]
+
+  # Actions 탭에서 수동으로 워크플로우를 실행할 수 있도록 구성
+  workflow_dispatch:
+
+# 동시에 하나의 배포만 허용하도록 구성
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -17,10 +25,11 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
-          node-version: 16
+          node-version: 18
+          cache: "npm"
 
       - name: Install dependencies
-        uses: bahmutov/npm-install@v1
+        run: npm install
 
       - name: Build project
         run: npm run build
