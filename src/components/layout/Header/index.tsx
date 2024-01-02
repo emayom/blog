@@ -2,7 +2,8 @@ import { useEffect } from "react";
 
 import clsx from "clsx";
 import * as styles from "./styles.css";
-// import mainLogo from "/emayom.svg";
+import GitHubSVG from "../../../assets/github.svg?react";
+import MailSVG from "../../../assets/mail.svg?react";
 
 export const Header = () => {
   //   const { toggleTheme, isDarkMode } = useContext(Context);
@@ -32,7 +33,23 @@ export const Header = () => {
           />
           <img src={logo} srcSet={logo} alt="Typing SVG Logo" />
         </a>
-        <div className="content">
+        <div className={styles.container}>
+          <div style={{ display: "flex", gap: "1rem" }}>
+            <a
+              className={styles.anchor}
+              href="https://github.com/emayom"
+              target="_blank"
+            >
+              <GitHubSVG />
+            </a>
+            <a
+              className={styles.anchor}
+              href="mailto:emayom@naver.com"
+              target="_blank"
+            >
+              <MailSVG />
+            </a>
+          </div>
           {/* <div onClick={toggleTheme}>{!isDarkMode ? "🌙 " : "☀️"}</div> */}
         </div>
       </div>

@@ -6,7 +6,7 @@ export const header = style({
   left: 0,
   zIndex: 1,
   padding: 10,
-  pointerEvents: "none",
+  color: "#3c3c43",
 });
 
 export const title = style({
@@ -18,5 +18,14 @@ export const title = style({
 
 export const container = style({
   display: "flex",
+  alignItems: "center",
   justifyContent: "space-between",
+});
+
+export const anchor = style({
+  display: "block",
+  fill: "currentcolor",
+  width: "24px",
+  height: "24px",
+  transition: "color .5s",
 });
