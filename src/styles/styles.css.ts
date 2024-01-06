@@ -1,4 +1,5 @@
 import { style, styleVariants } from "@vanilla-extract/css";
+import { vars } from "./theme.css";
 
 export const underlineOffset = styleVariants({
   4: { textUnderlineOffset: "4px" },
@@ -14,7 +15,7 @@ export const shadow = style({
 });
 
 export const border = style({
-  border: "0 solid #e5e7eb",
+  border: `0 solid ${vars.border}`,
 });
 
 export const reset = style({
@@ -87,10 +88,4 @@ export const gap = styleVariants({
   xs: { gap: ".25rem" },
   sm: { gap: ".5rem" },
   md: { gap: "1rem" },
-});
-
-export const background = styleVariants({
-  primary: { backgroundColor: "" },
-  secondary: { backgroundColor: "#f5f6f8" },
-  accent: { backgroundColor: "#3c82f6" },
 });
