@@ -1,4 +1,5 @@
 import { style } from "@vanilla-extract/css";
+import { reset } from "../../../styles/styles.css";
 
 export const header = style({
   position: "sticky",
@@ -6,7 +7,7 @@ export const header = style({
   left: 0,
   zIndex: 1,
   padding: "1rem 2rem",
-  color: "#3c3c43",
+  // color: "#3c3c43",
 });
 
 export const title = style({
@@ -29,3 +30,11 @@ export const anchor = style({
   height: "24px",
   transition: "color .5s",
 });
+
+export const toggleBtn = style([
+  reset,
+  {
+    color: "inherit",
+    background: "none",
+  },
+]);
