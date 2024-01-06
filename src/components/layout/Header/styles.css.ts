@@ -5,7 +5,7 @@ export const header = style({
   top: 0,
   left: 0,
   zIndex: 1,
-  padding: 10,
+  padding: "1rem 2rem",
   color: "#3c3c43",
 });
 
