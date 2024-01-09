@@ -9,7 +9,7 @@ import { ThemeContextProvider } from "./context/ThemeContext.tsx";
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ThemeContextProvider>
-      <BrowserRouter>
+      <BrowserRouter basename={"https://emayom.github.io/"}>
         <App />
       </BrowserRouter>
     </ThemeContextProvider>
