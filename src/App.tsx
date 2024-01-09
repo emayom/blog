@@ -15,11 +15,7 @@ function App() {
   const { isDark } = useThemeContext();
 
   useEffect(() => {
-    setElementVars(
-      document.body,
-      vars,
-      isDark ? darkTheme : lightTheme
-    );
+    setElementVars(document.body, vars, isDark ? darkTheme : lightTheme);
   }, [isDark]);
 
   return (
@@ -27,8 +23,8 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/:title" element={<Article />} />
         <Route path="/about" element={<About />} />
+        <Route path="/article/:title" element={<Article />} />
       </Routes>
       <Footer />
     </div>
