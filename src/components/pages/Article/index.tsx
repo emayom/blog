@@ -1,4 +1,4 @@
-import Utterances from "../../layout/Utterances";
+import Utterances from "../../Utterances";
 
 export const Article = () => {
   return (
