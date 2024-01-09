@@ -12,5 +12,4 @@ export default defineConfig({
     react(),
     vanillaExtractPlugin(),
   ],
-  base: "https://emayom.github.io/",
 });
