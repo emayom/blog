@@ -23,6 +23,18 @@ export const container = style({
   justifyContent: "space-between",
 });
 
+export const socialLinks = style({
+  display: "flex",
+  gap: "1rem",
+  "::before": {
+    content: "",
+    marginLeft: "1rem",
+    width: 1,
+    height: 24,
+    backgroundColor: "#e2e2e3",
+  },
+});
+
 export const anchor = style({
   display: "block",
   fill: "currentcolor",
@@ -34,6 +46,8 @@ export const anchor = style({
 export const toggleBtn = style([
   reset,
   {
+    width: 24,
+    height: 24,
     color: "inherit",
     background: "none",
   },
