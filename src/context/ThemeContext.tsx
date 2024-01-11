@@ -5,6 +5,9 @@ type ThemeContextType = {
   toggleTheme: () => void;
 };
 
+/**
+ * TODO: localStorage 추상화 (prefix, version ...)
+ */
 const THEME_PREF_KEY = "isdark";
 
 const ThemeContext = createContext<ThemeContextType>({
@@ -13,10 +16,17 @@ const ThemeContext = createContext<ThemeContextType>({
 });
 
 export const ThemeContextProvider = ({ children }: React.PropsWithChildren) => {
+  const mediaPrefer = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const themePrefer = localStorage.getItem(THEME_PREF_KEY);
-  const initialTheme = themePrefer ? JSON.parse(themePrefer) : false;
 
-  const [isDark, setIsDark] = useState(initialTheme);
+  /**
+   * 테마 설정 값이 없다면 시스템 설정에 따른다.
+   */
+  const initialValue: boolean = themePrefer
+    ? JSON.parse(themePrefer)
+    : mediaPrefer;
+
+  const [isDark, setIsDark] = useState(initialValue);
 
   const toggleTheme = () => setIsDark(!isDark);
 
