@@ -23,6 +23,7 @@ const Metadata = ({
       <time className={styles.publishedDate}>
         {new Date(date).toLocaleString()}
       </time>
+      <p>{description}</p>
       <div>
         {categories &&
           categories.map((category: string, index: number) => (
