@@ -8,7 +8,6 @@ export const footer = style([
   {
     userSelect: "none",
     padding: "1rem",
-    marginTop: "2rem",
     color: vars.color.secondary,
     background: vars.background.secondary,
     borderTopWidth: "1px",
