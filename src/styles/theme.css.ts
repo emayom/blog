@@ -1,6 +1,6 @@
 import { createThemeContract } from "@vanilla-extract/css";
 
-export const vars = createThemeContract({
+export const themeVars = createThemeContract({
   border: null,
   background: {
     primary: null,
@@ -9,5 +9,7 @@ export const vars = createThemeContract({
   color: {
     primary: null,
     secondary: null,
+    tertiary: null,
+    reversed: null,
   },
 });

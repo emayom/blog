@@ -1,5 +1,6 @@
 import { globalStyle } from "@vanilla-extract/css";
-import { vars } from "./theme.css";
+
+import { themeVars } from "./theme.css";
 
 globalStyle("#app", {
   display: "grid",
@@ -9,6 +10,6 @@ globalStyle("#app", {
   maxWidth: "100%",
   overflow: "scroll",
   boxSizing: "border-box",
-  background: vars.background.primary,
-  color: vars.color.primary,
+  background: themeVars.background.primary,
+  color: themeVars.color.primary,
 });
