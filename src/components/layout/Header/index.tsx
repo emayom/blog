@@ -41,10 +41,9 @@ export const Header = () => {
             <SwitchSVG
               width={25}
               height={25}
-              transform={isDark ? "rotate(180), scale(-1 1)" : ""}
+              transform={isDark ? "matrix(1, 0, 0, -1, 0, 0)" : ""}
             />
           </button>
-
           <div className={styles.socialLinks}>
             <a
               className={styles.anchor}
