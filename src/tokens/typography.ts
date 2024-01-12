@@ -9,13 +9,13 @@ const relativeSize = {
 };
 
 const headingLevel = {
-  h1: "80px",
-  h2: "72px",
-  h3: "54px",
-  h4: "40px",
-  h5: "34px",
-  h6: "28px",
-  h7: "20px",
+  h1: "48px",
+  h2: "30px",
+  h3: "24px",
+  h4: "20px",
+  h5: "17px",
+  h6: "14px",
+  h7: "12px",
 };
 
 const weight = {
@@ -51,13 +51,13 @@ export const lineHeight = {
   xl: "34px",
   xxl: "40px",
   // heading level
-  h1: "84px",
-  h2: "76px",
-  h3: "58px",
-  h4: "44px",
-  h5: "38px",
-  h6: "34px",
-  h7: "28px",
+  h1: "1.25",
+  h2: "1.55",
+  h3: "1.6",
+  h4: "1.6",
+  h5: "1.6",
+  h6: "1.6",
+  h7: "1.8",
 };
 
 export const letterSpacing = {
