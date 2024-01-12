@@ -5,7 +5,7 @@ import readingTime from "reading-time";
 import remarkGfm from "remark-gfm"; /** GFM(Github Flavored Markdown) */
 import rehypeRaw from "rehype-raw"; /** HTML 태그를 랜더링하는 방법을 제어하는 플러그인 */
 import Markdown from "react-markdown";
-import * as matter from "gray-matter"; /** front matter를 추출하여 JavaScript 객체로 변환하는 플러그인 */
+import matter from "gray-matter"; /** front matter를 추출하여 JavaScript 객체로 변환하는 플러그인 */
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark as style } from "react-syntax-highlighter/dist/esm/styles/prism";
 
@@ -29,7 +29,7 @@ export const Article = () => {
   });
 
   useEffect(() => {
-    import(`/content/${title}.md`)
+    import(`../../../../content/${title}.md`)
       .then((res) => {
         fetch(res.default)
           .then((res) => res.text())
