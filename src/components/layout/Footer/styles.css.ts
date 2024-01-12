@@ -1,6 +1,6 @@
 import { style } from "@vanilla-extract/css";
 import { border, text } from "../../../styles/styles.css";
-import { vars } from "../../../styles/theme.css";
+import { themeVars } from "../../../styles/theme.css";
 
 export const footer = style([
   border,
@@ -8,8 +8,8 @@ export const footer = style([
   {
     userSelect: "none",
     padding: "1rem",
-    color: vars.color.secondary,
-    background: vars.background.secondary,
+    color: themeVars.color.secondary,
+    background: themeVars.background.secondary,
     borderTopWidth: "1px",
   },
 ]);
