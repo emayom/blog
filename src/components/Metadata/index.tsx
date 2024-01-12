@@ -4,6 +4,7 @@ export type IMetadata = {
   title: string;
   date: string;
   description: string;
+  readingTime: string;
   categories: [];
   published: boolean;
 };
@@ -14,22 +15,28 @@ const Metadata = ({
   description,
   categories,
   published,
+  readingTime,
 }: IMetadata) => {
   if (!published) return;
 
   return (
     <header className={styles.metadata}>
-      <h1 className={styles.title}>{title}</h1>
-      <time className={styles.publishedDate}>
-        {new Date(date).toLocaleString()}
+      <h2 className={styles.title}>{title}</h2>
+      <time className={styles.publishedDate} dateTime={date}>
+        {new Date(date).toLocaleDateString("ko-kR")}
       </time>
-      <p>{description}</p>
+      <span className={styles.readingTime}>{readingTime}</span>
+      <p className={styles.description}>{description}</p>
       <div>
         {categories &&
           categories.map((category: string, index: number) => (
-            <div className={styles.category} key={index}>
+            <a
+              className={styles.category}
+              key={index}
+              href={`/tags/${category.replace(/\s/g, "-")}`}
+            >
               {category}
-            </div>
+            </a>
           ))}
       </div>
     </header>
