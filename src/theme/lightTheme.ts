@@ -1,11 +1,15 @@
+import { tokens } from "../tokens";
+
 export const lightTheme = {
-  border: "#e5e7eb",
+  border: tokens.color.primary[200],
   background: {
-    primary: "#FCFCFD",
-    secondary: "#F5F6F8",
+    primary: "#FFF",
+    secondary: tokens.color.primary[100],
   },
   color: {
-    primary: "#030712",
-    secondary: "#6B7280",
+    primary: tokens.color.primary[800],
+    secondary: tokens.color.primary[700],
+    tertiary: tokens.color.primary[500],
+    reversed: tokens.color.neutral[25],
   },
 };

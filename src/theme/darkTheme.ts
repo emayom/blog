@@ -1,11 +1,15 @@
+import { tokens } from "../tokens";
+
 export const darkTheme = {
-  border: "#484d56",
+  border: tokens.color.neutral[300],
   background: {
-    primary: "#030712",
+    primary: tokens.color.neutral[900],
     secondary: "#202127",
   },
   color: {
-    primary: "#f8f8f2",
-    secondary: "#6B7280",
+    primary: tokens.color.primary[25],
+    secondary: tokens.color.neutral[300],
+    tertiary: tokens.color.neutral[500],
+    reversed: tokens.color.neutral[900],
   },
 };
