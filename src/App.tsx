@@ -4,8 +4,8 @@ import { setElementVars } from "@vanilla-extract/dynamic";
 
 import { useThemeContext } from "./context/ThemeContext";
 
-import { Header, Footer } from "./components/layout";
-import { Home, About, Article } from "./components/pages";
+import { Header, Footer, Container } from "./components/layout";
+import { Home, Resume, Article, Post } from "./components/pages";
 
 import { themeVars } from "./styles/theme.css";
 import { darkTheme, lightTheme } from "./theme/index";
@@ -21,21 +21,14 @@ function App() {
   return (
     <div id="app">
       <Header />
-      <main
-        style={{
-          width: "100%",
-          maxWidth: "760px",
-          margin: "0 auto",
-          boxSizing: "border-box",
-          padding: "2rem",
-        }}
-      >
+      <Container component="main">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/article/:title" element={<Article />} />
+          <Route path="/posts" element={<Post />} />
+          <Route path="/resume" element={<Resume />} />
+          <Route path="/article/:slug" element={<Article />} />
         </Routes>
-      </main>
+      </Container>
       <Footer />
     </div>
   );
