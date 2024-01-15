@@ -1,3 +1,4 @@
 export { Home } from "./Home";
-export { About } from "./About";
+export { Resume } from "./Resume";
 export { Article } from "./Article";
+export { Post } from "./Post";
