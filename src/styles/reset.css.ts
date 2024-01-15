@@ -2,7 +2,7 @@ import { globalStyle, GlobalStyleRule } from "@vanilla-extract/css";
 import { reset } from "./layers.css.ts";
 
 /**
- * h1, h2, h3, h4, h5, h6, p, blockquote, strong, sub, sup 제외
+ * h1, h2, h3, h4, h5, h6, p, blockquote, strong, sub, sup, b 제외
  */
 export const globalReset: {
   selector: string;
@@ -10,7 +10,7 @@ export const globalReset: {
 }[] = [
   {
     selector:
-      "html, body, div, span, applet, object, iframe, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed,  figure, figcaption, footer, header, hgroup,  menu, nav, output, ruby, section, summary, time, mark, audio, video",
+      "html, body, div, span, applet, object, iframe, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, tt, var, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed,  figure, figcaption, footer, header, hgroup,  menu, nav, output, ruby, section, summary, time, mark, audio, video",
     rule: {
       margin: 0,
       padding: 0,

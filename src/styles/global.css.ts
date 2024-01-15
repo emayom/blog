@@ -8,7 +8,7 @@ globalStyle("#app", {
   width: "100vw",
   height: "100vh",
   maxWidth: "100%",
-  overflow: "scroll",
+  overflow: "auto",
   boxSizing: "border-box",
   background: themeVars.background.primary,
   color: themeVars.color.primary,

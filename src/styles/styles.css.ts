@@ -73,6 +73,9 @@ export const font = styleVariants({
   bold: {
     fontWeight: "700",
   },
+  serif: {
+    fontFamily: "'Arita buri'",
+  },
 });
 
 export const rounded = styleVariants({
