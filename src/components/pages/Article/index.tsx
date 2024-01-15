@@ -15,7 +15,7 @@ import Utterances from "../../Utterances";
 import * as styles from "./style.css";
 
 export const Article = () => {
-  const { title } = useParams();
+  const { slug } = useParams();
 
   const [isLoading, setIsLoading] = useState(true);
   const [markdown, setMarkdown] = useState("");
@@ -29,7 +29,7 @@ export const Article = () => {
   });
 
   useEffect(() => {
-    import(`../../../../content/${title}.md`)
+    import(`../../../../content/${slug}.md`)
       .then((res) => {
         fetch(res.default)
           .then((res) => res.text())
@@ -51,7 +51,7 @@ export const Article = () => {
           .catch((err) => console.log(err));
       })
       .catch((err) => console.log(err));
-  }, [title]);
+  }, [slug]);
 
   return (
     <>
