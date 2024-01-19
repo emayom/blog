@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { setElementVars } from "@vanilla-extract/dynamic";
+import AnimatedCursor from "react-animated-cursor";
 
 import { useThemeContext } from "./context/ThemeContext";
 
@@ -20,6 +21,18 @@ function App() {
 
   return (
     <div id="app">
+      <AnimatedCursor
+        innerStyle={{ background: themeVars.color.primary }}
+        outerScale={7}
+        outerStyle={{
+          mixBlendMode: isDark ? "difference" : "unset",
+          background: isDark
+            ? "rgba(253, 253, 253, 0.7)"
+            : "rgba(0, 0, 0, 0.09)",
+        }}
+        showSystemCursor={true}
+        trailingSpeed={2}
+      />
       <Header />
       <Container component="main">
         <Routes>
