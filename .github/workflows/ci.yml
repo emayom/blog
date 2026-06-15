@@ -32,9 +32,9 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Unit tests (Vitest)
+      - name: Unit & Integration tests (Vitest)
         if: ${{ hashFiles('vitest.config.*') != '' }}
-        run: npx vitest run
+        run: npm test
 
       - name: E2E tests (Playwright)
         if: ${{ hashFiles('playwright.config.*') != '' }}
