@@ -2,11 +2,10 @@ name: CI
 
 on:
   workflow_dispatch:
-# 활성화 시 아래 주석 해제
-#   pull_request:
-#     branches: [main]
-#   push:
-#     branches: [main]
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
 
 jobs:
   ci:
