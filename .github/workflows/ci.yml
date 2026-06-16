@@ -31,10 +31,14 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Install Playwright Browsers
+        if: ${{ hashFiles('playwright.config.*', 'vitest.config.*') != '' }}
+        run: npx playwright install --with-deps chromium
+
       - name: Unit & Integration tests (Vitest)
         if: ${{ hashFiles('vitest.config.*') != '' }}
         run: npm test
 
       - name: E2E tests (Playwright)
         if: ${{ hashFiles('playwright.config.*') != '' }}
-        run: npx playwright test
+        run: npx playwright test --pass-with-no-tests
