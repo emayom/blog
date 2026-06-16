@@ -10,6 +10,7 @@ on:
 jobs:
   ci:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
 
     steps:
       - uses: actions/checkout@v4
@@ -34,6 +35,7 @@ jobs:
       - name: Install Playwright Browsers
         if: ${{ hashFiles('playwright.config.*', 'vitest.config.*') != '' }}
         run: npx playwright install --with-deps chromium
+        timeout-minutes: 5
 
       - name: Unit & Integration tests (Vitest)
         if: ${{ hashFiles('vitest.config.*') != '' }}
