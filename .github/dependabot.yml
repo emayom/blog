@@ -14,6 +14,12 @@ updates:
           - "patch"
     # major는 그룹에서 빠져 각각 개별 PR로 분리됨 → 하나씩 신중히 검토
     open-pull-requests-limit: 10
+    ignore:
+      # eslint-config-next(16.x)가 ESLint 10 미지원(eslint-plugin-react가
+      # 제거된 context.getFilename() 사용) → 한시적 보류.
+      # Next.js가 ESLint 10을 지원하면 이 항목 제거.
+      - dependency-name: "eslint"
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: github-actions
     directory: /
