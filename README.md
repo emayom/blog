@@ -38,8 +38,8 @@ npm run lint:fix  # ESLint 자동 수정
 
 ## Docs
 
-- [로드맵](ROADMAP.md)
-- [PRD](PRD.md)
+- [로드맵](docs/ROADMAP.md)
+- [PRD](docs/PRD.md)
 - [문서 인덱스](docs/README.md)
 - [CHANGELOG](CHANGELOG.md)
 
