@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>와이어프레임 — 모바일</title>
+<link rel="stylesheet" href="wireframe.css">
+</head>
+<body>
+
+<nav class="toolbar">
+  <a href="home.html">홈</a>
+  <a href="list.html">목록</a>
+  <a href="detail.html">상세</a>
+  <a href="tag.html">태그</a>
+  <a href="archive.html">아카이브</a>
+  <a href="library.html">책장</a>
+  <a href="notes.html">메모</a>
+  <a href="about.html">소개</a>
+  <a href="mobile.html" class="active">모바일</a>
+  <a href="states.html">상태</a>
+</nav>
+
+<div class="frame">
+  <div class="frame-label">모바일 레이아웃 (~380px)</div>
+  <div class="pad">
+    <div class="phones">
+
+      <!-- 진입 -->
+      <div class="phone-wrap">
+        <div class="phone-label">진입 (Landing)</div>
+        <div class="phone">
+          <div class="notch"></div>
+          <div class="m-header">
+            <div class="logo"></div>
+            <div class="hamburger"><span></span><span></span><span></span></div>
+          </div>
+          <div class="m-body">
+            <div class="line" style="height:24px; width:80%"></div>
+            <div class="line" style="height:24px; width:55%; margin-bottom:16px"></div>
+            <div class="line sm w90"></div>
+            <div class="line sm w70" style="margin-bottom:16px"></div>
+            <a class="btn solid" href="#" style="display:block; text-align:center; margin-bottom:22px">글 보러가기</a>
+            <div class="sec-title" style="margin-bottom:10px">최근 글</div>
+            <a class="post" href="#" style="padding:12px; margin-bottom:10px">
+              <div class="top"><span class="tag">태그</span><span class="annot">2026.06.10 · 7분</span></div>
+              <div class="line w80" style="height:13px; margin-top:6px"></div>
+            </a>
+            <a class="post" href="#" style="padding:12px; margin-bottom:22px">
+              <div class="top"><span class="tag">태그</span><span class="annot">2026.05.22 · 5분</span></div>
+              <div class="line w70" style="height:13px; margin-top:6px"></div>
+            </a>
+            <div class="sec-title" style="margin-bottom:10px">아카이브</div>
+            <div class="archive">
+              <a class="ar" href="#"><span class="yr"></span><span class="ct">2026 · 6</span></a>
+              <a class="ar" href="#"><span class="yr"></span><span class="ct">2025 · 7</span></a>
+            </div>
+          </div>
+          <div class="m-tabbar">
+            <div class="ti on"><span class="dot"></span><span class="lb"></span></div>
+            <div class="ti"><span class="dot"></span><span class="lb"></span></div>
+            <div class="ti"><span class="dot"></span><span class="lb"></span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 탐색 -->
+      <div class="phone-wrap">
+        <div class="phone-label">탐색 (목록)</div>
+        <div class="phone">
+          <div class="notch"></div>
+          <div class="m-header">
+            <div class="brand">목록</div>
+            <div class="hamburger"><span></span><span></span><span></span></div>
+          </div>
+          <div class="m-body">
+            <div style="margin-bottom:14px">
+              <span class="chip on" style="height:26px; line-height:26px">전체</span>
+              <span class="chip" style="height:26px; line-height:26px">태그</span>
+              <span class="chip" style="height:26px; line-height:26px">태그</span>
+            </div>
+            <a class="post" href="#" style="margin-bottom:12px; padding:14px">
+              <div class="top"><span class="tag">태그</span><span class="annot">2026.06.10</span></div>
+              <div class="line w80" style="height:14px"></div>
+              <div class="line sm w90" style="margin-top:8px"></div>
+            </a>
+            <a class="post" href="#" style="margin-bottom:12px; padding:14px">
+              <div class="top"><span class="tag">태그</span><span class="annot">2026.05.22</span></div>
+              <div class="line w70" style="height:14px"></div>
+              <div class="line sm w90" style="margin-top:8px"></div>
+            </a>
+            <a class="post" href="#" style="padding:14px">
+              <div class="top"><span class="tag">태그</span><span class="annot">2026.04.03</span></div>
+              <div class="line w80" style="height:14px"></div>
+              <div class="line sm w80" style="margin-top:8px"></div>
+            </a>
+          </div>
+          <div class="m-tabbar">
+            <div class="ti"><span class="dot"></span><span class="lb"></span></div>
+            <div class="ti on"><span class="dot"></span><span class="lb"></span></div>
+            <div class="ti"><span class="dot"></span><span class="lb"></span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 소비 -->
+      <div class="phone-wrap">
+        <div class="phone-label">소비 (상세)</div>
+        <div class="phone">
+          <div class="notch"></div>
+          <div class="m-header">
+            <div class="annot">← 목록</div>
+            <div class="hamburger"><span></span><span></span><span></span></div>
+          </div>
+          <div class="m-body">
+            <div class="line" style="height:20px; width:90%"></div>
+            <div class="line" style="height:20px; width:60%; margin-bottom:10px"></div>
+            <div class="top" style="display:flex; gap:8px; margin-bottom:16px">
+              <span class="annot">2026.06.10</span><span class="tag">태그</span>
+            </div>
+            <div class="ph-img" style="height:160px; margin-bottom:18px">대표 이미지</div>
+            <p class="line w90"></p>
+            <p class="line w80"></p>
+            <p class="line w90"></p>
+            <p class="line w60" style="margin-bottom:18px"></p>
+            <div class="ph-img" style="height:90px; margin-bottom:18px">코드 블록</div>
+            <p class="line w80"></p>
+            <p class="line w70"></p>
+            <div class="divider"></div>
+            <div class="sec-title" style="margin-bottom:12px">댓글</div>
+            <div class="widget" style="border-style:dashed; margin:0">
+              <div class="line sm w80"></div>
+              <div class="line sm w50"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 감상 -->
+      <div class="phone-wrap">
+        <div class="phone-label">감상 (책장)</div>
+        <div class="phone">
+          <div class="notch"></div>
+          <div class="m-header">
+            <div class="brand">책장</div>
+            <div class="hamburger"><span></span><span></span><span></span></div>
+          </div>
+          <div class="m-body">
+            <div class="tabs" style="margin-bottom:16px">
+              <span class="tab on">전체</span><span class="tab">책</span>
+              <span class="tab">애니</span><span class="tab">영화</span>
+            </div>
+            <div class="m-grid2">
+              <div class="poster"><div class="ph-img" style="height:150px">포스터</div>
+                <div class="body"><div class="line sm w90"></div><div class="stars" style="margin-top:6px">★★★★☆</div></div></div>
+              <div class="poster"><div class="ph-img" style="height:150px">포스터</div>
+                <div class="body"><div class="line sm w80"></div><div class="stars" style="margin-top:6px">★★★★★</div></div></div>
+              <div class="poster"><div class="ph-img" style="height:150px">포스터</div>
+                <div class="body"><div class="line sm w90"></div><div class="stars" style="margin-top:6px">★★★☆☆</div></div></div>
+              <div class="poster"><div class="ph-img" style="height:150px">포스터</div>
+                <div class="body"><div class="line sm w70"></div><div class="stars" style="margin-top:6px">★★★★☆</div></div></div>
+            </div>
+          </div>
+          <div class="m-tabbar">
+            <div class="ti"><span class="dot"></span><span class="lb"></span></div>
+            <div class="ti"><span class="dot"></span><span class="lb"></span></div>
+            <div class="ti on"><span class="dot"></span><span class="lb"></span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 저자 -->
+      <div class="phone-wrap">
+        <div class="phone-label">저자 (소개)</div>
+        <div class="phone">
+          <div class="notch"></div>
+          <div class="m-header">
+            <div class="brand">소개</div>
+            <div class="hamburger"><span></span><span></span><span></span></div>
+          </div>
+          <div class="m-body">
+            <div style="display:flex; flex-direction:column; align-items:center; text-align:center; margin-bottom:20px">
+              <div class="pic" style="width:96px; height:96px; margin-bottom:14px"><span class="badge">🎯 포커싱 중</span></div>
+              <div class="line" style="height:20px; width:90px"></div>
+              <div class="line sm" style="width:70px; margin-bottom:12px"></div>
+              <div class="socials"><span class="tag">GitHub</span><span class="tag">LinkedIn</span><span class="tag">Email</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

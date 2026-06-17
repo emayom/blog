@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>와이어프레임 — 홈</title>
+<link rel="stylesheet" href="wireframe.css">
+</head>
+<body>
+
+<nav class="toolbar">
+  <a href="home.html" class="active">홈</a>
+  <a href="list.html">목록</a>
+  <a href="detail.html">상세</a>
+  <a href="tag.html">태그</a>
+  <a href="archive.html">아카이브</a>
+  <a href="library.html">책장</a>
+  <a href="notes.html">메모</a>
+  <a href="about.html">소개</a>
+  <a href="mobile.html">모바일</a>
+  <a href="states.html">상태</a>
+</nav>
+
+<div class="frame">
+  <div class="frame-label">화면 1 — 홈</div>
+
+  <header class="site">
+    <div class="logo"></div>
+    <nav class="site">
+      <a href="list.html">글</a>
+      <a href="notes.html">메모</a>
+      <a href="library.html">책장</a>
+      <a href="about.html">소개</a>
+      <span class="gh"></span>
+    </nav>
+  </header>
+
+  <!-- hero -->
+  <section class="hero">
+    <div class="headline" style="width:62%"></div>
+    <div class="headline" style="width:40%; margin-bottom:22px"></div>
+    <div class="sub">
+      <div class="line sm w90"></div>
+      <div class="line sm w80"></div>
+      <div class="line sm w60"></div>
+    </div>
+    <div style="margin-top:24px">
+      <a class="btn solid" href="list.html">글 보러가기</a>
+      <a class="btn" href="about.html">소개</a>
+    </div>
+  </section>
+
+  <!-- 최근 글 + 아카이브 (2컬럼) -->
+  <section class="block">
+    <div class="with-aside">
+      <!-- 최근 글 -->
+      <div>
+        <div class="section-title"><div class="sec-title">최근 글</div><a class="more" href="list.html">전체 글 →</a></div>
+        <div class="rows">
+          <a class="post" href="detail.html">
+            <div class="top"><span class="tag">태그</span><span class="annot">2026.06.10 · 7분</span></div>
+            <div class="line w70" style="height:16px"></div>
+            <div class="line sm w90" style="margin-top:10px"></div>
+            <div class="line sm w60"></div>
+          </a>
+          <a class="post" href="detail.html">
+            <div class="top"><span class="tag">태그</span><span class="annot">2026.05.22 · 5분</span></div>
+            <div class="line w60" style="height:16px"></div>
+            <div class="line sm w90" style="margin-top:10px"></div>
+            <div class="line sm w70"></div>
+          </a>
+          <a class="post" href="detail.html">
+            <div class="top"><span class="tag">태그</span><span class="annot">2026.04.03 · 10분</span></div>
+            <div class="line w80" style="height:16px"></div>
+            <div class="line sm w80" style="margin-top:10px"></div>
+            <div class="line sm w50"></div>
+          </a>
+        </div>
+      </div>
+
+      <!-- 아카이브 (테두리 없는 리스트) -->
+      <aside>
+        <div class="section-title"><div class="sec-title">아카이브</div></div>
+        <div class="archive">
+          <a class="ar" href="archive.html"><span class="yr"></span><span class="ct">2026 · 6</span></a>
+          <a class="ar" href="archive.html"><span class="yr"></span><span class="ct">2025 · 7</span></a>
+          <a class="ar" href="archive.html"><span class="yr"></span><span class="ct">2024 · 8</span></a>
+          <a class="ar" href="archive.html"><span class="yr"></span><span class="ct">2023 · 5</span></a>
+          <a class="ar" href="archive.html"><span class="yr"></span><span class="ct">2020 · 2</span></a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="ft-top">
+      <div class="ft-brand">
+        <div class="logo"></div>
+        <div class="line sm" style="width:170px; margin-top:14px"></div>
+      </div>
+      <div class="ft-cols">
+        <div class="ft-col">
+          <div class="ft-h">탐색</div>
+          <a href="list.html">글</a>
+          <a href="notes.html">메모</a>
+          <a href="library.html">책장</a>
+          <a href="about.html">소개</a>
+        </div>
+        <div class="ft-col">
+          <div class="ft-h">둘러보기</div>
+          <a href="tag.html">태그</a>
+          <a href="archive.html">아카이브</a>
+          <a href="#">RSS</a>
+        </div>
+        <div class="ft-col">
+          <div class="ft-h">연결</div>
+          <a href="#">GitHub</a>
+          <a href="#">LinkedIn</a>
+          <a href="#">Email</a>
+        </div>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <span>© 2026. 와이어프레임</span>
+      <span>Seoul, Korea</span>
+    </div>
+  </footer>
+</div>
+
+</body>
+</html>

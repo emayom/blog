@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>와이어프레임 — 상세</title>
+<link rel="stylesheet" href="wireframe.css">
+</head>
+<body>
+
+<nav class="toolbar">
+  <a href="home.html">홈</a>
+  <a href="list.html">목록</a>
+  <a href="detail.html" class="active">상세</a>
+  <a href="tag.html">태그</a>
+  <a href="archive.html">아카이브</a>
+  <a href="library.html">책장</a>
+  <a href="notes.html">메모</a>
+  <a href="about.html">소개</a>
+  <a href="mobile.html">모바일</a>
+  <a href="states.html">상태</a>
+</nav>
+
+<div class="frame">
+  <div class="frame-label">화면 3 — 상세 (글)</div>
+
+  <header class="site">
+    <div class="logo"></div>
+    <nav class="site">
+      <a href="list.html" class="on">글</a>
+      <a href="notes.html">메모</a>
+      <a href="library.html">책장</a>
+      <a href="about.html">소개</a>
+      <span class="gh"></span>
+    </nav>
+  </header>
+
+  <div class="pad">
+    <div class="with-aside">
+      <!-- article -->
+      <article>
+        <a class="btn" href="list.html" style="margin-bottom:18px">← 모든 글</a>
+        <div class="line" style="height:28px; width:90%"></div>
+        <div class="line" style="height:28px; width:55%; margin-bottom:14px"></div>
+        <div style="margin-bottom:18px">
+          <div class="annot">2026.06.10</div>
+          <div class="annot" style="margin-top:4px">8분 소요</div>
+        </div>
+
+        <div class="ph-img" style="height:280px; margin-bottom:24px">본문 대표 이미지</div>
+
+        <p class="line w90"></p>
+        <p class="line w80"></p>
+        <p class="line w90"></p>
+        <p class="line w70" style="margin-bottom:22px"></p>
+
+        <div class="line" style="height:18px; width:200px; margin-bottom:14px"></div>
+        <p class="line w80"></p>
+        <p class="line w90"></p>
+        <p class="line w60" style="margin-bottom:22px"></p>
+
+        <div class="ph-img" style="height:120px; margin-bottom:22px">코드 블록</div>
+        <p class="line w90"></p>
+        <p class="line w70"></p>
+
+        <div class="divider"></div>
+
+        <!-- 관련 글 (태그 겹침 기준 · 최대 3 · 있을 때만 노출) -->
+        <div class="section-title" style="margin-bottom:6px"><div class="sec-title">관련 글</div></div>
+        <div class="annot" style="margin-bottom:14px">태그가 겹치는 글이 있을 때만 노출 (최대 3)</div>
+        <div class="grid">
+          <a class="card" href="detail.html">
+            <div class="body">
+              <div class="top" style="display:flex; gap:8px; align-items:center; margin-bottom:8px"><span class="tag">태그</span><span class="annot">2026.05.20</span></div>
+              <div class="line w90" style="height:14px"></div>
+              <div class="line sm w70" style="margin-top:8px"></div>
+            </div>
+          </a>
+          <a class="card" href="detail.html">
+            <div class="body">
+              <div class="top" style="display:flex; gap:8px; align-items:center; margin-bottom:8px"><span class="tag">태그</span><span class="annot">2026.04.18</span></div>
+              <div class="line w80" style="height:14px"></div>
+              <div class="line sm w60" style="margin-top:8px"></div>
+            </div>
+          </a>
+          <a class="card" href="detail.html">
+            <div class="body">
+              <div class="top" style="display:flex; gap:8px; align-items:center; margin-bottom:8px"><span class="tag">태그</span><span class="annot">2026.03.30</span></div>
+              <div class="line w90" style="height:14px"></div>
+              <div class="line sm w70" style="margin-top:8px"></div>
+            </div>
+          </a>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- 이전/다음 글 -->
+        <div class="prevnext">
+          <a class="pn" href="#" style="text-decoration:none; color:inherit">
+            <div class="annot">← 이전 글</div>
+            <div class="line sm w80" style="margin-top:10px"></div>
+          </a>
+          <a class="pn" href="#" style="text-decoration:none; color:inherit; text-align:right">
+            <div class="annot">다음 글 →</div>
+            <div class="line sm w80" style="margin-top:10px; margin-left:auto"></div>
+          </a>
+        </div>
+
+        <!-- 모든 글로 돌아가기 (하단 보조 동선 — 상단 '← 모든 글'과 동일 목적) -->
+        <div style="margin-top:22px">
+          <a class="btn" href="list.html">← 모든 글로 돌아가기</a>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- 반응 (댓글) -->
+        <div class="sec-title" style="margin-bottom:16px">댓글</div>
+        <div class="widget" style="border-style:dashed">
+          <div class="meta" style="margin:0 0 12px">
+            <div class="avatar"></div>
+            <div>
+              <div class="line sm" style="width:80px; margin-bottom:6px"></div>
+              <div class="line sm" style="width:120px"></div>
+            </div>
+          </div>
+          <div class="line sm w90"></div>
+          <div class="line sm w60"></div>
+        </div>
+      </article>
+
+      <!-- TOC sidebar -->
+      <aside>
+        <div class="toc widget">
+          <div class="line sm" style="width:50px; margin-bottom:14px"></div>
+          <div class="line sm w90" style="margin-bottom:10px"></div>
+          <div class="line sm w70" style="margin-bottom:10px; margin-left:12px"></div>
+          <div class="line sm w80" style="margin-bottom:10px; margin-left:12px"></div>
+          <div class="line sm w60"></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="ft-top">
+      <div class="ft-brand">
+        <div class="logo"></div>
+        <div class="line sm" style="width:170px; margin-top:14px"></div>
+      </div>
+      <div class="ft-cols">
+        <div class="ft-col">
+          <div class="ft-h">탐색</div>
+          <a href="list.html">글</a>
+          <a href="notes.html">메모</a>
+          <a href="library.html">책장</a>
+          <a href="about.html">소개</a>
+        </div>
+        <div class="ft-col">
+          <div class="ft-h">둘러보기</div>
+          <a href="tag.html">태그</a>
+          <a href="archive.html">아카이브</a>
+          <a href="#">RSS</a>
+        </div>
+        <div class="ft-col">
+          <div class="ft-h">연결</div>
+          <a href="#">GitHub</a>
+          <a href="#">LinkedIn</a>
+          <a href="#">Email</a>
+        </div>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <span>© 2026. 와이어프레임</span>
+      <span>Seoul, Korea</span>
+    </div>
+  </footer>
+</div>
+
+</body>
+</html>

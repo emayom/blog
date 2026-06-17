@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>와이어프레임 — 공유 레이아웃</title>
+<link rel="stylesheet" href="wireframe.css">
+</head>
+<body>
+
+<nav class="toolbar">
+  <a href="home.html">홈</a>
+  <a href="list.html">목록</a>
+  <a href="detail.html">상세</a>
+  <a href="tag.html">태그</a>
+  <a href="archive.html">아카이브</a>
+  <a href="library.html">책장</a>
+  <a href="notes.html">메모</a>
+  <a href="about.html">소개</a>
+  <a href="mobile.html">모바일</a>
+  <a href="states.html">상태</a>
+  <a href="layout.html" class="active">레이아웃</a>
+</nav>
+
+<div class="frame">
+  <div class="frame-label">공유 레이아웃 (정본) — 헤더 · 푸터</div>
+
+  <div class="pad-narrow">
+    <div class="annot" style="margin-bottom:18px">
+      이 셸은 모든 페이지가 공유하는 헤더·푸터의 <b>단일 정본</b>입니다. 페이지별 와이어프레임은
+      이 마크업을 복제해 사용하며, nav 순서·라벨이 바뀌면 여기서 먼저 고친 뒤 각 페이지에 반영합니다.
+      (실제 구현에서는 <code>src/app/layout.tsx</code>로 자연 공유됨)
+    </div>
+  </div>
+
+  <!-- 데스크톱 헤더 (정본) -->
+  <div class="pad-narrow" style="padding-top:0">
+    <div class="sec-title" style="font-size:15px; margin-bottom:12px">데스크톱 헤더</div>
+  </div>
+  <header class="site">
+    <div class="logo"></div>
+    <nav class="site">
+      <a href="list.html">글</a>
+      <a href="notes.html">메모</a>
+      <a href="library.html">책장</a>
+      <a href="about.html">소개</a>
+      <span class="gh"></span>
+    </nav>
+  </header>
+
+  <div class="pad-narrow">
+    <div class="annot" style="margin:16px 0 0">
+      · 로고: 회색 placeholder(브랜드 자산) → 홈(<code>/</code>)으로 이동<br>
+      · 메뉴 순서·라벨: <b>글 · 메모 · 책장 · 소개</b> (실제 텍스트로 명시 — IA 결정)<br>
+      · 현재 페이지 메뉴에 <code>class="on"</code> 활성 표시<br>
+      · 우측 GitHub 아이콘(<code>.gh</code>)
+    </div>
+  </div>
+
+  <!-- 모바일 헤더 (정본) -->
+  <div class="pad-narrow" style="padding-bottom:0">
+    <div class="sec-title" style="font-size:15px; margin-bottom:12px">모바일 헤더</div>
+  </div>
+  <div class="pad-narrow">
+    <div class="m-header" style="border:1px solid var(--line); border-radius:10px">
+      <div class="logo"></div>
+      <div class="hamburger"><span></span><span></span><span></span></div>
+    </div>
+    <div class="annot" style="margin-top:12px">· 로고 + 햄버거(메뉴는 트레이로 접힘)</div>
+  </div>
+
+  <!-- 푸터 (정본) -->
+  <div class="pad-narrow" style="padding-bottom:0">
+    <div class="sec-title" style="font-size:15px; margin-bottom:12px">푸터</div>
+  </div>
+  <footer class="site-footer">
+    <div class="ft-top">
+      <div class="ft-brand">
+        <div class="logo"></div>
+        <div class="line sm" style="width:170px; margin-top:14px"></div>
+      </div>
+      <div class="ft-cols">
+        <div class="ft-col">
+          <div class="ft-h">탐색</div>
+          <a href="list.html">글</a>
+          <a href="notes.html">메모</a>
+          <a href="library.html">책장</a>
+          <a href="about.html">소개</a>
+        </div>
+        <div class="ft-col">
+          <div class="ft-h">둘러보기</div>
+          <a href="tag.html">태그</a>
+          <a href="archive.html">아카이브</a>
+          <a href="#">RSS</a>
+        </div>
+        <div class="ft-col">
+          <div class="ft-h">연결</div>
+          <a href="#">GitHub</a>
+          <a href="#">LinkedIn</a>
+          <a href="#">Email</a>
+        </div>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <span>© 2026. 와이어프레임</span>
+      <span>Seoul, Korea</span>
+    </div>
+  </footer>
+
+  <div class="pad-narrow">
+    <div class="annot" style="margin-top:16px">
+      참조: <code>component-inventory.md</code>의 <code>GlobalNav</code>·<code>Footer</code> 항목,
+      <code>information-architecture.md</code>의 내비게이션 모델.
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

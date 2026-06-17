@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>와이어프레임 — 상태</title>
+<link rel="stylesheet" href="wireframe.css">
+</head>
+<body>
+
+<nav class="toolbar">
+  <a href="home.html">홈</a>
+  <a href="list.html">목록</a>
+  <a href="detail.html">상세</a>
+  <a href="tag.html">태그</a>
+  <a href="archive.html">아카이브</a>
+  <a href="library.html">책장</a>
+  <a href="notes.html">메모</a>
+  <a href="about.html">소개</a>
+  <a href="mobile.html">모바일</a>
+  <a href="states.html" class="active">상태</a>
+</nav>
+
+<div class="frame">
+  <div class="frame-label">상태 화면 — 빈 / 로딩 / 에러</div>
+
+  <div class="pad">
+    <!-- 탐색(목록) 상태 -->
+    <div class="eyebrow">탐색 (목록)</div>
+    <div class="line" style="height:18px; width:180px; margin:6px 0 18px"></div>
+    <div class="state-grid">
+      <!-- 빈 -->
+      <div class="state-card">
+        <div class="state-cap"><b>빈 화면</b> — 글 없음</div>
+        <div class="state-body">
+          <div class="empty">
+            <div class="icon"></div>
+            <div class="cap">아직 작성된 글이 없습니다</div>
+            <a class="btn" href="#">첫 글 쓰기</a>
+          </div>
+        </div>
+      </div>
+      <!-- 로딩 -->
+      <div class="state-card">
+        <div class="state-cap"><b>로딩</b> — 스켈레톤</div>
+        <div class="state-body">
+          <div class="post" style="box-shadow:none; margin-bottom:12px">
+            <div class="line skeleton w30" style="height:14px"></div>
+            <div class="line skeleton w80" style="height:14px; margin-top:10px"></div>
+            <div class="line skeleton w60" style="height:9px"></div>
+          </div>
+          <div class="post" style="box-shadow:none">
+            <div class="line skeleton w30" style="height:14px"></div>
+            <div class="line skeleton w70" style="height:14px; margin-top:10px"></div>
+            <div class="line skeleton w50" style="height:9px"></div>
+          </div>
+        </div>
+      </div>
+      <!-- 에러 -->
+      <div class="state-card">
+        <div class="state-cap"><b>에러</b> — 불러오기 실패</div>
+        <div class="state-body">
+          <div class="empty err">
+            <div class="icon"></div>
+            <div class="cap">글을 불러오지 못했습니다</div>
+            <a class="btn" href="#">다시 시도</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- 소비(상세) + 감상(책장) 상태 -->
+    <div class="eyebrow">소비 (상세) · 감상 (책장)</div>
+    <div class="line" style="height:18px; width:220px; margin:6px 0 18px"></div>
+    <div class="state-grid">
+      <!-- 404 -->
+      <div class="state-card">
+        <div class="state-cap"><b>404</b> — 없는 글</div>
+        <div class="state-body">
+          <div class="empty">
+            <div class="icon"></div>
+            <div class="cap">존재하지 않는 페이지입니다</div>
+            <a class="btn" href="#">목록으로</a>
+          </div>
+        </div>
+      </div>
+      <!-- 상세 로딩 -->
+      <div class="state-card">
+        <div class="state-cap"><b>로딩</b> — 글 본문</div>
+        <div class="state-body">
+          <div class="line skeleton w90" style="height:18px"></div>
+          <div class="line skeleton w50" style="height:18px; margin-bottom:14px"></div>
+          <div class="ph-img skeleton" style="height:80px; margin-bottom:14px"></div>
+          <div class="line skeleton w90" style="height:9px"></div>
+          <div class="line skeleton w80" style="height:9px"></div>
+          <div class="line skeleton w60" style="height:9px"></div>
+        </div>
+      </div>
+      <!-- 감상 빈 -->
+      <div class="state-card">
+        <div class="state-cap"><b>빈 화면</b> — 감상 없음</div>
+        <div class="state-body">
+          <div class="empty">
+            <div class="icon"></div>
+            <div class="cap">이 카테고리에 기록이 없습니다</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="ft-top">
+      <div class="ft-brand">
+        <div class="logo"></div>
+        <div class="line sm" style="width:170px; margin-top:14px"></div>
+      </div>
+      <div class="ft-cols">
+        <div class="ft-col">
+          <div class="ft-h">탐색</div>
+          <a href="list.html">글</a>
+          <a href="notes.html">메모</a>
+          <a href="library.html">책장</a>
+          <a href="about.html">소개</a>
+        </div>
+        <div class="ft-col">
+          <div class="ft-h">둘러보기</div>
+          <a href="tag.html">태그</a>
+          <a href="archive.html">아카이브</a>
+          <a href="#">RSS</a>
+        </div>
+        <div class="ft-col">
+          <div class="ft-h">연결</div>
+          <a href="#">GitHub</a>
+          <a href="#">LinkedIn</a>
+          <a href="#">Email</a>
+        </div>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <span>© 2026. 와이어프레임</span>
+      <span>Seoul, Korea</span>
+    </div>
+  </footer>
+</div>
+
+</body>
+</html>

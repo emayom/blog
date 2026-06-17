@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>와이어프레임 — 아카이브</title>
+<link rel="stylesheet" href="wireframe.css">
+</head>
+<body>
+
+<nav class="toolbar">
+  <a href="home.html">홈</a>
+  <a href="list.html">목록</a>
+  <a href="detail.html">상세</a>
+  <a href="tag.html">태그</a>
+  <a href="archive.html" class="active">아카이브</a>
+  <a href="library.html">책장</a>
+  <a href="notes.html">메모</a>
+  <a href="about.html">소개</a>
+  <a href="mobile.html">모바일</a>
+  <a href="states.html">상태</a>
+</nav>
+
+<div class="frame">
+  <div class="frame-label">화면 — 아카이브 (/archive/[year])</div>
+
+  <header class="site">
+    <div class="logo"></div>
+    <nav class="site">
+      <a href="list.html" class="on">글</a>
+      <a href="notes.html">메모</a>
+      <a href="library.html">책장</a>
+      <a href="about.html">소개</a>
+      <span class="gh"></span>
+    </nav>
+  </header>
+
+  <div class="pad-narrow">
+    <!-- 모든 글(글 목록)로 — 아카이브는 글 목록에서 진입하는 필터 뷰 -->
+    <a class="btn" href="list.html" style="margin-bottom:18px">← 모든 글</a>
+
+    <!-- 제목: 연도 (글 수) -->
+    <div class="sec-title" style="font-size:28px; margin-bottom:24px">
+      2026 <span style="color:var(--muted); font-weight:400; font-size:20px">(6)</span>
+    </div>
+
+    <!-- 해당 연도 글 목록 — 목록(list)과 동일한 PostCard 컴포넌트 -->
+    <div class="rows">
+      <a class="post" href="detail.html">
+        <div class="top"><span class="annot">2026.06.09 · 5분 읽기</span></div>
+        <div class="line w70" style="height:17px"></div>
+        <div class="line sm w90" style="margin-top:10px"></div>
+        <div class="line sm w60"></div>
+        <div style="margin-top:12px"><span class="tag">카테고리</span><span class="tag">#태그</span><span class="tag">#태그</span></div>
+      </a>
+      <a class="post" href="detail.html">
+        <div class="top"><span class="annot">2026.06.02 · 12분 읽기</span></div>
+        <div class="line w60" style="height:17px"></div>
+        <div class="line sm w90" style="margin-top:10px"></div>
+        <div class="line sm w70"></div>
+        <div style="margin-top:12px"><span class="tag">카테고리</span><span class="tag">#태그</span></div>
+      </a>
+      <a class="post" href="detail.html">
+        <div class="top"><span class="annot">2026.05.28 · 8분 읽기</span></div>
+        <div class="line w80" style="height:17px"></div>
+        <div class="line sm w80" style="margin-top:10px"></div>
+        <div class="line sm w50"></div>
+        <div style="margin-top:12px"><span class="tag">카테고리</span><span class="tag">#태그</span><span class="tag">#태그</span></div>
+      </a>
+      <a class="post" href="detail.html">
+        <div class="top"><span class="annot">2026.05.22 · 3분 읽기</span></div>
+        <div class="line" style="height:17px; width:65%"></div>
+        <div class="line sm w90" style="margin-top:10px"></div>
+        <div class="line sm w60"></div>
+        <div style="margin-top:12px"><span class="tag">카테고리</span><span class="tag">#태그</span></div>
+      </a>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="ft-top">
+      <div class="ft-brand">
+        <div class="logo"></div>
+        <div class="line sm" style="width:170px; margin-top:14px"></div>
+      </div>
+      <div class="ft-cols">
+        <div class="ft-col">
+          <div class="ft-h">탐색</div>
+          <a href="list.html">글</a>
+          <a href="notes.html">메모</a>
+          <a href="library.html">책장</a>
+          <a href="about.html">소개</a>
+        </div>
+        <div class="ft-col">
+          <div class="ft-h">둘러보기</div>
+          <a href="tag.html">태그</a>
+          <a href="archive.html">아카이브</a>
+          <a href="#">RSS</a>
+        </div>
+        <div class="ft-col">
+          <div class="ft-h">연결</div>
+          <a href="#">GitHub</a>
+          <a href="#">LinkedIn</a>
+          <a href="#">Email</a>
+        </div>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <span>© 2026. 와이어프레임</span>
+      <span>Seoul, Korea</span>
+    </div>
+  </footer>
+</div>
+
+</body>
+</html>

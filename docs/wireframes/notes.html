@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>와이어프레임 — 메모</title>
+<link rel="stylesheet" href="wireframe.css">
+</head>
+<body>
+
+<nav class="toolbar">
+  <a href="home.html">홈</a>
+  <a href="list.html">목록</a>
+  <a href="detail.html">상세</a>
+  <a href="tag.html">태그</a>
+  <a href="archive.html">아카이브</a>
+  <a href="library.html">책장</a>
+  <a href="notes.html" class="active">메모</a>
+  <a href="about.html">소개</a>
+  <a href="mobile.html">모바일</a>
+  <a href="states.html">상태</a>
+</nav>
+
+<div class="frame">
+  <div class="frame-label">화면 — 메모 (/notes)</div>
+
+  <header class="site">
+    <div class="logo"></div>
+    <nav class="site">
+      <a href="list.html">글</a>
+      <a href="notes.html" class="on">메모</a>
+      <a href="library.html">책장</a>
+      <a href="about.html">소개</a>
+      <span class="gh"></span>
+    </nav>
+  </header>
+
+  <div class="pad">
+    <!-- breadcrumb -->
+    <div class="annot" style="margin-bottom:16px">
+      <a href="home.html" style="color:inherit">Home</a> › Notes
+    </div>
+
+    <!-- 타이틀 + 검색·정렬 -->
+    <div style="display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:8px">
+      <div class="sec-title" style="font-size:24px">메모</div>
+      <div class="search-box"><span class="search-ico"></span><span>검색</span></div>
+    </div>
+    <div class="line sm w50" style="margin-bottom:20px"></div>
+
+    <!-- 필터 (관심사/주제) — 많아지면 자유 줄바꿈 -->
+    <div class="filterbar" style="margin-bottom:22px">
+      <span class="chip on">전체</span>
+      <a href="tag.html" class="chip" style="text-decoration:none">개발</a>
+      <a href="tag.html" class="chip" style="text-decoration:none">아이디어</a>
+      <a href="tag.html" class="chip" style="text-decoration:none">취향</a>
+      <a href="tag.html" class="chip" style="text-decoration:none">TIL</a>
+    </div>
+
+    <!-- 고정됨 -->
+    <div class="group-label">📌 고정된 메모</div>
+    <div class="notes-grid" style="column-count:2; margin-bottom:8px">
+      <div class="note">
+        <div class="n-title">한 줄 생각</div>
+        <div class="line sm w90"></div>
+        <div class="line sm w70"></div>
+        <div class="n-meta"><span class="tag">아이디어</span><span class="n-date">06.14</span></div>
+      </div>
+      <div class="note">
+        <div class="n-title">기억해 둘 것</div>
+        <div class="line sm w80"></div>
+        <div class="line sm w60"></div>
+        <div class="n-meta"><span class="tag">개발</span><span class="n-date">06.10</span></div>
+      </div>
+    </div>
+
+    <!-- 모든 메모 (항상 최신순 — 정렬 컨트롤 없음) -->
+    <div class="group-label">모든 메모</div>
+    <div class="notes-grid">
+      <div class="note">
+        <div class="line sm w90"></div>
+        <div class="line sm w60"></div>
+        <div class="n-meta"><span class="tag">TIL</span><span class="n-date">06.13</span></div>
+      </div>
+      <div class="note">
+        <div class="n-title">정리해 둘 것</div>
+        <div class="line sm w90"></div>
+        <div class="line sm w80"></div>
+        <div class="line sm w60"></div>
+        <div class="n-meta"><span class="tag">개발</span><span class="n-date">06.12</span></div>
+      </div>
+      <div class="note">
+        <div class="line sm w80"></div>
+        <div class="line sm w50"></div>
+        <div class="n-meta"><span class="tag">아이디어</span><span class="n-date">06.11</span></div>
+      </div>
+      <div class="note">
+        <div class="n-title">한 줄 생각</div>
+        <div class="line sm w70"></div>
+        <div class="n-meta"><span class="tag">취향</span><span class="n-date">06.08</span></div>
+      </div>
+      <div class="note">
+        <div class="line sm w90"></div>
+        <div class="line sm w80"></div>
+        <div class="line sm w40"></div>
+        <div class="n-meta"><span class="tag">개발</span><span class="n-date">06.06</span></div>
+      </div>
+      <div class="note">
+        <div class="n-title">메모</div>
+        <div class="line sm w90"></div>
+        <div class="line sm w60"></div>
+        <div class="n-meta"><span class="tag">아이디어</span><span class="n-date">06.02</span></div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="ft-top">
+      <div class="ft-brand">
+        <div class="logo"></div>
+        <div class="line sm" style="width:170px; margin-top:14px"></div>
+      </div>
+      <div class="ft-cols">
+        <div class="ft-col">
+          <div class="ft-h">탐색</div>
+          <a href="list.html">글</a>
+          <a href="notes.html">메모</a>
+          <a href="library.html">책장</a>
+          <a href="about.html">소개</a>
+        </div>
+        <div class="ft-col">
+          <div class="ft-h">둘러보기</div>
+          <a href="tag.html">태그</a>
+          <a href="archive.html">아카이브</a>
+          <a href="#">RSS</a>
+        </div>
+        <div class="ft-col">
+          <div class="ft-h">연결</div>
+          <a href="#">GitHub</a>
+          <a href="#">LinkedIn</a>
+          <a href="#">Email</a>
+        </div>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <span>© 2026. 와이어프레임</span>
+      <span>Seoul, Korea</span>
+    </div>
+  </footer>
+</div>
+
+</body>
+</html>

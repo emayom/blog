@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>와이어프레임 — 인덱스</title>
+<link rel="stylesheet" href="wireframe.css">
+<style>
+  .hub { width:1100px; max-width:calc(100% - 32px); margin:0 auto; }
+  .hub-title { font-size:24px; font-weight:700; color:var(--ink); margin-bottom:4px; }
+  .hub-sub { font-size:13px; color:var(--muted); margin-bottom:32px; }
+  .hub-group { font-size:13px; font-weight:600; color:var(--muted); margin:28px 0 14px; }
+  .gallery { display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
+  .screen-card { display:block; text-decoration:none; color:inherit;
+    border:1px solid var(--line); border-radius:10px; overflow:hidden; background:#fff;
+    box-shadow:0 1px 3px rgba(0,0,0,.05); transition:box-shadow .15s, transform .15s; }
+  .screen-card:hover { box-shadow:0 6px 18px rgba(0,0,0,.12); transform:translateY(-2px); }
+  .thumb { height:180px; overflow:hidden; position:relative; background:#fafafa; border-bottom:1px solid var(--line); }
+  .thumb iframe { width:1280px; height:1024px; border:0; transform:scale(.34); transform-origin:top left; pointer-events:none; }
+  .thumb.phone iframe { transform:scale(.42); }
+  .screen-meta { padding:12px 14px; }
+  .screen-name { font-size:14px; font-weight:600; color:var(--ink); }
+  .screen-route { font-size:11px; color:var(--muted); margin-top:3px; }
+  @media (max-width:900px){ .gallery{ grid-template-columns:repeat(2,1fr) } }
+  @media (max-width:560px){ .gallery{ grid-template-columns:1fr } }
+</style>
+</head>
+<body>
+
+<div class="hub">
+  <div style="padding:8px 0 0">
+    <div class="hub-title">Blog - 와이어프레임</div>
+    <div class="hub-sub">저충실도 와이어프레임 인덱스. 카드를 눌러 각 화면으로 이동합니다.</div>
+  </div>
+
+  <!-- 페이지 -->
+  <div class="hub-group">페이지 (Pages)</div>
+  <div class="gallery">
+    <a class="screen-card" href="home.html">
+      <div class="thumb"><iframe src="home.html" scrolling="no" loading="lazy"></iframe></div>
+      <div class="screen-meta"><div class="screen-name">홈</div><div class="screen-route">/</div></div>
+    </a>
+    <a class="screen-card" href="list.html">
+      <div class="thumb"><iframe src="list.html" scrolling="no" loading="lazy"></iframe></div>
+      <div class="screen-meta"><div class="screen-name">글</div><div class="screen-route">/writing</div></div>
+    </a>
+    <a class="screen-card" href="detail.html">
+      <div class="thumb"><iframe src="detail.html" scrolling="no" loading="lazy"></iframe></div>
+      <div class="screen-meta"><div class="screen-name">상세</div><div class="screen-route">/writing/[slug]</div></div>
+    </a>
+    <a class="screen-card" href="tag.html">
+      <div class="thumb"><iframe src="tag.html" scrolling="no" loading="lazy"></iframe></div>
+      <div class="screen-meta"><div class="screen-name">태그</div><div class="screen-route">/tag/[tag]</div></div>
+    </a>
+    <a class="screen-card" href="archive.html">
+      <div class="thumb"><iframe src="archive.html" scrolling="no" loading="lazy"></iframe></div>
+      <div class="screen-meta"><div class="screen-name">아카이브</div><div class="screen-route">/archive/[year]</div></div>
+    </a>
+    <a class="screen-card" href="library.html">
+      <div class="thumb"><iframe src="library.html" scrolling="no" loading="lazy"></iframe></div>
+      <div class="screen-meta"><div class="screen-name">책장</div><div class="screen-route">/library</div></div>
+    </a>
+    <a class="screen-card" href="notes.html">
+      <div class="thumb"><iframe src="notes.html" scrolling="no" loading="lazy"></iframe></div>
+      <div class="screen-meta"><div class="screen-name">메모</div><div class="screen-route">/notes</div></div>
+    </a>
+    <a class="screen-card" href="about.html">
+      <div class="thumb"><iframe src="about.html" scrolling="no" loading="lazy"></iframe></div>
+      <div class="screen-meta"><div class="screen-name">소개</div><div class="screen-route">/about</div></div>
+    </a>
+  </div>
+
+  <!-- 반응형 · 상태 -->
+  <div class="hub-group">반응형 · 상태</div>
+  <div class="gallery">
+    <a class="screen-card" href="mobile.html">
+      <div class="thumb"><iframe src="mobile.html" scrolling="no" loading="lazy"></iframe></div>
+      <div class="screen-meta"><div class="screen-name">모바일</div><div class="screen-route">반응형 레이아웃</div></div>
+    </a>
+    <a class="screen-card" href="states.html">
+      <div class="thumb"><iframe src="states.html" scrolling="no" loading="lazy"></iframe></div>
+      <div class="screen-meta"><div class="screen-name">상태</div><div class="screen-route">빈 / 로딩 / 에러</div></div>
+    </a>
+  </div>
+
+  <!-- 디자인 정본 -->
+  <div class="hub-group">디자인 정본 (Reference)</div>
+  <div class="gallery">
+    <a class="screen-card" href="layout.html">
+      <div class="thumb"><iframe src="layout.html" scrolling="no" loading="lazy"></iframe></div>
+      <div class="screen-meta"><div class="screen-name">레이아웃</div><div class="screen-route">공유 셸 (헤더/푸터)</div></div>
+    </a>
+    <a class="screen-card" href="components.html">
+      <div class="thumb"><iframe src="components.html" scrolling="no" loading="lazy"></iframe></div>
+      <div class="screen-meta"><div class="screen-name">컴포넌트</div><div class="screen-route">컴포넌트 시트</div></div>
+    </a>
+  </div>
+
+  <div style="height:40px"></div>
+</div>
+
+</body>
+</html>

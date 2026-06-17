@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>와이어프레임 — 글</title>
+<link rel="stylesheet" href="wireframe.css">
+</head>
+<body>
+
+<nav class="toolbar">
+  <a href="home.html">홈</a>
+  <a href="list.html" class="active">목록</a>
+  <a href="detail.html">상세</a>
+  <a href="tag.html">태그</a>
+  <a href="archive.html">아카이브</a>
+  <a href="library.html">책장</a>
+  <a href="notes.html">메모</a>
+  <a href="about.html">소개</a>
+  <a href="mobile.html">모바일</a>
+  <a href="states.html">상태</a>
+</nav>
+
+<div class="frame">
+  <div class="frame-label">화면 2 — 글 (배운 것들)</div>
+
+  <header class="site">
+    <div class="logo"></div>
+    <nav class="site">
+      <a href="list.html" class="on">글</a>
+      <a href="notes.html">메모</a>
+      <a href="library.html">책장</a>
+      <a href="about.html">소개</a>
+      <span class="gh"></span>
+    </nav>
+  </header>
+
+  <div class="pad-narrow">
+    <!-- breadcrumb -->
+    <div class="annot" style="margin-bottom:16px">
+      <a href="home.html" style="color:inherit">Home</a> › Writing
+    </div>
+
+    <!-- 타이틀 + 검색·정렬 (양끝 정렬) -->
+    <div style="display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:14px">
+      <div class="sec-title" style="font-size:30px">글</div>
+      <div style="display:flex; align-items:center; gap:10px">
+        <div class="search-box"><span class="search-ico"></span><span>검색</span></div>
+        <span class="sort"><span class="sort-label">정렬</span><span>최신순</span><span class="sort-chev">▾</span></span>
+      </div>
+    </div>
+
+    <!-- 설명 한 줄 -->
+    <div class="line sm w70" style="margin-bottom:24px"></div>
+
+    <!-- 카테고리/주제 필터 (카운트) — 많아지면 자유 줄바꿈 -->
+    <div class="filterbar" style="margin-bottom:28px">
+      <span class="chip on">전체 48</span>
+      <a href="tag.html" class="chip" style="text-decoration:none">개발 20</a>
+      <a href="tag.html" class="chip" style="text-decoration:none">회고 12</a>
+      <a href="tag.html" class="chip" style="text-decoration:none">디자인 9</a>
+      <a href="tag.html" class="chip" style="text-decoration:none">도구 7</a>
+      <a href="tag.html" class="chip" style="text-decoration:none">TIL 6</a>
+      <a href="tag.html" class="chip" style="text-decoration:none">React 5</a>
+      <a href="tag.html" class="chip" style="text-decoration:none">CSS 4</a>
+    </div>
+
+    <!-- 글 목록 -->
+    <div class="rows">
+      <a class="post" href="detail.html">
+        <div class="top"><span class="annot">2026.06.10 · 7분 읽기</span></div>
+        <div class="line w70" style="height:17px"></div>
+        <div class="line sm w90" style="margin-top:10px"></div>
+        <div class="line sm w70"></div>
+        <div style="margin-top:12px"><span class="tag">카테고리</span><span class="tag">#태그</span><span class="tag">#태그</span></div>
+      </a>
+      <a class="post" href="detail.html">
+        <div class="top"><span class="annot">2026.05.22 · 5분 읽기</span></div>
+        <div class="line w60" style="height:17px"></div>
+        <div class="line sm w90" style="margin-top:10px"></div>
+        <div class="line sm w60"></div>
+        <div style="margin-top:12px"><span class="tag">카테고리</span><span class="tag">#태그</span></div>
+      </a>
+      <a class="post" href="detail.html">
+        <div class="top"><span class="annot">2026.04.03 · 10분 읽기</span></div>
+        <div class="line w80" style="height:17px"></div>
+        <div class="line sm w80" style="margin-top:10px"></div>
+        <div class="line sm w50"></div>
+        <div style="margin-top:12px"><span class="tag">카테고리</span><span class="tag">#태그</span><span class="tag">#태그</span></div>
+      </a>
+      <a class="post" href="detail.html">
+        <div class="top"><span class="annot">2026.03.18 · 4분 읽기</span></div>
+        <div class="line" style="height:17px; width:65%"></div>
+        <div class="line sm w90" style="margin-top:10px"></div>
+        <div class="line sm w60"></div>
+        <div style="margin-top:12px"><span class="tag">카테고리</span><span class="tag">#태그</span></div>
+      </a>
+    </div>
+
+    <!-- 페이지네이션 (현재 미적용 — 글이 많아지면 도입) -->
+    <div class="pager" style="opacity:.4">
+      <span class="pg">‹</span>
+      <span class="pg on">1</span>
+      <span class="pg">2</span>
+      <span class="pg" style="border:none; background:none">…</span>
+      <span class="pg">11</span>
+      <span class="pg">12</span>
+      <span class="pg">›</span>
+    </div>
+    <div class="annot" style="text-align:center; margin-top:10px">
+      페이지네이션 — 현재 미적용. 글이 일정 수(약 30~50편) 넘어가면 도입 예정 (ADR-012)
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="ft-top">
+      <div class="ft-brand">
+        <div class="logo"></div>
+        <div class="line sm" style="width:170px; margin-top:14px"></div>
+      </div>
+      <div class="ft-cols">
+        <div class="ft-col">
+          <div class="ft-h">탐색</div>
+          <a href="list.html">글</a>
+          <a href="notes.html">메모</a>
+          <a href="library.html">책장</a>
+          <a href="about.html">소개</a>
+        </div>
+        <div class="ft-col">
+          <div class="ft-h">둘러보기</div>
+          <a href="tag.html">태그</a>
+          <a href="archive.html">아카이브</a>
+          <a href="#">RSS</a>
+        </div>
+        <div class="ft-col">
+          <div class="ft-h">연결</div>
+          <a href="#">GitHub</a>
+          <a href="#">LinkedIn</a>
+          <a href="#">Email</a>
+        </div>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <span>© 2026. 와이어프레임</span>
+      <span>Seoul, Korea</span>
+    </div>
+  </footer>
+</div>
+
+</body>
+</html>
