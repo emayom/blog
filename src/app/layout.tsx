@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
+import { siteConfig } from '@/config/site'
 import './globals.css'
 
 const geistSans = Geist({
@@ -13,16 +14,16 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://ayounglim.dev'),
+  metadataBase: new URL(siteConfig.url),
   title: {
-    default: 'Ayoung Lim',
-    template: '%s | Ayoung Lim',
+    default: siteConfig.name,
+    template: `%s | ${siteConfig.name}`,
   },
-  description: '배우고 기록하는 것들',
+  description: siteConfig.description,
   openGraph: {
     type: 'website',
-    siteName: 'Ayoung Lim',
-    locale: 'ko_KR',
+    siteName: siteConfig.name,
+    locale: siteConfig.locale,
   },
   twitter: {
     card: 'summary_large_image',

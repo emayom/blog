@@ -1,6 +1,5 @@
 import type { Preview } from '@storybook/nextjs-vite'
-// globals.css 생성 후 아래 주석 해제 (M0 마무리 시점)
-// import '../src/styles/globals.css'
+import '../src/app/globals.css'
 
 const preview: Preview = {
   parameters: {

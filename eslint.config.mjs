@@ -17,6 +17,9 @@ const eslintConfig = defineConfig([
     'out/**',
     'build/**',
     'next-env.d.ts',
+    // Build artifacts (ESLint flat config does not read .gitignore):
+    'storybook-static/**',
+    'coverage/**',
   ]),
   ...storybook.configs['flat/recommended'],
 ])
