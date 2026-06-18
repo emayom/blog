@@ -5,6 +5,7 @@ import type { Post, PostFrontmatter, PostMeta } from '@/types/post'
 import { mdxComponents } from '@/components/mdx/mdx-components'
 import { rehypePlugins } from '@/lib/mdx-options'
 import { getReadingTime } from '@/lib/reading-time'
+import { extractToc } from '@/lib/toc'
 
 const CONTENT_DIR = path.join(process.cwd(), 'src/content/writing')
 
@@ -110,6 +111,8 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
   const meta = normalizeFrontmatter(frontmatter)
   if (!isVisible(meta.draft)) return null
 
-  const readingTime = getReadingTime(stripFrontmatter(source))
-  return { ...meta, slug, readingTime, content }
+  const body = stripFrontmatter(source)
+  const readingTime = getReadingTime(body)
+  const toc = extractToc(body)
+  return { ...meta, slug, readingTime, content, toc }
 }

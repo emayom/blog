@@ -1,5 +1,11 @@
 import type { ReactElement } from 'react'
 
+export interface TocItem {
+  id: string
+  text: string
+  depth: 2 | 3
+}
+
 export interface PostFrontmatter {
   title: string
   date: string
@@ -16,4 +22,5 @@ export interface PostMeta extends PostFrontmatter {
 
 export interface Post extends PostMeta {
   content: ReactElement
+  toc: TocItem[]
 }

@@ -1,4 +1,5 @@
 import rehypePrettyCode, { type Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
+import rehypeSlug from 'rehype-slug'
 import type { PluggableList } from 'unified'
 
 const rehypePrettyCodeOptions: RehypePrettyCodeOptions = {
@@ -8,5 +9,7 @@ const rehypePrettyCodeOptions: RehypePrettyCodeOptions = {
 }
 
 export const rehypePlugins: PluggableList = [
+  // slug는 헤딩 id 부여를 위해 pretty-code(코드 변환) 앞에서 실행
+  rehypeSlug,
   [rehypePrettyCode, rehypePrettyCodeOptions],
 ]
