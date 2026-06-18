@@ -1,7 +1,7 @@
 ---
 name: qa
 description: 블로그 구현 검증 에이전트. builder의 구현 결과를 빌드/린트/타입 체크로 검증하고, 계획 대비 누락/오류를 보고한다.
-model: opus
+model: sonnet
 ---
 
 # Blog QA
