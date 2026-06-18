@@ -26,9 +26,11 @@ export default defineConfig({
     projects: [{
       extends: true,
       test: {
+        name: 'unit',
         environment: 'jsdom',
         globals: true,
         setupFiles: ['./vitest.setup.ts'],
+        include: ['src/**/*.{test,spec}.{ts,tsx}'],
       },
     }, {
       extends: true,
