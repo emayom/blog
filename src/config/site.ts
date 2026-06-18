@@ -9,8 +9,8 @@ export const siteConfig = {
 } as const
 
 export const mainNav: NavItem[] = [
-  { label: '글', href: '/writing', enabled: false },
-  { label: '소개', href: '/about', enabled: false },
+  { label: '글', href: '/writing', enabled: true },
+  { label: '소개', href: '/about', enabled: true },
   { label: '메모', href: '/notes', enabled: false },
   { label: '책장', href: '/library', enabled: false },
 ]
@@ -19,8 +19,8 @@ export const footerNav: NavGroup[] = [
   {
     title: '탐색',
     items: [
-      { label: '글', href: '/writing', enabled: false },
-      { label: '소개', href: '/about', enabled: false },
+      { label: '글', href: '/writing', enabled: true },
+      { label: '소개', href: '/about', enabled: true },
     ],
   },
   {
