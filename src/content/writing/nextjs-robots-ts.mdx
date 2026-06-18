@@ -1,0 +1,258 @@
+---
+title: "Next.js App Router에서 동적으로 robots.txt와 sitemap.xml 맹글기"
+date: "2026-06-02"
+tags: ["nextjs"]
+draft: false
+description: "robots.txt와 sitemap.xml 유연하게 만들 수 있을까?"
+thumbnail: ""
+---
+
+# Next.js App Router에서 동적으로 robots.txt와 sitemap.xml 맹글기
+
+검색 엔진 최적화(Search Engine Optimization 줄여서 SEO)의 가장 기본이 되는 `robots.txt`와 `sitemap.xml` 파일을 통해, 웹 사이트가 더 효율적으로 검색엔진에 크롤링 될 수 있도록 설정할 수 있습니다.
+[Next.js 13.3](https://nextjs.org/blog/next-13-3#file-based-metadata-api)부터는 File-Based Metadata API를 통해 이 파일들을 `robots.(js|ts)`와 `sitemap.(js|ts)`같이 동적으로 관리할 수 있습니다.
+
+**robots.txt (차단)** — "이것들은 보지 마"
+- 네거티브 규칙: `Disallow: /og/`, `Disallow: /api/`
+- 환경별로 달라짐 → 스테이징은 전체 차단, 프로덕션은 선택 차단
+
+**sitemap.xml (안내)** — "이것들은 꼭 봐줘"
+- 포지티브 규칙: 공개할 모든 URL 나열
+- 데이터 기반 → 블로그 포스트처럼 동적으로 생성되는 페이지들 포함
+
+웹 크롤러는 사이트 방문 시 가장 먼저 `robots.txt`를 확인하여 크롤링 접근 권한과 정책을 검사한다. 
+`robots.txt`가 없는 경우 크롤러는 모든 경로를 크롤링하려고 시도한다. (차단 규칙이 없으므로)
+불필요하거나 중복된 콘텐츠까지 인덱싱되면 전체 사이트의 검색 품질이 저하된다.
+
+---
+
+### 기본 robots.txt 형식 (Static)
+
+`robots.txt`의 형식은 다음과 같다.
+
+- **User-Agent**: 크롤러 이름. `*`는 모든 크롤러, `Googlebot`이나 `Bingbot` 같은 특정 크롤러도 지정 가능
+- **Allow / Disallow**: 경로를 문자열로 작성. `/`, `/admin/`, `/api/*` 등 경로 패턴 사용
+- **Sitemap**: 절대 URL로 sitemap.xml 위치 명시
+
+```
+User-Agent: *              # 모든 웹 크롤러에게 적용
+Allow: /                   # 모든 경로 크롤링 허용
+Disallow: /private/        # /private/ 경로는 크롤링 금지
+ 
+Sitemap: https://acme.com/sitemap.xml  # sitemap.xml 위치
+```
+
+### 기본 sitemap.xml 형식 (Static)
+
+`sitemap.(xml|js|ts)`는 검색 엔진 크롤러가 사이트를 더 효율적으로 색인할 수 있도록 돕는 특수 파일이다.
+
+[Sitemaps XML 형식](https://www.sitemaps.org/protocol.html)은 다음과 같다.
+
+- **loc** (필수): 크롤러에게 알릴 페이지의 절대 URL
+- **lastmod** (선택): 마지막 수정 일시 (ISO 8601 형식)
+- **changefreq** (선택): 변경 빈도 (always, hourly, daily, weekly, monthly, yearly, never)
+- **priority** (선택): 상대적 우선순위 (0.0 ~ 1.0, 기본값 0.5)
+
+```xml
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://acme.com</loc>
+    <lastmod>2023-04-06T15:02:24.021Z</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://acme.com/about</loc>
+    <lastmod>2023-04-06T15:02:24.021Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://acme.com/blog</loc>
+    <lastmod>2023-04-06T15:02:24.021Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <!-- 추가적인 페이지 URL들을 계속 나열 -->
+</urlset>
+```
+
+### robots.txt와 sitemap.xml 정적 관리의 한계
+
+과거에는 `public/robots.txt`와 `public/sitemap.xml` 같은 정적 파일들을 두고 관리하는 것이 일반적이었다. 하지만 웹 서비스가 고도화되면서 다음과 같은 실무적 한계가 대두되었다.
+
+- **멀티테넌시(Multi-tenancy) 및 다중 도메인 대응**: 
+  - 하나의 Next.js 코드베이스로 여러 도메인을 처리하는 서비스가 많아졌다. → 도메인별로 허용해야 하는 경로(Disallow)가 다르고, 각각의 고유한 `sitemap.xml` 경로를 지정해 주어야 하는데, 정적 파일 하나로는 대응이 불가능하다.
+- **배포 환경(Staging vs Production)에 따른 자동 분기**: 
+  - 개발용 스테이징(Staging) 서버나 테스트 서버의 콘텐츠가 구글, 네이버 같은 검색 엔진에 긁혀서 중복 콘텐츠로 인덱싱되는 문제가 자주 발생한다. 
+- **dynamic sitemap과의 동기화**: 
+  - 대규모 커뮤니티나 커머스 사이트는 매일 수천 개씩 늘어나는 dynamic route(상세 페이지)를 정적 `robots.txt`로는 매번 대응할 수 없다. 
+
+---
+
+### Next.js App Router에서 동적으로 설정하기
+
+> Good to know: `robots.js`, `sitemap.js`는 특수한 라우트 핸들러로, 동적 함수나 동적 구성 옵션을 사용하지 않는 한 기본적으로 캐시된다.
+
+Next.js 13.3부터는 `app/robots.(js|ts)`와 `app/sitemap.(js|ts)`를 동적으로 생성할 수 있다. 
+
+`robots.(js|ts)`와 `sitemap.(js|ts)`는 **`app/` 루트 디렉토리에** 위치해야 한다. nested routes 내에 위치하면 작동하지 않는다.
+
+```
+my-next-project/
+└── app/
+    ├── robots.ts
+    └── sitemap.ts
+```
+
+
+#### Robots file 생성하기
+
+다음은 모든 크롤러에게 동일하게 적용하는 일반적인 예시다. 
+
+> 특정 에이전트(예: Googlebot, Bingbot)별로 다르게 처리하고 싶다면 [Next.js 공식 문서 - Customizing specific user-agents](https://nextjs.org/docs/app/api-reference/file-conventions/metadata/robots#customizing-specific-user-agents)을 참고한다.
+
+[Robots 객체](https://nextjs-ko.org/docs/app/api-reference/file-conventions/metadata/robots#robots-object)를 반환하는 `robots.js` 또는 `robots.ts` 파일을 추가한다. 
+
+
+```ts
+// app/robots.ts
+import type { MetadataRoute } from 'next'
+ 
+export default function robots(): MetadataRoute.Robots {
+  return {
+    rules: {
+      userAgent: '*',
+      allow: '/',
+      disallow: '/private/',
+    },
+    sitemap: 'https://acme.com/sitemap.xml',
+  }
+}
+```
+
+`app/robots.ts`에서 함수를 export하면 Next.js가 빌드 시 `/robots.txt` 엔드포인트를 자동으로 생성한다. 위 예시는 빌드 후 다음과 같은 형식의 `robots.txt` 파일을 생성한다.
+
+```
+User-Agent: *
+Allow: /
+Disallow: /private/
+
+Sitemap: https://acme.com/sitemap.xml
+```
+
+#### Sitemap file 생성하기
+
+다음은 단일 sitemap으로 처리하는 일반적인 예시다. 블로그 포스트처럼 데이터베이스나 파일 시스템에서 가져온 동적 콘텐츠를 동적으로 포함한다. 
+
+> 대규모 웹 애플리케이션처럼 여러 사이트맵으로 분할해야 하는 경우는 [Next.js 공식 문서 - Generating multiple sitemaps](https://nextjs-ko.org/docs/app/api-reference/file-conventions/metadata/sitemap#generating-multiple-sitemaps)을 참고한다.
+
+```ts
+// app/sitemap.ts
+import type { MetadataRoute } from 'next'
+import { getAllPosts } from '@/lib/mdx'
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://acme.com'
+
+export default function sitemap(): MetadataRoute.Sitemap {
+  // 모든 블로그 포스트를 동적으로 가져오기
+  const posts = getAllPosts().map((post) => ({
+    url: `${SITE_URL}/blog/${post.slug}`,
+    lastModified: new Date(post.date),
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }))
+
+  return [
+    {
+      url: SITE_URL,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 1,
+    },
+    {
+      url: `${SITE_URL}/blog`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    ...posts,  // 모든 블로그 포스트 포함
+  ]
+}
+```
+
+`getAllPosts()` 같은 동적 함수를 사용하므로, 매 요청마다 최신 포스트 목록을 포함한 `/sitemap.xml`이 생성된다. 위 예시는 다음과 같은 형식의 `sitemap.xml`을 생성한다.
+
+```xml
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://acme.com</loc>
+    <lastmod>2024-06-02T15:02:24.021Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://acme.com/blog</loc>
+    <lastmod>2024-06-02T15:02:24.021Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://acme.com/blog/nextjs-guide</loc>
+    <lastmod>2024-05-28T10:30:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://acme.com/blog/react-hooks</loc>
+    <lastmod>2024-05-20T08:15:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- 모든 블로그 포스트가 자동으로 포함됨 -->
+</urlset>
+```
+
+#### (추가) next-sitemap 패키지를 사용하면 좋은 경우
+
+다음과 같은 경우에는 동적 함수를 사용해서 **요청 시마다** 최신 데이터를 반영하는 방식이 적합하다:
+
+- **블로그, 뉴스 같은 정기적 콘텐츠** — 포스트가 자주 추가/수정되며, sitemap이 항상 최신 목록을 반영해야 할 때
+- **사용자 생성 콘텐츠(UGC)** — 커뮤니티, 마켓플레이스처럼 콘텐츠가 실시간으로 증가하는 경우
+- **데이터베이스 기반 동적 페이지** — 상품 상세 페이지, 사용자 프로필처럼 DB 쿼리로 동적 URL이 생성될 때
+- **URL이 100~수천 개 수준** — 정적 파일로 관리하기엔 너무 많지만, 수백만 개 규모는 아닐 때 
+
+다음과 같은 경우에는 [`next-sitemap`](https://github.com/iamvishnusankar/next-sitemap) 패키지를 사용하는 것이 편리하다:
+
+- **대규모 사이트** — 수천~수백만 개의 URL을 관리할 때
+- **자동 인덱싱** — 생성된 sitemap을 자동으로 Google Search Console, Bing Webmaster Tools에 제출하고 싶을 때
+- **주기적 생성** — 빌드 시에만 sitemap을 생성하고 싶을 때 (요청 시 생성 불필요)
+- **사이트맵 분할** — 파일 크기 제한(최대 50,000 URL)을 넘을 때 자동으로 여러 파일로 분할하고 싶을 때
+
+---
+
+### 순수 HTML이나 CSR(리액트) 환경에서는 왜 불가능할까?
+
+지금까지 살펴본 예시처럼 Next.js App Router에서 동적으로 `robots.txt`와 `sitemap.xml`을 생성하는 것은 쉽고 간편하다. 
+그런데 이런 방식이 **왜 Next.js 환경에서만 가능할까?** 
+
+이를 이해하려면 **파일의 특성**과 **CSR 환경의 한계**, 두 가지를 알아야 한다. 
+
+먼저, `robots.txt`와 `sitemap.xml`은 웹 크롤러가 사이트에 방문하는 초기 요청 단계에서 서버가 즉시 응답해야 하는 파일이다. 페이지를 렌더링한 후 응답하는 것이 아니라, 크롤러의 첫 요청에 바로 서버에서 생성해서 내려줘야 한다는 뜻이다.
+
+그런데 **순수 HTML이나 CSR(Client-Side Rendering) React 환경에서는 브라우저에서만 코드가 실행**된다. 즉, 서버 단계에서 데이터베이스를 쿼리하거나 최신 포스트 목록을 가져올 수 없다. 따라서 동적으로 생성할 수 없는 것이다.
+
+동일한 동작을 CSR 환경에서 구현하려면 별도의 인프라가 필요하다:
+
+- **Nginx Reverse Proxy** — 프록시에서 `/robots.txt`, `/sitemap.xml` 요청을 가로채 동적으로 처리
+- **Cloudflare Workers** — 엣지에서 요청을 감지해 응답 생성
+- **별도 백엔드 서버** — Express나 Fastify 같은 Node.js 서버를 별도로 운영
+
+**Next.js App Router에서는** 이런 복잡한 인프라 없이 이것이 가능한 이유는 App Router가 SSR(Server-Side Rendering) 환경을 기반으로 하고, 메타데이터 API를 통해 서버 단계에서 함수를 실행할 수 있게 지원하기 때문이다.
+
+---
+
+이제 SEO의 기본인 `robots.txt`와 `sitemap.xml`을 동적으로 관리할 수 있게 되었다. 
+
+마지막 단계는 Google Search Console이나 Naver Search Advisor 같은 검색 엔진 도구에 사이트를 등록하는 것이다. 
+그러면 웹 크롤러들이 사이트를 더 효율적으로 찾고 인덱싱할 수 있다.

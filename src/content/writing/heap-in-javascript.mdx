@@ -1,0 +1,225 @@
+---
+title: "자바스크립트로 구현하는 힙"
+date: "2025-01-14"
+tags: ["data-structure", "javascript"]
+draft: false
+description: "힙(Heap) 자료구조의 개념과 Min Heap, Max Heap을 JavaScript와 TypeScript로 구현하는 방법을 정리합니다."
+thumbnail: ""
+---
+
+# 자바스크립트로 구현하는 힙
+
+### 힙(Heap)
+
+**힙**은 트리 기반의 자료구조로, 일반적으로 완전 이진 트리(Complete Binary Tree)로 구현되며, 힙은 부모 노드와 자식 노드 간의 관계가 우선순위에 맞게 유지되는 특징을 가지고 있다.
+
+원래 힙 정렬(Heapsort) 알고리즘을 구현하기 위해 사용되었지만, 우선순위 큐(Priority Queue) 구현에도 내부적으로 힙을 사용하여 우선순위가 높은 요소가 먼저 처리되도록 한다.
+
+#### 힙의 종류 
+
+- 최소 힙(Min Heap)
+- 최대 힙(Max Heap)
+
+## Min Heap
+
+부모 노드가 자식 노드보다 작거나 같도록 구성된다. 루트 노드는 항상 트리에서 가장 작은 값이다. 
+
+### Min Heap의 구현 
+
+#### Array을 사용한 구현
+
+## Max Heap 
+
+부모 노드가 자식 노드보다 크거나 같도록 구성된다. 루트 노드는 항상 트리에서 가장 큰 값이다.
+
+### Max Heap의 구현 
+
+#### Array을 사용한 구현
+
+- JavaScript(ES6) & Prototype
+
+    ```js
+    const MaxHeap = function(){
+        this.heap = [];
+    }
+
+    /** 
+     * @param {number} index
+     * @return {number}
+     */   
+    MaxHeap.prototype.getParentIndex = function(index){
+        return Math.floor((index - 1) / 2);
+    }
+
+    /** 
+     * @param {number} index
+     * @return {number}
+     */
+    MaxHeap.prototype.getLeftChildIndex = function(index){
+        return 2 * index + 1;
+    }
+    
+    /** 
+     * @param {number} index
+     * @return {number}
+     */
+    MaxHeap.prototype.getRightChildIndex = function(index){
+        return 2 * index + 2;
+    }
+
+    /** 
+     * @param {number} childIndex
+     * @return {void}
+     */
+    MaxHeap.prototype.heapifyUp = function(childIndex){
+        if(childIndex === 0) return;
+        
+        const parentIndex = this.getParentIndex(childIndex);
+        
+        if(this.heap[parentIndex] < this.heap[childIndex]){
+            this.swap(parentIndex, childIndex);
+            this.heapifyUp(parentIndex);
+        } 
+    }
+
+    /** 
+     * @param {number} parentIndex
+     * @return {void}
+     */
+    MaxHeap.prototype.heapifyDown = function(parentIndex){
+        const leftChildIndex = this.getLeftChildIndex(parentIndex)
+        const rightChildIndex = this.getRightChildIndex(parentIndex)
+        
+        let maxIndex = parentIndex;
+        
+        [leftChildIndex, rightChildIndex].forEach(childIndex => {
+            if(childIndex < this.heap.length && this.heap[maxIndex] < this.heap[childIndex]) maxIndex = childIndex;
+        });
+        
+        if(maxIndex !== parentIndex){
+            this.swap(parentIndex, maxIndex);
+            this.heapifyDown(maxIndex);
+        }
+    }
+
+    /** 
+     * @return {number | null}
+     */
+    MaxHeap.prototype.peek = function(){
+        return this.heap[0] || null;
+    }
+
+    /** 
+     * @param {number} parentIndex
+     * @param {number} childIndex 
+     * @return {void}
+     */
+    MaxHeap.prototype.swap = function(parentIndex, childIndex){
+        [this.heap[parentIndex], this.heap[childIndex]] = [this.heap[childIndex], this.heap[parentIndex]];
+    }
+    
+    /** 
+     * @param {number} value
+     * @return {void}
+     */
+    MaxHeap.prototype.insert = function(value){
+        this.heap.push(value);
+        this.heapifyUp(this.heap.length - 1);
+    }
+          
+    /** 
+     * @param {number} value
+     * @return {number | null}
+     */
+    MaxHeap.prototype.remove = function(){
+        if(this.heap.length === 0)  return null;
+        if(this.heap.length === 1)  return this.heap.pop();
+
+        const item = this.heap[0];
+        
+        this.swap(0, this.heap.length - 1);        
+        this.heap.pop();
+        this.heapifyDown(0);
+        
+        return item;
+    }
+    ```
+
+- Typescript & Class
+
+    ```ts
+    export interface IHeap<T> {
+        peek(): T;
+        insert(): number;
+        remove(): number | null;
+    }
+
+    class MaxHeap<T> implements IHeap<T> {
+        private heap: T<number>  = [];
+
+        private getParentIndex(index: number): number {
+            return Math.floor((index - 1) / 2);
+        }
+
+        private getLeftChildIndex(index: number): number {
+            return 2 * index + 1;
+        }
+
+        private getRightChildIndex(index: number): number {
+            return 2 * index + 2;
+        }
+        
+        private swap(parentIndex, childIndex){
+            [this.heap[parentIndex], this.heap[childIndex]] = [this.heap[childIndex], this.heap[parentIndex]];
+        }
+        
+        private heapifyUp(childIndex): TValue | undefined {
+            if(childIndex === 0) return;
+        
+            const parentIndex = getParentIndex(childIndex);
+            
+            if(this.heap[parentIndex] < this.heap[childIndex]){
+                this.swap(parentIndex, childIndex);
+                this.heapifyUp(parentIndex);
+            } 
+        }
+
+        private heapifyDown(parentIndex){
+            const leftChildIndex = getLeftChildIndex(parentIndex);
+            const rightChildIndex = getRightChildIndex(parentIndex);
+            
+            let maxIndex = parentIndex;
+            
+            [leftChildIndex, rightChildIndex].forEach(childIndex => {
+                if(childIndex < this.heap.length && this.heap[maxIndex] < this.heap[childIndex]) maxIndex = childIndex;
+            });
+            
+            if(maxIndex !== parentIndex){
+                this.swap(parentIndex, maxIndex);
+                this.heapifyDown(maxIndex);
+            }
+        }
+
+        peek(){
+            return this.heap[0] || null;
+        }
+
+        insert(value){
+            this.heap.push(value);
+            this.heapifyUp(this.heap.length - 1);
+        }
+            
+        remove(){
+            if(this.heap.length === 0)  return null;
+            if(this.heap.length === 1)  return this.heap.pop();
+
+            const item = this.heap[0];
+            
+            this.swap(0, this.heap.length - 1);        
+            this.heap.pop();
+            this.heapifyDown(0);
+            
+            return item;
+        }
+    }
+    ```

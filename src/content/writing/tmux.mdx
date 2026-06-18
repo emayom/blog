@@ -1,0 +1,210 @@
+---
+title: "tmux로 터미널 작업 효율 올리기"
+date: "2026-05-28"
+tags: ["tooling"]
+draft: false
+description: "macOS에서 tmux로 세션·윈도·팬을 관리하는 핵심 명령어와 .tmux.conf 기본 설정까지 입문자 시선으로 정리합니다."
+thumbnail: ""
+---
+
+# tmux로 터미널 작업 효율 올리기
+
+### tmux란?
+`tmux`는 **Terminal Multiplexer**의 약자로, 하나의 터미널 창 안에서 여러 세션과 화면을 동시에 관리할 수 있게 해주는 도구입니다.
+
+- **왜 tmux를 쓸까?**
+
+    SSH로 원격 서버에 접속한 상태에서 연결이 끊겨도 작업 중이던 세션이 그대로 유지됩니다. iTerm2의 내장 분할은 창을 닫으면 모든 작업이 사라지지만, tmux 세션은 서버에 살아있어 다시 접속하면 그대로 이어갈 수 있습니다.
+
+- **설치**
+
+    ```shell
+    brew install tmux
+
+    # 버전 확인
+    tmux -V
+    ```
+
+> :point_down: `tmux 3.x` 이상이면 이 포스트의 모든 명령어가 동작합니다.
+
+<br />
+
+### 3대 개념: Session / Window / Pane
+tmux는 세 가지 계층으로 구성됩니다.
+
+```
+tmux server
+└── Session  (작업 단위 — 프로젝트 하나)
+    └── Window  (탭과 유사 — 화면 하나)
+        └── Pane  (분할된 터미널 영역)
+```
+
+| 개념 | 비유 | 설명 |
+|------|------|------|
+| **Session** | 프로젝트 | tmux를 실행하면 생성되는 최상위 단위. 연결을 끊어도 유지됨 |
+| **Window** | 브라우저 탭 | 세션 안에 여러 개 만들 수 있는 전체 화면 단위 |
+| **Pane** | 화면 분할 | 윈도 안에서 가로·세로로 나눈 개별 터미널 영역 |
+
+<br />
+
+### 프리픽스 키
+tmux의 모든 단축키는 **프리픽스 키를 먼저 누른 뒤** 명령 키를 입력하는 방식으로 동작합니다.
+
+기본 프리픽스는 `Ctrl-b`입니다.
+
+```
+# 예시: 새 윈도 열기
+Ctrl-b → c
+```
+
+> :exclamation: 프리픽스 키와 명령 키는 동시에 누르는 것이 아니라 **순서대로** 입력합니다.  
+> `Ctrl-b`를 눌렀다 떼고, 그 다음 `c`를 누릅니다.
+
+기본 프리픽스 `Ctrl-b`가 불편하다면 `.tmux.conf`에서 변경할 수 있습니다. 자세한 내용은 [.tmux.conf 기본 설정](#tmuxconf-기본-설정) 섹션을 참고하세요.
+<br />
+
+### 세션 관리
+#### 세션 시작 및 종료
+```shell
+# 새 세션 시작 (이름 자동 부여)
+tmux
+
+# 이름을 지정해서 세션 시작
+tmux new -s <name>
+tmux new-session -s <name>
+
+# 세션 목록 확인
+tmux ls
+tmux list-sessions
+
+# 세션에 다시 연결
+tmux attach -t <name>
+tmux a -t <name>
+
+# 세션 종료
+tmux kill-session -t <name>
+```
+
+> 세션 이름을 지정하면 `tmux attach -t work` 처럼 의미있는 이름으로 복귀할 수 있어 편리합니다.
+
+<br />
+
+#### 세션 단축키
+| 단축키 | 동작 |
+|--------|------|
+| `prefix + d` | Detach — 세션을 유지한 채 터미널에서 빠져나오기 |
+| `prefix + $` | 현재 세션 이름 변경 |
+| `prefix + s` | 세션 목록을 인터랙티브하게 탐색·전환 |
+| `prefix + (` / `)` | 이전/다음 세션으로 이동 |
+<br />
+
+### 윈도 관리
+윈도는 세션 안에서 브라우저 탭처럼 여러 개 운용할 수 있는 전체 화면 단위입니다.
+
+#### 윈도 단축키
+| 단축키 | 동작 |
+|--------|------|
+| `prefix + c` | 새 윈도 생성 |
+| `prefix + ,` | 현재 윈도 이름 변경 |
+| `prefix + n` | 다음 윈도로 이동 |
+| `prefix + p` | 이전 윈도로 이동 |
+| `prefix + 0~9` | 번호로 윈도 직접 이동 |
+| `prefix + w` | 윈도 목록 인터랙티브 탐색 |
+| `prefix + &` | 현재 윈도 닫기 (확인 프롬프트 있음) |
+
+> 하단 상태바에서 현재 활성화된 윈도는 `*` 표시로 확인할 수 있습니다.
+
+<br />
+
+### 팬 관리
+팬은 윈도를 수직·수평으로 분할한 개별 터미널 영역입니다. 여러 작업을 한 화면에서 동시에 볼 때 활용합니다.
+
+#### 팬 분할 및 이동
+| 단축키 | 동작 |
+|--------|------|
+| `prefix + %` | 수직 분할 (좌/우) |
+| `prefix + "` | 수평 분할 (상/하) |
+| `prefix + 방향키` | 인접한 팬으로 포커스 이동 |
+| `prefix + o` | 다음 팬으로 순환 이동 |
+| `prefix + z` | 현재 팬 전체화면 토글 (zoom) |
+| `prefix + {` / `}` | 팬 위치 앞/뒤로 교환 |
+| `prefix + x` | 현재 팬 닫기 |
+
+#### 팬 크기 조절
+```shell
+# 아래쪽으로 5칸 늘리기
+prefix + :resize-pane -D 5
+
+# 위쪽으로 5칸 늘리기
+prefix + :resize-pane -U 5
+
+# 왼쪽으로 5칸 늘리기
+prefix + :resize-pane -L 5
+
+# 오른쪽으로 5칸 늘리기
+prefix + :resize-pane -R 5
+```
+
+> :point_down: `prefix + :` 를 입력하면 tmux 명령어 입력 모드로 진입합니다.  
+> `mouse on` 설정 시 마우스로 팬 경계를 드래그해 크기를 조절할 수 있습니다. ([.tmux.conf 기본 설정](#tmuxconf-기본-설정) 참고)
+<br />
+
+### 스크롤 모드 (copy mode)
+tmux 팬에서는 기본적으로 마우스 휠 스크롤이 동작하지 않습니다. copy mode를 사용하면 터미널 히스토리를 자유롭게 탐색할 수 있습니다.
+
+| 동작 | 키 |
+|------|-----|
+| copy mode 진입 | `prefix + [` |
+| 스크롤 | 방향키, `PgUp` / `PgDn` |
+| copy mode 종료 | `q` |
+
+> :exclamation: `set -g mouse on` 설정을 `.tmux.conf`에 추가하면 마우스 휠로도 스크롤할 수 있습니다.
+
+<br />
+
+### .tmux.conf 기본 설정
+`~/.tmux.conf` 파일을 생성하면 tmux 시작 시 자동으로 설정을 적용할 수 있습니다.
+
+```shell
+# ~/.tmux.conf
+
+# 프리픽스 키 변경: Ctrl-b → Ctrl-a
+unbind C-b
+set-option -g prefix C-a
+bind-key C-a send-prefix
+
+# 마우스 모드 활성화 (스크롤, 팬 클릭, 팬 리사이즈)
+set -g mouse on
+
+# 256색 지원
+set -g default-terminal "screen-256color"
+
+# 팬 분할 단축키를 직관적으로 변경
+# | 키로 수직 분할 (좌/우)
+bind | split-window -h
+# - 키로 수평 분할 (상/하)
+bind - split-window -v
+```
+
+설정 파일을 저장한 뒤 현재 세션에 즉시 반영하려면 아래 명령어를 실행합니다.
+
+```shell
+tmux source-file ~/.tmux.conf
+```
+
+> 또는 `prefix + :` 입력 후 `source-file ~/.tmux.conf` 를 타이핑해도 동일합니다.
+<br />
+
+### 오늘의 결론
+tmux의 핵심은 세 가지 계층입니다.
+
+```
+Session > Window > Pane
+```
+
+처음에는 아래 두 가지만 익혀도 충분합니다.
+- **세션 attach/detach**: 작업을 잃지 않고 터미널을 닫고 복귀하기
+- **팬 분할**: `prefix + %` / `prefix + "` 로 화면 나누기
+
+익숙해지면 `.tmux.conf`를 조금씩 손보면서 자신만의 환경을 만들어가는 재미도 있습니다. :wave:
+<br />
