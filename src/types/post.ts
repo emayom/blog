@@ -11,6 +11,7 @@ export interface PostFrontmatter {
 
 export interface PostMeta extends PostFrontmatter {
   slug: string
+  readingTime: number
 }
 
 export interface Post extends PostMeta {

@@ -4,6 +4,7 @@ import { compileMDX } from 'next-mdx-remote/rsc'
 import type { Post, PostFrontmatter, PostMeta } from '@/types/post'
 import { mdxComponents } from '@/components/mdx/mdx-components'
 import { rehypePlugins } from '@/lib/mdx-options'
+import { getReadingTime } from '@/lib/reading-time'
 
 const CONTENT_DIR = path.join(process.cwd(), 'src/content/writing')
 
@@ -40,6 +41,11 @@ function normalizeFrontmatter(input: Record<string, unknown> | PostFrontmatter):
     description: typeof raw.description === 'string' ? raw.description : '',
     thumbnail: typeof raw.thumbnail === 'string' ? raw.thumbnail : '',
   }
+}
+
+// frontmatter 블록을 제거한 raw 본문 (읽기 시간 추정용 — 컴파일 없이 길이만 측정)
+function stripFrontmatter(source: string): string {
+  return source.replace(/^---\r?\n[\s\S]*?\r?\n---/, '')
 }
 
 // frontmatter 블록만 파싱 (목록 빌드 시 본문 컴파일 비용을 피하기 위한 경량 파서)
@@ -80,7 +86,8 @@ export function getPostMetaList(): PostMeta[] {
       const source = readSource(slug)
       if (source === null) return null
       const frontmatter = normalizeFrontmatter(parseFrontmatterBlock(source))
-      return { ...frontmatter, slug } satisfies PostMeta
+      const readingTime = getReadingTime(stripFrontmatter(source))
+      return { ...frontmatter, slug, readingTime } satisfies PostMeta
     })
     .filter((meta): meta is PostMeta => meta !== null && isVisible(meta.draft))
     .sort((a, b) => b.date.localeCompare(a.date))
@@ -103,5 +110,6 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
   const meta = normalizeFrontmatter(frontmatter)
   if (!isVisible(meta.draft)) return null
 
-  return { ...meta, slug, content }
+  const readingTime = getReadingTime(stripFrontmatter(source))
+  return { ...meta, slug, readingTime, content }
 }
