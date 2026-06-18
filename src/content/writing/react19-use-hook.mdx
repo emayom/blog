@@ -1,0 +1,92 @@
+---
+title: "React 19의 `use` 훅"
+date: "2026-05-22"
+tags: ["react"]
+draft: false
+description: "Promise와 Context를 렌더 중에 직접 읽는 React 19의 새로운 use API를 기존 데이터 페칭 방식과 비교하며 정리합니다."
+thumbnail: ""
+---
+
+# React 19의 `use` 훅
+
+## 기본 개념
+
+`use`는 **Promise 또는 Context 값을 렌더 중에 직접 읽는** 새로운 API입니다. 기존 훅과 달리 **조건문·반복문 안에서도 호출 가능**하다는 점이 가장 큰 특징입니다.
+
+```jsx
+import { use, Suspense } from 'react';
+
+function MessagesList({ messagesPromise }) {
+  const messages = use(messagesPromise); // Promise가 resolve될 때까지 suspend
+  return <ul>{messages.map(m => <li key={m.id}>{m.text}</li>)}</ul>;
+}
+
+function App({ messagesPromise }) {
+  return (
+    <Suspense fallback={<p>Loading...</p>}>
+      <MessagesList messagesPromise={messagesPromise} />
+    </Suspense>
+  );
+}
+```
+
+---
+
+## 기존 데이터 페칭 방식과의 비교
+
+| 항목 | `useEffect` + `useState` | `use` (React 19) |
+|------|--------------------------|------------------|
+| **위치** | 훅 규칙 엄격 적용 (조건문 불가) | 조건문·루프 안에서도 사용 가능 |
+| **로딩 상태** | `isLoading` state를 직접 관리 | `<Suspense>` fallback이 자동 처리 |
+| **에러 처리** | `try/catch` 또는 `error` state | `<ErrorBoundary>`가 담당 |
+| **데이터 흐름** | 컴포넌트 내부에서 fetch 시작 | Promise를 **props로 전달**받아 읽음 |
+| **Server Component 연동** | 불가 | 서버에서 만든 Promise를 클라이언트로 스트리밍 가능 |
+
+### 기존 방식 (useEffect)
+
+```jsx
+function MessagesList() {
+  const [messages, setMessages] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    fetchMessages().then(data => {
+      setMessages(data);
+      setIsLoading(false);
+    });
+  }, []);
+
+  if (isLoading) return <p>Loading...</p>;
+  return <ul>{messages.map(m => <li key={m.id}>{m.text}</li>)}</ul>;
+}
+```
+
+### `use` 방식 (React 19)
+
+```jsx
+// 부모에서 Promise 생성 → 자식에서 use로 읽기
+function Parent() {
+  const messagesPromise = fetchMessages(); // 렌더 중 Promise 생성
+  return (
+    <Suspense fallback={<p>Loading...</p>}>
+      <MessagesList messagesPromise={messagesPromise} />
+    </Suspense>
+  );
+}
+
+function MessagesList({ messagesPromise }) {
+  const messages = use(messagesPromise); // suspend → resolve 후 재개
+  return <ul>{messages.map(m => <li key={m.id}>{m.text}</li>)}</ul>;
+}
+```
+
+---
+
+## 핵심 차이점 요약
+
+1. **로딩 상태 관리 불필요** — `isLoading` state 없이 `<Suspense>`가 처리
+2. **조건부 호출 가능** — 유일하게 `if` 블록 안에서 호출할 수 있는 훅
+3. **Promise는 컴포넌트 외부에서 생성** — `use`는 Promise를 만들지 않고 *읽기만* 함 (렌더 중 직접 fetch 시작 금지)
+4. **Server → Client 스트리밍** — RSC에서 생성한 Promise를 그대로 클라이언트 컴포넌트에 전달 가능
+
+> **주의**: Promise를 렌더 함수 안에서 직접 생성하면 매 렌더마다 새 Promise가 만들어집니다. `use`에 넘길 Promise는 **state, ref, 또는 서버 컴포넌트의 props**로 안정적으로 관리해야 합니다.
