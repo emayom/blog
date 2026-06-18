@@ -142,4 +142,21 @@ describe('getPostBySlug', () => {
     expect(post?.slug).toBe('pub')
     expect(post?.content).toBeDefined()
   })
+
+  it('본문 헤딩에서 toc를 추출한다', async () => {
+    vi.stubEnv('NODE_ENV', 'production')
+    setFiles({
+      'pub.mdx': frontmatter({
+        date: '2026-01-01',
+        body: '## 첫 섹션\n\n본문\n\n### 하위\n\n## 둘째 섹션',
+      }),
+    })
+    const { getPostBySlug } = await loadMdx()
+    const post = await getPostBySlug('pub')
+    expect(post?.toc).toEqual([
+      { id: '첫-섹션', text: '첫 섹션', depth: 2 },
+      { id: '하위', text: '하위', depth: 3 },
+      { id: '둘째-섹션', text: '둘째 섹션', depth: 2 },
+    ])
+  })
 })

@@ -11,13 +11,13 @@ export const mdxComponents: MDXComponents = {
   ),
   h2: (props: ComponentPropsWithoutRef<'h2'>) => (
     <h2
-      className="text-ink dark:text-body-on-dark font-semibold text-[34px] leading-[1.47] tracking-[-0.374px] mt-[48px] mb-[17px]"
+      className="text-ink dark:text-body-on-dark font-semibold text-[34px] leading-[1.47] tracking-[-0.374px] mt-[48px] mb-[17px] scroll-mt-[80px]"
       {...props}
     />
   ),
   h3: (props: ComponentPropsWithoutRef<'h3'>) => (
     <h3
-      className="text-ink dark:text-body-on-dark font-semibold text-[21px] leading-[1.19] tracking-[0.231px] mt-[32px] mb-[12px]"
+      className="text-ink dark:text-body-on-dark font-semibold text-[21px] leading-[1.19] tracking-[0.231px] mt-[32px] mb-[12px] scroll-mt-[80px]"
       {...props}
     />
   ),
