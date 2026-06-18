@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* next-themes attribute="class" 연동: .dark 클래스 기반 dark variant */
+@variant dark (&:where(.dark, .dark *));
+
 @theme {
   /* Colors — DESIGN.md */
   --color-primary: #0066cc;
@@ -57,4 +60,11 @@ body {
   color-scheme: light;
   background-color: var(--color-canvas);
   color: var(--color-ink);
+}
+
+/* DESIGN.md Known Gaps — dark counterpart 미정의. 기존 토큰 재활용 */
+.dark body {
+  color-scheme: dark;
+  background-color: var(--color-surface-tile-1);
+  color: var(--color-body-on-dark);
 }
