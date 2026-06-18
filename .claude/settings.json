@@ -1,0 +1,20 @@
+{ 
+  "permissions": {
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./secrets/)",
+      "Read(./config/credentials.json)",
+      "Read(./build/)",
+      "Read(./dist/)",
+      "Read(./node_modules/)",
+      "Bash(rm -rf *)",
+      "Bash(git reset --hard*)",
+      "Bash(git push --force*)",
+      "Bash(chmod -R 777*)"
+    ]
+  },
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  }
+}
