@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { getAllSlugs, getPostBySlug } from '@/lib/mdx'
+import { getAllSlugs, getPostBySlug, getPostMetaList } from '@/lib/mdx'
+import { getAdjacentPosts, getRelatedPosts } from '@/lib/post-navigation'
 import { ArticleLayout } from '@/components/writing/article-layout'
 
 // Next.js 16: params는 Promise — await 필수
@@ -29,5 +30,9 @@ export default async function WritingPostPage({ params }: Props) {
   const post = await getPostBySlug(slug)
   if (!post) notFound()
 
-  return <ArticleLayout post={post} />
+  const posts = getPostMetaList()
+  const adjacent = getAdjacentPosts(posts, slug)
+  const related = getRelatedPosts(posts, slug)
+
+  return <ArticleLayout post={post} adjacent={adjacent} related={related} />
 }

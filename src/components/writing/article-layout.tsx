@@ -1,14 +1,19 @@
 import Link from 'next/link'
 import { formatDate } from '@/lib/format-date'
 import { BackToTop } from '@/components/writing/back-to-top'
+import { PostNavigation } from '@/components/writing/post-navigation'
+import { RelatedPosts } from '@/components/writing/related-posts'
 import { TableOfContents } from '@/components/writing/table-of-contents'
-import type { Post } from '@/types/post'
+import type { Post, PostMeta } from '@/types/post'
+import type { AdjacentPosts } from '@/types/post-navigation'
 
 interface ArticleLayoutProps {
   post: Post
+  adjacent: AdjacentPosts
+  related: PostMeta[]
 }
 
-export function ArticleLayout({ post }: ArticleLayoutProps) {
+export function ArticleLayout({ post, adjacent, related }: ArticleLayoutProps) {
   return (
     <div className="mx-auto grid max-w-[1000px] grid-cols-1 gap-8 px-6 py-12 lg:grid-cols-[1fr_260px] xl:gap-8">
       <article className="min-w-0 max-w-[680px]">
@@ -32,6 +37,10 @@ export function ArticleLayout({ post }: ArticleLayoutProps) {
         <div className="text-[17px] leading-[1.47] tracking-[-0.374px] text-ink-muted-80 dark:text-body-muted [&_p]:mb-[17px]">
           {post.content}
         </div>
+
+        <RelatedPosts posts={related} />
+
+        <PostNavigation prev={adjacent.prev} next={adjacent.next} />
 
         <div className="my-12 h-px bg-hairline dark:bg-ink-muted-80" />
 

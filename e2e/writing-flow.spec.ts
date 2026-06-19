@@ -11,8 +11,8 @@ test.describe('글 읽기 플로우', () => {
     await firstCard.click()
 
     await expect(page).toHaveURL(/\/writing\/.+/)
-    await expect(page.locator('article h1')).toBeVisible()
-    await expect(page.getByText(/분 읽기/)).toBeVisible()
+    await expect(page.locator('article > h1')).toBeVisible()
+    await expect(page.locator('article > p').filter({ has: page.locator('time') })).toContainText('분 읽기')
 
     await page.getByRole('link', { name: '← 모든 글' }).first().click()
     await expect(page).toHaveURL(/\/writing$/)
@@ -55,6 +55,30 @@ test.describe('글 상세 — 모바일에서 TOC 숨김', () => {
     await page.goto('/writing/next-mdx-library-decision')
     await expect(page.locator('article h1')).toBeVisible()
     await expect(page.getByRole('navigation', { name: '목차' })).toBeHidden()
+  })
+})
+
+test.describe('글 상세 — 관련 글 + 이전·다음', () => {
+  test.use({ viewport: { width: 1280, height: 900 } })
+
+  test('관련 글 섹션과 이전·다음 내비게이션이 보이고, 관련 글로 이동한다', async ({ page }) => {
+    // react·architecture 태그를 가진 글 — 다른 react 글들과 태그가 겹친다
+    await page.goto('/writing/data-flow-in-react')
+    await expect(page.locator('article > h1')).toBeVisible()
+
+    const related = page.getByRole('heading', { name: '관련 글' })
+    await expect(related).toBeVisible()
+
+    const nav = page.getByRole('navigation', { name: '이전·다음 글' })
+    await expect(nav).toBeVisible()
+
+    const relatedLink = page
+      .locator('article a[href^="/writing/"]')
+      .filter({ hasNot: page.getByText('모든 글') })
+      .last()
+    await relatedLink.click()
+    await expect(page).toHaveURL(/\/writing\/.+/)
+    await expect(page.locator('article > h1')).toBeVisible()
   })
 })
 
