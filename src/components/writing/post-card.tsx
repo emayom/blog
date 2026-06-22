@@ -8,18 +8,20 @@ interface PostCardProps {
 
 export function PostCard({ post }: PostCardProps) {
   return (
-    <Link
-      href={`/writing/${post.slug}`}
-      className="block rounded-lg border border-hairline bg-canvas px-5 py-[17px] transition-colors hover:bg-canvas-parchment focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-focus dark:border-ink-muted-80 dark:bg-surface-tile-2 dark:hover:bg-surface-tile-3"
-    >
+    <article className="rounded-lg border border-hairline bg-canvas px-5 py-[17px] dark:border-ink-muted-80 dark:bg-surface-tile-2">
       <p className="text-sm text-ink-muted-48 dark:text-body-muted">
         <time dateTime={post.date}>{formatDate(post.date)}</time>
         <span aria-hidden="true"> · </span>
         <span>{`${post.readingTime}분 읽기`}</span>
       </p>
 
-      <h2 className="mt-2 text-[21px] font-semibold leading-[1.2] tracking-[-0.374px] text-ink dark:text-body-on-dark">
-        {post.title}
+      <h2 className="mt-2 text-[21px] font-semibold leading-[1.2] tracking-[-0.374px]">
+        <Link
+          href={`/writing/${post.slug}`}
+          className="text-ink hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-focus dark:text-body-on-dark dark:hover:text-primary-on-dark"
+        >
+          {post.title}
+        </Link>
       </h2>
 
       {post.description && (
@@ -40,6 +42,6 @@ export function PostCard({ post }: PostCardProps) {
           ))}
         </ul>
       )}
-    </Link>
+    </article>
   )
 }
