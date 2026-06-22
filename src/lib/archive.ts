@@ -1,6 +1,10 @@
 import type { PostMeta } from '@/types/post'
 import type { YearCount } from '@/types/archive'
 
+export function getPostsByYear(posts: PostMeta[], year: string): PostMeta[] {
+  return posts.filter(post => post.date.startsWith(year))
+}
+
 // 연도별 글 수를 집계하여 연도 내림차순으로 반환한다.
 export function getArchiveCounts(posts: PostMeta[]): YearCount[] {
   const counts = new Map<string, number>()
