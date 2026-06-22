@@ -21,6 +21,7 @@
   <a href="states.html">상태</a>
   <a href="layout.html">레이아웃</a>
   <a href="components.html" class="active">컴포넌트</a>
+  <a href="search.html">검색</a>
 </nav>
 
 <div class="frame">
@@ -47,7 +48,7 @@
         <span class="tab on">전체</span><span class="tab">책</span><span class="tab">영화</span>
       </span>
       <span class="sort" style="margin-left:16px; vertical-align:middle"><span class="sort-label">정렬</span><span>최신순</span><span class="sort-chev">▾</span></span>
-      <span style="margin-left:16px"><span class="tag">카테고리</span><span class="tag">#태그</span></span>
+      <span style="margin-left:16px"><span class="tag">#태그</span></span>
     </div>
     <div style="margin-bottom:28px">
       <span class="annot" style="display:block; margin-bottom:8px">Pagination (말줄임)</span>
@@ -60,11 +61,29 @@
 
     <div class="divider"></div>
 
-    <!-- 폼 -->
-    <div class="sec-title" style="margin-bottom:16px">폼 (Form)</div>
-    <div style="margin-bottom:28px">
-      <span class="annot" style="display:block; margin-bottom:8px">SearchInput</span>
-      <div class="search-box"><span class="search-ico"></span><span>검색</span></div>
+    <!-- 폼 / 검색 -->
+    <div class="sec-title" style="margin-bottom:16px">폼 · 검색 (Form)</div>
+    <div class="with-aside" style="margin-bottom:28px">
+      <div>
+        <span class="annot" style="display:block; margin-bottom:8px">SearchModal — 검색 트리거 클릭 시 오버레이 (정본 <a href="search.html" style="color:inherit">search.html</a>)</span>
+        <div class="modal" style="max-width:420px; box-shadow:0 6px 20px rgba(0,0,0,.12)">
+          <div class="modal-search">
+            <span class="search-ico"></span>
+            <div class="q">리액<span class="cursor"></span></div>
+          </div>
+          <div class="modal-scope">글에서 검색 · 결과 2</div>
+          <div class="modal-results">
+            <a class="result on" href="#"><div class="r-title"><span class="hl">리액</span>트 19의 use 훅</div><div class="line sm w80"></div></a>
+            <a class="result" href="#"><div class="r-title">상태 관리와 <span class="hl">리액</span>트</div><div class="line sm w70"></div></a>
+          </div>
+          <div class="modal-foot"><span><span class="kbd">↑</span> <span class="kbd">↓</span> 이동</span><span><span class="kbd">↵</span> 열기</span><span><span class="kbd">esc</span> 닫기</span></div>
+        </div>
+      </div>
+      <aside>
+        <span class="annot" style="display:block; margin-bottom:8px">SearchTrigger (아이콘 → 모달)</span>
+        <a href="search.html" title="검색" style="display:inline-flex; align-items:center; height:36px; padding:0 4px; color:var(--muted); text-decoration:none"><span class="search-ico"></span></a>
+        <div class="annot" style="margin-top:14px">검색 입력은 별도 컴포넌트가 아니라 SearchModal 내부(modal-search)에 포함된다.</div>
+      </aside>
     </div>
 
     <div class="divider"></div>
@@ -81,10 +100,10 @@
 
         <span class="annot" style="display:block; margin-bottom:8px">PostCard (목록 행)</span>
         <a class="post" href="#" style="margin-bottom:24px">
-          <div class="top"><span class="annot">2026.06.10 · 7분 읽기</span></div>
           <div class="line w70" style="height:16px"></div>
           <div class="line sm w90" style="margin-top:10px"></div>
-          <div style="margin-top:12px"><span class="tag">카테고리</span><span class="tag">#태그</span></div>
+          <div class="annot" style="margin-top:12px">2026.06.10 · 7분 읽기</div>
+          <div style="margin-top:8px"><span class="tag">#태그</span></div>
         </a>
 
         <span class="annot" style="display:block; margin-bottom:8px">ShelfCard (포스터 + 별점)</span>

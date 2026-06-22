@@ -33,13 +33,14 @@
 | `Pagination` | 현재 페이지, 이전/다음 비활성 (현재 미적용·향후) | `page`, `total` | 탐색 | — |
 | `Sort` | 드롭다운(라벨·값·chevron) | `options[]`, `current` | 탐색(글 목록) | (신규) |
 | `Tag` | 라벨(채움 칩) | `label`, `href` | 전역 | (신규) |
+| `RssButton` | 아이콘 + 라벨 | `href`(해당 분류 피드) | 태그(향후 목록·아카이브) | (신규) |
 
 ## 3. 콘텐츠 카드 · 목록
 
 | 컴포넌트 | 변형 / 상태 | 주요 props | 사용 화면 | DESIGN.md |
 |----------|-------------|------------|-----------|-----------|
 | `Intro` | 슬림 — 아바타 + 한 줄 소개 (연결 정보는 푸터) | `avatar`, `bio` | 진입 | — |
-| `PostCard` | 기본 / featured. 메타(날짜·읽기시간)+제목+요약+태그 | `title`, `date`, `readingTime`, `tags[]`, `excerpt`, `href` | 탐색·진입·태그·아카이브 | `store-utility-card` |
+| `PostCard` | 기본 / featured. **제목 → 요약 → 메타(날짜·읽기시간) → 태그** 순 | `title`, `date`, `readingTime`, `tags[]`, `excerpt`, `href` | 탐색·진입·태그·아카이브 | `store-utility-card` |
 | `NoteCard` | 고정(pinned) / 일반 — 제목(선택)+본문+태그·날짜 | `title?`, `body`, `tags[]`, `date`, `pinned` | 메모 | (신규) |
 | `ShelfCard` | type별(책/애니) | `title`, `cover`, `rating`, `type`, `link` | 감상 | `store-utility-card` |
 | `ArchiveList` | 사이드바 / 진입 블록 / 테두리 없는 리스트 | `years[{year,count}]` | 진입·탐색 | — |
@@ -78,8 +79,8 @@
 
 | 컴포넌트 | 변형 / 상태 | 주요 props | 사용 화면 | DESIGN.md |
 |----------|-------------|------------|-----------|-----------|
-| `SearchInput` | 기본 / 포커스 | `value`, `placeholder` | 검색(m3) | `search-input` |
-| `SearchModal` | 열림 / 닫힘, 결과 / 빈 결과 | `open`, `results[]` | 검색(m3) | — |
+| `SearchTrigger` | 보더·배경 없는 아이콘 버튼(돋보기) — 클릭 시 검색 모달 오픈 | `onClick` | 목록·메모 | — |
+| `SearchModal` | 열림/닫힘 · 결과/빈 결과 · 키보드 선택. **fuse.js 퍼지 검색**, 스코프=현재 섹션 | `open`, `query`, `results[]`, `scope` | 검색 (정본 `search.html`) | — |
 
 ## 8. 상태
 

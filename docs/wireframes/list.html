@@ -21,6 +21,7 @@
   <a href="states.html">상태</a>
   <a href="layout.html">레이아웃</a>
   <a href="components.html">컴포넌트</a>
+  <a href="search.html">검색</a>
 </nav>
 
 <div class="frame">
@@ -47,7 +48,7 @@
     <div style="display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:14px">
       <div class="sec-title" style="font-size:30px">글</div>
       <div style="display:flex; align-items:center; gap:10px">
-        <div class="search-box"><span class="search-ico"></span><span>검색</span></div>
+        <a href="search.html" title="검색" style="display:inline-flex; align-items:center; height:36px; padding:0 4px; color:var(--muted); text-decoration:none"><span class="search-ico"></span></a>
         <span class="sort"><span class="sort-label">정렬</span><span>최신순</span><span class="sort-chev">▾</span></span>
       </div>
     </div>
@@ -55,7 +56,7 @@
     <!-- 설명 한 줄 -->
     <div class="line sm w70" style="margin-bottom:24px"></div>
 
-    <!-- 카테고리/주제 필터 (카운트) — 많아지면 자유 줄바꿈 -->
+    <!-- 주제(태그) 필터 (카운트) — 많아지면 자유 줄바꿈 -->
     <div class="filterbar" style="margin-bottom:28px">
       <span class="chip on">전체 48</span>
       <a href="tag.html" class="chip" style="text-decoration:none">개발 20</a>
@@ -70,32 +71,32 @@
     <!-- 글 목록 -->
     <div class="rows">
       <a class="post" href="detail.html">
-        <div class="top"><span class="annot">2026.06.10 · 7분 읽기</span></div>
         <div class="line w70" style="height:17px"></div>
         <div class="line sm w90" style="margin-top:10px"></div>
         <div class="line sm w70"></div>
-        <div style="margin-top:12px"><span class="tag">카테고리</span><span class="tag">#태그</span><span class="tag">#태그</span></div>
+        <div class="annot" style="margin-top:12px">2026.06.10 · 7분 읽기</div>
+        <div style="margin-top:8px"><span class="tag">#태그</span><span class="tag">#태그</span></div>
       </a>
       <a class="post" href="detail.html">
-        <div class="top"><span class="annot">2026.05.22 · 5분 읽기</span></div>
         <div class="line w60" style="height:17px"></div>
         <div class="line sm w90" style="margin-top:10px"></div>
         <div class="line sm w60"></div>
-        <div style="margin-top:12px"><span class="tag">카테고리</span><span class="tag">#태그</span></div>
+        <div class="annot" style="margin-top:12px">2026.05.22 · 5분 읽기</div>
+        <div style="margin-top:8px"><span class="tag">#태그</span></div>
       </a>
       <a class="post" href="detail.html">
-        <div class="top"><span class="annot">2026.04.03 · 10분 읽기</span></div>
         <div class="line w80" style="height:17px"></div>
         <div class="line sm w80" style="margin-top:10px"></div>
         <div class="line sm w50"></div>
-        <div style="margin-top:12px"><span class="tag">카테고리</span><span class="tag">#태그</span><span class="tag">#태그</span></div>
+        <div class="annot" style="margin-top:12px">2026.04.03 · 10분 읽기</div>
+        <div style="margin-top:8px"><span class="tag">#태그</span><span class="tag">#태그</span></div>
       </a>
       <a class="post" href="detail.html">
-        <div class="top"><span class="annot">2026.03.18 · 4분 읽기</span></div>
         <div class="line" style="height:17px; width:65%"></div>
         <div class="line sm w90" style="margin-top:10px"></div>
         <div class="line sm w60"></div>
-        <div style="margin-top:12px"><span class="tag">카테고리</span><span class="tag">#태그</span></div>
+        <div class="annot" style="margin-top:12px">2026.03.18 · 4분 읽기</div>
+        <div style="margin-top:8px"><span class="tag">#태그</span></div>
       </a>
     </div>
 
