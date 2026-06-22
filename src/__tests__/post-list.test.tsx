@@ -38,10 +38,10 @@ describe('PostList', () => {
     expect(screen.getByText('글-c')).toBeInTheDocument()
   })
 
-  it('태그 링크를 렌더한다', () => {
+  it('태그 필터 링크를 렌더한다', () => {
     render(<PostList posts={posts} tags={tags} />)
-    expect(screen.getByRole('link', { name: /Next.js/ })).toHaveAttribute('href', '/tag/Next.js')
-    expect(screen.getByRole('link', { name: /MDX/ })).toHaveAttribute('href', '/tag/MDX')
+    expect(screen.getByRole('link', { name: 'Next.js2' })).toHaveAttribute('href', '/tag/Next.js')
+    expect(screen.getByRole('link', { name: 'MDX1' })).toHaveAttribute('href', '/tag/MDX')
   })
 
   it('전체 0건이면 빈 상태를 렌더한다', () => {
