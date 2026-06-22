@@ -6,7 +6,7 @@ interface SeriesNavigationProps {
 }
 
 const itemLinkClass
-  = 'group flex rounded-sm text-[17px] leading-[1.47] tracking-[-0.374px] text-ink-muted-80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-focus group-hover:text-primary dark:text-body-muted dark:group-hover:text-primary-on-dark'
+  = 'flex rounded-sm text-[17px] leading-[1.47] tracking-[-0.374px] text-ink-muted-80 transition-colors hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-focus dark:text-body-muted dark:hover:text-primary-on-dark'
 
 const currentItemClass
   = 'flex text-[17px] font-semibold leading-[1.47] tracking-[-0.374px] text-primary dark:text-primary-on-dark'
