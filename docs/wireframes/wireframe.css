@@ -91,6 +91,16 @@ nav.site a.on { color: var(--ink); font-weight: 600; }
   width:32px; height:32px; border:1px solid var(--line); border-radius:8px; background:#fff;
   color:var(--muted); font-size:15px; line-height:1; cursor:pointer; }
 .icon-btn:hover { border-color:var(--muted); }
+/* RSS 버튼 (제목 옆) */
+.rss-btn { display:inline-flex; align-items:center; gap:7px; height:32px; padding:0 12px;
+  border:1px solid var(--line); border-radius:8px; background:#fff; color:var(--muted);
+  font-size:12px; text-decoration:none; flex:none; }
+.rss-btn:hover { border-color:var(--muted); color:var(--ink); }
+.rss-ico { position:relative; width:14px; height:14px; flex:none; }
+.rss-ico::before { content:""; position:absolute; left:1px; bottom:1px; width:4px; height:4px;
+  border-radius:50%; background:currentColor; }
+.rss-ico::after { content:""; position:absolute; left:1px; bottom:1px; width:11px; height:11px;
+  border:2px solid currentColor; border-radius:0 0 0 14px; border-top-color:transparent; border-right-color:transparent; }
 .eyebrow { font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-bottom:12px; }
 .annot { font-size:11px; color:#c0392b; opacity:.7; }
 .btn { display:inline-block; height:38px; line-height:38px; padding:0 22px;
@@ -125,6 +135,12 @@ nav.site a.on { color: var(--ink); font-weight: 600; }
 .archive .ar:last-child { border-bottom:none; }
 .archive .yr { width:70px; height:14px; background:var(--fill); border-radius:3px; }
 .archive .ct { font-size:12px; color:var(--muted); }
+
+/* 연도(글 수) 링크 리스트 — 배포 홈 아카이브 스타일 */
+.year-list { display:flex; flex-direction:column; gap:10px; }
+.year-list a { font-size:14px; color:var(--ink); text-decoration:none; }
+.year-list a .ct { color:var(--muted); font-size:13px; }
+.year-list a:hover { color:var(--muted); }
 
 /* card grid (blog list / generic) */
 .grid { display:grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
@@ -226,6 +242,28 @@ footer.site { padding: 28px 40px; border-top:1px solid var(--line); background:#
 .notes-bar { display:flex; align-items:center; gap:10px; margin-bottom:22px; }
 .group-label { font-size:13px; font-weight:600; color:var(--muted); margin:8px 0 14px; }
 @media (max-width:760px) { .notes-grid { column-count: 1; } }
+
+/* ===== 검색 모달 (fuse.js) ===== */
+.modal-scrim { background:rgba(20,20,20,.4); display:flex; align-items:flex-start; justify-content:center;
+  padding:64px 16px; min-height:520px; }
+.modal { width:580px; max-width:100%; background:#fff; border:1px solid var(--line); border-radius:14px;
+  box-shadow:0 24px 60px rgba(0,0,0,.3); overflow:hidden; }
+.modal-search { display:flex; align-items:center; gap:12px; padding:16px 18px; border-bottom:1px solid var(--line); }
+.modal-search .q { flex:1; font-size:15px; color:var(--ink); }
+.modal-search .q .cursor { display:inline-block; width:1px; height:16px; background:var(--ink); vertical-align:-3px; margin-left:1px; }
+.modal-search .ph { color:var(--muted); font-weight:400; }
+.kbd { font-size:11px; color:var(--muted); border:1px solid var(--line); border-radius:5px; padding:1px 6px; background:#fafafa; }
+.modal-scope { padding:9px 18px; border-bottom:1px solid var(--line); font-size:11px; color:var(--muted); }
+.modal-results { max-height:340px; overflow:auto; }
+.result { display:block; padding:13px 18px; border-bottom:1px solid var(--line); text-decoration:none; color:inherit; }
+.result:last-child { border-bottom:none; }
+.result.on { background:var(--fill-2); }
+.result .r-title { font-size:14px; font-weight:600; color:var(--ink); margin-bottom:7px; }
+.hl { background:var(--fill); font-weight:700; border-radius:2px; padding:0 2px; }
+.modal-foot { display:flex; gap:16px; align-items:center; padding:10px 18px; border-top:1px solid var(--line);
+  font-size:11px; color:var(--muted); background:#fafafa; }
+.modal-empty { padding:48px 18px; text-align:center; color:var(--muted); }
+.modal-empty .icon { width:48px; height:48px; border-radius:12px; background:var(--fill); margin:0 auto 14px; }
 
 /* ===== 모바일 레이아웃 ===== */
 .phones { display:flex; flex-wrap:wrap; gap:28px; justify-content:center; }

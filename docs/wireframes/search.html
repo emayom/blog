@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>와이어프레임 — 검색 모달</title>
+<link rel="stylesheet" href="wireframe.css">
+</head>
+<body>
+
+<nav class="toolbar">
+  <a href="home.html">홈</a>
+  <a href="list.html">목록</a>
+  <a href="detail.html">상세</a>
+  <a href="tag.html">태그</a>
+  <a href="archive.html">아카이브</a>
+  <a href="library.html">책장</a>
+  <a href="notes.html">메모</a>
+  <a href="about.html">소개</a>
+  <a href="mobile.html">모바일</a>
+  <a href="states.html">상태</a>
+  <a href="layout.html">레이아웃</a>
+  <a href="components.html">컴포넌트</a>
+  <a href="search.html" class="active">검색</a>
+</nav>
+
+<div class="frame">
+  <div class="frame-label">검색</div>
+
+  <div class="pad">
+    <div class="annot" style="margin-bottom:18px">
+      검색을 누르면 오버레이로 열린다. 현재 섹션(글) 안에서 검색하며, 초기(검색 전) / 결과 / 빈 결과 상태를 가진다.
+    </div>
+
+    <!-- 초기 (검색어 입력 전) -->
+    <div class="sec-title" style="font-size:15px; margin-bottom:10px">열림 — 초기 (검색어 입력 전)</div>
+    <div class="modal-scrim" style="min-height:auto; padding:32px 16px; border:1px solid var(--line); border-radius:10px">
+      <div class="modal">
+        <div class="modal-search">
+          <span class="search-ico"></span>
+          <div class="q"><span class="ph">검색어를 입력하세요</span><span class="cursor"></span></div>
+        </div>
+        <div class="modal-scope">글에서 검색</div>
+        <div class="modal-empty">
+          <div class="icon"></div>
+          <div style="font-size:13px">검색어를 입력해 글을 찾아보세요</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 결과 있음 -->
+    <div class="sec-title" style="font-size:15px; margin:28px 0 10px">열림 — 결과</div>
+    <div class="modal-scrim" style="min-height:auto; padding:32px 16px; border:1px solid var(--line); border-radius:10px">
+      <div class="modal">
+        <div class="modal-search">
+          <span class="search-ico"></span>
+          <div class="q">리액<span class="cursor"></span></div>
+        </div>
+        <div class="modal-scope">글에서 검색 · 결과 3</div>
+        <div class="modal-results">
+          <a class="result on" href="detail.html">
+            <div class="r-title"><span class="hl">리액</span>트 19의 use 훅</div>
+            <div class="line sm w90"></div>
+            <div class="annot" style="margin-top:8px">2026.05.22 · 3분 읽기 · #react</div>
+          </a>
+          <a class="result" href="detail.html">
+            <div class="r-title"><span class="hl">리액</span>트 서버 컴포넌트 정리</div>
+            <div class="line sm w80"></div>
+            <div class="annot" style="margin-top:8px">2026.04.10 · 8분 읽기 · #react</div>
+          </a>
+          <a class="result" href="detail.html">
+            <div class="r-title">상태 관리와 <span class="hl">리액</span>트</div>
+            <div class="line sm w70"></div>
+            <div class="annot" style="margin-top:8px">2026.03.02 · 6분 읽기 · #state-management</div>
+          </a>
+        </div>
+        <div class="modal-foot">
+          <span><span class="kbd">↑</span> <span class="kbd">↓</span> 이동</span>
+          <span><span class="kbd">↵</span> 열기</span>
+          <span><span class="kbd">esc</span> 닫기</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 빈 결과 -->
+    <div class="sec-title" style="font-size:15px; margin:28px 0 10px">열림 — 빈 결과</div>
+    <div class="modal-scrim" style="min-height:auto; padding:32px 16px; border:1px solid var(--line); border-radius:10px">
+      <div class="modal">
+        <div class="modal-search">
+          <span class="search-ico"></span>
+          <div class="q">없는검색어<span class="cursor"></span></div>
+        </div>
+        <div class="modal-scope">글에서 검색 · 결과 0</div>
+        <div class="modal-empty">
+          <div class="icon"></div>
+          <div style="font-size:13px; margin-bottom:14px">검색 결과가 없습니다</div>
+          <a class="btn" href="list.html">전체 글 보기</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="ft-top">
+      <div class="ft-brand">
+        <div class="logo"></div>
+        <div class="line sm" style="width:170px; margin-top:14px"></div>
+      </div>
+      <div class="ft-cols">
+        <div class="ft-col">
+          <div class="ft-h">탐색</div>
+          <a href="list.html">글</a>
+          <a href="notes.html">메모</a>
+          <a href="library.html">책장</a>
+          <a href="about.html">소개</a>
+        </div>
+        <div class="ft-col">
+          <div class="ft-h">둘러보기</div>
+          <a href="tag.html">태그</a>
+          <a href="archive.html">아카이브</a>
+          <a href="#">RSS</a>
+        </div>
+        <div class="ft-col">
+          <div class="ft-h">연결</div>
+          <a href="#">GitHub</a>
+          <a href="#">LinkedIn</a>
+          <a href="#">Email</a>
+        </div>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <span>© 2026. 와이어프레임</span>
+      <span>Seoul, Korea</span>
+    </div>
+  </footer>
+</div>
+
+</body>
+</html>

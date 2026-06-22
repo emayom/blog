@@ -21,6 +21,7 @@
   <a href="states.html">상태</a>
   <a href="layout.html">레이아웃</a>
   <a href="components.html">컴포넌트</a>
+  <a href="search.html">검색</a>
 </nav>
 
 <div class="frame">
@@ -41,33 +42,36 @@
     <!-- 모든 글(글 목록)로 — 태그는 글 목록에서 진입하는 필터 뷰 -->
     <a class="btn" href="list.html" style="margin-bottom:18px">← 모든 글</a>
 
-    <!-- 제목: #태그 (글 수) -->
-    <div class="sec-title" style="font-size:28px; margin-bottom:22px">
-      #태그명 <span style="color:var(--muted); font-weight:400; font-size:20px">(3)</span>
+    <!-- 제목: #태그 (글 수) + RSS -->
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:22px">
+      <div class="sec-title" style="font-size:28px; margin:0">
+        #태그명 <span style="color:var(--muted); font-weight:400; font-size:20px">(3)</span>
+      </div>
+      <a href="#" class="rss-btn" title="이 태그의 RSS 피드">RSS</a>
     </div>
 
     <!-- 해당 태그 글 목록 — 목록(list)과 동일한 PostCard 컴포넌트 -->
     <div class="rows">
       <a class="post" href="detail.html">
-        <div class="top"><span class="annot">2026.06.10 · 8분 읽기</span></div>
         <div class="line w70" style="height:17px"></div>
         <div class="line sm w90" style="margin-top:10px"></div>
         <div class="line sm w60"></div>
-        <div style="margin-top:12px"><span class="tag">카테고리</span><span class="tag">#태그</span><span class="tag">#태그</span></div>
+        <div class="annot" style="margin-top:12px">2026.06.10 · 8분 읽기</div>
+        <div style="margin-top:8px"><span class="tag">#태그</span><span class="tag">#태그</span></div>
       </a>
       <a class="post" href="detail.html">
-        <div class="top"><span class="annot">2026.05.22 · 5분 읽기</span></div>
         <div class="line w60" style="height:17px"></div>
         <div class="line sm w90" style="margin-top:10px"></div>
         <div class="line sm w70"></div>
-        <div style="margin-top:12px"><span class="tag">카테고리</span><span class="tag">#태그</span></div>
+        <div class="annot" style="margin-top:12px">2026.05.22 · 5분 읽기</div>
+        <div style="margin-top:8px"><span class="tag">#태그</span></div>
       </a>
       <a class="post" href="detail.html">
-        <div class="top"><span class="annot">2026.04.03 · 11분 읽기</span></div>
         <div class="line w80" style="height:17px"></div>
         <div class="line sm w80" style="margin-top:10px"></div>
         <div class="line sm w50"></div>
-        <div style="margin-top:12px"><span class="tag">카테고리</span><span class="tag">#태그</span><span class="tag">#태그</span></div>
+        <div class="annot" style="margin-top:12px">2026.04.03 · 11분 읽기</div>
+        <div style="margin-top:8px"><span class="tag">#태그</span><span class="tag">#태그</span></div>
       </a>
     </div>
   </div>
