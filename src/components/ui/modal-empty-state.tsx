@@ -1,0 +1,38 @@
+import Link from 'next/link'
+
+type ModalEmptyStateAction
+  = | { label: string, href: string, onClick?: () => void }
+    | { label: string, onClick: () => void, href?: never }
+
+interface ModalEmptyStateProps {
+  message: string
+  action?: ModalEmptyStateAction
+}
+
+export function ModalEmptyState({ message, action }: ModalEmptyStateProps) {
+  return (
+    <div className="flex flex-col items-center px-4.5 py-12 text-center text-ink-muted-48 dark:text-body-muted">
+      <div className="mb-3.5 size-12 rounded-xl bg-canvas-parchment dark:bg-surface-tile-1" aria-hidden="true" />
+      <p className={action ? 'mb-3.5 text-[13px]' : 'text-[13px]'}>{message}</p>
+      {action && (action.href
+        ? (
+            <Link
+              href={action.href}
+              onClick={action.onClick}
+              className="rounded-full border border-hairline px-4 py-1.5 text-[13px] text-ink-muted-48 transition-colors hover:border-ink-muted-48 hover:text-ink dark:border-ink-muted-80 dark:text-body-muted dark:hover:text-body-on-dark"
+            >
+              {action.label}
+            </Link>
+          )
+        : (
+            <button
+              type="button"
+              onClick={action.onClick}
+              className="rounded-full border border-hairline px-4 py-1.5 text-[13px] text-ink-muted-48 transition-colors hover:border-ink-muted-48 hover:text-ink dark:border-ink-muted-80 dark:text-body-muted dark:hover:text-body-on-dark"
+            >
+              {action.label}
+            </button>
+          ))}
+    </div>
+  )
+}

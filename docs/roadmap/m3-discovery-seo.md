@@ -41,4 +41,5 @@
 
 ## Related Issues / Links
 
-- 와이어프레임: [tag](../wireframes/tag.html), [archive](../wireframes/archive.html)
+- 와이어프레임: [list](../wireframes/list.html), [search](../wireframes/search.html), [tag](../wireframes/tag.html), [archive](../wireframes/archive.html)
+- ADR: [ADR-004 검색 구현 방식](../adr/004-search.md), [ADR-005 댓글](../adr/005-comments.md)
