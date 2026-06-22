@@ -1,8 +1,13 @@
 import { render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
 import { describe, expect, it, vi } from 'vitest'
 import { TagFilter } from '@/components/writing/tag-filter'
 import type { TagCount } from '@/types/tag'
+
+vi.mock('next/link', () => ({
+  default: ({ href, children, ...rest }: { href: string, children: React.ReactNode }) => (
+    <a href={href} {...rest}>{children}</a>
+  ),
+}))
 
 const tags: TagCount[] = [
   { tag: 'Next.js', count: 2 },
@@ -10,30 +15,27 @@ const tags: TagCount[] = [
 ]
 
 describe('TagFilter', () => {
-  it('전체 칩과 모든 태그 칩을 렌더한다', () => {
-    render(<TagFilter tags={tags} total={3} selected={null} onSelect={vi.fn()} />)
-    expect(screen.getByRole('button', { name: /전체/ })).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: /Next.js/ })).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: /MDX/ })).toBeInTheDocument()
+  it('전체 링크와 모든 태그 링크를 렌더한다', () => {
+    render(<TagFilter tags={tags} total={3} />)
+    expect(screen.getByRole('link', { name: /전체/ })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /Next.js/ })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /MDX/ })).toBeInTheDocument()
   })
 
-  it('선택된 태그에 aria-pressed를 표시한다', () => {
-    render(<TagFilter tags={tags} total={3} selected="MDX" onSelect={vi.fn()} />)
-    expect(screen.getByRole('button', { name: /MDX/ })).toHaveAttribute('aria-pressed', 'true')
-    expect(screen.getByRole('button', { name: /전체/ })).toHaveAttribute('aria-pressed', 'false')
+  it('전체 링크는 /writing으로 연결한다', () => {
+    render(<TagFilter tags={tags} total={3} />)
+    expect(screen.getByRole('link', { name: /전체/ })).toHaveAttribute('href', '/writing')
   })
 
-  it('태그 클릭 시 해당 태그로 onSelect를 호출한다', async () => {
-    const onSelect = vi.fn()
-    render(<TagFilter tags={tags} total={3} selected={null} onSelect={onSelect} />)
-    await userEvent.click(screen.getByRole('button', { name: /Next.js/ }))
-    expect(onSelect).toHaveBeenCalledWith('Next.js')
+  it('태그 링크는 /tag/[tag]로 연결한다', () => {
+    render(<TagFilter tags={tags} total={3} />)
+    expect(screen.getByRole('link', { name: /Next.js/ })).toHaveAttribute('href', '/tag/Next.js')
+    expect(screen.getByRole('link', { name: /MDX/ })).toHaveAttribute('href', '/tag/MDX')
   })
 
-  it('전체 클릭 시 null로 onSelect를 호출한다', async () => {
-    const onSelect = vi.fn()
-    render(<TagFilter tags={tags} total={3} selected="MDX" onSelect={onSelect} />)
-    await userEvent.click(screen.getByRole('button', { name: /전체/ }))
-    expect(onSelect).toHaveBeenCalledWith(null)
+  it('태그 개수를 표시한다', () => {
+    render(<TagFilter tags={tags} total={3} />)
+    expect(screen.getByRole('link', { name: /Next.js/ })).toHaveTextContent('2')
+    expect(screen.getByRole('link', { name: /MDX/ })).toHaveTextContent('1')
   })
 })

@@ -1,10 +1,8 @@
-import { Suspense } from 'react'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getPostMetaList } from '@/lib/mdx'
 import { getTagCounts } from '@/lib/tags'
 import { PostList } from '@/components/writing/post-list'
-import { PostListSkeleton } from '@/components/writing/post-list-skeleton'
 
 export const metadata: Metadata = {
   title: '글',
@@ -31,10 +29,7 @@ export default function WritingPage() {
         배우고 기록한 것들을 모았습니다.
       </p>
 
-      {/* useSearchParams를 쓰는 PostList는 Suspense 경계 필수 (Next.js 16 빌드 요구) */}
-      <Suspense fallback={<PostListSkeleton />}>
-        <PostList posts={posts} tags={tags} />
-      </Suspense>
+      <PostList posts={posts} tags={tags} />
     </main>
   )
 }
