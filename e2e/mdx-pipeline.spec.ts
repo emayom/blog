@@ -13,7 +13,9 @@ test.describe('MDX 파이프라인 — 글 상세', () => {
       }),
     ).toBeVisible()
 
-    await expect(page.getByRole('article')).toContainText('후보는 두 가지')
+    // 본문 article — 하단 연관 글 카드 article과 구분 (h1 보유)
+    const article = page.locator('article').filter({ has: page.getByRole('heading', { level: 1 }) })
+    await expect(article).toContainText('후보는 두 가지')
   })
 
   test('코드 블록에 신택스 하이라이팅 마크업이 존재한다', async ({ page }) => {

@@ -10,7 +10,7 @@ const chipClass = 'inline-flex h-[34px] items-center gap-1.5 rounded-full border
 
 export function TagFilter({ tags, total }: TagFilterProps) {
   return (
-    <div className="flex flex-wrap gap-2">
+    <nav aria-label="주제 필터" className="flex flex-wrap gap-2">
       <Link href="/writing" className={chipClass}>
         전체
         <span className="text-ink-muted-48 dark:text-body-muted">{total}</span>
@@ -22,6 +22,6 @@ export function TagFilter({ tags, total }: TagFilterProps) {
           <span className="text-ink-muted-48 dark:text-body-muted">{count}</span>
         </Link>
       ))}
-    </div>
+    </nav>
   )
 }
