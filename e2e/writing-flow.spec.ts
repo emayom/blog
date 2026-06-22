@@ -82,6 +82,35 @@ test.describe('글 상세 — 관련 글 + 이전·다음', () => {
   })
 })
 
+test.describe('글 상세 — 시리즈 네비게이션', () => {
+  test.use({ viewport: { width: 1280, height: 900 } })
+
+  test('연재 글에서 시리즈 nav가 노출되고, 다른 편으로 이동한다', async ({ page }) => {
+    // heap = 시리즈 2편 중 2번째
+    await page.goto('/writing/heap-in-javascript')
+    await expect(page.locator('article > h1')).toBeVisible()
+
+    const series = page.getByRole('region', { name: '시리즈' })
+    await expect(series).toBeVisible()
+    await expect(series).toContainText('자바스크립트로 구현하는 자료구조')
+    await expect(series).toContainText('2편 중 2번째')
+
+    // 현재 글은 aria-current로 표기되고 링크가 아니다
+    await expect(series.locator('[aria-current="true"]')).toContainText('2. ')
+
+    // 1편(lru) 링크 클릭 → 이동
+    await series.getByRole('link', { name: /1\./ }).click()
+    await expect(page).toHaveURL(/\/writing\/lru-cache-in-javascript$/)
+    await expect(page.getByRole('region', { name: '시리즈' })).toContainText('2편 중 1번째')
+  })
+
+  test('비연재 글에서는 시리즈 nav가 노출되지 않는다', async ({ page }) => {
+    await page.goto('/writing/next-mdx-library-decision')
+    await expect(page.locator('article > h1')).toBeVisible()
+    await expect(page.getByRole('region', { name: '시리즈' })).toHaveCount(0)
+  })
+})
+
 test.describe('반응형 — 모바일 375px', () => {
   test.use({ viewport: { width: 375, height: 812 } })
 
