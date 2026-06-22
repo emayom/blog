@@ -11,8 +11,10 @@ test.describe('글 읽기 플로우', () => {
     await firstCard.click()
 
     await expect(page).toHaveURL(/\/writing\/.+/)
-    await expect(page.locator('article > h1')).toBeVisible()
-    await expect(page.locator('article > p').filter({ has: page.locator('time') })).toContainText('분 읽기')
+    // 본문 article — 하단 연관 글 카드 article과 구분 (직속 h1 보유)
+    const article = page.locator('article').filter({ has: page.locator('> h1') })
+    await expect(article.locator('> h1')).toBeVisible()
+    await expect(article.locator('> p').filter({ has: page.locator('time') })).toContainText('분 읽기')
 
     await page.getByRole('link', { name: '← 모든 글' }).first().click()
     await expect(page).toHaveURL(/\/writing$/)

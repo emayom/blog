@@ -34,12 +34,15 @@ test.describe('홈 페이지', () => {
     await expect(allPosts).toHaveAttribute('href', '/writing')
   })
 
-  test('아카이브 사이드바의 연도 항목은 비링크다', async ({ page }) => {
+  test('아카이브 사이드바의 연도 항목은 /archive/[year]로 링크된다', async ({ page }) => {
     await page.goto('/')
 
     const aside = page.locator('aside')
     await expect(aside.getByRole('heading', { level: 2, name: '아카이브' })).toBeVisible()
-    expect(await aside.getByRole('link').count()).toBe(0)
+
+    const yearLinks = aside.getByRole('link')
+    expect(await yearLinks.count()).toBeGreaterThan(0)
+    await expect(yearLinks.first()).toHaveAttribute('href', /\/archive\/\d{4}$/)
   })
 
   test('모바일·데스크톱에서 가로 스크롤이 없다', async ({ page }) => {
