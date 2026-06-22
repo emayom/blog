@@ -33,11 +33,13 @@ export function PostCard({ post }: PostCardProps) {
       {post.tags.length > 0 && (
         <ul className="mt-3 flex flex-wrap gap-2">
           {post.tags.map(tag => (
-            <li
-              key={tag}
-              className="rounded-full bg-canvas-parchment px-3 py-1 text-xs text-ink-muted-80 dark:bg-surface-tile-1 dark:text-body-muted"
-            >
-              {tag}
+            <li key={tag}>
+              <Link
+                href={`/tag/${tag}`}
+                className="rounded-full bg-canvas-parchment px-3 py-1 text-xs text-ink-muted-80 hover:bg-canvas-parchment/70 hover:text-primary dark:bg-surface-tile-1 dark:text-body-muted dark:hover:text-primary-on-dark"
+              >
+                {tag}
+              </Link>
             </li>
           ))}
         </ul>

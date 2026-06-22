@@ -27,10 +27,10 @@ describe('PostCard', () => {
     expect(screen.getByText('3분 읽기')).toBeInTheDocument()
   })
 
-  it('태그를 모두 렌더한다', () => {
+  it('태그를 /tag/[tag]로 링크한다', () => {
     render(<PostCard post={post} />)
-    expect(screen.getByText('Next.js')).toBeInTheDocument()
-    expect(screen.getByText('MDX')).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'Next.js' })).toHaveAttribute('href', '/tag/Next.js')
+    expect(screen.getByRole('link', { name: 'MDX' })).toHaveAttribute('href', '/tag/MDX')
   })
 
   it('description이 없으면 요약을 렌더하지 않는다', () => {
