@@ -13,6 +13,8 @@ export interface PostFrontmatter {
   draft: boolean
   description: string
   thumbnail: string
+  series?: string
+  seriesOrder?: number
 }
 
 export interface PostMeta extends PostFrontmatter {

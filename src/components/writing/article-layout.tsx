@@ -3,17 +3,20 @@ import { formatDate } from '@/lib/format-date'
 import { BackToTop } from '@/components/writing/back-to-top'
 import { PostNavigation } from '@/components/writing/post-navigation'
 import { RelatedPosts } from '@/components/writing/related-posts'
+import { SeriesNavigation } from '@/components/writing/series-navigation'
 import { TableOfContents } from '@/components/writing/table-of-contents'
 import type { Post, PostMeta } from '@/types/post'
 import type { AdjacentPosts } from '@/types/post-navigation'
+import type { SeriesNavigation as SeriesNavigationData } from '@/types/series-navigation'
 
 interface ArticleLayoutProps {
   post: Post
   adjacent: AdjacentPosts
   related: PostMeta[]
+  series: SeriesNavigationData | null
 }
 
-export function ArticleLayout({ post, adjacent, related }: ArticleLayoutProps) {
+export function ArticleLayout({ post, adjacent, related, series }: ArticleLayoutProps) {
   return (
     <div className="mx-auto grid max-w-[1000px] grid-cols-1 gap-8 px-6 py-12 lg:grid-cols-[1fr_260px] xl:gap-8">
       <article className="min-w-0 max-w-[680px]">
@@ -37,6 +40,8 @@ export function ArticleLayout({ post, adjacent, related }: ArticleLayoutProps) {
         <div className="text-[17px] leading-[1.47] tracking-[-0.374px] text-ink-muted-80 dark:text-body-muted [&_p]:mb-[17px]">
           {post.content}
         </div>
+
+        <SeriesNavigation series={series} />
 
         <RelatedPosts posts={related} />
 

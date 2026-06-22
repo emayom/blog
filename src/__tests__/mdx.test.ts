@@ -93,6 +93,84 @@ describe('getPostMetaList — 정렬 및 정규화', () => {
     expect(meta.tags).toEqual(['Next.js', 'MDX'])
     expect(meta.draft).toBe(false)
   })
+
+  it('series·seriesOrder 미존재 시 undefined로 정규화한다', async () => {
+    vi.stubEnv('NODE_ENV', 'development')
+    setFiles({
+      'a.mdx': frontmatter({ date: '2026-01-01' }),
+    })
+    const { getPostMetaList } = await loadMdx()
+    const [meta] = getPostMetaList()
+    expect(meta.series).toBeUndefined()
+    expect(meta.seriesOrder).toBeUndefined()
+  })
+
+  it('따옴표 없는 숫자 seriesOrder를 number로 파싱한다', async () => {
+    vi.stubEnv('NODE_ENV', 'development')
+    setFiles({
+      'a.mdx': `---
+title: "Title"
+date: "2026-01-01"
+tags: ["a"]
+draft: false
+description: "desc"
+thumbnail: ""
+series: "내 시리즈"
+seriesOrder: 2
+---
+
+본문
+`,
+    })
+    const { getPostMetaList } = await loadMdx()
+    const [meta] = getPostMetaList()
+    expect(meta.series).toBe('내 시리즈')
+    expect(meta.seriesOrder).toBe(2)
+    expect(typeof meta.seriesOrder).toBe('number')
+  })
+
+  it('seriesOrder 0을 유효한 number로 유지한다', async () => {
+    vi.stubEnv('NODE_ENV', 'development')
+    setFiles({
+      'a.mdx': `---
+title: "Title"
+date: "2026-01-01"
+tags: ["a"]
+draft: false
+description: "desc"
+thumbnail: ""
+series: "내 시리즈"
+seriesOrder: 0
+---
+
+본문
+`,
+    })
+    const { getPostMetaList } = await loadMdx()
+    const [meta] = getPostMetaList()
+    expect(meta.seriesOrder).toBe(0)
+  })
+
+  it('빈 문자열 series는 undefined로 처리한다', async () => {
+    vi.stubEnv('NODE_ENV', 'development')
+    setFiles({
+      'a.mdx': `---
+title: "Title"
+date: "2026-01-01"
+tags: ["a"]
+draft: false
+description: "desc"
+thumbnail: ""
+series: ""
+---
+
+본문
+`,
+    })
+    const { getPostMetaList } = await loadMdx()
+    const [meta] = getPostMetaList()
+    expect(meta.series).toBeUndefined()
+  })
 })
 
 describe('getPostMetaList — draft 필터', () => {

@@ -41,6 +41,11 @@ function normalizeFrontmatter(input: Record<string, unknown> | PostFrontmatter):
     draft: raw.draft === true,
     description: typeof raw.description === 'string' ? raw.description : '',
     thumbnail: typeof raw.thumbnail === 'string' ? raw.thumbnail : '',
+    series: typeof raw.series === 'string' && raw.series !== '' ? raw.series : undefined,
+    seriesOrder:
+      typeof raw.seriesOrder === 'number' && Number.isFinite(raw.seriesOrder)
+        ? raw.seriesOrder
+        : undefined,
   }
 }
 
@@ -71,6 +76,9 @@ function parseFrontmatterBlock(source: string): Record<string, unknown> {
     }
     else if (rawValue === 'true' || rawValue === 'false') {
       result[key] = rawValue === 'true'
+    }
+    else if (/^-?\d+(\.\d+)?$/.test(rawValue)) {
+      result[key] = Number(rawValue)
     }
     else {
       result[key] = rawValue.replace(/^["']|["']$/g, '')
