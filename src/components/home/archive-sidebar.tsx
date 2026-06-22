@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import type { YearCount } from '@/types/archive'
 
 interface ArchiveSidebarProps {
@@ -16,11 +17,14 @@ export function ArchiveSidebar({ years }: ArchiveSidebarProps) {
         {years.map(({ year, count }) => (
           <li
             key={year}
-            className="flex items-baseline justify-between py-2.5 border-b border-divider-soft last:border-b-0 dark:border-ink-muted-80"
+            className="flex items-baseline justify-between border-b border-divider-soft py-2.5 last:border-b-0 dark:border-ink-muted-80"
           >
-            <span className="text-[17px] text-ink dark:text-body-on-dark">
+            <Link
+              href={`/archive/${year}`}
+              className="text-[17px] text-ink hover:text-primary dark:text-body-on-dark dark:hover:text-primary-on-dark"
+            >
               {year}
-            </span>
+            </Link>
             <span className="text-sm text-ink-muted-48 dark:text-body-muted">
               {`${count}편`}
             </span>
