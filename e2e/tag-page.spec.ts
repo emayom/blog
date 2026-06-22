@@ -12,8 +12,9 @@ test.describe('태그 페이지', () => {
   test('브레드크럼에 홈·글 링크가 있다', async ({ page }) => {
     await page.goto('/tag/javascript')
 
-    await expect(page.getByRole('link', { name: '홈' })).toHaveAttribute('href', '/')
-    await expect(page.getByRole('link', { name: '글' })).toHaveAttribute('href', '/writing')
+    const breadcrumb = page.getByRole('navigation', { name: 'breadcrumb' })
+    await expect(breadcrumb.getByRole('link', { name: '홈' })).toHaveAttribute('href', '/')
+    await expect(breadcrumb.getByRole('link', { name: '글' })).toHaveAttribute('href', '/writing')
   })
 
   test('← 모든 글 버튼을 클릭하면 /writing으로 이동한다', async ({ page }) => {

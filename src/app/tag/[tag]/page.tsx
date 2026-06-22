@@ -30,7 +30,7 @@ export default async function TagPage({ params }: Props) {
 
   return (
     <main className="mx-auto max-w-3xl px-6 py-12">
-      <nav className="mb-4 text-xs tracking-[-0.12px] text-ink-muted-48">
+      <nav aria-label="breadcrumb" className="mb-4 text-xs tracking-[-0.12px] text-ink-muted-48">
         <Link href="/" className="text-primary dark:text-primary-on-dark">홈</Link>
         <span aria-hidden="true"> / </span>
         <Link href="/writing" className="text-primary dark:text-primary-on-dark">글</Link>
