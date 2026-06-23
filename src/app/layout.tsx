@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { siteConfig } from '@/config/site'
+import { absoluteUrl } from '@/lib/seo'
 import { ThemeProvider } from '@/components/theme-provider'
 import { Navbar } from '@/components/layout/navbar'
 import { Footer } from '@/components/layout/footer'
@@ -23,6 +24,11 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
+  alternates: {
+    types: {
+      'application/rss+xml': absoluteUrl('/feed.xml'),
+    },
+  },
   // openGraph는 페이지 레벨(buildMetadata)에서만 정의한다.
   // layout과 페이지가 둘 다 openGraph.type을 정의하면 dev 모드에서 og:type 메타가 중복 렌더된다.
   twitter: {

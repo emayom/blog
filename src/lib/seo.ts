@@ -17,7 +17,12 @@ export function buildMetadata(input: PageMetaInput): Metadata {
 
   const metadata: Metadata = {
     description,
-    alternates: { canonical: url },
+    // 페이지 metadata의 alternates는 layout의 alternates를 통째로 대체하므로
+    // RSS self-link를 여기서도 선언해야 모든 페이지 head에 유지된다.
+    alternates: {
+      canonical: url,
+      types: { 'application/rss+xml': absoluteUrl('/feed.xml') },
+    },
     openGraph: {
       ...(title ? { title } : {}),
       description,
