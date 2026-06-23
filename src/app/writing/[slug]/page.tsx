@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { getAllSlugs, getPostBySlug, getPostMetaList } from '@/lib/mdx'
+import { buildMetadata } from '@/lib/seo'
 import { getAdjacentPosts, getRelatedPosts } from '@/lib/post-navigation'
 import { getSeriesNavigation } from '@/lib/series'
 import { ArticleLayout } from '@/components/writing/article-layout'
@@ -20,10 +21,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = await getPostBySlug(slug)
   if (!post) return {}
 
-  return {
+  // OG images는 opengraph-image.tsx가 자동 주입하므로 여기서 지정하지 않는다(중복 방지).
+  return buildMetadata({
     title: post.title,
     description: post.description,
-  }
+    path: `/writing/${slug}`,
+    type: 'article',
+    publishedTime: post.date,
+    tags: post.tags,
+  })
 }
 
 export default async function WritingPostPage({ params }: Props) {

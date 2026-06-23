@@ -2,14 +2,16 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getPostMetaList } from '@/lib/mdx'
 import { getTagCounts } from '@/lib/tags'
+import { buildMetadata } from '@/lib/seo'
 import { PostList } from '@/components/writing/post-list'
 import { SearchProvider } from '@/components/search/search-provider'
 import { SearchTrigger } from '@/components/search/search-trigger'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: '글',
   description: '배우고 기록한 글 목록',
-}
+  path: '/writing',
+})
 
 export default function WritingPage() {
   const posts = getPostMetaList()

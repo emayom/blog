@@ -1,10 +1,12 @@
 import type { Metadata } from 'next'
 import { siteConfig, social } from '@/config/site'
+import { buildMetadata } from '@/lib/seo'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: '소개',
   description: `${siteConfig.name} 소개`,
-}
+  path: '/about',
+})
 
 export default function AboutPage() {
   return (

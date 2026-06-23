@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getPostMetaList } from '@/lib/mdx'
 import { getTagCounts, getPostsByTag } from '@/lib/tags'
+import { buildMetadata } from '@/lib/seo'
 import { PostCard } from '@/components/writing/post-card'
 
 type Props = { params: Promise<{ tag: string }> }
@@ -16,10 +17,11 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { tag } = await params
-  return {
+  return buildMetadata({
     title: `#${tag}`,
     description: `'${tag}' 태그의 글 목록`,
-  }
+    path: `/tag/${tag}`,
+  })
 }
 
 export default async function TagPage({ params }: Props) {
