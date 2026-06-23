@@ -23,11 +23,8 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
-  openGraph: {
-    type: 'website',
-    siteName: siteConfig.name,
-    locale: siteConfig.locale,
-  },
+  // openGraph는 페이지 레벨(buildMetadata)에서만 정의한다.
+  // layout과 페이지가 둘 다 openGraph.type을 정의하면 dev 모드에서 og:type 메타가 중복 렌더된다.
   twitter: {
     card: 'summary_large_image',
   },
