@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getPostMetaList } from '@/lib/mdx'
 import { getArchiveCounts, getPostsByYear } from '@/lib/archive'
+import { buildMetadata } from '@/lib/seo'
 import { PostCard } from '@/components/writing/post-card'
 
 type Props = { params: Promise<{ year: string }> }
@@ -16,10 +17,11 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { year } = await params
-  return {
+  return buildMetadata({
     title: year,
     description: `${year}년에 작성한 글 목록`,
-  }
+    path: `/archive/${year}`,
+  })
 }
 
 export default async function ArchiveYearPage({ params }: Props) {

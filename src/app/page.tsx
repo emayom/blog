@@ -1,13 +1,15 @@
 import type { Metadata } from 'next'
 import { getPostMetaList } from '@/lib/mdx'
 import { getArchiveCounts } from '@/lib/archive'
+import { buildMetadata } from '@/lib/seo'
 import { Hero } from '@/components/home/hero'
 import { RecentPosts } from '@/components/home/recent-posts'
 import { ArchiveSidebar } from '@/components/home/archive-sidebar'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   description: '개발하며 배운 것, 읽고 생각한 것들을 기록합니다.',
-}
+  path: '/',
+})
 
 export default function Home() {
   const posts = getPostMetaList()
