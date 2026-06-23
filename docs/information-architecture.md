@@ -135,7 +135,7 @@
 |-----------|------|----------------|------|
 | `/sitemap.xml` | 사이트맵 | `app/sitemap.ts` | M3 |
 | `/robots.txt` | 크롤러 규칙 | `app/robots.ts` | M3 |
-| `/feed.xml` | RSS 피드 | `app/feed.xml/route.ts` | M5 |
+| `/feed.xml` | RSS 피드 | `app/feed.xml/route.ts` | M3 |
 | 동적 OG 이미지 | SNS 미리보기 | 세그먼트별 `opengraph-image.tsx` | M3 |
 | 404 | 미정의 경로 | `app/not-found.tsx` | M1 |
 
