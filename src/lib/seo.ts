@@ -22,6 +22,8 @@ export function buildMetadata(input: PageMetaInput): Metadata {
       ...(title ? { title } : {}),
       description,
       url,
+      siteName: siteConfig.name,
+      locale: siteConfig.locale,
       type,
       ...(type === 'article'
         ? {
