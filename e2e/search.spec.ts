@@ -32,15 +32,16 @@ test.describe('검색 모달', () => {
     await page.goto('/writing')
     await page.getByRole('button', { name: '검색 열기' }).click()
     const input = page.getByRole('searchbox')
-    await input.fill('제네릭')
+    // 여러 글이 매칭되는 쿼리 — 방향키로 선택을 옮길 수 있다
+    await input.fill('자바스크립트')
     const dialog = page.getByRole('dialog', { name: '검색' })
-    const firstLink = dialog.getByRole('link').first()
-    const href = await firstLink.getAttribute('href')
+    await page.keyboard.press('ArrowDown')
+    const activeLink = dialog.locator('a[data-active="true"]')
+    const href = await activeLink.getAttribute('href')
+    expect(href).toBeTruthy()
     await page.keyboard.press('Enter')
     await expect(page.getByRole('dialog', { name: '검색' })).not.toBeVisible()
-    if (href) {
-      await expect(page).toHaveURL(href)
-    }
+    await expect(page).toHaveURL(href!)
   })
 
   test('오버레이 클릭 시 모달이 닫힌다', async ({ page }) => {
@@ -55,11 +56,11 @@ test.describe('검색 모달', () => {
     await page.goto('/writing')
     await page.getByRole('button', { name: '검색 열기' }).click()
     const input = page.getByRole('searchbox')
-    // _search-fixture-typescript.mdx 제목에만 "제네릭" 포함
-    await input.fill('제네릭')
+    // "멱등성"은 idempotency-in-http-methods 글에만 등장하는 고유어
+    await input.fill('멱등성')
     const dialog = page.getByRole('dialog', { name: '검색' })
-    await expect(dialog.getByText('TypeScript 제네릭 심화')).toBeVisible()
-    await expect(dialog.getByText('React Hooks 완전 정복')).not.toBeVisible()
+    await expect(dialog.getByText('안정적인 API를 위한 HTTP 멱등성 이해하기')).toBeVisible()
+    await expect(dialog.getByText('Stateful vs Stateless')).not.toBeVisible()
   })
 
   test('검색어와 무관한 결과가 없으면 empty 메시지를 표시한다', async ({ page }) => {

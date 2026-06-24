@@ -31,17 +31,17 @@ test.describe('SEO 메타데이터', () => {
   })
 
   test('글 상세 페이지는 og:type article과 canonical을 가진다', async ({ page }) => {
-    await page.goto('/writing')
-    const firstPost = page.locator('main a[href^="/writing/"]').first()
-    await firstPost.click()
-    await expect(page).toHaveURL(/\/writing\/.+/)
+    const slug = 'next-mdx-library-decision'
+    await page.goto(`/writing/${slug}`)
 
     await expect(page.locator('head meta[property="og:type"]')).toHaveAttribute(
       'content',
       'article',
     )
-    const canonical = await page.locator('head link[rel="canonical"]').getAttribute('href')
-    expect(canonical).toMatch(new RegExp(`^${SITE_URL}/writing/.+`))
+    await expect(page.locator('head link[rel="canonical"]')).toHaveAttribute(
+      'href',
+      `${SITE_URL}/writing/${slug}`,
+    )
   })
 
   test('sitemap.xml은 200이며 siteConfig URL을 포함한다', async ({ request }) => {
