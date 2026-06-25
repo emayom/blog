@@ -1,9 +1,12 @@
 import Link from 'next/link'
 import { formatDate } from '@/lib/format-date'
+import { absoluteUrl } from '@/lib/seo'
 import { BackToTop } from '@/components/writing/back-to-top'
+import { Comments } from '@/components/writing/comments'
 import { PostNavigation } from '@/components/writing/post-navigation'
 import { RelatedPosts } from '@/components/writing/related-posts'
 import { SeriesNavigation } from '@/components/writing/series-navigation'
+import { ShareButton } from '@/components/writing/share-button'
 import { TableOfContents } from '@/components/writing/table-of-contents'
 import type { Post, PostMeta } from '@/types/post'
 import type { AdjacentPosts } from '@/types/post-navigation'
@@ -31,11 +34,18 @@ export function ArticleLayout({ post, adjacent, related, series }: ArticleLayout
           {post.title}
         </h1>
 
-        <p className="mb-8 text-sm tracking-[-0.224px] text-ink-muted-48 dark:text-body-muted">
+        <p className="mb-4 text-sm tracking-[-0.224px] text-ink-muted-48 dark:text-body-muted">
           <time dateTime={post.date}>{formatDate(post.date)}</time>
           <span aria-hidden="true"> · </span>
           <span>{`${post.readingTime}분 읽기`}</span>
         </p>
+
+        <div className="mb-8 flex items-center gap-2">
+          <ShareButton
+            url={absoluteUrl(`/writing/${post.slug}`)}
+            title={post.title}
+          />
+        </div>
 
         <div className="text-[17px] leading-[1.47] tracking-[-0.374px] text-ink-muted-80 dark:text-body-muted [&_p]:mb-[17px]">
           {post.content}
@@ -55,6 +65,8 @@ export function ArticleLayout({ post, adjacent, related, series }: ArticleLayout
         >
           ← 모든 글
         </Link>
+
+        <Comments />
       </article>
 
       <aside className="hidden lg:block">
