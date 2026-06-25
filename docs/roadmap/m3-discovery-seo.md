@@ -1,6 +1,6 @@
 # M3 — 탐색 / SEO
 
-- **진행 상태:** 진행중
+- **진행 상태:** 진행중 (JSON-LD 미구현 — 나머지 완료)
 - **목표 일자:** —
 - **목표:** 글 탐색 경로를 확장하고, 검색 엔진 노출을 위한 SEO를 정비한다
 - **목표 버전:** v0.3.0
@@ -11,13 +11,14 @@
 
 - [x] 태그 페이지 (`/tag/[tag]`)
 - [x] 연도별 아카이브 (`/archive/[year]`)
-- [ ] 검색 모달 (퍼지 검색)
-- [ ] 페이지별 메타데이터 (title, description)
-- [ ] 동적 OG 이미지
-- [ ] 사이트맵 / robots.txt
-- [ ] RSS 피드 (`/feed.xml`)
-- [ ] 공유 버튼 (URL 복사)
-- [ ] 댓글 (giscus)
+- [x] 검색 모달 (퍼지 검색)
+- [x] 페이지별 메타데이터 (title, description)
+- [x] 동적 OG 이미지
+- [x] 사이트맵 / robots.txt
+- [ ] 구조화 데이터 (JSON-LD: `WebSite`·`BlogPosting`·`Person`·`BreadcrumbList`)
+- [x] RSS 피드 (`/feed.xml`)
+- [x] 공유 버튼 (URL 복사)
+- [x] 댓글 (giscus)
 
 ## Out of Scope
 
