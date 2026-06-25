@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { siteConfig } from '@/config/site'
 import { absoluteUrl } from '@/lib/seo'
+import { buildPersonJsonLd, buildWebSiteJsonLd } from '@/lib/json-ld'
+import { JsonLd } from '@/components/seo/json-ld'
 import { ThemeProvider } from '@/components/theme-provider'
 import { Navbar } from '@/components/layout/navbar'
 import { Footer } from '@/components/layout/footer'
@@ -56,6 +58,8 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <JsonLd data={buildWebSiteJsonLd()} />
+        <JsonLd data={buildPersonJsonLd({ includeContext: true })} />
         <ThemeProvider>
           <Navbar />
           <main className="flex-1">{children}</main>
