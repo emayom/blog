@@ -4,6 +4,8 @@ import { getAllSlugs, getPostBySlug, getPostMetaList } from '@/lib/mdx'
 import { buildMetadata } from '@/lib/seo'
 import { getAdjacentPosts, getRelatedPosts } from '@/lib/post-navigation'
 import { getSeriesNavigation } from '@/lib/series'
+import { buildBlogPostingJsonLd } from '@/lib/json-ld'
+import { JsonLd } from '@/components/seo/json-ld'
 import { ArticleLayout } from '@/components/writing/article-layout'
 
 // Next.js 16: params는 Promise — await 필수
@@ -43,6 +45,9 @@ export default async function WritingPostPage({ params }: Props) {
   const series = getSeriesNavigation(posts, slug)
 
   return (
-    <ArticleLayout post={post} adjacent={adjacent} related={related} series={series} />
+    <>
+      <JsonLd data={buildBlogPostingJsonLd(post)} />
+      <ArticleLayout post={post} adjacent={adjacent} related={related} series={series} />
+    </>
   )
 }

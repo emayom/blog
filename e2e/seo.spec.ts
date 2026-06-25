@@ -66,3 +66,34 @@ test.describe('SEO 메타데이터', () => {
     expect(res.headers()['content-type']).toContain('image/png')
   })
 })
+
+test.describe('JSON-LD 구조화 데이터', () => {
+  test('홈에 WebSite JSON-LD가 파싱 가능하게 존재한다', async ({ page }) => {
+    await page.goto('/')
+
+    const scripts = await page.locator('script[type="application/ld+json"]').allTextContents()
+    const parsed = scripts.map(s => JSON.parse(s))
+    const website = parsed.find(d => d['@type'] === 'WebSite')
+
+    expect(website).toBeDefined()
+    expect(website.url).toBe(SITE_URL)
+    expect(website.name).toBeTruthy()
+  })
+
+  test('글 상세에 BlogPosting JSON-LD가 1개 존재하고 절대 URL을 가진다', async ({ page }) => {
+    const slug = 'next-mdx-library-decision'
+    await page.goto(`/writing/${slug}`)
+
+    const scripts = await page.locator('script[type="application/ld+json"]').allTextContents()
+    const blogPostings = scripts
+      .map(s => JSON.parse(s))
+      .filter(d => d['@type'] === 'BlogPosting')
+
+    expect(blogPostings).toHaveLength(1)
+    const post = blogPostings[0]
+    expect(post.headline).toBeTruthy()
+    expect(post.image).toBe(`${SITE_URL}/writing/${slug}/opengraph-image`)
+    expect(post.url).toBe(`${SITE_URL}/writing/${slug}`)
+    expect(JSON.stringify(post)).not.toContain('localhost')
+  })
+})
