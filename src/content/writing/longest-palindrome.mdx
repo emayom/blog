@@ -1,0 +1,75 @@
+---
+title: "[프로그래머스 Level 3] 가장 긴 팰린드롬"
+date: "2024-12-28"
+tags: ["algorithm", "javascript"]
+draft: false
+description: "프로그래머스 가장 긴 팰린드롬을 투 포인터(축소·확장) 방식으로 풀이합니다."
+thumbnail: ""
+series: "Two Pointers"
+seriesOrder: 6
+---
+
+- [문제 풀러 가기](https://school.programmers.co.kr/learn/courses/30/lessons/12904)
+
+### 풀이 1: 완전 탐색 + 투 포인터(축소)
+
+```js
+function solution(s){
+    let max_len = 0;
+
+    // 중앙으로 좁혀나가며 팰린드롬 검사
+    function isPalindrome(left, right){
+        while(left < right){
+            if(s[left] !== s[right]) return false;
+
+            left++;
+            right--;
+        }
+
+        return true;
+    }
+
+    // 가장 긴 길이부터 검사
+    for(let i = s.length; i > 0; i--){
+        if(max_len > i) break;
+
+        for(let j = 0; j + i <= s.length; j++){
+            if(isPalindrome(j, j + i - 1)){
+                max_len = Math.max(max_len, i);
+            }
+        }
+    }
+
+    return max_len;
+}
+```
+
+### 풀이 2: 완전 탐색 + 투 포인터(확장)
+
+```js
+function solution(s) {
+    let max_len = 0;
+
+    // 좌우로 확장시켜나가며 팰린드롬 검사
+    function expand(left, right = left) {
+        while(left >= 0 && right < s.length) {
+            if(s[left] !== s[right]) break;
+
+            left--;
+            right++;
+        }
+
+        return right - left - 1;
+    }
+
+    for(let i = 0; i < s.length; i++) {
+        max_len = Math.max(
+            max_len,
+            expand(i),          // 홀수 팰린드롬
+            expand(i, i + 1),   // 짝수 팰린드롬
+        );
+    }
+
+    return max_len;
+}
+```

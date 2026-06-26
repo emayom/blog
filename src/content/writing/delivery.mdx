@@ -1,0 +1,67 @@
+---
+title: "[프로그래머스 Level 2] 배달"
+date: "2024-12-05"
+tags: ["algorithm", "javascript"]
+draft: false
+description: "프로그래머스 배달을 다익스트라로 풀이합니다."
+thumbnail: ""
+series: "Shortest Path"
+seriesOrder: 2
+---
+
+- [문제 풀러 가기](https://school.programmers.co.kr/learn/courses/30/lessons/12978)
+
+### 풀이 1: 다익스트라 - 배열
+
+```js
+function solution(N, road, K) {
+    const map = Array.from({ length: N }, () => new Array(N).fill(Infinity));
+
+    road.forEach(([v1, v2, takes]) => {
+        v1-- && v2--;
+        map[v1][v2] = map[v2][v1] = Math.min(map[v1][v2], takes);
+    });
+
+    function dijkstra(source){
+        const dist = [...map[source]];  // ✅ 우선순위 큐로 개선 가능
+        const visited = new Array(N).fill(false);
+
+        // O(N)
+        function getSmallIdx(){
+            let min = Infinity;
+            let idx = 0;
+
+            // 1 ≤ N ≤ 50
+            dist.forEach((v, i) => {
+                if(v < min && !visited[i]){
+                    min = v;
+                    idx = i;
+                }
+            });
+
+            return idx;
+        }
+
+        dist[source] = 0;
+        visited[source] = true;
+
+        // O(N^2) → (N-2) * (N + N)
+        for(let i = 0; i < N - 2; i++){
+            const current = getSmallIdx();
+
+            visited[current] = true;
+
+            for(let j = 0; j < N; j++){
+                if(visited[j]) continue;
+                if(map[current][j] === Infinity) continue;
+
+                dist[j] = Math.min(dist[j], dist[current] + map[current][j]);
+            }
+        }
+
+        return dist;
+    }
+
+    return dijkstra(0).filter(v => v <= K).length;
+}
+```

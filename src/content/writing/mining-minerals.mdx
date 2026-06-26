@@ -1,0 +1,115 @@
+---
+title: "[프로그래머스 Level 2] 광물 캐기"
+date: "2024-11-21"
+tags: ["algorithm", "javascript"]
+draft: false
+description: "프로그래머스 광물 캐기를 DFS 백트래킹과 그리디로 풀이합니다."
+thumbnail: ""
+series: "DFS/BFS"
+seriesOrder: 8
+---
+
+- [문제 풀러 가기](https://school.programmers.co.kr/learn/courses/30/lessons/172927)
+
+### 풀이 1: DFS + 백트래킹
+
+```js
+function solution(picks, minerals) {
+    let answer = Infinity;
+
+    const visited = new Array(minerals.length).fill(false);
+
+    // 각 곡괭이로 광물을 캘 때의 피로도
+    const table = {
+        diamond: [1, 5, 25],
+        iron: [1, 1, 5],
+        stone: [1, 1, 1],
+    }
+
+    function getFatigue(mineral, pick){
+        return table[minerals[mineral]][pick];
+    }
+
+    function dfs(picks, remain, n = 0, fatigue = 0){
+        // ✅ 곡괭이 소진 || 채집 완료 시 종료
+        if(!remain || n >= minerals.length){
+            if(answer > fatigue) answer = fatigue;
+            return;
+        }
+
+        picks.forEach((value, i) => {
+            if(value && !visited[n]){
+                picks[i]--;
+                visited[n] = true;
+
+                let consumed = 0;
+
+                for(let j = 0; j < 5; j++){
+                    if(!minerals[n + j]) break;
+                    consumed += getFatigue(n + j, i);
+                }
+
+                dfs(picks, remain - 1, n + 5, fatigue + consumed);
+
+                // ✅ 백트래킹
+                picks[i]++;
+                visited[n] = false;
+            }
+        });
+    }
+
+    dfs(picks, picks.reduce((acc, current) => acc += current, 0));
+
+    return answer;
+}
+```
+
+### 풀이 2: 그리디
+
+```js
+function solution(picks, minerals) {
+    function countMinerals(arr) {
+        return arr.reduce((acc, current) => {
+            acc[current]++;
+            return acc;
+        }, { diamond: 0, iron: 0, stone: 0 })
+    }
+
+    const total = picks.reduce((acc, current) => acc + current, 0);
+    const set = Array.from({ length: total }, (_, i) => minerals.splice(0, 5)).filter(arr => arr.length);
+
+    // 광석 묶음 정렬
+    set.sort((a, b) => {
+        const ac = countMinerals(a);
+        const bc = countMinerals(b);
+
+        if(ac.diamond === bc.diamond){
+            return ac.iron - bc.iron;
+        } else {
+            return ac.diamond - bc.diamond;
+        }
+    });
+
+    const fatigue = [1, 1, 1];
+    const index_map = { diamond: 0, iron: 1, stone: 2 };
+
+    return picks.reduce((acc, current, i) => {
+        let consumed = 0;
+
+        while(set.length && current > 0){
+            set.pop()
+                .forEach(mineral => consumed += fatigue[index_map[mineral]]);
+
+            current--;
+        }
+
+        // 피로도 갱신
+        for(let j = 0; j < i + 1; j++){
+            fatigue[j] *= 5;
+        }
+
+        return acc + consumed;
+
+    }, 0);
+}
+```

@@ -1,0 +1,55 @@
+---
+title: "[프로그래머스 Level 2] 조이스틱"
+date: "2024-10-25"
+tags: ["algorithm", "javascript"]
+draft: false
+description: "프로그래머스 조이스틱을 그리디로 풀이합니다."
+thumbnail: ""
+series: "Greedy"
+seriesOrder: 1
+---
+
+- [문제 풀러 가기](https://school.programmers.co.kr/learn/courses/30/lessons/42860)
+
+### 풀이 1:
+
+```js
+function solution(name) {
+    const A = 'A'.charCodeAt();
+    const Z = 'Z'.charCodeAt();
+
+    const n = name.length;
+
+    const { total, move } = [...name].reduce((acc, current, i) => {
+        let next = i + 1;
+
+        while (next < n && name[next] === 'A') next++;
+
+        // 1. 커서 조작
+        const move = Math.min(
+            acc.move,           // 1-1. 좌우 단방향(initial)
+            i * 2 + (n - next), // 1-2. 우측 → 좌측 → 좌측
+            (n - next) * 2 + i  // 1-3. 좌측 → 좌측 → 우측
+        )
+
+        // 2. 알파벳 조작
+        const total =  acc.total + Math.min(
+            current.charCodeAt() - A,       // 2-1. A → to
+            1 + Z - current.charCodeAt(),   // 2-2. A → Z(via) → to
+        )
+
+        return { total, move };
+
+    }, { total: 0, move: n - 1 });
+
+    return total + move;
+}
+```
+
+##### Review
+
+```
+제한 사항
+- name은 알파벳 대문자로만 이루어져 있습니다.
+- name의 길이는 1 이상 20 이하입니다.
+```

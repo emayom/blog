@@ -1,0 +1,58 @@
+---
+title: "[프로그래머스 Level 3] 단어 변환"
+date: "2024-11-18"
+tags: ["algorithm", "javascript"]
+draft: false
+description: "프로그래머스 단어 변환을 BFS로 풀이합니다."
+thumbnail: ""
+series: "DFS/BFS"
+seriesOrder: 5
+---
+
+- [문제 풀러 가기](https://school.programmers.co.kr/learn/courses/30/lessons/43163)
+
+### 풀이 1:
+
+```js
+function solution(begin, target, words) {
+    const words_set = new Set(words);
+
+    if(!words_set.has(target)) return 0;
+
+    function getDiff(word1, word2, max_diff){
+        let diff = 0;
+
+        for(let i = 0; i < word1.length; i++){
+            if(word1[i] !== word2[i]) diff++;
+            if(max_diff && diff >= max_diff) return max_diff;
+        }
+
+        return diff;
+    }
+
+    function bfs(begin){
+        const q = [ [begin, 0] ];
+        const visited = new Set();
+
+        while(q.length){
+            const [word, steps] = q.shift();
+
+            if(word === target) return steps;
+
+            if(!visited.has(word)){
+                visited.add(word);
+
+                words_set.forEach(str => {
+                    if(getDiff(str, word, 2) === 1 && !visited.has(str)) {
+                        words_set.delete(str);
+                        q.push([str, steps + 1]);
+                    }
+                });
+            }
+        }
+        return 0;
+    }
+
+    return bfs(begin);
+}
+```

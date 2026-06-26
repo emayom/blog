@@ -1,0 +1,45 @@
+---
+title: "[백준 Silver 4] 수들의 합 2"
+date: "2024-12-28"
+tags: ["algorithm", "javascript"]
+draft: false
+description: "백준 수들의 합 2(2003)를 투 포인터로 풀이합니다."
+thumbnail: ""
+series: "Two Pointers"
+seriesOrder: 4
+---
+
+| 시간 제한 | 메모리 제한 |
+|---------|----------|
+| 0.5 초 | 128 MB |
+
+- [문제 풀러 가기](https://www.acmicpc.net/problem/2003)
+
+### 풀이 1: 투 포인터 - 누적 합
+
+```js
+const [N, M, ...arr] = require("fs")
+                        .readFileSync("/dev/stdin")
+                        .toString()
+                        .trim()
+                        .split(/\s/)
+                        .map(v => +v);
+
+let count = 0;
+
+let left = 0;
+let right = 0;
+let sum = arr[0];
+
+while(left < arr.length && right < arr.length){
+    if(sum === M) count++;
+
+    if(sum >= M){
+        sum -= arr[left++]
+    } else {
+        sum += arr[++right];
+    }
+}
+
+console.log(count);
+```

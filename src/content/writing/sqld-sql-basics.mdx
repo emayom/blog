@@ -1,0 +1,914 @@
+---
+title: "[2과목] Part1. SQL 기본"
+date: "2023-08-08"
+tags: ["sqld", "database"]
+draft: false
+description: "SQLD 2과목 SQL 기본 — 관계형 데이터베이스, DDL·DML·TCL, WHERE절, 함수, GROUP BY/HAVING, ORDER BY, 조인, 윈도우 함수를 정리합니다."
+thumbnail: ""
+series: "SQLD"
+seriesOrder: 3
+---
+
+## 1) 관계형 데이터베이스
+
+### 1. 데이터베이스
+
+- 데이터 모델링의 결과물인 데이터 모델(ER 모델)을 기반으로 관계형 데이터베이스가 구축된다.
+
+### 2. SQL(Structured Query Language)
+
+- **SQL의 특징**
+    - SQL은 구조적(Structured), 집합적(Set-based), 선언적(Declarative)인 언어이다.
+    - 문법 구조가 존재하며, 데이터들을 묶어서 처리, 소프트웨어가 알아서 처리(내부 처리 과정은 알 필요가 없음)
+    - 원하는 집합을 구조에 맞춰 질의할 뿐, 구체적인 프로세싱 과정은 프로그래밍 하지 않아도 된다.
+    - 자연어에 가까운 언어이기 때문에, 프로그래머가 아니더라도 쉽게 접근할 수 있다.
+- **SQL 문장 종류 ⭐️⭐️⭐️**
+
+| 명령어의 종류 | 명령어 | 설명 |
+| --- | --- | --- |
+| 데이터 정의어 (DDL) | CREATE, ALTER, DROP, RENAME | 테이블과 같은 데이터 구조를 정의하는데 사용되는 명령어들로 그러한 구조를 생성하거나 변경하거나 삭제하거나 이름을 바꾸는 데이터 구조와 관련된 명령어들을 말한다. |
+| 데이터 조작어 (DML) | INSERT, UPDATE, DELETE | 데이터에 변형을 가하는 종류의 명령어들을 말한다. |
+| | SELECT | RETRIEVE라고도 한다. |
+| 데이터 제어어 (DCL) | GRANT, REVOKE | 데이터베이스에 접근하고 객체들을 사용하도록 권한을 주고 회수하는 명령어 |
+| 트랜잭션 제어어 (TCL) | COMMIT, ROLLBACK, SAVEPOINT | 논리적인 작업의 단위를 묶어서 DML에 의해 조작된 결과를 작업단위(트랜잭션) 별로 제어하는 명령어를 말한다. |
+
+### 3. 테이블
+
+> 💡 관계형 데이터베이스의 기본 단위
+
+- **테이블(TABLE)**
+    - 데이터를 저장하는 객체(Object)로서 관계형 데이터베이스의 기본 단위
+    - 관계형 데이터베이스에서는 모든 데이터를 칼럼과 행의 2차원 구조로 나타낸다.
+
+        세로 방향을 칼럼(Column), 가로 방향을 행(Row)이라고 하고, 컬럼과 행이 겹치는 하나의 공간을 필드(Field)라고 한다.
+
+- **테이블 관계 용어들**
+    - 정규화: 테이블을 분할하여 데이터의 정합성을 확보하고, 불필요한 중복을 줄이는 프로세스
+    - 기본키: 테이블에 존재하는 각 행을 한 가지 의미로 특정할 수 있는 한 개 이상의 칼럼
+    - 외부키: 다른 테이블의 기본키로 사용되고 있는 관계를 연결하는 칼럼
+
+### 4. ERD(Entity Relationship Diagram)
+
+> 💡 테이블 간 서로의 상관 관계를 그림으로 도식화한 것을 E-R 다이어그램이라고 하며, 간략히 ERD라고 한다.
+
+- **ERD 구성 요소**
+    - 엔터티(Entity)
+    - 관계(Relationship)
+    - 속성(Attribute)
+- **ERD 표기법**
+    - IE(정보공학)표기법
+        - 실선: 식별 관계
+        - 점선: 비식별 관계
+    - Barker 표기법
+        - 수직바: 식별 관계
+
+## 2) DDL
+
+> 💡 `ORACLE` **→ DDL 문장 수행 후 자동으로 COMMIT을 수행한다.**
+> `SQL Server` **→ DDL 문장 수행 후 자동으로 COMMIT을 수행하지 않는다.**
+>
+> DDL 문장을 실행하면 그 전후 시점에 자동으로 커밋된다. DML 문장 이후에 커밋 없이 DDL 문장이 실행되면 DDL 수행 전에 자동으로 커밋된다.
+
+### 1. 데이터 유형
+
+> 💡 데이터베이스의 테이블에 특정 자료를 입력할 때, 그 자료를 받아들일 공간을 자료의 유형별로 나누는 기준
+
+> 💡 **CHAR, VARCHAR의 문자열 비교**
+> - CHAR 유형 'AA' = 'AA ' → 우선, 공백(BLANK)을 채워서 비교
+> - VARCHAR 유형 'AA' != 'AA ' → 맨 처음부터 한 문자씩 비교 + 공백도 하나의 문자로 취급
+
+- **CHARACTER(s) :** 고정 길이 문자열 정보
+    - `Oracle, SQL Server 모두 CHAR로 표현`
+    - 기본 길이 1바이트 최대 Oracle 2000바이트, SQL Server 8000바이트
+    - 할당된 변수 값의 길이보다 작을 경우 그 차이 길이만큼 공간으로 채워진다.
+- **VARCHAR(s) :** 가변 길이 문자열 정보
+    - `Oracle: VARCHAR2`, `SQL Server: VARCHAR`
+    - 최소 길이 1바이트 최대 Oracle 4000바이트, SQL Server 8000바이트
+    - 최대 길이를 갖지만 가변 길이로 조정이 되기 때문에 할당된 변수값의 바이트만 적용된다. (Limit 개념)
+- **NUMERIC** : 정수, 실수 등 숫자 정보
+    - `Oracle: NUMBER`, `SQL Server: 10가지 이상의 숫자 타입`
+    - Oracle은 처음에 전체 자리 수를 지정하고, 그 다음 소수 부분의 자리 수를 지정한다.
+
+        *예) 정수 부분 6자리, 소수점 부분이 2자리 ⇒ Number(8, 2)*
+
+- **DATETIME :** 날짜와 시각정보
+    - `Oracle: DATE`, `SQL Server: DATETIME`
+    - Oracle은 1초단위, SQL Server는 3.33ms 단위 관리
+
+### 2. CREATE TABLE
+
+```sql
+CREATE TABLE 테이블_이름 (
+	칼럼명1 DATATYPE [DEFAULT 형식],
+	칼럼명2 DATATYPE [DEFAULT 형식]
+)
+```
+
+- **테이블 생성 규칙**
+    1. 테이블명은 객체를 의미할 수 있는 적절한 이름을 사용한다. 가능한 단수형을 권고한다.
+    2. 한 테이블 내에서는 칼럼명이 중복되게 지정될 수 없다.
+    3. 테이블 이름을 지정하고 각 칼럼들은 괄호()로 묶어 지정한다.
+    4. 각 칼럼들은 콤마(,)로 구분되고, 테이블 생성문의 끝은 항상 세미콜론(;)으로 끝난다.
+    5. 칼럼에 대해서는 다른 테이블까지 고려하여 데이터베이스 내에서는 일관성 있게 사용하는 것이 좋다.(데이터 표준화 관점)
+    6. 칼럼 뒤에 데이터 유형은 꼭 지정되어야 한다.
+    7. 테이블명과 칼럼명은 반드시 문자로 시작해야하고, 벤더별로 길이에 대한 한계가 있다.
+    8. 벤더에서 사전에 정의한 예약어(Reserved word)는 쓸 수 없다.
+    9. A-Z, a-z, 0-9, _, $, # 문자만 허용된다.
+
+- **PLAYER 테이블 생성 예제**
+
+```sql
+-- Oracle
+CREATE TABLE PLAYER (
+    -- 칼럼 LEVEL 정의 방식
+    PLAYER_ID CHAR(7) NOT NULL,
+    PLAYER_NAME VARCHAR2(20) NOT NULL,
+    TEAM_ID CHAR(3) NOT NULL,
+    E_PLAYER_NAME VARCHAR2(40),
+    NICKNAME VARCHAR2(30),
+    JOIN_YYYY CHAR(4),
+    POSITION VARCHAR2(10),
+    BACK_NO NUMBER(2),
+    NATION VARCHAR2(20),
+    BIRTH_DATE DATE,
+    SOLAR CHAR(1),
+    HEIGHT NUMBER(3),
+    WEIGHT NUMBER(3),
+    -- 테이블 LEVEL 정의 방식
+    CONSTRAINT PLAYER_ID_PK PRIMARY KEY (PLAYER_ID),
+    CONSTRAINT PLAYER_FK FOREIGN KEY (TEAM_ID) REFERENCES TEAM(TEAM_ID)
+);
+
+-- SQL Server
+CREATE TABLE PLAYER (
+    PLAYER_ID CHAR(7) NOT NULL,
+    PLAYER_NAME VARCHAR(20) NOT NULL,
+    TEAM_ID CHAR(3) NOT NULL,
+    E_PLAYER_NAME VARCHAR(40),
+    NICKNAME VARCHAR(30),
+    JOIN_YYYY CHAR(4),
+    POSITION VARCHAR(10),
+    BACK_NO TINYINT,
+    NATION VARCHAR(20),
+    BIRTH_DATE DATE,
+    SOLAR CHAR(1),
+    HEIGHT SMALLINT,
+    WEIGHT SMALLINT,
+    CONSTRAINT PLAYER_ID_PK PRIMARY KEY (PLAYER_ID),
+    CONSTRAINT PLAYER_FK FOREIGN KEY (TEAM_ID) REFERENCES TEAM(TEAM_ID)
+);
+```
+
+- **생성된 테이블 구조 확인**
+
+| 벤더 | 구문 |
+| --- | --- |
+| Oracle | DESCRIBE 테이블명 OR DESC 테이블명 |
+| SQL Server | sp_help 'dbo.테이블명' |
+
+- **SELECT 문장을 통한 테이블 생성 (CTAS, Create Table ~ As Select ~)**
+
+```sql
+-- Oracle
+CREATE TABLE TEAM_TEMP
+AS SELECT * FROM TEAM;
+
+-- SQL Server
+-- 칼럼 속성에 Identity를 사용했다면 Identity 속성까지 같이 적용이 된다.
+SELECT *
+INTO TEAM_TEMP
+FROM TEAM;
+```
+
+  - CTAS 기법 사용시 주의할 점: NOT NULL만 새로운 복제 테이블에 적용이 되고, 기본키, 고유키, 외래키, CHECK 등의 다른 제약 조건은 없어진다. *(제약 조건을 추가하기 위해서는 ALTER TABLE 기능을 사용해야 한다.)*
+
+- **제약조건(CONSTRAINT)**
+
+    > 💡 **데이터 무결성을 유지하기 위한** 데이터베이스의 보편적인 방법으로 테이블의 특정 칼럼에 설정하는 제약이다.
+
+    ```sql
+    ALTER TABLE 테이블명 ADD CONSTRAINT 제약조건명 제약조건 (칼럼명);
+    -- PK 지정 시
+    CONSTRAINT 제약조건명 제약조건 (칼럼명)
+    -- FK 지정 시
+    CONSTRAINT 제약조건명 제약조건 (칼럼명) REFERENCES 테이블(칼럼명)
+    ```
+
+| 제약조건 | 설명 |
+| --- | --- |
+| PRIMARY KEY ⭐️ | 하나의 테이블에 하나의 기본키 제약만 정의할 수 있다.<br />기본키 제약을 정의하면 DBMS는 자동으로 UNIQUE 인덱스를 생성하며, 기본키를 구성하는 칼럼에는 NULL을 입력할 수 없다.<br />'기본키 제약 = 고유키 제약 & NOT NULL 제약' |
+| UNIQUE KEY ⭐️ | NULL은 고유키 제약의 대상이 아니다. |
+| NOT NULL | NOT NULL을 CHECK의 일부분으로 이해할 수도 있다. |
+| CHECK | 입력할 수 있는 값의 범위 등을 제한한다. (`TRUE` or `FALSE` 평가 논리식 지정) |
+| FOREIGN KEY | 외래키 지정 시 참조 무결성 제약 옵션을 선택할 수 있다. NULL 값을 가질 수 있다. |
+
+- **NULL의 의미 ⭐️⭐️⭐️⭐️⭐️**
+
+    > 💡 NULL(ASCII 코드 00번)은 공백(BLANK, ASCII 코드 32번)이나 숫자 0(ZERO, ASCII 48)과 전혀 다른 값이며, 조건에 맞는 데이터가 없을 때의 공집합과도 다르다. 'NULL'은 '아직 정의되지 않은 미지의 값'이거나 '현재 데이터를 입력하지 못하는 경우'를 의미한다.
+
+    - 모르는 값 혹은 값의 부재를 의미한다.
+    - NULL과 모든 비교(IS NULL 제외)는 알 수 없음(Unknown)을 반환한다.
+
+- **DEFAULT의 의미 ⭐️⭐️⭐️**
+    - ALTER 구문으로 추가된 DEFAULT 옵션은 이전의 NULL 값을 변경하지 않는다.
+    - NULL을 입력하는 경우 값을 입력한 것으로 보기 때문에 DEFAULT는 활성화되지 않는다.
+
+- **참조 무결성 옵션 ⭐️⭐️⭐️⭐️⭐️**
+    - Delete(Modify) Action
+
+| 옵션 | 설명 |
+| --- | --- |
+| CASCADE | Master 삭제 시 Child 같이 삭제 |
+| SET NULL | Master 삭제 시 Child 해당 필드 Null |
+| SET DEFAULT | Master 삭제 시 Child 해당 필드 Default 값으로 설정 |
+| RESTRICT | Child 테이블에 PK 값이 없는 경우만 Master 삭제 허용 |
+| NO ACTION | 참조 무결성을 위반하는 삭제/수정 액션을 취하지 않음 |
+
+  - Insert Action
+
+| 옵션 | 설명 |
+| --- | --- |
+| AUTOMATIC | Master 테이블에 PK가 없는 경우 Master PK를 생성 후 Child 입력 |
+| SET NULL | Master 테이블에 PK가 없는 경우 Child 외부키를 Null 값으로 처리 |
+| SET DEFAULT | Master 테이블에 PK가 없는 경우 Child 외부키를 지정된 기본 값으로 입력 |
+| DEPENDENT | Master 테이블에 PK가 존재할 때만 Child 입력 허용 |
+| NO ACTION | 참조 무결성을 위반하는 입력 액션을 취하지 않음 |
+
+### 3. ALTER TABLE ⭐️⭐️⭐️
+
+> 💡 **DROP TABLE, TRUNCATE TABLE, DELETE TABLE의 차이는?**
+
+| 구분 | DROP | TRUNCATE | DELETE (조건절 생략) |
+| --- | --- | --- | --- |
+| 명령어 종류 | DDL | DDL (일부 DML 성격 가짐) | DML |
+| Rollback(복구) | 불가능 | 불가능 | Commit 이전 Rollback 가능 |
+| Commit | Auto Commit | Auto Commit | 사용자 Commit |
+| Storage Release 여부 | 테이블이 사용했던 Storage를 모두 Release | 최초 테이블 생성 시 할당된 Storage 만 남기고 Release | 사용했던 Storage는 Release 되지 않음 |
+| 삭제 범위 | 테이블의 정의 자체를 완전히 삭제 (구조 + 데이터) | 테이블을 최초 생성된 초기상태로 만듬 (구조 유지) | 데이터만 삭제 |
+| 로그 생성 여부 | 로그 생성하지 않음 | 로그 생성하지 않음 | 로그 생성 |
+
+- **ADD COLUMN**
+
+    ```sql
+    ALTER TABLE 테이블명 ADD 추가할_칼럼명 데이터_유형;
+
+    -- Oracle
+    ALTER TABLE PLAYER ADD (ADDRESS VARCHAR2(80));
+    -- SQL Server
+    ALTER TABLE PLAYER ADD ADDRESS VARCHAR(80);
+    ```
+
+- **DROP COLUMN**
+
+    > 💡 한 번 삭제된 칼럼은 복구가 불가능하다. 한 번에 하나의 칼럼만 삭제 가능하며, 칼럼 삭제 후 최소 하나 이상의 칼럼이 테이블에 존재해야 한다.
+
+    ```sql
+    ALTER TABLE 테이블명 DROP COLUMN 삭제할_칼럼명;
+    ```
+
+- **MODIFY COLUMN**
+    - 칼럼 변경 시 주의사항
+        - 해당 칼럼의 크기를 늘릴 수는 있지만 줄이지는 못한다. (기존 데이터 훼손 우려)
+        - 해당 칼럼이 NULL 값만 가지고 있거나 테이블에 아무 행도 없으면 칼럼의 폭을 줄일 수 있다.
+        - 해당 칼럼이 NULL 값만 가지고 있으면 데이터 유형을 변경할 수 있다.
+        - 해당 칼럼의 DEFAULT 값을 바꾸면 변경 작업 이후 발생하는 행 삽입에만 영향을 미치게 된다.
+        - 해당 칼럼에 NULL 값이 없을 경우에만 NOT NULL 제약조건을 추가할 수 있다.
+
+    ```sql
+    -- ORACLE
+    ALTER TABLE 테이블명
+    MODIFY (
+    	칼럼명1 데이터_유형 [DEFAULT식] [NOT NULL],
+    	칼럼명2 데이터_유형 ...
+    );
+
+    -- SQL Server
+    ALTER TABLE 테이블명
+    ALTER 칼럼명 데이터_유형 [DEFAULT 식] [NOT NULL];
+    ```
+
+- **RENAME COLUMN**
+
+    ```sql
+    -- Oracle (관계된 제약조건도 자동 변경되나 ANSI/ISO 표준은 아님)
+    ALTER TABLE 테이블명 RENAME COLUMN 칼럼명 TO 새로운_칼럼명;
+
+    -- SQL Server (엔터티 이름 변경은 스크립트/저장 프로시저를 손상시킬 수 있음)
+    sp_rename '변경할_칼럼명', '새로운_칼럼명', 'COLUMN';
+    ```
+
+- **DROP CONSTRAINT / ADD CONSTRAINT**
+
+    ```sql
+    ALTER TABLE 테이블명 DROP CONSTRAINT 제약조건명;
+    ALTER TABLE 테이블명 ADD CONSTRAINT 제약조건명 제약조건 (칼럼명);
+    ```
+
+    - 참조 제약조건을 추가하면 참조 무결성 옵션에 따라 외부 테이블에서 참조되고 있는 테이블의 데이터는 삭제가 불가능하다.
+    - 즉, 외부키(FK)를 설정함으로써 실수에 의한 테이블 삭제나 필요한 데이터의 의도하지 않은 삭제와 같은 불상사를 방지할 수 있다.
+
+- **RENAME TABLE**
+
+    ```sql
+    RENAME 변경_전_테이블명 TO 변경_후_테이블명;
+    ```
+
+- **DROP TABLE**
+
+    > 💡 SQL Server에서는 CASCADE 옵션이 존재하지 않는다.
+
+    ```sql
+    DROP TABLE 테이블명 [CASCADE CONSTRAINT];
+    ```
+
+- **TRUNCATE TABLE**
+
+    > 💡 테이블의 전체 데이터를 삭제하는 경우, 시스템 활용 측면에서 시스템 부하가 적은 TRUNCATE TABLE을 권고한다.
+
+    ```sql
+    TRUNCATE TABLE 테이블명;
+    ```
+
+## 3) DML
+
+> 호스트 프로그램 속에 삽입되어 사용하는 DML 명령어들을 '**데이터 부속어(Data Sub Language)**'라고 한다.
+
+> 💡 **DDL 명령어와 DML 명령어를 처리하는 방식의 차이?**
+>
+> DML 명령어는 조작하려는 테이블을 메모리 버퍼에 올려놓고 작업을 하기 때문에 실시간으로 테이블에 영향을 미치는 것은 아니다. 따라서 버퍼에서 처리한 명령어가 실제 테이블에 반영되기 위해서는 COMMIT 명령어를 입력하여 TRANSACTION 을 종료해야한다.
+
+### 1. INSERT
+
+> 🚨 데이터를 입력하는 방법은 두가지 유형이 있으나 한 번에 한 건만 입력된다.
+
+```sql
+-- 특정 칼럼에 매핑되는 값을 1:1로 매핑해서 입력
+INSERT INTO 테이블명 (COLUMN_LIST)
+VALUES (VALUE_LIST);
+
+-- 순서대로 존재하는 모든 칼럼에 매핑되는 값을 입력할 때
+INSERT INTO 테이블명
+VALUES (전체 COLUMN에 넣을 VALUE_LIST);
+```
+
+- ''를 입력하는 경우 ⭐️
+
+| DBMS | 입력 값 | 저장 값 |
+| --- | --- | --- |
+| ORACLE | '' | NULL |
+| SQL Server | '' | '' |
+
+### 2. UPDATE
+
+```sql
+UPDATE 테이블명 SET 수정할_칼럼명 = 새로운_값;
+```
+
+### 3. DELETE
+
+```sql
+DELETE [FROM] 삭제를_원하는_테이블명;
+```
+
+### 4. SELECT
+
+- **ALL** : Default 옵션이므로 별도로 표시하지 않아도 된다. 중복된 데이터가 있어도 모두 출력한다.
+- **DISTINCT 옵션 :** 중복 데이터가 있을 경우 1건으로 처리해서 출력한다.
+- **WILDCARD(*) 사용하기**
+- **ALIAS 부여하기**
+    - ALIAS 중간에 공백이 들어가는 경우 ""를 사용해야 한다.
+
+### 5. 산술 연산자와 합성 연산자
+
+- 산술 연산자 : (), *, /, +, -의 우선 순위를 가진다.
+- 합성 연산자 : 문자와 문자를 연결하는 경우 2개의 수직 바(||)에 의해 이루어진다.
+    - Oracle: `+`, `CONCAT(string1, string2)`
+    - SQL Server: `CONCAT(string1, string2)`
+
+## 4) TCL
+
+### 1. 트랜잭션 개요
+
+- **트랜잭션 (ALL OR NOTHING)**
+    - 데이터베이스의 논리적 연산단위
+    - 분리될 수 없는 한 개 이상의 데이터베이스 조작 (최소 단위)
+    - 하나의 논리적인 작업 단위를 구성하는 세부적인 연산들의 집합
+- **트랜잭션의 특성 (ACID)**
+
+| 특성 | 설명 |
+| --- | --- |
+| **원자성(Atomicity)** | 트랜잭션에서 정의된 연산들은 모두 성공적으로 실행되던지 아니면 전혀 실행되지 않은 상태로 남아 있어야 한다. *(all or nothing)* |
+| **일관성(Consistency)** | 트랜잭션이 실행되기 전의 데이터베이스 내용이 잘못 되어 있지 않다면 트랜잭션이 실행된 이후에도 데이터베이스의 내용에 잘못이 있으면 안된다. |
+| **고립성(Isolation)** | 트랜잭션이 실행되는 도중에 다른 트랜잭션의 영향을 받아 잘못된 결과를 만들어서는 안된다. |
+| **지속성(Durability)** | 트랜잭션이 성공적으로 수행되면 그 트랜잭션이 갱신한 데이터베이스의 내용은 영구적으로 저장된다. |
+
+- **트랜잭션에 대한 '격리성'이 낮을 경우 발생할 수 있는 문제점**
+    - **Dirty Read** : 다른 트랜잭션에 의해 수정되었지만 아직 커밋되지 않은 데이터를 읽는 것
+    - **Non-Repeatable Read** : 한 트랜잭션 내에서 같은 쿼리를 두번 수행했는데, 그 사이에 다른 트랜잭션이 값을 수정 또는 삭제하는 바람에 두 쿼리 결과가 다르게 나타나는 현상
+    - **Phantom Read** : 한 트랜잭션 내에서 같은 쿼리를 두번 수행했는데, 첫번째 쿼리에서 없던 유령 레코드가 두번째 쿼리에서 나타나는 현상
+
+- **SQL Server에서의 트랜잭션 방식**
+    - **AUTO COMMIT** (기본) : DBMS가 트랜잭션을 컨트롤하는 방식. 자동으로 COMMIT을 수행하고 오류가 발생하면 자동으로 ROLLBACK을 수행한다.
+    - **암시적 트랜잭션** : 트랜잭션의 시작은 DBMS가 처리하고 트랜잭션의 끝은 사용자가 명시적으로 COMMIT 또는 ROLLBACK으로 처리한다. 인스턴스 단위 또는 세션 단위로 설정할 수 있다.
+    - **명시적 트랜잭션** : 트랜잭션의 시작과 끝을 모두 사용자가 명시적으로 지정하는 방식이다.
+
+### 2. COMMIT
+
+> 💡 데이터에 대한 변경사항을 데이터베이스에 영구적으로 반영하는 것으로 이후 모든 사용자는 결과를 볼 수 있으며, 관련 행에 대한 잠금(LOCKING)이 풀리고, 다른 사용자들이 데이터 변경을 할 수 있게 된다.
+
+### 3. ROLLBACK
+
+> 🚨 ROLLBACK 구문은 COMMIT 되지 않은 상위의 모든 트랜잭션을 ROLLBACK한다.
+>
+> *SQL Server는 AUTO COMMIT이 기본 방식임으로 임의적으로 ROLLBACK을 수행하려면 명시적으로 트랜잭션을 선언해야 한다.*
+
+```sql
+BEGIN TRAN
+INSERT INTO 테이블 ()
+VALUES ();
+
+ROLLBACK;
+```
+
+- 데이터 변경 사항이 취소되어 데이터의 이전 상태로 복구된다.
+- 관련된 행에 대한 잠금(LOCKING)이 풀리고 다른 사용자들이 데이터 변경을 할 수 있게 된다.
+
+> 💡 **COMMIT과 ROLLBACK 사용의 효과**
+> - 데이터 무결성 보장
+> - 영구적인 변경을 하기 전에 데이터의 변경 사항 확인 가능
+> - 논리적으로 연관된 작업을 그룹핑하여 처리 가능
+
+### 4. SAVEPOINT
+
+> 💡 복수의 저장점을 정의할 수 있으며, 동일 이름으로 저장점을 정의 했을 때는 나중에 정의한 저장점이 유효하다.
+
+```sql
+-- Oracle
+SAVEPOINT SVPT1;
+ROLLBACK TO SVPT1;
+
+-- SQL Server
+SAVE TRANSACTION SVTR1;
+ROLLBACK TRANSACTION SVTR1;
+```
+
+## 5) WHERE절
+
+### 1. WHERE 조건절 개요
+
+```sql
+SELECT [DISTINCT/ALL] 칼럼명 [ALIAS명]
+FROM 테이블명
+WHERE 조건식;
+```
+
+- **조건식 구성**
+    - 칼럼명 (보통 조건식의 좌측에 위치)
+    - 비교연산자
+    - 문자, 숫자, 표현식 (보통 조건식의 우측에 위치)
+    - 비교 칼럼명 (JOIN 사용 시)
+
+### 2. 연산자의 종류
+
+- **WHERE절에 사용하는 연산자의 종류**
+    - **비교 연산자** : `=, >, ≥, <, ≤`
+    - **부정 비교 연산자** : `≠, ^=, <>, NOT 칼럼명 =, NOT 칼럼명`
+    - **SQL 연산자** : BETWEEN a AND b, IN (list), LIKE '비교문자열', IS NULL
+    - **부정 SQL 연산자** : NOT BETWEEN a AND b, NOT IN (list), IS NOT NULL
+    - **논리 연산자** : AND, OR, NOT
+
+- **연산자의 우선순위**
+
+    `괄호` ⇒ `NOT` ⇒ `비교, SQL 비교 연산자` ⇒ `논리 연산자(AND/OR)`
+
+    - 괄호로 묶은 연산이 제일 먼저 연산 처리된다.
+    - 연산자들 중에는 부정 연산자(NOT)가 먼저 처리되고,
+    - 비교 연산자, SQL 비교 연산자가 처리되고,
+    - 논리 연산자 중에서는 AND, OR의 순으로 처리된다.
+
+### 3. 비교 연산자
+
+- 문자 유형 비교 방법: 길이가 서로 다른 문자열은 짧은 쪽에 공백을 채워 비교 방식에 따라 처리된다.
+
+### 4. SQL 연산자
+
+| SQL 연산자 | 설명 |
+| --- | --- |
+| BETWEEN a AND b | a와 b의 값 사이에 있으면 된다. (a와 b의 값이 포함됨 / a 이상 b 이하) |
+| IN (list) | 리스트에 있는 값 중에서 어느 하나라도 일치하면 된다. |
+| LIKE '비교 문자열' | 비교 문자와 형태가 일치하면 된다. |
+| IS NULL | NULL 값인 경우 |
+
+- LIKE 연산자 와일드 카드
+    - `%` : 0개 이상의 어떤 문자를 의미
+    - `_` : 1개인 단일 문자를 의미
+
+### 5. 논리 연산자
+
+| 논리 연산자 | 설명 |
+| --- | --- |
+| NOT | 뒤에 오는 조건에 반대되는 결과를 되돌려 준다. |
+| AND | 앞의 조건과 뒤의 조건을 동시에 만족해야한다. |
+| OR | 앞뒤의 조건 중 하나만 참이면 된다. |
+
+- **논리 연산자의 우선 순위 :** NOT > AND > OR
+
+### 6. 부정 연산자
+
+> 💡 NULL 값을 조건절에 사용하는 경우 `<>` 연산자 또한 사용할 수 없다.
+
+- 부정 비교 연산자 : `≠, ^=, <>, NOT 칼럼명 =, NOT 칼럼명 >`
+- 부정 SQL 연산자 : NOT BETWEEN a AND b, NOT IN (list), IS NOT NULL
+
+### 7. ROWNUM, TOP절 사용
+
+- **ROWNUM** (Oracle)
+
+    > 💡 칼럼과 비슷한 성격의 **Pseudo Column**으로써 SQL 처리 결과 집합의 각 행에 대해 임시로 부여되는 일련번호이며, 테이블이나 집합에서 원하는 만큼의 행만 가져오고 싶을 때 WHERE 절에 행의 개수를 제한하는 목적으로 사용한다. *(테이블 내의 고유한 키나 인덱스 값을 만들 수 있다.)*
+
+- **TOP절** (SQL Server) ⭐️⭐️
+
+    > 💡 결과 집합으로 출력 되는 행의 수를 제한할 수 있다.
+
+    ```sql
+    TOP(Expression) [PERCENT] [WITH TIES];
+    ```
+
+    - **Expression**: 반환할 행의 수를 지정하는 숫자이다.
+    - **PERCENT**: 쿼리 결과 집합에서 처음 Expression의 행만 반환됨을 나타낸다.
+    - **WITH TIES** : ORDER BY절이 지정된 경우에만 사용할 수 있으며, **TOP N(PERCENT)의 마지막 행과 같은 값이 있는 경우 추가 행이 출력 되도록 지정**할 수 있다.
+
+## 6) 함수
+
+> 💡 함수는 입력되는 값이 아무리 많아도 출력은 하나만 된다는 M:1 관계라는 중요한 특징을 가지고 있다.
+
+- **함수의 분류**
+    - 내장 함수(Built-in Function) *: 벤더 제공 함수*
+    - 사용자 정의 함수(User Defined Function)
+
+### 1. 내장 함수(BUILT-IN FUNCTION) 개요
+
+> 💡 **함수의 입력 행수에 따라** 단일 행 함수와 다중 행 함수로 구분할 수 있다. 단일 행 함수와 다중 행 함수 모두 여러 개의 인수가 입력되어도 단일 값을 반환한다.
+
+- **단일 행 함수 (Single-Row Functions) ⭐️⭐️⭐️**
+    - **단일행 함수의 특징**
+        - SELECT, WHERE, ORDER BY절에서 사용 가능하다.
+        - 각 행(Row)들에 대해 개별적으로 작용하여 데이터 값들을 조작하고, 각각의 행에 대한 조작 결과를 리턴한다.
+        - 여러 인자(Argument)를 입력해도 단 하나의 결과만 리턴한다.
+        - 함수의 인자로 상수, 변수, 표현식이 사용 가능하고, 여러개의 인수를 가질 수도 있다.
+        - 특별한 경우가 아니면 함수의 인자로 함수를 사용하는 함수의 중첩이 가능하다.
+    - **단일 행 함수의 종류**
+        - 문자형 함수 : 문자를 입력하면 문자나 숫자 값을 반환한다.
+        - 숫자형 함수 : 숫자를 입력하면 숫자 값을 반환한다.
+        - 날짜형 함수 : DATE 타입의 값을 연산한다.
+        - 변환형 함수 : 문자, 숫자, 날짜형 값의 데이터 타입을 변환한다.
+        - NULL 관련 함수 : NULL을 처리하기 위한 함수
+- **다중행 함수(Multi-Row Function)** *: 여러 레코드의 값들을 입력 인수로 사용하는 것*
+    - 집계 함수(Aggregate Function)
+    - 그룹 함수(Group Function)
+    - 윈도우 함수(Window Function)
+
+### 2. 문자형 함수
+
+**Oracle**
+
+| 함수 | 설명 | 비고 |
+| --- | --- | --- |
+| LOWER(문자열) | 문자열의 알파벳 문자를 소문자로 바꾸어 준다. | |
+| UPPER(문자열) | 문자열의 알파벳 문자를 대문자로 바꾸어 준다. | |
+| ASCII(문자) | 문자나 숫자를 ASCII 코드 번호로 바꾸어 준다. | |
+| CHR(ASCII번호) | ASCII 코드 번호를 매핑되는 문자나 숫자로 바꾸어 준다. | |
+| CONCAT(문자열1, 문자열2) | 문자열 1과 문자열 2를 연결한다. *합성 연산자 '\|\|'(Oracle)나 '+'(SQL Server)와 동일* | *Oracle, MySQL에서 유효* |
+| SUBSTR(문자열, m[,n]) | 문자열 중 m위치에서 n개의 문자 길이에 해당하는 문자를 돌려준다. *n이 생략되면 마지막 문자까지* | *인덱스 주의* |
+| LTRIM(문자열 [,지정문자]) | 문자열의 왼쪽부터 확인해서 지정 문자를 제거한다. | *default: 공백* |
+| RTRIM(문자열 [,지정문자]) | 문자열의 오른쪽부터 지정 문자와 비교, 제거한다. | *default: 공백* |
+| TRIM([LEADING\|TRAILING\|BOTH] 지정문자 FROM 문자열) | 문자열에서 머리말, 꼬리말, 또는 양쪽에 있는 지정 문자를 제거한다. | *default: both* |
+| LENGTH(문자열) | 문자열의 개수를 숫자 값으로 돌려준다. | |
+| REPLACE(문자열, 변경 전 문자열 [,변경 후 문자열]) | 문자열 내 특정 문자열을 변경한다. | |
+
+**SQL Server** (차이: CHAR, SUBSTRING, LEN)
+
+| 함수 | 설명 |
+| --- | --- |
+| CHAR(ASCII번호) | ASCII 코드 번호를 매핑되는 문자로 바꾸어 준다. (Oracle의 CHR) |
+| SUBSTRING(문자열, m[,n]) | 문자열 중 m위치에서 n개의 문자를 돌려준다. (Oracle의 SUBSTR) |
+| LEN(문자열) | 문자열의 개수를 숫자 값으로 돌려준다. (Oracle의 LENGTH) |
+
+### 3. 숫자형 함수
+
+**Oracle**
+
+| 함수 | 설명 | 비고 |
+| --- | --- | --- |
+| ABS(숫자) | 숫자의 절댓값을 돌려준다. | |
+| SIGN(숫자) | 숫자가 양수인지, 음수인지 0인지를 구별한다. | *return -1, 0, 1* |
+| MOD(숫자1, 숫자2) | 숫자1을 숫자2로 나누어 나머지 값을 리턴한다. SQL Server에서는 % 연산자로 대체 가능 | |
+| CEIL(숫자) | 숫자보다 크거나 같은 최소 정수를 리턴한다. | |
+| FLOOR(숫자) | 숫자보다 작거나 같은 최대 정수를 리턴한다. | |
+| ROUND(숫자 [, m]) | 숫자를 소수점 m자리에서 반올림하여 리턴한다. | *default: 0* |
+| TRUNC(숫자 [, m]) | 숫자를 소수 m자리에서 잘라서 버린다. | *default: 0* |
+| SIN, COS, TAN, … | 숫자의 삼각함수 값을 리턴한다. | |
+| EXP(), POWER(), SQRT(), LOG(), LN() | 숫자의 지수, 거듭 제곱, 제곱근, 자연 로그 값을 리턴한다. | |
+
+**SQL Server**
+
+> 💡 *SQL Server에서 TRUNC 함수는 제공되지 않는다.* CEIL은 `CEILING(숫자)`로 사용한다.
+
+### 4. 날짜형 함수
+
+> 🚨 날짜형 함수는 Oracle과 SQL Server가 모두 다르다! 공통 함수 ❌
+
+**Oracle** (날짜 추출: EXTRACT() 또는 TO_NUMBER(TO_CHAR()))
+
+| 함수 | 설명 |
+| --- | --- |
+| SYSDATE | 현재 날짜와 시각을 출력한다. *(nls_date_format에 따라 출력 양식이 달라질 수 있음)* |
+| EXTRACT(YEAR\|MONTH\|DAY from d) | 날짜 데이터에서 년/월/일 데이터를 출력 (시간/분/초도 가능) |
+| TO_NUMBER(TO_CHAR(d, 'YYYY')) | 날짜 데이터에서 년 데이터를 출력 (EXTRACT와 같은 기능, TO_NUMBER 제외 시 문자형) |
+| ADD_MONTHS(날짜, 개월 수) | 날짜에서 특정 개월 수를 더한 날짜를 반환 *(기준 일자가 존재하지 않으면 해당 월의 마지막 일자 반환)* |
+
+**SQL Server** (날짜 추출: DATEPART() 또는 YEAR(), MONTH(), DAY())
+
+| 함수 | 설명 |
+| --- | --- |
+| GETDATE() | 현재 날짜와 시각을 출력한다. |
+| DATEPART(YEAR\|MONTH\|DAY, d) | 날짜 데이터에서 년/월/일 데이터를 출력 (시간/분/초도 가능) |
+| YEAR(d), MONTH(d), DAY(d) | 날짜 데이터에서 년/월/일 데이터를 출력 (DATEPART와 같은 기능) |
+| DATEADD(MONTH, 개월 수, 날짜) | 날짜에서 특정 개월 수를 더한 날짜를 반환 |
+
+```sql
+-- Oracle
+SELECT SYSDATE FROM DUAL;
+
+-- SQL Server
+SELECT GETDATE() AS CURRENTTIME;
+```
+
+### 5. 변환형 함수
+
+- **명시적 형변환(Explicit)**: 데이터 변환형 함수로 데이터 유형을 변환하도록 명시해 주는 경우
+- **암시적 형변환(Implicit)**: 데이터베이스가 자동으로 데이터 유형을 변환하여 계산하는 경우
+
+**Oracle**
+
+| 함수 | 설명 |
+| --- | --- |
+| TO_NUMBER(문자열) | alphanumeric 문자열을 숫자로 변환한다. |
+| TO_CHAR(숫자\|날짜 [, FORMAT]) | 숫자나 날짜를 주어진 FORMAT 형태로 문자열 타입으로 변환한다. |
+| TO_DATE(문자열 [, FORMAT]) | 문자열을 주어진 FORMAT 형태로 날짜 타입으로 변환한다. |
+
+**SQL Server**
+
+| 함수 | 설명 |
+| --- | --- |
+| CAST(expression AS data_type [(length)]) | expression을 목표 데이터 유형으로 변환한다. |
+| CONVERT(data_type [(length)], expression [,style]) | expression을 목표 데이터 유형으로 변환한다. |
+
+### 6. CASE 표현
+
+> *Oracle의 경우 **DECODE 함수**를 사용할 수도 있다.*
+
+- **SIMPLE_CASE_EXPRESSION**
+
+    ```sql
+    CASE LOC
+    	WHEN 'NEW YORK' THEN 'EAST'
+    	WHEN 'BOSTON' THEN 'EAST'
+    	WHEN 'CHICAGO' THEN 'CENTER'
+    	WHEN 'DALLAS' THEN 'CENTER'
+    	ELSE 'ETC'
+    END;
+    ```
+
+- **SEARCHED_CASE_EXPRESSION**
+
+    ```sql
+    CASE
+    	WHEN SAL >= 3000 THEN 'HIGH'
+    	WHEN SAL >= 1000 THEN 'MID'
+    	ELSE 'LOW'
+    END;
+    ```
+
+- **DECODE 함수** (Oracle) — *표준 함수는 아님 / if else 와 비슷한 기능*
+
+    ```sql
+    SELECT SUBWAY_LINE,
+           DECODE(SUBWAY_LINE, '1', 'BLUE', '2', 'GREEN', '3', 'ORANGE' [, 'GRAY']) AS LINE_COLOR
+    FROM SUBWAY_INFO;
+    ```
+
+    - 표현식의 값이 기준값1이면 값1을 출력하고, 기준값2이면 값2를 출력한다. 기준 값이 없으면 디폴트 값을 출력한다. (CASE의 SIMPLE_CASE_EXPRESSION과 동일)
+
+### 7. NULL 관련 함수
+
+> 💡 Oracle 함수 NVL()과 SQL Server 함수 ISNULL()의 경우 표현식 1과 표현식 2의 결과 데이터 타입이 같아야한다.
+
+| 함수 | 설명 |
+| --- | --- |
+| NVL(표현식1, 표현식2) ⭐️⭐️ *(Oracle)* / ISNULL(표현식1, 표현식2) *(SQL Server)* | 표현식1의 결과 값이 NULL이면 표현식2의 값을 출력한다. (단, 표현식1과 표현식2의 결과 데이터 타입이 같아야 한다.) |
+| NULLIF(표현식1, 표현식2) | 표현식1이 표현식2와 같으면 NULL을, 같지 않으면 표현식1을 리턴한다. |
+| COALESCE(표현식1, 표현식2, …) | 임의의 개수 표현식에서 NULL이 아닌 최초의 인수를 반환한다. *(모든 표현식이 NULL이라면 NULL을 리턴)* |
+
+- **NULL 포함 연산 결과 ⭐️**
+    - NULL 값과의 **연산(+, -, *, / 등)은 NULL 값을 리턴**
+    - NULL 값과의 **비교연산(`=, >, ≥, <, ≤`)은 거짓(FALSE)를 리턴**
+    - 특정 값보다 크다, 적다라고 표현할 수 없음
+- **NULL과 공집합**
+
+    > 💡 공집합이란 조건에 맞는 데이터가 한 건도 없는 경우로 NULL 데이터와는 또 다르게 이해해야 한다. NVL/ISNULL 함수를 이용해서 처리할 수 없으며, 적절한 집계 함수로 적용해야한다.
+
+## 7) GROUP BY, HAVING절
+
+### 1. 집계 함수
+
+> 💡 여러 행들의 그룹이 모여서 그룹당 단 하나의 결과를 돌려준다.
+
+| 집계 함수 | 사용 목적 |
+| --- | --- |
+| COUNT(*) | NULL 값을 포함한 행의 수를 출력한다. |
+| COUNT(표현식) | 표현식의 값이 NULL 값인 것을 제외한 행의 수를 출력한다. |
+| SUM([DISTINCT \| ALL] 표현식) | 표현식의 NULL 값을 제외한 합계를 출력한다. |
+| AVG([DISTINCT \| ALL] 표현식) | 표현식의 NULL 값을 제외한 평균을 출력한다. |
+| MAX([DISTINCT \| ALL] 표현식) | 표현식의 최대값을 출력한다. |
+| MIN([DISTINCT \| ALL] 표현식) | 표현식의 최소값을 출력한다. |
+| STDDEV([DISTINCT \| ALL] 표현식) | 표현식의 표준편차를 출력한다. |
+| VARIANCE([DISTINCT \| ALL] 표현식) | 표현식의 분산을 출력한다. |
+
+### 2. GROUP BY 절
+
+- **GROUP BY절 / HAVING절의 특성 ⭐️⭐️⭐️⭐️⭐️**
+    - GROUP BY절을 통해 소그룹별 기준을 정한 후, SELECT 절에 집계 함수를 사용한다.
+    - 집계 함수의 통계 정보는 NULL 값을 가진 행을 제외하고 수행한다.
+    - GROUP BY절에서는 SELECT 절과는 달리 ALIAS명을 사용할 수 없다.
+    - 집계 함수는 WHERE 절에는 올 수 없다. (집계 함수를 사용할 수 있는 GROUP BY절보다 WHERE절이 먼저 수행된다)
+    - WHERE절은 전체 데이터를 GROUP으로 나누기 전에 행들을 미리 제거시킨다.
+    - HAVING 절은 GROUP BY 절의 기준 항목이나 소그룹의 집계 함수를 이용한 조건을 표시할 수 있다.
+    - GROUP BY 절에 의한 소그룹별로 만들어진 집계 데이터 중, HAVING 절에서 제한 조건을 두어 조건을 만족하는 내용만 출력한다.
+    - HAVING 절은 일반적으로 GROUP BY절 뒤에 위치한다.
+
+### 3. HAVING 절
+
+- **GROUP BY 소그룹의 데이터 중 일부만 필요한 경우**
+    1. **GROUP BY 연산 전** WHERE절에서 조건을 적용하여 필요한 데이터만 추출하여 GROUP BY 연산을 하는 방법
+    2. **GROUP BY 연산 후** HAVING 절에서 필요한 데이터만 필터링 하는 방법
+
+### 4. CASE 표현을 활용한 월별 데이터 집계
+
+- SIMPLE_CASE_EXPRESSION *(CASE 칼럼명 WHEN A THEN B …)*
+- DECODE 함수 *(DECODE(표현식, 기준값1, 값1 [, 기준값2, 값2, …, 디폴트 값]))*
+
+### 5. 집계 함수와 NULL
+
+> 💡 다중 행 함수는 입력 값으로 전체 건수가 NULL 값인 경우만 함수의 결과가 NULL이 나오고, 전체 건수 중에서 일부만 NULL인 경우는 NULL인 행을 다중행 함수의 대상에서 제외한다.
+
+## 8) ORDER BY 절
+
+> 💡 칼럼(Column)명 대신에 SELECT 절에서 사용한 ALIAS 명이나 칼럼 순서를 나타내는 정수도 사용 가능하다. **SELECT절에서 정의하지 않은 칼럼을 사용해도 문제가 없다**. (단, GROUP BY절이 있거나 또는 SELECT문에 UNION 연산자가 있으면 열 정의가 SELECT 목록에 표시되어야 한다.)
+
+### 1. ORDER BY 정렬
+
+```sql
+SELECT 칼럼명 [ALIAS명]
+FROM 테이블명
+[WHERE 조건식]
+[GROUP BY 칼럼이나 표현식]
+[HAVING 그룹조건식]
+[ORDER BY 칼럼이나 표현식 [ASC 또는 DESC]];
+```
+
+- **ORDER BY절 특징**
+    - 기본적인 정렬 순서는 오름차순(ASC)이다.
+    - 숫자형 데이터 타입은 오름차순으로 정렬했을 경우에 가장 작은 값부터 출력된다.
+    - 날짜형 데이터 타입은 오름차순으로 정렬했을 경우 날짜 값이 가장 빠른 값이 먼저 출력된다.
+    - **Oracle에서는 NULL 값을 가장 큰 값으로 간주**하여 오름차순 시 가장 마지막에, 내림차순 시 가장 먼저 위치한다. **반면, SQL Server에서는 NULL값을 가장 작은 값으로 간주**하여 오름차순 시 가장 먼저, 내림차순 시 가장 마지막에 위치한다.
+
+### 2. SELECT 문장 실행 순서 ⭐️⭐️⭐️⭐️⭐️
+
+> **FROM - WHERE - GROUP BY - HAVING - SELECT - ORDER BY**
+> *옵티마이저가 SQL 문장의 SYNTAX, SEMANTIC 에러를 점검하는 순서이기도 하다.*
+
+```sql
+SELECT 칼럼명 [ALIAS명]            -- [5]
+FROM 테이블명                      -- [1]
+WHERE 조건식                       -- [2]
+GROUP BY 칼럼이나 표현식           -- [3]
+HAVING 그룹조건식                  -- [4]
+ORDER BY 칼럼이나 표현식;          -- [6]
+```
+
+1. 발췌 대상 테이블을 참조한다. (FROM)
+2. 발췌 대상 데이터가 아닌 것은 제거한다. (WHERE)
+3. 행들을 소그룹화 한다. (GROUP BY)
+4. 그룹핑된 값의 조건에 맞는 것만 출력한다. (HAVING)
+5. 데이터 값을 출력/계산한다. (SELECT)
+6. 데이터를 정렬한다. (ORDER BY)
+
+### 3. TOP N 쿼리
+
+- **ROWNUM** `Oracle` — ROWNUM 조건을 ORDER BY절보다 먼저 처리되는 WHERE절에서 처리하므로 인라인 뷰에서 먼저 데이터 정렬을 수행 후 사용해야 한다.
+
+    ```sql
+    -- 정렬 후 데이터 출력 ❌
+    SELECT ENAME, SAL
+    FROM EMP
+    WHERE ROWNUM < 4
+    ORDER BY SAL DESC;
+
+    -- 인라인뷰에서 정렬 수행 후 출력 🟢
+    SELECT ENAME, SAL
+    FROM (SELECT ENAME, SAL FROM EMP ORDER BY SAL DESC)
+    WHERE ROWNUM < 4;
+    ```
+
+- **TOP()** `SQL Server` — TOP 조건을 사용하면 별도의 처리 없이 관련 ORDER BY절의 데이터를 정렬 후 원하는 일부 데이터만 출력할 수 있다.
+
+    ```sql
+    TOP(Expression) [PERCENT] [WITH TIES]
+    ```
+
+## 9) 조인
+
+### 1. JOIN 개요
+
+> 💡 두 개 이상의 테이블들을 연결 또는 결합하여 데이터를 출력하는 것
+>
+> 일반적으로 조인은 PRIMARY KEY(PK)나 FOREIGN KEY(FK)값의 연관에 의해 성립된다. 하지만 어떤 경우에는 이러한 PK, FK의 관계가 없어도 논리적인 값들의 연관만으로 JOIN이 성립 가능하다.
+
+- **옵티마이저의 JOIN 처리 방식**
+
+    > 💡 DBMS 옵티마이저는 FROM절에 나열될 테이블들을 임의로 2개 정도씩 묶어서 JOIN을 처리한다. FROM 절에 여러 테이블이 나열되더라도 SQL에서 데이터를 처리할 때는 단 두 개의 집합 간에만 조인이 일어난다. 예를 들어 A, B, C, D 4개의 테이블을 조인하고자 할 경우 옵티마이저는 **( ( (A JOIN D) JOIN C) JOIN B)**와 같이 순차적으로 조인을 처리하게 된다.
+
+### 2. EQUI JOIN
+
+> 💡 EQUI(등가) JOIN은 **두 개의 테이블 간에 칼럼 값들이 서로 정확하게 일치하는 경우에 사용**되는 방법
+
+```sql
+SELECT 테이블1.칼럼명, 테이블2.칼럼명, ...
+FROM 테이블1, 테이블2
+WHERE 테이블1.칼럼명1 = 테이블2.칼럼명2;
+
+-- ANSI/ISO
+SELECT 테이블1.칼럼명, 테이블2.칼럼명, ...
+FROM 테이블1
+INNER JOIN 테이블2
+ON 테이블1.칼럼명1 = 테이블2.칼럼명2;
+```
+
+- **PK ↔ FK의 관계를 기반**으로 한다.
+- WHERE 절에 `=` 연산자를 사용해서 표현한다.
+- ANSI/ISO SQL 표준 방식에서는 **INNER JOIN** 방식으로 표현한다.
+- n개의 테이블을 조인하기 위해서는 n-1 개의 조인 조건이 필요하다.
+
+### 3. Non EQUI JOIN
+
+> 💡 Non EQUI(비등가) JOIN은 **두 개의 테이블 간에 칼럼 값들이 서로 정확하게 일치하지 않는 경우**에 사용되는 방법
+
+```sql
+SELECT 테이블1.칼럼명, 테이블2.칼럼명, ...
+FROM 테이블1, 테이블2
+WHERE 테이블1.칼럼명1
+BETWEEN 테이블2.칼럼명1 AND 테이블2.칼럼명2;
+```
+
+- WHERE 절에 `=` 연산자가 아닌 다른(`BETWEEN, >, >=, <, <=` 등) 연산자들을 사용하여 표현한다.
+- **예시**: 사원 테이블과 급여 등급 테이블 조인 → 해당 급여 등급
+
+### 4. 3개 이상 TABLE JOIN
+
+## 10) 윈도우 함수
+
+1. 순위 관련 함수
+2. 그룹 내 집계 관련 함수
+3. 그룹 내 행 순서 관련 함수 (Oracle)
+4. 그룹 내 비율 관련 함수
+5. RATIO_TO_REPORT 함수 (Oracle)
+
+- **그룹 내 순위 함수**
+    - **RANK 함수**: 동일한 값에 대해서는 동일한 순위를 부여
+
+        ```sql
+        SELECT JOB,
+               ENAME,
+               SAL,
+               RANK() OVER (ORDER BY SAL DESC) ALL_RANK,
+               RANK() OVER (PARTITION BY JOB ORDER BY SAL DESC) JOB_RANK
+        FROM EMP;
+        ```
+
+    - **DENSE_RANK 함수**: 동일한 순위를 하나의 건수로 취급
+    - **ROW_NUMBER 함수**: 동일한 값이라도 고유한 순위를 부여
+
+- **일반 집계 함수**: SUM, MAX, MIN, AVG, COUNT
+- **그룹 내 행 순서 함수**: FIRST_VALUE, LAST_VALUE, LAG, LEAD
+- **그룹 내 비율 관련 함수**: CUME_DIST, PERCENT_RANK, NTILE, RATIO_TO_REPORT
+
+## 부록
+
+### DUAL 테이블의 특성
+
+Sybase나 SQL Server의 경우에는 SELECT절만으로도 SQL 문장이 수행 가능하도록 정의하였기 때문에 DUAL이란 DUMMY 테이블이 필요 없다.
+
+- 사용자 SYS가 소유하며 모든 사용자가 액세스 가능한 테이블이다.
+- SELECT ~ FROM ~ 의 형식을 갖추기 위한 일종의 DUMMY 테이블이다.
+- DUMMY라는 문자열 유형의 칼럼에 'X'라는 값이 들어 있는 행을 1건 포함하고 있다.

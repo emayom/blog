@@ -1,0 +1,95 @@
+---
+title: "[프로그래머스 Level 2] 타겟 넘버"
+date: "2024-11-02"
+tags: ["algorithm", "javascript"]
+draft: false
+description: "프로그래머스 타겟 넘버를 DFS와 DP로 풀이합니다."
+thumbnail: ""
+series: "DFS/BFS"
+seriesOrder: 2
+---
+
+- [문제 풀러 가기](https://school.programmers.co.kr/learn/courses/30/lessons/43165)
+
+### 풀이 1: 깊이 우선 탐색(DFS)
+
+```js
+function solution(numbers, target) {
+    let answer = 0;
+
+    // O(2^n)
+    function dfs(idx = 0, acc = 0){
+        if(idx === numbers.length){
+            if(acc === target) answer++;
+            return;
+        }
+
+        dfs(idx + 1, acc + numbers[idx]);   // 더하거나
+        dfs(idx + 1, acc - numbers[idx]);   // 빼거나
+    }
+
+    dfs();
+
+    return answer;
+}
+```
+
+### 풀이 2: 깊이 우선 탐색(DFS) - 이진 트리 생성 포함
+
+```js
+function solution(numbers, target) {
+    const answer = [];
+    const tree = {};
+
+    function buildBinaryTree(node = 0, idx = 0){
+        if(idx === numbers.length) return;
+
+        tree[node] = {
+            left: numbers[idx],
+            right: -numbers[idx]
+        };
+
+        buildBinaryTree((node*2) + 1, idx + 1);
+        buildBinaryTree((node*2) + 2, idx + 1);
+    }
+
+    function dfs(node = 0, acc = 0){
+        if(!tree[node]) return answer.push(acc);
+
+        const { left, right } = tree[node];
+
+        dfs((node*2) + 1, acc + left);
+        dfs((node*2) + 2, acc + right);
+    }
+
+    buildBinaryTree();
+    dfs();
+
+    return answer.filter(sum => sum === target).length;
+}
+```
+
+### 풀이 3: DP - Bottom-Up 방식
+
+```js
+function solution(numbers, target) {
+    const sum = numbers.reduce((acc, num) => acc + num, 0);
+    const table = Array.from({ length: numbers.length + 1 }, () => new Array(2 * sum + 1).fill(null));
+
+    table[0][sum] = 1;  // 합이 0인 경우 = 1 (=기준점 설정)
+
+    table.forEach((rows, i) => {
+        if(i === numbers.length) return;
+
+        rows.forEach((node, j) => {
+            // 이전 상태에서 해당 합에 도달할 수 있는 경로가 존재하는지 확인
+            if (node) {
+                table[i + 1][j + numbers[i]] += node;
+                table[i + 1][j - numbers[i]] += node;
+            }
+        })
+    });
+
+    return table[numbers.length][target + sum]; // 음수 인덱스를 처리하기 위해 sum을 기준으로 오프셋을 추가
+}
+```

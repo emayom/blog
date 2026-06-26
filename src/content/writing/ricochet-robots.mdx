@@ -1,0 +1,156 @@
+---
+title: "[프로그래머스 Level 2] 리코쳇 로봇"
+date: "2024-11-17"
+tags: ["algorithm", "javascript"]
+draft: false
+description: "프로그래머스 리코쳇 로봇을 BFS와 DFS로 풀이합니다."
+thumbnail: ""
+series: "DFS/BFS"
+seriesOrder: 4
+---
+
+- [문제 풀러 가기](https://school.programmers.co.kr/learn/courses/30/lessons/169199)
+
+### 풀이 1: BFS
+
+```js
+function solution(board) {
+    const m = board.length;
+    const n = board[0].length;
+
+    const dx = [0, 0, -1, 1];
+    const dy = [-1, 1, 0, 0];
+
+    let reset;
+    let goal;
+
+    // O(m*n)
+    const matrix = board.map((rows, i) => {
+        return [...rows].map((node, j) => {
+            if(node === 'D')    return node;
+            if(node === 'R')    reset = [i, j];
+            if(node === 'G')    goal = [i, j];
+
+            return 0;
+        })
+    });
+
+    function bfs(matrix, reset){
+        const q = [ reset ];
+        const visited = Array.from({ length: m }, () => new Array(n).fill(0));
+
+        while(q.length){
+            const [y, x] = q.shift();
+
+            if(visited[y][x] === 0){
+                if(x === goal[1] && y === goal[0])  return matrix[y][x];
+
+                visited[y][x] = 1;
+
+                // 상, 하, 좌, 우
+                dx.forEach((_, i)=> {
+                    let nx = x;
+                    let ny = y;
+
+                    while(true){
+                        if(nx + dx[i] >= n || nx + dx[i] < 0 || ny + dy[i] >= m || ny + dy[i] < 0){
+                            break;
+                        };
+
+                        if(matrix[ny + dy[i]][nx + dx[i]] === 'D'){
+                            break;
+                        }
+
+                        nx += dx[i];
+                        ny += dy[i];
+                    }
+
+                    // ✅ matrix[ny][nx] === truthy, 먼저 도달한 경로가 항상 더 짧거나 같음
+                    if(!matrix[ny][nx] && !visited[ny][nx]){
+                        matrix[ny][nx] = matrix[y][x] + 1;
+                        q.push([ny, nx]);
+                    }
+                });
+            }
+        }
+        return -1;
+    }
+
+    return bfs(matrix, reset);
+}
+```
+
+### 풀이 2: DFS - 48.1/100.0 (시간 초과)
+
+```js
+function solution(board) {
+    const m = board.length;
+    const n = board[0].length;
+
+    const dx = [0, 0, -1, 1];
+    const dy = [-1, 1, 0, 0];
+
+    let answer = Infinity;
+    let reset;
+    let goal;
+
+    // O(m*n)
+    const matrix = board.map((rows, i) => {
+        return [...rows].map((node, j) => {
+            if(node === 'D')    return node;
+            if(node === 'R')    reset = [i, j];
+            if(node === 'G')    goal = [i, j];
+
+            return 0;
+        })
+    });
+
+    function dfs(y, x, steps = 0){
+        if(x === goal[1] && y === goal[0]){
+            answer = Math.min(answer, steps);
+            return;
+        }
+
+        if(!matrix[y][x]){
+            matrix[y][x] = 1;
+
+            // 상, 하, 좌, 우
+            dx.forEach((_, i)=> {
+                let nx = x;
+                let ny = y;
+
+                // 벽 또는 'D'를 만날 때까지 (최악의 경우: O(max(m, n)))
+                while(true){
+                    if(nx + dx[i] >= n || nx + dx[i] < 0 || ny + dy[i] >= m || ny + dy[i] < 0){
+                        break;
+                    };
+
+                    if(matrix[ny + dy[i]][nx + dx[i]] === 'D'){
+                        break;
+                    }
+
+                    nx += dx[i];
+                    ny += dy[i];
+                }
+
+                if(!matrix[ny][nx]){
+                    // ✅ 가지치기(pruning)
+                    if (steps + 1 >= answer) return;
+                    dfs(ny, nx, steps + 1);
+                }
+            });
+
+            matrix[y][x] = 0;  // ✅ 방문 해제 (다른 경로 탐색을 위해)
+        }
+    }
+
+    dfs(...reset);
+
+    return answer === Infinity ? -1 : answer;
+}
+```
+
+#### 입출력 예 #1 BFS 탐색 과정
+> ["...D..R", ".D.G...", "....D.D", "D....D.", "..D...."]
+
+<img width="353" alt="입출력 예 #1 BFS 탐색 순서" src="https://github.com/user-attachments/assets/24bef2b5-371b-4b1d-9eb3-502b7c28d657" />

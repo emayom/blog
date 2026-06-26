@@ -1,0 +1,78 @@
+---
+title: "[2022 KAKAO BLIND RECRUITMENT Level 2] 양궁대회"
+date: "2024-11-23"
+tags: ["algorithm", "javascript"]
+draft: false
+description: "2022 카카오 블라인드 양궁대회를 DFS 백트래킹으로 풀이합니다."
+thumbnail: ""
+series: "DFS/BFS"
+seriesOrder: 9
+---
+
+- [문제 풀러 가기](https://school.programmers.co.kr/learn/courses/30/lessons/92342)
+
+### 풀이 1: DFS + 백트래킹
+
+```js
+function solution(n, info) {
+    const scoreboard = new Array(11).fill(0);
+    const visited = new Set();
+
+    // 최초 어피치 점수
+    const max_score = info.reduce((acc, current, i) => current ? acc += 10 - i : acc, 0);
+
+    let answer = [];
+    let gap = 0;
+
+    // 최대 11^n
+    function dfs(n, scoreboard, lion, apeach){
+        // ✅ 중복 연산 방지
+        const key = scoreboard.join('');
+
+        if(visited.has(key)) return;
+        visited.add(key);
+
+        // ✅ 화살 모두 소진 시, 종료
+        if(n === 0 && lion - apeach > 0){
+            const current = lion - apeach;
+
+            if(current > gap){
+                gap = current;
+                answer = [[...scoreboard]];
+
+            } else if(current === gap){
+                answer.push([...scoreboard]);
+            }
+            return;
+        }
+
+        scoreboard.forEach((_, i) => {
+            // ✅ 유망성 판단 - 이미 점수를 얻은 과녁은 더 쏠 필요 x
+            if(scoreboard[i] <= info[i]){
+                scoreboard[i]++;
+
+                dfs(
+                    n-1,
+                    scoreboard,
+                    info[i] < scoreboard[i] ? lion + (10-i) : lion,
+                    info[i] && info[i] < scoreboard[i] ? apeach - (10-i) : apeach,
+                );
+
+                scoreboard[i]--;    // ✅ 백트래킹
+            }
+        });
+    }
+
+    dfs(n, scoreboard, 0, max_score);
+
+    if(!answer.length)  return [-1];
+    if(answer.length === 1)  return answer[0];
+
+    // 점수 차이가 같은 경우, 가장 낮은 점수를 더 많이 맞힌 경우를 선택
+    return answer.sort((a, b) => {
+        for(let i = 10; i >= 0; i--) {
+            if(a[i] !== b[i]) return b[i] - a[i];
+        }
+    })[0];
+}
+```

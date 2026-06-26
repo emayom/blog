@@ -1,0 +1,106 @@
+---
+title: "[프로그래머스 Level 3] 정수 삼각형"
+date: "2024-11-11"
+tags: ["algorithm", "javascript"]
+draft: false
+description: "프로그래머스 정수 삼각형을 Bottom-Up·Top-Down DP로 풀이합니다."
+thumbnail: ""
+series: "DP"
+seriesOrder: 2
+---
+
+- [문제 풀러 가기](https://school.programmers.co.kr/learn/courses/30/lessons/43105)
+
+### 풀이 1: Bottom-Up 방식
+
+```js
+function solution(triangle) {
+    const m = triangle.length;
+    const n = triangle[m-1].length;
+    const table = Array.from(new Array(m), () => new Array(n).fill(0)); // ✅ Tabulation
+
+    table[0][0] = triangle[0][0];
+
+    triangle.forEach((siblings, i) => {
+        if(i === triangle.length-1) return;
+
+        siblings.forEach((node, j)=> {
+            const prev = table[i][j];
+
+            const left = prev + triangle[i+1][j];
+            const right = prev + triangle[i+1][j+1];
+
+            if(table[i+1][j] < left) table[i+1][j] = left;
+            if(table[i+1][j+1] < right) table[i+1][j+1] = right;
+        })
+    });
+
+    return Math.max(...table[n-1]);
+}
+```
+
+### 풀이 2: Top-Down 방식 - 메모이제이션 미적용
+
+```js
+function solution(triangle) {
+    function calc(m){
+        if(m < 0) return triangle[0][0];
+
+        triangle[m].forEach((node, n)=> {
+            triangle[m][n] = node + Math.max(
+                triangle[m+1][n],
+                triangle[m+1][n+1]
+            );
+        });
+
+        return calc(m-1);
+    }
+
+    return calc(triangle.length-2);
+}
+```
+
+### 풀이 3: Top-Down 방식 - 효율성 테스트 2,3,7 시간 초과 ❌
+
+```js
+function solution(triangle) {
+    const m = triangle.length;
+    const n = triangle[m-1].length;
+    const table = Array.from(new Array(m), () => new Array(n).fill(0)); // ✅ Memoization
+
+    function calc(m, n) {
+        if (m === triangle.length - 1) return triangle[m][n];
+        if (table[m][n] > 0) return table[m][n];
+
+        return table[m][n] = triangle[m][n] + Math.max(calc(m+1, n), calc(m+1, n+1));
+    }
+
+    return calc(0, 0);
+}
+```
+
+### 풀이 4: Top-Down 방식 - 초기값 수정
+
+```js
+function solution(triangle) {
+    const m = triangle.length;
+    const table = Array.from(new Array(m), () => new Array(m).fill(-1)); // ✅ 초기값 -1로 설정
+
+    function calc(m, n) {
+        if (m === triangle.length - 1) return triangle[m][n];
+        if (table[m][n] !== -1) return table[m][n];
+
+        return table[m][n] = triangle[m][n] + Math.max(calc(m+1, n), calc(m+1, n+1));
+    }
+
+    return calc(0, 0);
+}
+```
+
+##### Review
+
+```
+제한사항
+- 삼각형의 높이는 1 이상 500 이하입니다.
+- 삼각형을 이루고 있는 숫자는 0 이상 9,999 이하의 정수입니다.
+```

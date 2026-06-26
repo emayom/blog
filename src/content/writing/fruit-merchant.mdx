@@ -1,0 +1,59 @@
+---
+title: "[프로그래머스 Level 1] 과일 장수"
+date: "2024-12-15"
+tags: ["algorithm", "javascript"]
+draft: false
+description: "프로그래머스 과일 장수를 해시맵·정렬 기반 그리디로 풀이합니다."
+thumbnail: ""
+series: "Greedy"
+seriesOrder: 7
+---
+
+- [문제 풀러 가기](https://school.programmers.co.kr/learn/courses/30/lessons/135808)
+
+### 풀이 1: 해시맵 + 그리디
+
+```js
+function solution(k, m, score) {
+    const fruits = new Map();
+
+    score.forEach(grade => fruits.set(grade, (fruits.get(grade) || 0) + 1));
+
+    let income = 0;
+    let pending = 0;
+
+    for(let i = k; i > 0; i--){
+        if(!fruits.has(i)) continue;
+
+        const count = fruits.get(i);
+
+        if(pending && count < m - pending){
+            pending += count;
+
+        } else {
+            const box = Math.floor((count + pending) / m);
+
+            income += i * m * box;
+            pending = (count + pending) % m;
+        }
+    }
+
+    return income;
+}
+```
+
+### 풀이 2: 정렬 + 그리디
+
+```js
+function solution(k, m, score) {
+    score.sort((a, b) => a - b).splice(0, score.length % m);
+
+    let income = 0;
+
+    for(let i = 0; i < score.length; i += m){
+        income += score[i] * m;
+    }
+
+    return income;
+}
+```

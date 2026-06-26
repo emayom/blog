@@ -1,0 +1,41 @@
+---
+title: "[프로그래머스 Level 2] 마법의 엘리베이터"
+date: "2025-01-05"
+tags: ["algorithm", "javascript"]
+draft: false
+description: "프로그래머스 마법의 엘리베이터를 자리수 그리디로 풀이합니다."
+thumbnail: ""
+series: "Greedy"
+seriesOrder: 10
+---
+
+- [문제 풀러 가기](https://school.programmers.co.kr/learn/courses/30/lessons/148653)
+
+### 풀이 1:
+
+```js
+function solution(storey) {
+    let count = 0;
+
+    while(storey > 0){
+        const remain = storey % 10;
+        const next = Math.floor(storey / 10);
+        const min = Math.min(10 - remain, remain);
+
+        count += min;
+        storey = next;
+
+        // 나머지가 5 초과일 경우, 올림이 항상 최적의 선택이다.
+        // 하지만 나머지가 5인 경우, 다음 자리수의 크기에 따라 올림 또는 내림이 결정된다.
+        if(remain > 5 || remain === 5 && next >= 5){
+            storey++;
+        }
+    }
+
+    return count;
+}
+```
+
+## Review
+#### [제한 사항]
+- 1 ≤ `storey` ≤ 100,000,000

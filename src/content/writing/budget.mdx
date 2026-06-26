@@ -1,0 +1,31 @@
+---
+title: "[프로그래머스 Level 1] 예산"
+date: "2024-12-07"
+tags: ["algorithm", "javascript"]
+draft: false
+description: "프로그래머스 예산을 정렬 기반 그리디로 풀이합니다."
+thumbnail: ""
+series: "Greedy"
+seriesOrder: 5
+---
+
+- [문제 풀러 가기](https://school.programmers.co.kr/learn/courses/30/lessons/12982)
+
+### 풀이 1: 그리디
+
+```js
+function solution(d, budget) {
+    d.sort((a, b) => a - b);
+
+    let count = 0;
+
+    for(let i = 0; i < d.length; i++){
+        if(budget < d[i]) continue;
+
+        budget -= d[i];
+        count++;
+    }
+
+    return count;
+}
+```

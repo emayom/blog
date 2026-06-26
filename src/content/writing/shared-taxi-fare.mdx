@@ -1,0 +1,75 @@
+---
+title: "[2021 KAKAO BLIND RECRUITMENT Level 3] 합승 택시 요금"
+date: "2024-12-02"
+tags: ["algorithm", "javascript"]
+draft: false
+description: "2021 카카오 블라인드 합승 택시 요금을 다익스트라로 풀이합니다."
+thumbnail: ""
+series: "Shortest Path"
+seriesOrder: 1
+---
+
+- [문제 풀러 가기](https://school.programmers.co.kr/learn/courses/30/lessons/72413)
+
+### 풀이 1: 다익스트라 - 배열
+
+```js
+function solution(n, s, a, b, fares) {
+    const costs = Array.from({ length: n + 1 }, () => new Array(n + 1).fill(Infinity));
+
+    // 지점 사이의 예상 택시요금 업데이트
+    fares.forEach(([dep, arr, fare]) => costs[dep][arr] = costs[arr][dep] = fare);
+
+    function dijkstra(start){
+        // 지점별 요금
+        const dist = [...costs[start]];
+        const visited = new Array(n + 1).fill(false);
+
+        function getShortestIdx(){
+            let min = Infinity;
+            let idx = 0;
+
+            dist.forEach((v, i) => {
+                if(v < min && !visited[i]){
+                    min = v;
+                    idx = i;
+                }
+            });
+
+            return idx;
+        }
+
+        // 출발지 초기화
+        dist[start] = 0;
+        visited[start] = true;
+
+        for(let i = 1; i <= n - 2; i++){
+            const current = getShortestIdx();
+
+            visited[current] = true;
+
+            for(let j = 1; j <= n; j++){
+                if (visited[j]) continue;
+
+                if (dist[current] + costs[current][j] < dist[j]){
+                    dist[j] = dist[current] + costs[current][j];
+                }
+            }
+        }
+
+        return dist;
+    }
+
+    const from_s = dijkstra(s);
+    const from_a = dijkstra(a);
+    const from_b = dijkstra(b);
+
+    let min = Infinity;
+
+    for (let i = 1; i <= n; i++) {
+        min = Math.min(min, from_s[i] + from_a[i] + from_b[i]);
+    }
+
+    return min;
+}
+```

@@ -1,0 +1,59 @@
+---
+title: "[프로그래머스 Level 2] 멀리 뛰기"
+date: "2024-11-16"
+tags: ["algorithm", "javascript"]
+draft: false
+description: "프로그래머스 멀리 뛰기를 누적합과 피보나치 기반 DP로 풀이합니다."
+thumbnail: ""
+series: "DP"
+seriesOrder: 7
+---
+
+- [문제 풀러 가기](https://school.programmers.co.kr/learn/courses/30/lessons/12914)
+
+### 풀이 1: 경로 기반 누적합
+
+```js
+function solution(n) {
+    const modular = 1234567;
+    const table = new Array(n+1).fill(0);
+
+    table[0] = 1;   // n이 0인 경우는 없다.
+
+    for(let i = 0; i <= n; i++){
+        if(table[i]){
+            table[i+1] = (table[i+1] + table[i]) % modular;
+            table[i+2] += (table[i+2] + table[i]) % modular;
+        }
+    }
+
+    return table[n];
+}
+```
+
+### 풀이 2: 피보나치의 수열 기반
+
+```js
+function solution(n) {
+    const modular = 1234567;
+    const table = new Array(n);
+
+    table[0] = 1;   // 1가지 경우의 수 (1)
+    table[1] = 2;   // 2가지 경우의 수 (1, 1), (2)
+
+    for(let i = 2; i <= n; i++){
+        table[i] = (table[i-1] + table[i-2])  % modular;
+    }
+
+    return table[n-1];
+}
+```
+
+##### Review
+
+```
+제한 사항
+- n은 1 이상, 2000 이하인 정수입니다.
+```
+
+[타겟 넘버](/writing/target-number)와 유사
