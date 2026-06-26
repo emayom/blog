@@ -55,19 +55,28 @@
 | `TableOfContents` | 데스크톱 sticky / 모바일 숨김 | `headings[]`, `activeId` | 상세 | — |
 | `RelatedPosts` | 1~3개 / 없으면 섹션 미노출 | `posts[]`(태그 겹침 파생, 최대 3) | 상세 | `store-utility-card` |
 | `PrevNext` | 이전만 / 다음만 / 양쪽 | `prev`, `next` | 상세 | — |
+| `ShareButton` | 공유됨 / 복사됨 (Web Share API → clipboard 폴백) | `url`, `title` | 상세 (제목 하단 액션 행) | — |
 | `Comments` | 외부 위젯(직접 구현 아님) | giscus 임베드 설정 | 상세 | — (ADR-005) |
 | `CodeBlock` | 복사 기본 / 복사됨 | `lang`, `code` | 상세 | — |
 
 > `Comments`는 직접 구현하지 않고 외부 라이브러리 **giscus**(GitHub Discussions 기반)를 임베드한다 — 결정 배경은 `docs/adr/005-giscus-comments.md`. 와이어프레임의 점선 박스는 임베드 영역 placeholder이며, 실제 UI·동작은 giscus가 제공한다.
 
-## 5. 사이드바 · 위젯
+## 5. SEO / 메타
+
+서버 컴포넌트. 시각적 출력 없음.
+
+| 컴포넌트 | 역할 | 사용 위치 |
+|----------|------|---------|
+| `JsonLd` | `<script type="application/ld+json">` 주입. XSS 방어(`<` → `<`) | layout(WebSite·Person), 글 상세(BlogPosting), 태그·아카이브(BreadcrumbList) |
+
+## 6. 사이드바 · 위젯
 
 | 컴포넌트 | 변형 / 상태 | 주요 props | 사용 화면 | DESIGN.md |
 |----------|-------------|------------|-----------|-----------|
 | `Widget` | 아카이브 / 태그 / 목차 컨테이너 | `title`, `children` | 탐색·상세 | `store-utility-card` |
 | `WithAside` (레이아웃) | 본문+사이드바 / 모바일 단일 | — | 탐색·상세 | Responsive |
 
-## 6. 프로필 (저자)
+## 7. 프로필 (저자)
 
 | 컴포넌트 | 변형 / 상태 | 주요 props | 사용 화면 | DESIGN.md |
 |----------|-------------|------------|-----------|-----------|
@@ -75,14 +84,14 @@
 | `StatusBadge` | — | `label` (예: 포커싱 중) | 저자 | — |
 | `SocialLinks` | — | `links[]` (GitHub·LinkedIn·Email) | 저자·진입·푸터 | — |
 
-## 7. 폼 · 입력
+## 8. 폼 · 입력
 
 | 컴포넌트 | 변형 / 상태 | 주요 props | 사용 화면 | DESIGN.md |
 |----------|-------------|------------|-----------|-----------|
 | `SearchTrigger` | 보더·배경 없는 아이콘 버튼(돋보기) — 클릭 시 검색 모달 오픈 | `onClick` | 목록·메모 | — |
 | `SearchModal` | 열림/닫힘 · 결과/빈 결과 · 키보드 선택. **fuse.js 퍼지 검색**, 스코프=현재 섹션 | `open`, `query`, `results[]`, `scope` | 검색 (정본 `search.html`) | — |
 
-## 8. 상태
+## 9. 상태
 
 | 컴포넌트 | 변형 / 상태 | 주요 props | 사용 화면 | DESIGN.md |
 |----------|-------------|------------|-----------|-----------|
@@ -106,3 +115,4 @@
 |------|----------|------|
 | 2026-06-15 | 초기 컴포넌트 인벤토리 정의 | 와이어프레임 기반 컴포넌트 카탈로그화 |
 | 2026-06-17 | 누락 컴포넌트 보강: `Sort`·`Tag`·`Hero`·`NoteCard`·`SectionHeading` 추가, `PostCard`에 읽기시간 props·사용 화면 반영 | 페이지↔컴포넌트 정합성 점검 |
+| 2026-06-26 | 신규 컴포넌트 반영: `ShareButton`(섹션 4), `JsonLd`(섹션 5 SEO/메타 신설) | — |
