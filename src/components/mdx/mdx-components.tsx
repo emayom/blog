@@ -58,4 +58,37 @@ export const mdxComponents: MDXComponents = {
     />
   ),
   pre: CodeBlock,
+  table: (props: ComponentPropsWithoutRef<'table'>) => (
+    <div className="my-[24px] overflow-x-auto">
+      <table
+        className="w-full border-collapse text-[15px]"
+        {...props}
+      />
+    </div>
+  ),
+  thead: (props: ComponentPropsWithoutRef<'thead'>) => (
+    <thead
+      className="bg-canvas-parchment dark:bg-surface-tile-2"
+      {...props}
+    />
+  ),
+  tbody: (props: ComponentPropsWithoutRef<'tbody'>) => <tbody {...props} />,
+  tr: (props: ComponentPropsWithoutRef<'tr'>) => (
+    <tr
+      className="border-b border-hairline dark:border-ink-muted-80 last:border-0"
+      {...props}
+    />
+  ),
+  th: (props: ComponentPropsWithoutRef<'th'>) => (
+    <th
+      className="px-[12px] py-[10px] text-left font-semibold text-ink dark:text-body-on-dark"
+      {...props}
+    />
+  ),
+  td: (props: ComponentPropsWithoutRef<'td'>) => (
+    <td
+      className="px-[12px] py-[10px] text-body dark:text-body-on-dark"
+      {...props}
+    />
+  ),
 }
