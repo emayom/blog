@@ -21,6 +21,25 @@
 
 ---
 
+## [0.3.0] - 2026-06-26
+
+M3 탐색 / SEO — 글 탐색 경로를 확장하고 검색 엔진 노출을 위한 SEO를 정비했다.
+
+### Added
+
+- 태그 페이지 (`/tag/[tag]`) + 연도별 아카이브 (`/archive/[year]`) (#33)
+- 검색 모달 — fuse.js 퍼지 검색, 키보드 탐색 (#35)
+- 페이지별 메타데이터 (title, description) + 동적 OG 이미지 + sitemap.xml / robots.txt (#37)
+- RSS 2.0 피드 (`/feed.xml`) (#38)
+- 공유 버튼 (Web Share API + 클립보드 폴백) + giscus 댓글 위젯 (#40)
+- JSON-LD 구조화 데이터 — WebSite·Person·BlogPosting·BreadcrumbList (#42)
+
+### Fixed
+
+- BlogPosting `datePublished`·`dateModified` ISO 8601 시간대 포함 포맷 적용 (#43)
+
+---
+
 ## [0.2.0] - 2026-06-22
 
 M2 읽기 경험 — 글을 읽는 과정에서 탐색과 집중을 돕는 기능을 추가했다.
