@@ -37,6 +37,11 @@ export function buildPersonJsonLd(opts?: { includeContext?: boolean }): PersonJs
   }
 }
 
+// YYYY-MM-DD 포맷에 자정 KST를 붙여 Google 권장 ISO 8601 datetime으로 변환한다.
+function toIsoDateTime(date: string): string {
+  return date.includes('T') ? date : `${date}T00:00:00+09:00`
+}
+
 export function buildBlogPostingJsonLd(post: {
   slug: string
   title: string
@@ -50,8 +55,8 @@ export function buildBlogPostingJsonLd(post: {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
     'headline': post.title,
-    'datePublished': post.date,
-    'dateModified': post.updated ?? post.date,
+    'datePublished': toIsoDateTime(post.date),
+    'dateModified': toIsoDateTime(post.updated ?? post.date),
     'author': buildPersonJsonLd(),
     ...(post.tags.length > 0 ? { keywords: post.tags.join(', ') } : {}),
     'image': absoluteUrl(`/writing/${post.slug}/opengraph-image`),

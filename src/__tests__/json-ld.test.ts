@@ -55,16 +55,16 @@ describe('buildBlogPostingJsonLd', () => {
   it('headline과 datePublished를 매핑한다', () => {
     const data = buildBlogPostingJsonLd(base)
     expect(data.headline).toBe('안녕 세계')
-    expect(data.datePublished).toBe('2026-01-01')
+    expect(data.datePublished).toBe('2026-01-01T00:00:00+09:00')
   })
 
   it('updated 미제공 시 dateModified는 date와 같다', () => {
-    expect(buildBlogPostingJsonLd(base).dateModified).toBe('2026-01-01')
+    expect(buildBlogPostingJsonLd(base).dateModified).toBe('2026-01-01T00:00:00+09:00')
   })
 
   it('updated 제공 시 dateModified는 그 값이다', () => {
     const data = buildBlogPostingJsonLd({ ...base, updated: '2026-02-02' })
-    expect(data.dateModified).toBe('2026-02-02')
+    expect(data.dateModified).toBe('2026-02-02T00:00:00+09:00')
   })
 
   it('author는 Person이고 중첩 author엔 @context가 없다', () => {
