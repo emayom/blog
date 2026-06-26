@@ -1,0 +1,50 @@
+---
+title: "[프로그래머스 Level 2] 할인 행사"
+date: "2024-12-25"
+tags: ["algorithm", "javascript"]
+draft: false
+description: "프로그래머스 할인 행사를 고정 길이 슬라이딩 윈도우 투 포인터로 풀이합니다."
+thumbnail: ""
+series: "Two Pointers"
+seriesOrder: 2
+---
+
+- [문제 풀러 가기](https://school.programmers.co.kr/learn/courses/30/lessons/131127)
+
+### 풀이 1: 투 포인터
+
+```js
+function solution(want, number, discount) {
+    let answer = 0;
+
+    let start = 0;
+    let end = 9;
+    let products = Object.fromEntries(want.map((product, i) => [product, number[i]]));
+    let remain = new Set(want);
+
+    const put = (product) => {
+        products[product] -= 1;
+        if(products[product] <= 0) remain.delete(product);
+    }
+
+    const out = (product) => {
+        products[product] += 1;
+        if(products[product] > 0) remain.add(product);
+    }
+
+    for(let i = start; i <= end; i++){
+        put(discount[i])
+    }
+
+    while(end < discount.length){
+        if(remain.size === 0){
+            answer++;
+        }
+
+        out(discount[start++]);
+        put(discount[++end]);
+    }
+
+    return answer;
+}
+```

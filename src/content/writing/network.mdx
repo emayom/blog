@@ -1,0 +1,92 @@
+---
+title: "[프로그래머스 Level 3] 네트워크"
+date: "2024-11-18"
+tags: ["algorithm", "javascript"]
+draft: false
+description: "프로그래머스 네트워크를 DFS·BFS로 연결 요소 개수를 세어 풀이합니다."
+thumbnail: ""
+series: "DFS/BFS"
+seriesOrder: 6
+---
+
+- [문제 풀러 가기](https://school.programmers.co.kr/learn/courses/30/lessons/43162)
+
+### 풀이 1: DFS
+
+```js
+function solution(n, computers) {
+    const visited = new Array(n).fill(0);
+
+    let answer = 0;
+
+    function dfs(matrix, begin = 0){
+        const stack = [ begin ];
+
+        while(stack.length){
+            const node = stack.pop();
+
+            if(!visited[node]){
+                visited[node] = 1;
+
+                // ✅ 여기서 방문 순서는 중요하지 않다.
+                matrix[node].forEach((conn, i) => {
+                    if(conn && !visited[i])
+                        stack.push(i);
+                });
+            }
+        }
+    }
+
+    computers.forEach((_, i) => {
+        // ✅ 이전 탐색 과정에서 다른 컴퓨터와 연결되어 이미 방문한 경우, 재탐색하지 않는다.
+        if(visited[i]) return;
+
+        dfs(computers, i);
+        answer++;
+    });
+
+    return answer;
+}
+```
+
+### 풀이 2: BFS
+
+```js
+function solution(n, computers) {
+    const visited = new Array(n).fill(0);
+
+    let answer = 0;
+
+    function bfs(matrix, begin) {
+        const q = [ begin ];
+
+        while(q.length) {
+            const node = q.shift();
+
+            if(!visited[node]){
+                visited[node] = 1;
+
+                matrix[node].forEach((conn, i) => {
+                    if(conn && !visited[i])
+                        q.push(i);
+                });
+            }
+        }
+    }
+
+    computers.forEach((_, i) => {
+        if(visited[i]) return;
+
+        bfs(computers, i);
+        answer++;
+    });
+
+    return answer;
+}
+```
+
+이 문제는 컴퓨터들이 서로 연결되어 있는 네트워크의 개수, 즉, **그래프의 연결 요소(Connected Component)의 개수**를 찾는 문제로 **완전 탐색** 풀이가 필요하다. DFS 또는 BFS를 사용하여 구현할 수 있으며, 연결 관계가 인접 행렬로 주어졌기 때문에 탐색 구현 시에는 행렬의 크기에 따른 시간 복잡도와 재귀 호출의 깊이에 유의해야 한다.
+
+탐색의 목적은 단순히 연결된 모든 노드를 방문하여 네트워크의 개수만 파악하는 것으로 탐색 과정에서의 방문 순서는 결과에 영향을 미치지 않는다.
+
+또한, 모든 컴퓨터가 하나의 네트워크로 연결되어 있을 수도 있고, 여러 네트워크로 분리되어 있을 수도 있다. 네트워크가 분리되어 있는 경우, 한 번의 DFS 또는 BFS 호출만으로는 모든 연결 요소들을 탐색할 수 없으므로, 반복문을 사용하여 방문하지 않은 각 노드(행)에 대해 함수를 호출하도록 설계해야 한다.

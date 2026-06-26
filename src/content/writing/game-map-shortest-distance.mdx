@@ -1,0 +1,52 @@
+---
+title: "[프로그래머스 Level 2] 게임 맵 최단거리"
+date: "2024-11-04"
+tags: ["algorithm", "javascript"]
+draft: false
+description: "프로그래머스 게임 맵 최단거리를 BFS로 풀이합니다."
+thumbnail: ""
+series: "DFS/BFS"
+seriesOrder: 3
+---
+
+- [문제 풀러 가기](https://school.programmers.co.kr/learn/courses/30/lessons/1844)
+
+### 풀이 1:
+
+```js
+function solution(maps) {
+    const m = maps.length;
+    const n = maps[0].length;
+
+    const dx = [0, 1, 0, -1];
+    const dy = [1, 0, -1, 0];
+
+    function bfs(matrix, start_x = 0, start_y = 0){
+        const q = [ [start_x, start_y] ];
+        const visited = Array.from({ length: m }).map(_ => Array.from({ length: n }).fill(0));  // 중복 방문 방지
+
+        while(q.length){
+            const [x, y] = q.shift();
+
+            if(visited[y][x] === 0){
+                if(x === n-1 && y === m-1)  return matrix[y][x];
+
+                visited[y][x] = 1;
+
+                dx.forEach((_, i) => {
+                    const nx = Math.min(Math.max(x + dx[i], 0), n-1);
+                    const ny = Math.min(Math.max(y + dy[i], 0), m-1);
+
+                    if(matrix[ny][nx] && !visited[ny][nx]){
+                        matrix[ny][nx] = matrix[y][x] + 1;
+                        q.push([nx, ny]);
+                    }
+                });
+            }
+        }
+        return -1;
+    }
+
+    return bfs(maps);
+}
+```

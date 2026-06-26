@@ -1,0 +1,75 @@
+---
+title: "[2020 KAKAO INTERNSHIP Level 2] 수식 최대화"
+date: "2024-12-11"
+tags: ["algorithm", "javascript"]
+draft: false
+description: "2020 카카오 인턴십 수식 최대화를 DFS로 풀이합니다."
+thumbnail: ""
+series: "DFS/BFS"
+seriesOrder: 10
+---
+
+- [문제 풀러 가기](https://school.programmers.co.kr/learn/courses/30/lessons/67257)
+
+### 풀이 1: DFS
+
+```js
+function solution(expression) {
+    const operators = Array.from(new Set(expression.match(/[\+|\-|\*]/g)));
+    const visited = new Array(operators.length).fill(false);
+    const cases = new Array();
+
+    let max = 0;
+    let splitted = expression.match(/([0-9]+)|([\+|\-|\*])/g);
+
+    function calc(priority){
+        let current = [...splitted];
+
+        // ✅ 연산자 우선순위에 따라 계산 수행 → 최대 연산자 종류(3) * 연산자와 피연산자 최대 길이(100)
+        priority.forEach(operator => {
+            // 현재 우선순위를 기준으로 계산 → 배열 상태 저장
+            const next = [];
+
+            for(let i = 0; i < current.length; i++){
+                if(current[i] !== operator){
+                    next.push(current[i]);
+                    continue;
+                }
+
+                i++;
+                const n1 = Number(next.pop());
+                const n2 = Number(current[i]);
+
+                if(operator === '+') next.push(n1 + n2);
+                if(operator === '-') next.push(n1 - n2);
+                if(operator === '*') next.push(n1 * n2);
+            }
+
+            current = next;
+        });
+
+        max = Math.max(max, Math.abs(current.pop()));
+    }
+
+
+    function getPriority(operators, priority = []){
+        if(priority.length === operators.length){
+            cases.push(priority);
+            return;
+        }
+
+        operators.forEach((o, i) => {
+            if(visited[i]) return;
+
+            visited[i] = true;
+            getPriority(operators, [...priority, o]);
+            visited[i] = false;
+        })
+    }
+
+    getPriority(operators); // 3! = 6번 연산
+    cases.forEach(calc);    // 3! * 300 → 최대 1,800번 연산
+
+    return max;
+}
+```

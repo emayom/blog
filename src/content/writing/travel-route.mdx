@@ -1,0 +1,45 @@
+---
+title: "[프로그래머스 Level 3] 여행경로"
+date: "2024-11-21"
+tags: ["algorithm", "javascript"]
+draft: false
+description: "프로그래머스 여행경로를 DFS와 백트래킹으로 풀이합니다."
+thumbnail: ""
+series: "DFS/BFS"
+seriesOrder: 7
+---
+
+- [문제 풀러 가기](https://school.programmers.co.kr/learn/courses/30/lessons/43164)
+
+### 풀이 1: DFS + 백트래킹
+
+```js
+function solution(tickets) {
+    const answer = [];
+    const visited = new Array(tickets.length).fill(false);
+
+    function dfs(graph, departure, route = [ departure ], n = 0){
+        // ✅ 티켓 모두 소진 시, 종료
+        if(n === graph.length){
+            answer.push(route);
+            return;
+        }
+
+        tickets.forEach((ticket, i) => {
+            // ✅ 유망성 판단 - 방문 여부 & 현재 위치에서 출발하는 티켓 존재 여부
+            if(ticket[0] === departure && !visited[i]){
+                visited[i] = true;
+                dfs(tickets, ticket[1], [...route, ticket[1]], n+1);
+                visited[i] = false; // ✅ 백트래킹
+            }
+        });
+    }
+
+    dfs(tickets, "ICN");
+
+    answer.sort();
+
+    // 알파벳 순서가 앞서는 경로
+    return answer[0];
+}
+```

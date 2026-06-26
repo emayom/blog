@@ -1,0 +1,76 @@
+---
+title: "[프로그래머스 Level 2] 피보나치 수"
+date: "2024-11-11"
+tags: ["algorithm", "javascript"]
+draft: false
+description: "프로그래머스 피보나치 수를 Bottom-Up·Top-Down DP와 BigInt 모듈러 연산으로 풀이합니다."
+thumbnail: ""
+series: "DP"
+seriesOrder: 1
+---
+
+- [문제 풀러 가기](https://school.programmers.co.kr/learn/courses/30/lessons/12945)
+
+### 풀이 1: Bottom-Up 방식
+
+```js
+function solution(n) {
+    const modular = 1234567;
+    const table = new Array(n+1).fill(BigInt(0));
+
+    table[1] = BigInt(1);
+
+    for (let i = 2; i <= n; i++) {
+        table[i] = (table[i-1].toString() % modular) + (table[i-2].toString() % modular);
+    }
+
+    return table[n].toString() % modular;
+}
+```
+
+### 풀이 2: Bottom-Up 방식 - 문자열로 변환 과정 `BigInt` 모듈러 연산으로 개선
+
+```js
+function solution(n) {
+    const modular = BigInt(1234567);
+    const table = new Array(n+1).fill(BigInt(0));
+
+    table[1] = BigInt(1);
+
+    for (let i = 2; i <= n; i++) {
+        table[i] = (table[i-1] + table[i-2]) % modular;
+    }
+
+    return table[n];
+}
+```
+
+### 풀이 3: Top-Down 방식 - 테스트 13~14 런타임 에러 ❌
+> JavaScript에서는 Python과 다르게 재귀의 최대 깊이를 직접 설정할 수 없다.
+> 재귀 호출의 최대 깊이는 브라우저나 Node.js 환경의 엔진에 따라 달라지며, 일반적으로 약 10,000회 내외이다.
+
+```js
+function solution(n) {
+    const modular = 1234567n;
+    const table = new Array(n+1).fill(0n);
+
+    function fibonacci(n) {
+        if (n < 2) return table[n] = BigInt(n);
+        if (table[n] > 0n) return table[n]; // ✅ 메모이제이션
+
+        return table[n] = (fibonacci(n-1) + fibonacci(n-2)) % modular;
+    }
+
+    // n+1 재귀 호출
+    return fibonacci(n);
+}
+```
+
+##### Review
+
+```
+제한 사항
+- n은 2 이상 100,000 이하인 자연수입니다.
+```
+
+[Number.MAX_SAFE_INTEGER](/writing/js-max-safe-integer)

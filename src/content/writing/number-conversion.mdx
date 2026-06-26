@@ -1,0 +1,135 @@
+---
+title: "[프로그래머스 Level 2] 숫자 변환하기"
+date: "2024-11-14"
+tags: ["algorithm", "javascript"]
+draft: false
+description: "프로그래머스 숫자 변환하기를 BFS와 DP로 풀이합니다."
+thumbnail: ""
+series: "DP"
+seriesOrder: 3
+---
+
+- [문제 풀러 가기](https://school.programmers.co.kr/learn/courses/30/lessons/154538)
+
+### 풀이 1: BFS + 큐 구현
+
+```js
+class Node {
+    constructor(value){
+        this.value = value;
+        this.next = null;
+    }
+}
+
+class Queue {
+    constructor(value){
+        this.front = 0;
+        this.rear = 0;
+        this.size = 0;
+
+        if(Array.isArray(value) && value.length){
+            value.forEach(this.enqueue, this);
+        }
+    }
+
+    isEmpty(){
+        return !this.front && !this.size;
+    }
+
+    #isEqual(node1, node2){
+        if(!(node1 instanceof Node) || !(node2 instanceof Node)) return false;
+
+        // temp
+        const nodeToString = (object) => Object.entries(object).toString();
+
+        return nodeToString(node1) === nodeToString(node2);
+    }
+
+    enqueue(value){
+        const node = new Node(value);
+
+        if(this.isEmpty()){
+            this.front = node;
+            this.rear = node;
+        } else {
+            this.rear.next = node;
+            this.rear = node;
+        }
+
+        return ++this.size;
+    }
+
+    dequeue(){
+        if(this.isEmpty()) return;
+
+        const { next, value } = this.front;
+
+        if(this.#isEqual(this.front, this.rear)){
+            this.rear = null;
+        }
+
+        this.front = next;
+        this.size--;
+
+        return value;
+    }
+}
+
+function solution(x, y, n) {
+    function bfs(v){
+        const queue = new Queue([[v, 0]])
+        const visited = new Set([v]);
+
+        while(queue.size){
+            const [value, cnt] = queue.dequeue();
+
+            if(value === y)  return cnt;
+
+            for(const next of [value * 2, value * 3, value + n]){
+                if(next <= y && !visited.has(next)){
+                    visited.add(next);
+                    queue.enqueue([next, cnt + 1]);
+                }
+            }
+        }
+
+        return -1;
+    }
+
+    return bfs(x);
+}
+```
+
+### 풀이 2: DP
+
+```js
+function solution(x, y, n) {
+    const table = new Array(y+1).fill(-1);
+
+    table[x] = 0;
+
+    for(let i = x; i < y + 1; i++){
+        if(table[i] === -1) continue;
+
+        for(const next of [i+n, i*2, i*3]){
+            if(next <= y){
+                if(table[next] === -1){
+                    table[next] = table[i] + 1;
+                } else {
+                    table[next] = Math.min(table[next], table[i] + 1);
+                }
+            }
+        }
+    }
+
+    return table[y];
+}
+```
+
+##### Review
+
+```
+제한사항
+- 1 ≤ x ≤ y ≤ 1,000,000
+- 1 ≤ n < y
+```

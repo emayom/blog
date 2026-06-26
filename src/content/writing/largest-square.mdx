@@ -1,0 +1,52 @@
+---
+title: "[프로그래머스 Level 2] 가장 큰 정사각형 찾기"
+date: "2024-11-15"
+tags: ["algorithm", "javascript"]
+draft: false
+description: "프로그래머스 가장 큰 정사각형 찾기를 DP로 풀이합니다."
+thumbnail: ""
+series: "DP"
+seriesOrder: 5
+---
+
+- [문제 풀러 가기](https://school.programmers.co.kr/learn/courses/30/lessons/12905)
+
+### 풀이 1:
+
+```js
+function solution(board){
+    const m = board.length;
+    const n = board[0].length;
+    const table = Array.from({ length: m }, () => new Array(n).fill(0));
+
+    let len = 0;    // 한 변의 최대 길이
+
+    for(let i = 0; i < m; i++){
+        for(let j = 0; j < n; j++){
+            if(board[i][j] === 0) continue;
+
+            if(i === 0 || j === 0) table[i][j] = 1;
+            else {
+                table[i][j] = Math.min(
+                    table[i-1][j-1],
+                    Math.min(table[i-1][j], table[i][j-1])
+                ) + 1;
+            }
+
+            len = Math.max(len, table[i][j]);
+        }
+    }
+
+    return len * len;
+}
+```
+
+##### Review
+
+```
+제한사항
+- 표(board)는 2차원 배열로 주어집니다.
+- 표(board)의 행(row)의 크기 : 1,000 이하의 자연수
+- 표(board)의 열(column)의 크기 : 1,000 이하의 자연수
+- 표(board)의 값은 1또는 0으로만 이루어져 있습니다.
+```

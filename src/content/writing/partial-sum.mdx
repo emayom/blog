@@ -1,0 +1,45 @@
+---
+title: "[백준 Gold 4] 부분합"
+date: "2024-12-28"
+tags: ["algorithm", "javascript"]
+draft: false
+description: "백준 부분합(1806)을 투 포인터로 풀이합니다."
+thumbnail: ""
+series: "Two Pointers"
+seriesOrder: 5
+---
+
+| 시간 제한 | 메모리 제한 |
+|---------|----------|
+| 0.5 초 | 128 MB |
+
+- [문제 풀러 가기](https://www.acmicpc.net/problem/1806)
+
+### 풀이 1: 투 포인터
+
+```js
+const [N, S, ...arr] = require("fs")
+                        .readFileSync("/dev/stdin")
+                        .toString()
+                        .trim()
+                        .split(/\s/)
+                        .map(v => +v);
+
+let left = 0;
+let right = 0;
+let sum = arr[0];
+let min_len = Infinity;
+
+while(left < arr.length && right < arr.length){
+    if(sum >= S){
+        min_len = Math.min(min_len, right - left + 1);
+        sum -= arr[left++];
+
+    } else {
+        sum += arr[++right];
+    }
+}
+
+// 만일 그러한 합을 만드는 것이 불가능하다면 0을 출력
+console.log(min_len === Infinity ? 0 : min_len);
+```

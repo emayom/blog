@@ -1,0 +1,44 @@
+---
+title: "[프로그래머스 Level 2] 연속된 부분 수열의 합"
+date: "2024-12-25"
+tags: ["algorithm", "javascript"]
+draft: false
+description: "프로그래머스 연속된 부분 수열의 합을 투 포인터로 풀이합니다."
+thumbnail: ""
+series: "Two Pointers"
+seriesOrder: 1
+---
+
+- [문제 풀러 가기](https://school.programmers.co.kr/learn/courses/30/lessons/178870)
+
+### 풀이 1: 투 포인터
+
+```js
+function solution(sequence, k) {
+    let answer = [0, sequence.length - 1];
+
+    let start = 0;
+    let end = 0;
+    let sum = sequence[0];
+    let length = sequence.length;
+
+    while(start < sequence.length && end < sequence.length){
+        if(sum === k){
+            const current = end - start + 1;
+
+            if(length > current || length === current && answer[0] > start){
+                answer = [start, end];
+                length = current;
+            }
+        }
+
+        if(sum >= k){
+            sum -= sequence[start++];
+        } else {
+            sum += sequence[++end];
+        }
+    }
+
+    return answer;
+}
+```

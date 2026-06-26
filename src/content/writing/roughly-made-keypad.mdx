@@ -1,0 +1,42 @@
+---
+title: "[프로그래머스 Level 1] 대충 만든 자판"
+date: "2024-12-16"
+tags: ["algorithm", "javascript"]
+draft: false
+description: "프로그래머스 대충 만든 자판을 해시맵 그리디로 풀이합니다."
+thumbnail: ""
+series: "Greedy"
+seriesOrder: 8
+---
+
+- [문제 풀러 가기](https://school.programmers.co.kr/learn/courses/30/lessons/160586)
+
+### 풀이 1:
+
+```js
+function solution(keymap, targets) {
+    const map = new Map();
+
+    keymap.forEach(keys => {
+        [...keys].forEach((key, j) => {
+            const count = j + 1;
+            const value = map.get(key);
+
+            if(!value || value && value > count){
+                map.set(key, count);
+            }
+        })
+    });
+
+    return targets.map(str => {
+        let total = 0;
+
+        for(let i = 0; i < str.length; i++){
+            if(!map.has(str[i])) return -1;
+            total += map.get(str[i]);
+        }
+
+        return total;
+    });
+}
+```

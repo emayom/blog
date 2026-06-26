@@ -1,0 +1,91 @@
+---
+title: "[프로그래머스 Level 2] 미로 탈출"
+date: "2025-01-06"
+tags: ["algorithm", "javascript"]
+draft: false
+description: "프로그래머스 미로 탈출을 BFS로 풀이합니다."
+thumbnail: ""
+series: "DFS/BFS"
+seriesOrder: 11
+---
+
+- [문제 풀러 가기](https://school.programmers.co.kr/learn/courses/30/lessons/159993)
+
+### 풀이 1: BFS
+
+```js
+function solution(maps) {
+    const m = maps.length;
+    const n = maps[0].length;
+    const dx = [0, 0, -1, 1];
+    const dy = [1, -1, 0, 0];
+
+    let start, exit, lever;
+
+    maps = maps.map((row, i) =>
+        row.split('').map((node, j) => {
+            if(node === 'S') start = [i, j];
+            if(node === 'L') lever = [i, j];
+            if(node === 'E') exit = [i, j];
+            if(node === 'X') return 0;
+            return 1;
+        })
+    );
+
+    function bfs(matrix, start, end){
+        const q = [ start ];
+        const visited = Array.from({ length: m }, () => new Array(n).fill(0));
+        const distance = Array.from({ length: m }, () => Array(n).fill(Infinity));
+
+        distance[start[0]][start[1]] = 0;
+
+        while(q.length){
+            const [y, x] = q.shift();
+
+            if(visited[y][x] === 0){
+                visited[y][x] = 1;
+
+                if(y === end[0] && x === end[1]){
+                    return distance[y][x];
+                }
+
+                dx.forEach((_, i) => {
+                    const nx = Math.min(Math.max(x + dx[i], 0), n - 1);
+                    const ny = Math.min(Math.max(y + dy[i], 0), m - 1);
+
+                    if(matrix[ny][nx] && !visited[ny][nx]){
+                        distance[ny][nx] = distance[y][x] + 1;
+                        q.push([ny, nx]);
+                    }
+                });
+            }
+        }
+
+        return -1;
+    }
+
+    // 시작 지점에서 레버까지 최단거리
+    const toLever = bfs(maps, start, lever);
+    // 레버에서 출구까지 최단거리
+    const fromLever = bfs(maps, lever, exit);
+
+    if(toLever === -1 || fromLever === -1){
+        return -1;
+    }
+
+    return toLever + fromLever;
+}
+```
+
+## Review
+#### [제한 사항]
+- 5 ≤ maps의 길이 ≤ 100
+    - 5 ≤ maps[i]의 길이 ≤ 100
+    - maps[i]는 다음 5개의 문자들로만 이루어져 있습니다.
+        - S : 시작 지점
+        - E : 출구
+        - L : 레버
+        - O : 통로
+        - X : 벽
+    - 시작 지점과 출구, 레버는 항상 다른 곳에 존재하며 한 개씩만 존재합니다.
+    - 출구는 레버가 당겨지지 않아도 지나갈 수 있으며, 모든 통로, 출구, 레버, 시작점은 여러 번 지나갈 수 있습니다.
