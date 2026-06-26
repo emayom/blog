@@ -3,7 +3,7 @@ import path from 'node:path'
 import { compileMDX } from 'next-mdx-remote/rsc'
 import type { Post, PostFrontmatter, PostMeta } from '@/types/post'
 import { mdxComponents } from '@/components/mdx/mdx-components'
-import { rehypePlugins } from '@/lib/mdx-options'
+import { rehypePlugins, remarkPlugins } from '@/lib/mdx-options'
 import { getReadingTime } from '@/lib/reading-time'
 import { extractToc } from '@/lib/toc'
 
@@ -112,7 +112,7 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
     components: mdxComponents,
     options: {
       parseFrontmatter: true,
-      mdxOptions: { rehypePlugins },
+      mdxOptions: { remarkPlugins, rehypePlugins },
     },
   })
 
