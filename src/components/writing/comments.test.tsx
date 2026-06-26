@@ -22,6 +22,10 @@ afterEach(() => {
 
 describe('Comments', () => {
   it('giscus env가 없으면 아무것도 렌더하지 않는다', async () => {
+    vi.stubEnv('NEXT_PUBLIC_GISCUS_REPO', '')
+    vi.stubEnv('NEXT_PUBLIC_GISCUS_REPO_ID', '')
+    vi.stubEnv('NEXT_PUBLIC_GISCUS_CATEGORY', '')
+    vi.stubEnv('NEXT_PUBLIC_GISCUS_CATEGORY_ID', '')
     const { Comments } = await import('@/components/writing/comments')
     const { container } = render(<Comments />)
     expect(container).toBeEmptyDOMElement()
