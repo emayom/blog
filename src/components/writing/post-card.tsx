@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { formatDate } from '@/lib/format-date'
+import { Tag } from '@/components/writing/tag'
 import type { PostMeta } from '@/types/post'
 
 interface PostCardProps {
@@ -34,12 +35,7 @@ export function PostCard({ post }: PostCardProps) {
         <ul className="mt-3 flex flex-wrap gap-2">
           {post.tags.map(tag => (
             <li key={tag}>
-              <Link
-                href={`/tag/${tag}`}
-                className="rounded-full bg-canvas-parchment px-3 py-1 text-xs text-ink-muted-80 hover:bg-canvas-parchment/70 hover:text-primary dark:bg-surface-tile-1 dark:text-body-muted dark:hover:text-primary-on-dark"
-              >
-                {tag}
-              </Link>
+              <Tag href={`/tag/${tag}`} label={tag} />
             </li>
           ))}
         </ul>

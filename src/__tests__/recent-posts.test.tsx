@@ -25,9 +25,9 @@ describe('RecentPosts', () => {
     expect(screen.queryByText('제목 d')).not.toBeInTheDocument()
   })
 
-  it('"전체 글 →" 링크가 /writing을 가리킨다', () => {
+  it('"전체 →" 링크가 /writing을 가리킨다', () => {
     render(<RecentPosts posts={[meta('a')]} />)
-    const link = screen.getByRole('link', { name: /전체 글/ })
+    const link = screen.getByRole('link', { name: /전체/ })
     expect(link).toHaveAttribute('href', '/writing')
   })
 
