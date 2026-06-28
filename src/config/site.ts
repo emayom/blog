@@ -15,6 +15,27 @@ export const mainNav: NavItem[] = [
   { label: '책장', href: '/library', enabled: false },
 ]
 
+export const social: NavItem[] = [
+  {
+    label: 'GitHub',
+    href: process.env.NEXT_PUBLIC_SOCIAL_GITHUB ?? '#',
+    enabled: true,
+    external: true,
+  },
+  {
+    label: 'LinkedIn',
+    href: process.env.NEXT_PUBLIC_SOCIAL_LINKEDIN ?? '#',
+    enabled: true,
+    external: true,
+  },
+  {
+    label: 'Email',
+    href: process.env.NEXT_PUBLIC_SOCIAL_EMAIL ?? '#',
+    enabled: true,
+    external: true,
+  },
+]
+
 export const footerNav: NavGroup[] = [
   {
     title: '탐색',
@@ -32,16 +53,6 @@ export const footerNav: NavGroup[] = [
   },
   {
     title: '연결',
-    items: [
-      { label: 'GitHub', href: '#', enabled: true, external: true },
-      { label: 'LinkedIn', href: '#', enabled: true, external: true },
-      { label: 'Email', href: '#', enabled: true, external: true },
-    ],
+    items: social,
   },
-]
-
-export const social: NavItem[] = [
-  { label: 'GitHub', href: '#', enabled: true, external: true },
-  { label: 'LinkedIn', href: '#', enabled: true, external: true },
-  { label: 'Email', href: '#', enabled: true, external: true },
 ]
