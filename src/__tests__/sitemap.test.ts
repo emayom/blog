@@ -24,6 +24,12 @@ describe('sitemap', () => {
     expect(urls).toContain(`${siteConfig.url}/about`)
   })
 
+  it('아카이브 인덱스(/archive)를 priority 0.4로 포함한다', () => {
+    const archiveIndex = entries.find(e => e.url === `${siteConfig.url}/archive`)
+    expect(archiveIndex).toBeDefined()
+    expect(archiveIndex?.priority).toBe(0.4)
+  })
+
   it('홈 priority는 1.0, /writing은 0.6이다', () => {
     const home = entries.find(e => e.url === siteConfig.url)
     const writing = entries.find(e => e.url === `${siteConfig.url}/writing`)

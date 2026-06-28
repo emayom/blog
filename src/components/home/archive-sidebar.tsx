@@ -10,9 +10,17 @@ export function ArchiveSidebar({ years }: ArchiveSidebarProps) {
 
   return (
     <aside className="flex flex-col gap-4">
-      <h2 className="text-[28px] font-semibold leading-[1.1] tracking-[-0.2px] text-ink dark:text-body-on-dark">
-        아카이브
-      </h2>
+      <div className="flex items-baseline justify-between">
+        <h2 className="text-[28px] font-semibold leading-[1.1] tracking-[-0.2px] text-ink dark:text-body-on-dark">
+          아카이브
+        </h2>
+        <Link
+          href="/archive"
+          className="text-[17px] text-primary hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-focus dark:text-primary-on-dark"
+        >
+          전체 →
+        </Link>
+      </div>
       <ul className="flex flex-col">
         {years.map(({ year, count }) => (
           <li
@@ -26,7 +34,7 @@ export function ArchiveSidebar({ years }: ArchiveSidebarProps) {
               {year}
             </Link>
             <span className="text-sm text-ink-muted-48 dark:text-body-muted">
-              {`${count}편`}
+              {`(${count})`}
             </span>
           </li>
         ))}

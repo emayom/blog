@@ -22,7 +22,7 @@ export function RecentPosts({ posts }: RecentPostsProps) {
           href="/writing"
           className="text-[17px] text-primary hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-focus dark:text-primary-on-dark"
         >
-          전체 글 →
+          전체 →
         </Link>
       </div>
 

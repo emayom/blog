@@ -1,13 +1,13 @@
 import { describe, expect, it } from 'vitest'
-import { getArchiveCounts, getPostsByYear } from '@/lib/archive'
+import { getArchiveCounts, getPostsByYear, getTopTagsByYear } from '@/lib/archive'
 import type { PostMeta } from '@/types/post'
 
-function meta(slug: string, date: string): PostMeta {
+function meta(slug: string, date: string, tags: string[] = []): PostMeta {
   return {
     slug,
     title: slug,
     date,
-    tags: [],
+    tags,
     draft: false,
     description: '',
     thumbnail: '',
@@ -84,5 +84,56 @@ describe('getPostsByYear', () => {
     ]
     const result = getPostsByYear(posts, '2024')
     expect(result).toHaveLength(2)
+  })
+})
+
+describe('getTopTagsByYear', () => {
+  it('해당 연도 글의 태그만 집계하고 다른 연도는 제외한다', () => {
+    const posts = [
+      meta('a', '2026-01-01', ['react', 'next']),
+      meta('b', '2026-06-01', ['react']),
+      meta('c', '2025-01-01', ['react', 'vue']),
+    ]
+    expect(getTopTagsByYear(posts, '2026')).toEqual([
+      { tag: 'react', count: 2 },
+      { tag: 'next', count: 1 },
+    ])
+  })
+
+  it('개수 내림차순, 동순위는 가나다순으로 정렬한다(getTagCounts 위임)', () => {
+    const posts = [
+      meta('a', '2026-01-01', ['zebra', 'apple']),
+      meta('b', '2026-02-01', ['apple', 'zebra', 'mango']),
+      meta('c', '2026-03-01', ['mango']),
+    ]
+    expect(getTopTagsByYear(posts, '2026')).toEqual([
+      { tag: 'apple', count: 2 },
+      { tag: 'mango', count: 2 },
+      { tag: 'zebra', count: 2 },
+    ])
+  })
+
+  it('limit 기본값은 5이며 초과 시 상위 limit개만 반환한다', () => {
+    const posts = [
+      meta('a', '2026-01-01', ['t1', 't2', 't3', 't4', 't5', 't6']),
+    ]
+    expect(getTopTagsByYear(posts, '2026')).toHaveLength(5)
+  })
+
+  it('limit 인자로 반환 개수를 조절한다', () => {
+    const posts = [
+      meta('a', '2026-01-01', ['t1', 't2', 't3']),
+    ]
+    expect(getTopTagsByYear(posts, '2026', 2)).toHaveLength(2)
+  })
+
+  it('해당 연도 글이 없으면 빈 배열을 반환한다', () => {
+    const posts = [meta('a', '2025-01-01', ['react'])]
+    expect(getTopTagsByYear(posts, '2026')).toEqual([])
+  })
+
+  it('태그가 없는 연도는 빈 배열을 반환한다', () => {
+    const posts = [meta('a', '2026-01-01', [])]
+    expect(getTopTagsByYear(posts, '2026')).toEqual([])
   })
 })
