@@ -35,27 +35,48 @@
 
   <!-- 페이지 -->
   <div class="hub-group">페이지 (Pages)</div>
-  <div class="gallery">
+
+  <!-- 1행: 홈, 소개 -->
+  <div style="font-size:11px; font-weight:600; color:var(--muted); margin:0 0 10px; letter-spacing:.06em; text-transform:uppercase">홈 · 소개</div>
+  <div class="gallery" style="grid-template-columns:repeat(2,1fr); margin-bottom:28px">
     <a class="screen-card" href="home.html">
       <div class="thumb"><iframe src="home.html" scrolling="no" loading="lazy"></iframe></div>
       <div class="screen-meta"><div class="screen-name">홈</div><div class="screen-route">/</div></div>
     </a>
+    <a class="screen-card" href="about.html">
+      <div class="thumb"><iframe src="about.html" scrolling="no" loading="lazy"></iframe></div>
+      <div class="screen-meta"><div class="screen-name">소개</div><div class="screen-route">/about</div></div>
+    </a>
+  </div>
+
+  <!-- 2행: 글, 글 상세, 태그, 아카이브, 아카이브 연도 -->
+  <div style="font-size:11px; font-weight:600; color:var(--muted); margin:0 0 10px; letter-spacing:.06em; text-transform:uppercase">글</div>
+  <div class="gallery" style="grid-template-columns:repeat(2,1fr); margin-bottom:28px">
     <a class="screen-card" href="list.html">
       <div class="thumb"><iframe src="list.html" scrolling="no" loading="lazy"></iframe></div>
       <div class="screen-meta"><div class="screen-name">글</div><div class="screen-route">/writing</div></div>
     </a>
     <a class="screen-card" href="detail.html">
       <div class="thumb"><iframe src="detail.html" scrolling="no" loading="lazy"></iframe></div>
-      <div class="screen-meta"><div class="screen-name">상세</div><div class="screen-route">/writing/[slug]</div></div>
+      <div class="screen-meta"><div class="screen-name">글 상세</div><div class="screen-route">/writing/[slug]</div></div>
     </a>
     <a class="screen-card" href="tag.html">
       <div class="thumb"><iframe src="tag.html" scrolling="no" loading="lazy"></iframe></div>
       <div class="screen-meta"><div class="screen-name">태그</div><div class="screen-route">/tag/[tag]</div></div>
     </a>
+    <a class="screen-card" href="archive-index.html">
+      <div class="thumb"><iframe src="archive-index.html" scrolling="no" loading="lazy"></iframe></div>
+      <div class="screen-meta"><div class="screen-name">아카이브</div><div class="screen-route">/archive</div></div>
+    </a>
     <a class="screen-card" href="archive.html">
       <div class="thumb"><iframe src="archive.html" scrolling="no" loading="lazy"></iframe></div>
-      <div class="screen-meta"><div class="screen-name">아카이브</div><div class="screen-route">/archive/[year]</div></div>
+      <div class="screen-meta"><div class="screen-name">아카이브 연도</div><div class="screen-route">/archive/[year]</div></div>
     </a>
+  </div>
+
+  <!-- 3행: 책장, 메모 -->
+  <div style="font-size:11px; font-weight:600; color:var(--muted); margin:0 0 10px; letter-spacing:.06em; text-transform:uppercase">컬렉션</div>
+  <div class="gallery" style="grid-template-columns:repeat(2,1fr)">
     <a class="screen-card" href="library.html">
       <div class="thumb"><iframe src="library.html" scrolling="no" loading="lazy"></iframe></div>
       <div class="screen-meta"><div class="screen-name">책장</div><div class="screen-route">/library</div></div>
@@ -63,10 +84,6 @@
     <a class="screen-card" href="notes.html">
       <div class="thumb"><iframe src="notes.html" scrolling="no" loading="lazy"></iframe></div>
       <div class="screen-meta"><div class="screen-name">메모</div><div class="screen-route">/notes</div></div>
-    </a>
-    <a class="screen-card" href="about.html">
-      <div class="thumb"><iframe src="about.html" scrolling="no" loading="lazy"></iframe></div>
-      <div class="screen-meta"><div class="screen-name">소개</div><div class="screen-route">/about</div></div>
     </a>
   </div>
 
