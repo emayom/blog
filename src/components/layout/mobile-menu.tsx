@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useId, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import type { NavItem } from '@/types/nav'
@@ -75,7 +76,9 @@ export function MobileMenu({ items, social }: MobileMenuProps) {
         </svg>
       </button>
 
-      {open && (
+      {open && createPortal(
+        // navbar의 header에 걸린 backdrop-filter가 position:fixed 자손의
+        // containing block이 되므로, 메뉴를 body로 portal해 뷰포트 기준으로 렌더한다 (#48)
         <div className="fixed inset-0 z-50 md:hidden">
           <div
             onClick={() => setOpen(false)}
@@ -89,7 +92,7 @@ export function MobileMenu({ items, social }: MobileMenuProps) {
             role="dialog"
             aria-modal="true"
             aria-label="모바일 메뉴"
-            className="absolute inset-y-0 right-0 flex w-4/5 max-w-xs flex-col bg-canvas pt-11 dark:bg-surface-tile-1"
+            className="absolute inset-y-0 right-0 flex w-4/5 max-w-[20rem] flex-col bg-canvas pt-11 dark:bg-surface-tile-1"
           >
             <nav className="flex flex-col">
               {enabledItems.map((item) => {
@@ -127,7 +130,8 @@ export function MobileMenu({ items, social }: MobileMenuProps) {
               </div>
             )}
           </div>
-        </div>
+        </div>,
+        document.body,
       )}
     </>
   )
