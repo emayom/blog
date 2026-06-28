@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import { siteConfig, social } from '@/config/site'
+import profileImg from '@/assets/profile.png'
 import { buildMetadata } from '@/lib/seo'
 
 export const metadata: Metadata = buildMetadata({
@@ -12,7 +14,18 @@ export default function AboutPage() {
   return (
     <main className="mx-auto max-w-[680px] px-6 py-12">
       <div className="grid grid-cols-1 items-center gap-8 sm:grid-cols-[160px_1fr]">
-        <div className="relative size-[150px] rounded-full border border-hairline bg-canvas-parchment dark:border-ink-muted-80 dark:bg-surface-tile-2">
+        <div className="relative size-[150px]">
+          <div className="absolute inset-0 overflow-hidden rounded-full border border-hairline bg-canvas-parchment dark:border-ink-muted-80 dark:bg-surface-tile-2">
+            <Image
+              src={profileImg}
+              alt={`${siteConfig.name} 프로필`}
+              fill
+              sizes="150px"
+              className="object-cover"
+              placeholder="blur"
+              priority
+            />
+          </div>
           <span className="absolute bottom-1 right-1 rounded-full border border-hairline bg-canvas px-2.5 py-1 text-xs text-ink dark:border-ink-muted-80 dark:bg-surface-tile-1 dark:text-body-on-dark">
             Seoul
           </span>
