@@ -16,7 +16,7 @@ vi.mock('@/config/site', () => ({
     { label: '소개', href: '/about', enabled: true },
     { label: '메모', href: '/notes', enabled: false },
   ],
-  social: [{ label: 'GitHub', href: 'https://github.com/x', enabled: true, external: true }],
+  social: [{ label: 'GitHub', href: 'https://github.com/x', enabled: true, external: true, icon: 'github' }],
 }))
 
 import { Navbar } from './navbar'
