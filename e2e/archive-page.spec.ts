@@ -9,25 +9,25 @@ test.describe('아카이브 연도 페이지', () => {
     await expect(page.locator('main ul li')).not.toHaveCount(0)
   })
 
-  test('브레드크럼에 홈·글 링크가 있다', async ({ page }) => {
+  test('브레드크럼에 홈·아카이브 링크가 있다', async ({ page }) => {
     await page.goto('/archive/2024')
 
     const breadcrumb = page.getByRole('navigation', { name: 'breadcrumb' })
     await expect(breadcrumb.getByRole('link', { name: '홈' })).toHaveAttribute('href', '/')
-    await expect(breadcrumb.getByRole('link', { name: '글' })).toHaveAttribute('href', '/writing')
+    await expect(breadcrumb.getByRole('link', { name: '아카이브' })).toHaveAttribute('href', '/archive')
   })
 
-  test('← 모든 글 버튼을 클릭하면 /writing으로 이동한다', async ({ page }) => {
+  test('브레드크럼 아카이브 링크를 클릭하면 /archive로 이동한다', async ({ page }) => {
     await page.goto('/archive/2024')
 
-    await page.getByRole('link', { name: '← 모든 글' }).click()
-    await expect(page).toHaveURL(/\/writing$/)
+    await page.getByRole('navigation', { name: 'breadcrumb' }).getByRole('link', { name: '아카이브' }).click()
+    await expect(page).toHaveURL(/\/archive$/)
   })
 
   test('글 카드를 클릭하면 해당 글 상세로 이동한다', async ({ page }) => {
     await page.goto('/archive/2024')
 
-    const firstCard = page.locator('main ul li a').first()
+    const firstCard = page.locator('main a[href^="/writing/"]').first()
     await firstCard.click()
     await expect(page).toHaveURL(/\/writing\/.+/)
   })
