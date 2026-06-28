@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import { siteConfig, social } from '@/config/site'
 import profileImg from '@/assets/profile.png'
+import { Icon } from '@/components/icons'
 import { buildMetadata } from '@/lib/seo'
 
 export const metadata: Metadata = buildMetadata({
@@ -46,11 +47,12 @@ export default function AboutPage() {
                 <li key={item.label}>
                   <a
                     href={item.href}
+                    aria-label={item.label}
                     target={item.external ? '_blank' : undefined}
                     rel={item.external ? 'noopener noreferrer' : undefined}
-                    className="inline-flex h-[34px] items-center rounded-full border border-hairline bg-canvas px-4 text-sm text-primary dark:border-ink-muted-80 dark:bg-surface-tile-2 dark:text-primary-on-dark"
+                    className="inline-flex size-9 items-center justify-center rounded-full text-ink-muted-80 transition-colors hover:bg-canvas-parchment hover:text-ink dark:text-body-muted dark:hover:bg-surface-tile-2 dark:hover:text-body-on-dark"
                   >
-                    {item.label}
+                    <Icon name={item.icon} />
                   </a>
                 </li>
               ))}

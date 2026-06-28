@@ -21,18 +21,21 @@ export const social: NavItem[] = [
     href: process.env.NEXT_PUBLIC_SOCIAL_GITHUB ?? '#',
     enabled: true,
     external: true,
+    icon: 'github',
   },
   {
     label: 'LinkedIn',
     href: process.env.NEXT_PUBLIC_SOCIAL_LINKEDIN ?? '#',
     enabled: true,
     external: true,
+    icon: 'linkedin',
   },
   {
     label: 'Email',
     href: process.env.NEXT_PUBLIC_SOCIAL_EMAIL ?? '#',
     enabled: true,
     external: true,
+    icon: 'mail',
   },
 ]
 
