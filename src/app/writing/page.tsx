@@ -7,6 +7,7 @@ import { PostList } from '@/components/writing/post-list'
 import { FeaturedPosts } from '@/components/writing/featured-posts'
 import { SearchProvider } from '@/components/search/search-provider'
 import { SearchTrigger } from '@/components/search/search-trigger'
+import { Heading } from '@/components/ui/heading'
 
 export const metadata: Metadata = buildMetadata({
   title: '글',
@@ -30,13 +31,11 @@ export default function WritingPage() {
         </nav>
 
         <div className="mb-2 flex items-center justify-between gap-4">
-          <h1 className="font-display text-[40px] font-semibold leading-[1.1] text-ink dark:text-body-on-dark">
-            글
-          </h1>
+          <Heading as="h1" size="xl">글</Heading>
           <SearchTrigger />
         </div>
         <p className="mb-7 text-[17px] text-ink-muted-80 dark:text-body-muted">
-          배우고 기록한 것들을 모았습니다.
+          개발, 경험, 생각을 기록합니다.
         </p>
 
         <FeaturedPosts posts={featured} />

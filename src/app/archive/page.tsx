@@ -6,6 +6,7 @@ import { absoluteUrl, buildMetadata } from '@/lib/seo'
 import { buildBreadcrumbJsonLd } from '@/lib/json-ld'
 import { JsonLd } from '@/components/seo/json-ld'
 import { FolderCard } from '@/components/archive/folder-card'
+import { Heading } from '@/components/ui/heading'
 
 export const metadata: Metadata = buildMetadata({
   title: '아카이브',
@@ -32,9 +33,7 @@ export default function ArchivePage() {
           <span>아카이브</span>
         </nav>
 
-        <h1 className="mb-[22px] font-display text-[34px] font-semibold leading-[1.47] tracking-[-0.374px] text-ink dark:text-body-on-dark">
-          아카이브
-        </h1>
+        <Heading as="h1" size="lg" className="mb-[22px]">아카이브</Heading>
 
         {years.length === 0
           ? (

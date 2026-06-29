@@ -8,6 +8,7 @@ import { buildBreadcrumbJsonLd } from '@/lib/json-ld'
 import { JsonLd } from '@/components/seo/json-ld'
 import { PostCard } from '@/components/writing/post-card'
 import { Tag } from '@/components/writing/tag'
+import { Heading } from '@/components/ui/heading'
 
 type Props = { params: Promise<{ year: string }> }
 
@@ -53,14 +54,14 @@ export default async function ArchiveYearPage({ params }: Props) {
           <span>{year}</span>
         </nav>
 
-        <h1 className="mb-[22px] font-display text-[34px] font-semibold leading-[1.47] tracking-[-0.374px] text-ink dark:text-body-on-dark">
+        <Heading as="h1" size="lg" className="mb-[22px]">
           {year}
           <span className="ml-2 text-[28px] font-normal text-ink-muted-48 dark:text-body-muted">
             (
             {filtered.length}
             )
           </span>
-        </h1>
+        </Heading>
 
         {topTags.length > 0 && (
           <section className="mb-[22px]">

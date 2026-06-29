@@ -7,6 +7,7 @@ import { absoluteUrl, buildMetadata } from '@/lib/seo'
 import { buildBreadcrumbJsonLd } from '@/lib/json-ld'
 import { JsonLd } from '@/components/seo/json-ld'
 import { PostCard } from '@/components/writing/post-card'
+import { Heading } from '@/components/ui/heading'
 
 type Props = { params: Promise<{ tag: string }> }
 
@@ -59,7 +60,7 @@ export default async function TagPage({ params }: Props) {
           ← 모든 글
         </Link>
 
-        <h1 className="mb-[22px] font-display text-[34px] font-semibold leading-[1.47] tracking-[-0.374px] text-ink dark:text-body-on-dark">
+        <Heading as="h1" size="lg" className="mb-[22px]">
           #
           {tag}
           <span className="ml-2 text-[28px] font-normal text-ink-muted-48 dark:text-body-muted">
@@ -67,7 +68,7 @@ export default async function TagPage({ params }: Props) {
             {filtered.length}
             )
           </span>
-        </h1>
+        </Heading>
 
         <ul className="flex flex-col gap-3.5">
           {filtered.map(post => (

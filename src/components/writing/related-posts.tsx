@@ -1,4 +1,5 @@
 import { PostCard } from '@/components/writing/post-card'
+import { Heading } from '@/components/ui/heading'
 import type { PostMeta } from '@/types/post'
 
 interface RelatedPostsProps {
@@ -13,9 +14,7 @@ export function RelatedPosts({ posts }: RelatedPostsProps) {
       <div className="my-12 h-px bg-hairline dark:bg-ink-muted-80" />
 
       <section>
-        <h2 className="text-[28px] font-semibold leading-[1.1] tracking-[-0.2px] text-ink dark:text-body-on-dark">
-          관련 글
-        </h2>
+        <Heading size="md">관련 글</Heading>
 
         <ul className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {posts.map(post => (

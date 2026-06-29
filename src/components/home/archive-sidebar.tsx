@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { Heading } from '@/components/ui/heading'
 import type { YearCount } from '@/types/archive'
 
 interface ArchiveSidebarProps {
@@ -11,9 +12,7 @@ export function ArchiveSidebar({ years }: ArchiveSidebarProps) {
   return (
     <aside className="flex flex-col gap-4">
       <div className="flex items-baseline justify-between">
-        <h2 className="text-[28px] font-semibold leading-[1.1] tracking-[-0.2px] text-ink dark:text-body-on-dark">
-          아카이브
-        </h2>
+        <Heading size="md">아카이브</Heading>
         <Link
           href="/archive"
           className="text-[17px] text-primary hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-focus dark:text-primary-on-dark"
