@@ -8,7 +8,7 @@ export function HeadingAnchor({ href, children }: ComponentPropsWithoutRef<'a'>)
 
   function handleClick(e: React.MouseEvent<HTMLAnchorElement>) {
     e.preventDefault()
-    const url = window.location.origin + window.location.pathname + href
+    const url = window.location.origin + window.location.pathname + encodeURI(href ?? '')
     navigator.clipboard.writeText(url).then(() => {
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
