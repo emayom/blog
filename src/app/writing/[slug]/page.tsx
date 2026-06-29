@@ -4,8 +4,9 @@ import { getAllSlugs, getPostBySlug, getPostMetaList } from '@/lib/mdx'
 import { buildMetadata } from '@/lib/seo'
 import { getAdjacentPosts, getRelatedPosts } from '@/lib/post-navigation'
 import { getSeriesNavigation } from '@/lib/series'
-import { buildBlogPostingJsonLd } from '@/lib/json-ld'
+import { buildBlogPostingJsonLd, buildBreadcrumbJsonLd } from '@/lib/json-ld'
 import { JsonLd } from '@/components/seo/json-ld'
+import { absoluteUrl } from '@/lib/seo'
 import { ArticleLayout } from '@/components/writing/article-layout'
 
 // Next.js 16: params는 Promise — await 필수
@@ -47,6 +48,13 @@ export default async function WritingPostPage({ params }: Props) {
   return (
     <>
       <JsonLd data={buildBlogPostingJsonLd(post)} />
+      <JsonLd
+        data={buildBreadcrumbJsonLd([
+          { name: '홈', url: absoluteUrl('/') },
+          { name: '글', url: absoluteUrl('/writing') },
+          { name: post.title, url: absoluteUrl(`/writing/${slug}`) },
+        ])}
+      />
       <ArticleLayout post={post} adjacent={adjacent} related={related} series={series} />
     </>
   )
