@@ -26,14 +26,14 @@ export default function ArchivePage() {
           { name: '아카이브', url: absoluteUrl('/archive') },
         ])}
       />
-      <main className="mx-auto max-w-3xl px-6 py-12">
+      <div className="mx-auto max-w-4xl px-6 py-12">
         <nav aria-label="breadcrumb" className="mb-4 text-xs tracking-[-0.12px] text-ink-muted-48">
           <Link href="/" className="text-primary dark:text-primary-on-dark">홈</Link>
           <span aria-hidden="true"> / </span>
           <span>아카이브</span>
         </nav>
 
-        <Heading as="h1" size="lg" className="mb-[22px]">아카이브</Heading>
+        <Heading as="h1" size="md" className="mb-[22px]">아카이브</Heading>
 
         {years.length === 0
           ? (
@@ -42,13 +42,13 @@ export default function ArchivePage() {
               </p>
             )
           : (
-              <div className="flex flex-wrap gap-2">
+              <div className="grid grid-cols-4 gap-8 md:flex md:flex-wrap">
                 {years.map(({ year, count }) => (
                   <FolderCard key={year} year={year} count={count} />
                 ))}
               </div>
             )}
-      </main>
+      </div>
     </>
   )
 }

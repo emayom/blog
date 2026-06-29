@@ -18,12 +18,12 @@ function meta(slug: string): PostMeta {
 }
 
 describe('RecentPosts', () => {
-  it('최대 3개의 글만 렌더한다', () => {
+  it('최대 4개의 글만 렌더한다', () => {
     const posts = [meta('a'), meta('b'), meta('c'), meta('d'), meta('e')]
     render(<RecentPosts posts={posts} />)
     expect(screen.getByText('제목 a')).toBeInTheDocument()
-    expect(screen.getByText('제목 c')).toBeInTheDocument()
-    expect(screen.queryByText('제목 d')).not.toBeInTheDocument()
+    expect(screen.getByText('제목 d')).toBeInTheDocument()
+    expect(screen.queryByText('제목 e')).not.toBeInTheDocument()
   })
 
   it('"전체 →" 링크가 /writing을 가리킨다', () => {

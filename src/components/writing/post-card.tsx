@@ -1,37 +1,33 @@
 import Link from 'next/link'
-import { formatDate } from '@/lib/format-date'
+// import { formatDate } from '@/lib/format-date'
 import { Tag } from '@/components/writing/tag'
 import type { PostMeta } from '@/types/post'
 
 interface PostCardProps {
   post: PostMeta
+  showTags?: boolean
 }
 
-export function PostCard({ post }: PostCardProps) {
+export function PostCard({ post, showTags = true }: PostCardProps) {
+  const hasTags = showTags && post.tags.length > 0
   return (
-    <article className="rounded-lg border border-hairline bg-canvas px-5 py-[17px] dark:border-ink-muted-80 dark:bg-surface-tile-2">
-      <p className="text-sm text-ink-muted-48 dark:text-body-muted">
-        <time dateTime={post.date}>{formatDate(post.date)}</time>
-        <span aria-hidden="true"> · </span>
-        <span>{`${post.readingTime}분 읽기`}</span>
-      </p>
-
-      <h2 className="mt-2 text-[21px] font-semibold leading-[1.2] tracking-[-0.374px]">
+    <article className={`group cursor-pointer bg-canvas dark:border-ink-muted-80 dark:bg-surface-tile-2 ${hasTags ? 'py-md' : 'py-lg'}`}>
+      <h2 className="text-md font-semibold leading-[1.3] tracking-[-0.374px] md:text-lg">
         <Link
           href={`/writing/${post.slug}`}
-          className="text-ink hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-focus dark:text-body-on-dark dark:hover:text-primary-on-dark"
+          className="text-ink group-hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-focus dark:text-body-on-dark dark:group-hover:text-primary-on-dark"
         >
           {post.title}
         </Link>
       </h2>
 
       {post.description && (
-        <p className="mt-2 line-clamp-2 text-[17px] leading-[1.47] text-ink-muted-80 dark:text-body-muted">
+        <p className="mt-2 line-clamp-2 text-base leading-[1.47] text-ink-muted-80 dark:text-body-muted md:text-md">
           {post.description}
         </p>
       )}
 
-      {post.tags.length > 0 && (
+      {hasTags && (
         <ul className="mt-3 flex flex-wrap gap-2">
           {post.tags.map(tag => (
             <li key={tag}>
@@ -40,6 +36,11 @@ export function PostCard({ post }: PostCardProps) {
           ))}
         </ul>
       )}
+      {/* <p className="text-sm text-ink-muted-48 dark:text-body-muted">
+        <time dateTime={post.date}>{formatDate(post.date)}</time>
+        <span aria-hidden="true"> · </span>
+        <span>{`${post.readingTime}분 읽기`}</span>
+      </p> */}
     </article>
   )
 }

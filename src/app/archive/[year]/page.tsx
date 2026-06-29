@@ -45,7 +45,7 @@ export default async function ArchiveYearPage({ params }: Props) {
           { name: `${year}`, url: absoluteUrl(`/archive/${year}`) },
         ])}
       />
-      <main className="mx-auto max-w-3xl px-6 py-12">
+      <main className="mx-auto max-w-4xl px-6 py-12">
         <nav aria-label="breadcrumb" className="mb-4 text-xs tracking-[-0.12px] text-ink-muted-48">
           <Link href="/" className="text-primary dark:text-primary-on-dark">홈</Link>
           <span aria-hidden="true"> / </span>
@@ -54,9 +54,9 @@ export default async function ArchiveYearPage({ params }: Props) {
           <span>{year}</span>
         </nav>
 
-        <Heading as="h1" size="lg" className="mb-[22px]">
+        <Heading as="h1" size="md" className="mb-[22px]">
           {year}
-          <span className="ml-2 text-[28px] font-normal text-ink-muted-48 dark:text-body-muted">
+          <span className="ml-2 text-xl font-normal text-ink-muted-48 dark:text-body-muted">
             (
             {filtered.length}
             )
@@ -75,7 +75,7 @@ export default async function ArchiveYearPage({ params }: Props) {
           </section>
         )}
 
-        <ul className="flex flex-col gap-3.5">
+        <ul className="flex flex-col divide-y divide-hairline dark:divide-ink-muted-80">
           {filtered.map(post => (
             <li key={post.slug}>
               <PostCard post={post} />

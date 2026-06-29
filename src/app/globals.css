@@ -49,6 +49,10 @@
   --radius-lg: 18px;
   --radius-pill: 9999px;
   --radius-full: 9999px;
+
+  /* Font size — Tailwind 기본(text-base 16 / text-lg 18)의 빈 자리를 채우는 md.
+     DESIGN.md body=17px와 일치. text-sm/base/lg/xl 등 기본 스케일은 그대로 유지된다 */
+  --text-md: 17px;
 }
 
 @theme inline {

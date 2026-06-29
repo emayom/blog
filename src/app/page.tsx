@@ -16,10 +16,10 @@ export default function Home() {
   const years = getArchiveCounts(posts)
 
   return (
-    <div className="mx-auto max-w-5xl px-6">
+    <div className="mx-auto max-w-4xl px-6">
       <Hero />
-      <div className="grid grid-cols-1 gap-12 pb-20 lg:grid-cols-[1fr_240px]">
-        <RecentPosts posts={posts} />
+      <div className="grid grid-cols-1 gap-12 pb-20 md:grid-cols-2">
+        <RecentPosts posts={posts} className="md:col-span-2" />
         <ArchiveSidebar years={years} />
       </div>
     </div>

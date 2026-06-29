@@ -46,6 +46,7 @@ export const footerNav: NavGroup[] = [
     items: [
       { label: '글', href: '/writing', enabled: true },
       { label: '소개', href: '/about', enabled: true },
+      { label: '아카이브', href: '/archive', enabled: true },
     ],
   },
   {

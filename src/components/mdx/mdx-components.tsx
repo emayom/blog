@@ -17,19 +17,19 @@ export const mdxComponents: MDXComponents = {
   },
   h2: (props: ComponentPropsWithoutRef<'h2'>) => (
     <h2
-      className="group relative text-ink dark:text-body-on-dark font-semibold text-[34px] leading-[1.47] tracking-[-0.374px] mt-[48px] mb-md scroll-mt-[80px]"
+      className="group relative text-ink dark:text-body-on-dark font-semibold text-[34px] leading-[1.47] tracking-[-0.374px] mt-xxl mb-md scroll-mt-[80px]"
       {...props}
     />
   ),
   h3: (props: ComponentPropsWithoutRef<'h3'>) => (
     <h3
-      className="group relative text-ink dark:text-body-on-dark font-semibold text-[21px] leading-[1.19] tracking-[0.231px] mt-[32px] mb-[12px] scroll-mt-[80px]"
+      className="group relative text-ink dark:text-body-on-dark font-semibold text-[21px] leading-[1.19] tracking-[0.231px] mt-xl mb-sm scroll-mt-[80px]"
       {...props}
     />
   ),
   h4: (props: ComponentPropsWithoutRef<'h4'>) => (
     <h4
-      className="group relative text-ink dark:text-body-on-dark font-semibold text-[19px] leading-[1.3] tracking-[-0.374px] mt-[24px] mb-xs scroll-mt-[80px]"
+      className="group relative text-ink dark:text-body-on-dark font-semibold text-[19px] leading-[1.3] tracking-[-0.374px] mt-lg mb-xs scroll-mt-[80px]"
       {...props}
     />
   ),
@@ -47,43 +47,43 @@ export const mdxComponents: MDXComponents = {
   ),
   p: (props: ComponentPropsWithoutRef<'p'>) => (
     <p
-      className="text-body dark:text-body-on-dark text-[17px] leading-[1.47] tracking-[-0.374px] my-[17px]"
+      className="text-body dark:text-body-on-dark text-[17px] leading-[1.47] tracking-[-0.374px] my-md"
       {...props}
     />
   ),
   blockquote: (props: ComponentPropsWithoutRef<'blockquote'>) => (
     <blockquote
-      className="border-l-2 border-primary dark:border-primary-on-dark bg-canvas-parchment dark:bg-surface-tile-2 pl-[24px] pr-[17px] py-[12px] my-[24px] text-ink-muted-80 dark:text-body-muted"
+      className="border-l-2 border-primary dark:border-primary-on-dark bg-canvas-parchment dark:bg-surface-tile-2 pl-lg pr-md py-sm my-lg text-ink-muted-80 dark:text-body-muted"
       {...props}
     />
   ),
   hr: (props: ComponentPropsWithoutRef<'hr'>) => (
     <hr
-      className="border-0 border-t border-hairline dark:border-ink-muted-80 my-[48px]"
+      className="border-0 border-t border-hairline dark:border-ink-muted-80 my-xxl"
       {...props}
     />
   ),
   ul: (props: ComponentPropsWithoutRef<'ul'>) => (
     <ul
-      className="list-disc pl-[24px] my-[17px] marker:text-ink-muted-48"
+      className="list-disc pl-lg my-md marker:text-ink-muted-48"
       {...props}
     />
   ),
   ol: (props: ComponentPropsWithoutRef<'ol'>) => (
     <ol
-      className="list-decimal pl-[24px] my-[17px] marker:text-ink-muted-48"
+      className="list-decimal pl-lg my-md marker:text-ink-muted-48"
       {...props}
     />
   ),
   li: (props: ComponentPropsWithoutRef<'li'>) => (
     <li
-      className="text-body dark:text-body-on-dark text-[17px] leading-[1.47] my-[8px]"
+      className="text-body dark:text-body-on-dark text-[17px] leading-[1.47] my-xs"
       {...props}
     />
   ),
   pre: CodeBlock,
   table: (props: ComponentPropsWithoutRef<'table'>) => (
-    <div className="my-[24px] overflow-x-auto">
+    <div className="my-lg overflow-x-auto">
       <table
         className="w-full border-collapse text-[15px]"
         {...props}
@@ -105,13 +105,13 @@ export const mdxComponents: MDXComponents = {
   ),
   th: (props: ComponentPropsWithoutRef<'th'>) => (
     <th
-      className="px-[12px] py-[10px] text-left font-semibold text-ink dark:text-body-on-dark"
+      className="px-sm py-[10px] text-left font-semibold text-ink dark:text-body-on-dark"
       {...props}
     />
   ),
   td: (props: ComponentPropsWithoutRef<'td'>) => (
     <td
-      className="px-[12px] py-[10px] text-body dark:text-body-on-dark"
+      className="px-sm py-[10px] text-body dark:text-body-on-dark"
       {...props}
     />
   ),

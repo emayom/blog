@@ -9,7 +9,7 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-hairline bg-canvas/72 backdrop-blur-[20px] backdrop-saturate-[180%] dark:border-ink-muted-80 dark:bg-surface-tile-1/72">
-      <div className="mx-auto flex h-[44px] max-w-5xl items-center justify-between px-4 sm:px-6">
+      <div className="mx-auto flex h-[44px] max-w-4xl items-center justify-between px-6">
         <Link
           href="/"
           className="flex items-center gap-2 text-base font-semibold text-ink dark:text-body-on-dark"

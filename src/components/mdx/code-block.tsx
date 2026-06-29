@@ -16,7 +16,7 @@ export function CodeBlock({ children, ...props }: ComponentPropsWithoutRef<'pre'
   const codeText = Children.toArray(children).map(extractText).join('')
 
   return (
-    <div className="relative my-[24px]">
+    <div className="relative my-lg">
       <CopyButton code={codeText} />
       <pre {...props}>{children}</pre>
     </div>

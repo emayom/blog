@@ -82,8 +82,7 @@ export function MobileMenu({ items, social }: MobileMenuProps) {
         <div className="fixed inset-0 z-50 md:hidden">
           <div
             onClick={() => setOpen(false)}
-            style={{ backgroundColor: 'rgba(0,0,0,0.32)' }}
-            className="absolute inset-0"
+            className="absolute inset-0 bg-black/[0.32]"
             aria-hidden="true"
           />
           <div

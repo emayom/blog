@@ -13,7 +13,7 @@ export const metadata: Metadata = buildMetadata({
 
 export default function AboutPage() {
   return (
-    <main className="mx-auto max-w-[680px] px-6 py-12">
+    <main className="mx-auto max-w-4xl px-6 py-12">
       <div className="grid grid-cols-1 items-center gap-8 sm:grid-cols-[160px_1fr]">
         <div className="relative size-[150px]">
           <div className="absolute inset-0 overflow-hidden rounded-full border border-hairline bg-canvas-parchment dark:border-ink-muted-80 dark:bg-surface-tile-2">
@@ -36,7 +36,7 @@ export default function AboutPage() {
           <h1 className="mb-1 font-display text-[28px] font-semibold leading-[1.14] text-ink dark:text-body-on-dark">
             {siteConfig.name}
           </h1>
-          <p className="mb-[17px] text-[17px] text-ink-muted-48 dark:text-body-muted">
+          <p className="mb-md text-[17px] text-ink-muted-48 dark:text-body-muted">
             배우고 기록하는 개발자입니다.
           </p>
 
@@ -61,7 +61,7 @@ export default function AboutPage() {
       </div>
 
       <div className="mt-8 text-[17px] leading-[1.47] text-ink-muted-80 dark:text-body-muted">
-        <p className="mb-[17px]">
+        <p className="mb-md">
           안녕하세요. 배운 것과 만든 것을 글로 정리하며 천천히 쌓아가는 것을 좋아합니다.
         </p>
         <p>
