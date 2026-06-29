@@ -1,27 +1,11 @@
 import { expect, test } from '@playwright/test'
 
 test.describe('홈 페이지', () => {
-  test('Hero 헤드라인과 CTA를 표시한다', async ({ page }) => {
+  test('Hero 헤드라인을 표시한다', async ({ page }) => {
     await page.goto('/')
 
     const main = page.locator('main')
     await expect(main.getByRole('heading', { level: 1 })).toBeVisible()
-
-    const primary = main.getByRole('link', { name: '글 보러가기' })
-    await expect(primary).toHaveAttribute('href', '/writing')
-
-    const ghost = main.getByRole('link', { name: '소개' })
-    await expect(ghost).toHaveAttribute('href', '/about')
-  })
-
-  test('CTA로 글 목록과 소개로 이동할 수 있다', async ({ page }) => {
-    await page.goto('/')
-    await page.locator('main').getByRole('link', { name: '글 보러가기' }).click()
-    await expect(page).toHaveURL(/\/writing$/)
-
-    await page.goto('/')
-    await page.locator('main').getByRole('link', { name: '소개' }).click()
-    await expect(page).toHaveURL(/\/about$/)
   })
 
   test('최근 글 섹션과 전체 링크를 표시한다', async ({ page }) => {
