@@ -9,6 +9,7 @@ function makePost(overrides: Partial<PostMeta> = {}): PostMeta {
     date: '2026-01-15',
     tags: ['react', 'nextjs'],
     draft: false,
+    featured: false,
     description: '설명',
     thumbnail: '',
     readingTime: 3,

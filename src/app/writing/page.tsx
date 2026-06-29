@@ -4,6 +4,7 @@ import { getPostMetaList } from '@/lib/mdx'
 import { getTagCounts } from '@/lib/tags'
 import { buildMetadata } from '@/lib/seo'
 import { PostList } from '@/components/writing/post-list'
+import { FeaturedPosts } from '@/components/writing/featured-posts'
 import { SearchProvider } from '@/components/search/search-provider'
 import { SearchTrigger } from '@/components/search/search-trigger'
 
@@ -16,6 +17,7 @@ export const metadata: Metadata = buildMetadata({
 export default function WritingPage() {
   const posts = getPostMetaList()
   const tags = getTagCounts(posts)
+  const featured = posts.filter(p => p.featured)
 
   return (
     <SearchProvider posts={posts}>
@@ -37,6 +39,7 @@ export default function WritingPage() {
           배우고 기록한 것들을 모았습니다.
         </p>
 
+        <FeaturedPosts posts={featured} />
         <PostList posts={posts} tags={tags} />
       </main>
     </SearchProvider>

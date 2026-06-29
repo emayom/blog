@@ -39,6 +39,7 @@ function normalizeFrontmatter(input: Record<string, unknown> | PostFrontmatter):
     date: typeof raw.date === 'string' ? raw.date : '',
     tags: Array.isArray(raw.tags) ? raw.tags.filter((t): t is string => typeof t === 'string') : [],
     draft: raw.draft === true,
+    featured: raw.featured === true,
     description: typeof raw.description === 'string' ? raw.description : '',
     thumbnail: typeof raw.thumbnail === 'string' ? raw.thumbnail : '',
     series: typeof raw.series === 'string' && raw.series !== '' ? raw.series : undefined,

@@ -14,6 +14,7 @@ function meta(
     date,
     tags: [],
     draft: false,
+    featured: false,
     description: '',
     thumbnail: '',
     readingTime: 1,

@@ -9,6 +9,7 @@ const post: PostMeta = {
   date: '2026-06-18',
   tags: ['Next.js', 'MDX'],
   draft: false,
+  featured: false,
   description: '첫 글입니다.',
   thumbnail: '',
   readingTime: 3,

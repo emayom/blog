@@ -25,14 +25,16 @@ function frontmatter(opts: {
   date: string
   tags?: string
   draft?: boolean
+  featured?: boolean
   body?: string
 }) {
+  const featuredLine = opts.featured === undefined ? '' : `featured: ${opts.featured}\n`
   return `---
 title: "${opts.title ?? 'Title'}"
 date: "${opts.date}"
 tags: [${opts.tags ?? '"a"'}]
 draft: ${opts.draft ?? false}
-description: "desc"
+${featuredLine}description: "desc"
 thumbnail: ""
 ---
 
@@ -92,6 +94,26 @@ describe('getPostMetaList — 정렬 및 정규화', () => {
     const [meta] = getPostMetaList()
     expect(meta.tags).toEqual(['Next.js', 'MDX'])
     expect(meta.draft).toBe(false)
+  })
+
+  it('featured: true를 boolean true로 정규화한다', async () => {
+    vi.stubEnv('NODE_ENV', 'development')
+    setFiles({
+      'a.mdx': frontmatter({ date: '2026-01-01', featured: true }),
+    })
+    const { getPostMetaList } = await loadMdx()
+    const [meta] = getPostMetaList()
+    expect(meta.featured).toBe(true)
+  })
+
+  it('featured 미존재 시 false로 정규화한다', async () => {
+    vi.stubEnv('NODE_ENV', 'development')
+    setFiles({
+      'a.mdx': frontmatter({ date: '2026-01-01' }),
+    })
+    const { getPostMetaList } = await loadMdx()
+    const [meta] = getPostMetaList()
+    expect(meta.featured).toBe(false)
   })
 
   it('series·seriesOrder 미존재 시 undefined로 정규화한다', async () => {

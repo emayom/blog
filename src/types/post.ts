@@ -11,6 +11,7 @@ export interface PostFrontmatter {
   date: string
   tags: string[]
   draft: boolean
+  featured: boolean
   description: string
   thumbnail: string
   series?: string
