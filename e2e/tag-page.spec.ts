@@ -17,10 +17,11 @@ test.describe('태그 페이지', () => {
     await expect(breadcrumb.getByRole('link', { name: '글' })).toHaveAttribute('href', '/writing')
   })
 
-  test('← 모든 글 버튼을 클릭하면 /writing으로 이동한다', async ({ page }) => {
+  test('브레드크럼 글 링크를 클릭하면 /writing으로 이동한다', async ({ page }) => {
     await page.goto('/tag/javascript')
 
-    await page.getByRole('link', { name: '← 모든 글' }).click()
+    const breadcrumb = page.getByRole('navigation', { name: 'breadcrumb' })
+    await breadcrumb.getByRole('link', { name: '글' }).click()
     await expect(page).toHaveURL(/\/writing$/)
   })
 
