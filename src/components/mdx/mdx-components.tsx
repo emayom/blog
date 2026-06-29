@@ -1,23 +1,47 @@
 import type { ComponentPropsWithoutRef } from 'react'
 import type { MDXComponents } from 'mdx/types'
 import { CodeBlock } from '@/components/mdx/code-block'
+import { HeadingAnchor } from '@/components/mdx/heading-anchor'
 
 export const mdxComponents: MDXComponents = {
-  a: (props: ComponentPropsWithoutRef<'a'>) => (
-    <a
-      className="text-primary underline underline-offset-2 decoration-1 hover:decoration-2 dark:text-primary-on-dark"
-      {...props}
-    />
-  ),
+  a: ({ className, ...props }: ComponentPropsWithoutRef<'a'>) => {
+    if (className?.includes('heading-anchor')) {
+      return <HeadingAnchor href={props.href} {...props} />
+    }
+    return (
+      <a
+        className="text-primary underline underline-offset-2 decoration-1 hover:decoration-2 dark:text-primary-on-dark"
+        {...props}
+      />
+    )
+  },
   h2: (props: ComponentPropsWithoutRef<'h2'>) => (
     <h2
-      className="text-ink dark:text-body-on-dark font-semibold text-[34px] leading-[1.47] tracking-[-0.374px] mt-[48px] mb-[17px] scroll-mt-[80px]"
+      className="group relative text-ink dark:text-body-on-dark font-semibold text-[34px] leading-[1.47] tracking-[-0.374px] mt-[48px] mb-md scroll-mt-[80px]"
       {...props}
     />
   ),
   h3: (props: ComponentPropsWithoutRef<'h3'>) => (
     <h3
-      className="text-ink dark:text-body-on-dark font-semibold text-[21px] leading-[1.19] tracking-[0.231px] mt-[32px] mb-[12px] scroll-mt-[80px]"
+      className="group relative text-ink dark:text-body-on-dark font-semibold text-[21px] leading-[1.19] tracking-[0.231px] mt-[32px] mb-[12px] scroll-mt-[80px]"
+      {...props}
+    />
+  ),
+  h4: (props: ComponentPropsWithoutRef<'h4'>) => (
+    <h4
+      className="group relative text-ink dark:text-body-on-dark font-semibold text-[19px] leading-[1.3] tracking-[-0.374px] mt-[24px] mb-xs scroll-mt-[80px]"
+      {...props}
+    />
+  ),
+  h5: (props: ComponentPropsWithoutRef<'h5'>) => (
+    <h5
+      className="group relative text-ink dark:text-body-on-dark font-semibold text-[17px] leading-[1.24] tracking-[-0.374px] mt-5 mb-xs scroll-mt-[80px]"
+      {...props}
+    />
+  ),
+  h6: (props: ComponentPropsWithoutRef<'h6'>) => (
+    <h6
+      className="group relative text-ink-muted-80 dark:text-body-muted font-semibold text-[15px] leading-[1.33] tracking-[-0.224px] mt-4 mb-xs scroll-mt-[80px]"
       {...props}
     />
   ),
