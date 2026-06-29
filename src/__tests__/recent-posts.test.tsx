@@ -10,6 +10,7 @@ function meta(slug: string): PostMeta {
     date: '2026-06-18',
     tags: [],
     draft: false,
+    featured: false,
     description: '',
     thumbnail: '',
     readingTime: 1,

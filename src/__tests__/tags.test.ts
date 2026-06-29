@@ -9,6 +9,7 @@ function meta(slug: string, tags: string[]): PostMeta {
     date: '2026-01-01',
     tags,
     draft: false,
+    featured: false,
     description: '',
     thumbnail: '',
     readingTime: 1,

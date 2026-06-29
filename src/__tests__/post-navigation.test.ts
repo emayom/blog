@@ -9,6 +9,7 @@ function meta(slug: string, date: string, tags: string[] = []): PostMeta {
     date,
     tags,
     draft: false,
+    featured: false,
     description: '',
     thumbnail: '',
     readingTime: 1,
