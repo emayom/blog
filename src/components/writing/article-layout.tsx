@@ -24,9 +24,9 @@ export function ArticleLayout({ post, adjacent, related, series }: ArticleLayout
     <div className="mx-auto grid max-w-[1000px] grid-cols-1 gap-8 px-6 py-12 lg:grid-cols-[1fr_260px] xl:gap-8">
       <article className="min-w-0 max-w-[680px]">
         <nav aria-label="breadcrumb" className="mb-6 text-xs tracking-[-0.12px] text-ink-muted-48">
-          <Link href="/" className="text-primary dark:text-primary-on-dark">홈</Link>
+          <Link href="/" className="text-primary hover:underline dark:text-primary-on-dark">홈</Link>
           <span aria-hidden="true"> / </span>
-          <Link href="/writing" className="text-primary dark:text-primary-on-dark">글</Link>
+          <Link href="/writing" className="text-primary hover:underline dark:text-primary-on-dark">글</Link>
           <span aria-hidden="true"> / </span>
           <span className="max-w-[40ch] truncate">{post.title}</span>
         </nav>
