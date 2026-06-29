@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { formatDate } from '@/lib/format-date'
+import { Heading } from '@/components/ui/heading'
 import type { PostMeta } from '@/types/post'
 
 interface FeaturedPostsProps {
@@ -12,9 +13,7 @@ export function FeaturedPosts({ posts }: FeaturedPostsProps) {
 
   return (
     <section className="mb-7">
-      <h2 className="mb-6 font-display text-[21px] font-semibold leading-[1.19] tracking-[0.231px] text-ink dark:text-body-on-dark">
-        Featured Posts
-      </h2>
+      <Heading size="sm" className="mb-6">Featured Posts</Heading>
       <ul className="grid grid-cols-1 gap-3.5 sm:grid-cols-3">
         {posts.map(post => (
           <li key={post.slug}>

@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { Heading } from '@/components/ui/heading'
 import type { SeriesNavigation as SeriesNavigationData } from '@/types/series-navigation'
 
 interface SeriesNavigationProps {
@@ -19,13 +20,13 @@ export function SeriesNavigation({ series }: SeriesNavigationProps) {
       <div className="my-12 h-px bg-hairline dark:bg-ink-muted-80" />
 
       <section aria-label="시리즈">
-        <h2 className="text-[28px] font-semibold leading-[1.1] tracking-[-0.2px]">
-          <span className="text-ink dark:text-body-on-dark">{series.name}</span>
+        <Heading size="md">
+          {series.name}
           <span aria-hidden="true"> · </span>
           <span className="font-normal text-ink-muted-48 dark:text-body-muted">
             {`${series.total}편 중 ${series.currentPosition}번째`}
           </span>
-        </h2>
+        </Heading>
 
         <ol className="mt-6 list-none space-y-2.5">
           {series.items.map(item => (

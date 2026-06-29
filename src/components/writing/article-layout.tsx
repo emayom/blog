@@ -8,6 +8,7 @@ import { RelatedPosts } from '@/components/writing/related-posts'
 import { SeriesNavigation } from '@/components/writing/series-navigation'
 import { ShareButton } from '@/components/writing/share-button'
 import { TableOfContents } from '@/components/writing/table-of-contents'
+import { Heading } from '@/components/ui/heading'
 import type { Post, PostMeta } from '@/types/post'
 import type { AdjacentPosts } from '@/types/post-navigation'
 import type { SeriesNavigation as SeriesNavigationData } from '@/types/series-navigation'
@@ -31,9 +32,9 @@ export function ArticleLayout({ post, adjacent, related, series }: ArticleLayout
           <span className="max-w-[40ch] truncate">{post.title}</span>
         </nav>
 
-        <h1 className="mb-3.5 font-display text-[40px] font-semibold leading-[1.1] tracking-[-0.374px] text-ink dark:text-body-on-dark">
+        <Heading as="h1" size="xl" className="mb-3.5">
           {post.title}
-        </h1>
+        </Heading>
 
         <p className="mb-4 text-sm tracking-[-0.224px] text-ink-muted-48 dark:text-body-muted">
           <time dateTime={post.date}>{formatDate(post.date)}</time>
