@@ -22,7 +22,7 @@ interface ArticleLayoutProps {
 
 export function ArticleLayout({ post, adjacent, related, series }: ArticleLayoutProps) {
   return (
-    <div className="mx-auto grid max-w-[1000px] grid-cols-1 gap-8 px-6 py-12 lg:grid-cols-[1fr_260px] xl:gap-8">
+    <div className="mx-auto grid max-w-4xl grid-cols-1 gap-8 px-6 py-12 lg:grid-cols-[1fr_260px] xl:gap-8">
       <article className="min-w-0 max-w-[680px]">
         <nav aria-label="breadcrumb" className="mb-6 text-xs tracking-[-0.12px] text-ink-muted-48">
           <Link href="/" className="text-primary hover:underline dark:text-primary-on-dark">홈</Link>
@@ -49,7 +49,7 @@ export function ArticleLayout({ post, adjacent, related, series }: ArticleLayout
           />
         </div>
 
-        <div className="text-[17px] leading-[1.47] tracking-[-0.374px] text-ink-muted-80 dark:text-body-muted [&_p]:mb-[17px]">
+        <div className="text-[17px] leading-[1.47] tracking-[-0.374px] text-ink-muted-80 dark:text-body-muted [&_p]:mb-md">
           {post.content}
         </div>
 

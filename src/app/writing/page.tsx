@@ -22,7 +22,7 @@ export default function WritingPage() {
 
   return (
     <SearchProvider posts={posts}>
-      <main className="mx-auto max-w-3xl px-6 py-12">
+      <main className="mx-auto max-w-4xl px-6 py-12">
         <nav className="mb-4 text-xs tracking-[-0.12px] text-ink-muted-48">
           <Link href="/" className="text-primary dark:text-primary-on-dark">
             홈
@@ -31,7 +31,7 @@ export default function WritingPage() {
         </nav>
 
         <div className="mb-2 flex items-center justify-between gap-4">
-          <Heading as="h1" size="xl">글</Heading>
+          <Heading as="h1" size="md">글</Heading>
           <SearchTrigger />
         </div>
         <p className="mb-7 text-[17px] text-ink-muted-80 dark:text-body-muted">

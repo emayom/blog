@@ -9,9 +9,9 @@ export function FolderCard({ year, count }: FolderCardProps) {
   return (
     <Link
       href={`/archive/${year}`}
-      className="group flex flex-col items-center gap-2.5 rounded-[11px] px-3 pb-4 pt-5 transition-colors duration-300 ease-out hover:bg-canvas-parchment focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-focus dark:hover:bg-surface-tile-2"
+      className="group flex flex-col items-center gap-2.5 rounded-[11px] pt-5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-focus"
     >
-      <span aria-hidden="true" className="relative h-16 w-20 shrink-0">
+      <span aria-hidden="true" className="relative h-[51px] w-16 shrink-0">
         {/* 뒷판 — macOS 폴더 실루엣(탭 포함) */}
         <svg
           viewBox="0 0 242.514 193.914"
@@ -27,19 +27,19 @@ export function FolderCard({ year, count }: FolderCardProps) {
         </svg>
 
         {/* 종이 시트 3장 — hover 시 솟아 부채처럼 펼쳐짐 */}
-        <span className="absolute bottom-2 left-1/2 z-10 h-11 w-12 origin-bottom -translate-x-1/2 rounded-sm border border-hairline bg-white shadow-sm transition-transform duration-300 ease-out motion-safe:group-hover:-translate-y-5" />
-        <span className="absolute bottom-2 left-1/2 z-10 h-10 w-11 origin-bottom -translate-x-1/2 rounded-sm border border-hairline bg-white shadow-sm transition-transform duration-300 ease-out motion-safe:group-hover:-translate-y-4 motion-safe:group-hover:-rotate-[9deg] motion-safe:group-hover:translate-x-[calc(-50%_-_var(--spacing)*3)]" />
-        <span className="absolute bottom-2 left-1/2 z-10 h-10 w-11 origin-bottom -translate-x-1/2 rounded-sm border border-hairline bg-white shadow-sm transition-transform duration-300 ease-out motion-safe:group-hover:-translate-y-4 motion-safe:group-hover:rotate-[9deg] motion-safe:group-hover:translate-x-[calc(-50%_+_var(--spacing)*3)]" />
+        <span className="absolute bottom-[6px] left-1/2 z-10 h-[35px] w-[38px] origin-bottom -translate-x-1/2 rounded-sm border border-hairline bg-white shadow-sm transition-transform duration-300 ease-out motion-safe:group-hover:-translate-y-4" />
+        <span className="absolute bottom-[6px] left-1/2 z-10 h-8 w-[35px] origin-bottom -translate-x-1/2 rounded-sm border border-hairline bg-white shadow-sm transition-transform duration-300 ease-out motion-safe:group-hover:-translate-y-[13px] motion-safe:group-hover:-rotate-[9deg] motion-safe:group-hover:translate-x-[calc(-50%_-_var(--spacing)*2.4)]" />
+        <span className="absolute bottom-[6px] left-1/2 z-10 h-8 w-[35px] origin-bottom -translate-x-1/2 rounded-sm border border-hairline bg-white shadow-sm transition-transform duration-300 ease-out motion-safe:group-hover:-translate-y-[13px] motion-safe:group-hover:rotate-[9deg] motion-safe:group-hover:translate-x-[calc(-50%_+_var(--spacing)*2.4)]" />
 
         {/* 앞 덮개 — hover 시 아래 기준점으로 앞으로 기울어짐 */}
         <span className="absolute inset-x-0 bottom-0 z-20 aspect-[243/170] origin-bottom border-[0.5px] border-white bg-primary-on-dark dark:border-[color-mix(in_srgb,var(--color-primary-on-dark),white_50%)] [background-image:linear-gradient(color-mix(in_srgb,var(--color-primary-on-dark),white_26%)_0%,var(--color-primary-on-dark)_100%)] [border-radius:9.87654%_/_14.1176%] [box-shadow:rgba(0,0,0,0.12)_0px_-1px_4px_0px] [transform:perspective(1200px)] transition-transform duration-300 ease-out will-change-transform motion-safe:group-hover:[transform:perspective(1200px)_rotateX(-30deg)]" />
       </span>
 
       <span className="text-center">
-        <span className="block text-[14px] font-semibold tracking-[-0.224px] text-ink dark:text-body-on-dark">
+        <span className="block text-xs font-semibold tracking-[-0.224px] text-ink dark:text-body-on-dark">
           {year}
         </span>
-        <span className="mt-0.5 block text-[12px] text-ink-muted-48 dark:text-body-muted">
+        <span className="mt-0.5 block text-xs text-ink-muted-48 dark:text-body-muted">
           {count}
           편
         </span>

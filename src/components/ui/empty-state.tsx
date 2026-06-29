@@ -2,7 +2,7 @@ import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '@/lib/cn'
 
 const iconBoxVariants = cva(
-  'mb-[17px] inline-flex size-14 items-center justify-center',
+  'mb-md inline-flex size-14 items-center justify-center',
   {
     variants: {
       variant: {
@@ -42,7 +42,7 @@ export function EmptyState({
       <span className={iconBoxVariants({ variant })} aria-hidden="true">
         {variant === 'error' ? <AlertIcon /> : <InboxIcon />}
       </span>
-      <p className="mb-[17px] text-[17px] text-ink-muted-80 dark:text-body-muted">
+      <p className="mb-md text-[17px] text-ink-muted-80 dark:text-body-muted">
         {title}
       </p>
       {action && (action.href

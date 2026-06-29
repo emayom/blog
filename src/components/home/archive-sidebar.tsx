@@ -10,12 +10,12 @@ export function ArchiveSidebar({ years }: ArchiveSidebarProps) {
   if (years.length === 0) return null
 
   return (
-    <aside className="flex flex-col gap-4">
-      <div className="flex items-baseline justify-between">
-        <Heading size="md">아카이브</Heading>
+    <aside className="flex flex-col gap-6">
+      <div className="flex items-center justify-between">
+        <Heading size="sm">아카이브</Heading>
         <Link
           href="/archive"
-          className="text-[17px] text-primary hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-focus dark:text-primary-on-dark"
+          className="text-sm text-primary hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-focus dark:text-primary-on-dark"
         >
           전체 →
         </Link>
@@ -24,16 +24,34 @@ export function ArchiveSidebar({ years }: ArchiveSidebarProps) {
         {years.map(({ year, count }) => (
           <li
             key={year}
-            className="flex items-baseline justify-between border-b border-divider-soft py-2.5 last:border-b-0 dark:border-ink-muted-80"
+            className="flex items-center justify-between gap-3 pb-5 last:pb-0 sm:pb-4"
           >
             <Link
               href={`/archive/${year}`}
-              className="text-[17px] text-ink hover:text-primary dark:text-body-on-dark dark:hover:text-primary-on-dark"
+              className="min-w-9 shrink-0 text-sm text-ink hover:text-primary dark:text-body-on-dark dark:hover:text-primary-on-dark"
             >
               {year}
             </Link>
-            <span className="text-sm text-ink-muted-48 dark:text-body-muted">
-              {`(${count})`}
+            <span className="group/bars relative flex flex-1 justify-end">
+              <span
+                className="flex flex-wrap justify-end gap-[1px]"
+                role="img"
+                aria-label={`${count}편`}
+              >
+                {Array.from({ length: count }).map((_, i) => (
+                  <span
+                    key={i}
+                    className="h-3 w-1 bg-primary/70 dark:bg-primary-on-dark/70"
+                  />
+                ))}
+              </span>
+              <span
+                role="tooltip"
+                className="pointer-events-none absolute bottom-full right-0 mb-1.5 whitespace-nowrap rounded bg-ink px-2 py-1 text-xs text-canvas opacity-0 transition-opacity duration-150 group-hover/bars:opacity-100 dark:bg-canvas dark:text-ink"
+              >
+                {count}
+                편
+              </span>
             </span>
           </li>
         ))}
