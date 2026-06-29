@@ -1,6 +1,7 @@
 import { PostCard } from '@/components/writing/post-card'
 import { TagFilter } from '@/components/writing/tag-filter'
 import { EmptyState } from '@/components/ui/empty-state'
+import { Heading } from '@/components/ui/heading'
 import type { PostMeta } from '@/types/post'
 import type { TagCount } from '@/types/tag'
 
@@ -12,6 +13,7 @@ interface PostListProps {
 export function PostList({ posts, tags }: PostListProps) {
   return (
     <div className="flex flex-col gap-7">
+      <Heading size="sm">전체 글</Heading>
       {tags.length > 0 && <TagFilter tags={tags} total={posts.length} />}
 
       {posts.length === 0
