@@ -20,19 +20,24 @@ const tagVariants = cva(
 )
 
 interface TagProps extends VariantProps<typeof tagVariants> {
-  href: string
   label: string
   count?: number
   className?: string
+  as?: 'span'
+  href?: string
 }
 
-export function Tag({ href, label, count, variant, size, className }: TagProps) {
-  return (
-    <Link href={href} className={cn(tagVariants({ variant, size }), className)}>
+export function Tag({ href, label, count, variant, size, className, as }: TagProps) {
+  const classes = cn(tagVariants({ variant, size }), className)
+  const children = (
+    <>
       {label}
       {count !== undefined && (
         <span className="text-ink-muted-48 dark:text-body-muted">{count}</span>
       )}
-    </Link>
+    </>
   )
+
+  if (as === 'span') return <span className={classes}>{children}</span>
+  return <Link href={href!} className={classes}>{children}</Link>
 }
