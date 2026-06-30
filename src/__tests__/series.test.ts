@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { getSeriesNavigation, sortSeriesPosts } from '@/lib/series'
+import { getSeriesNavigation, getSeriesSummaries, sortSeriesPosts, toSeriesSlug } from '@/lib/series'
 import type { PostMeta } from '@/types/post'
 
 function meta(
@@ -135,5 +135,87 @@ describe('getSeriesNavigation', () => {
     ]
     const nav = getSeriesNavigation(posts, 'a')
     expect(nav?.items.map(i => i.order)).toEqual([1, 2, 3])
+  })
+})
+
+describe('toSeriesSlug', () => {
+  it('소문자로 변환한다', () => {
+    expect(toSeriesSlug('Greedy')).toBe('greedy')
+  })
+
+  it('슬래시를 하이픈으로 바꾼다', () => {
+    expect(toSeriesSlug('DFS/BFS')).toBe('dfs-bfs')
+  })
+
+  it('공백을 하이픈으로 바꾼다', () => {
+    expect(toSeriesSlug('Shortest Path')).toBe('shortest-path')
+  })
+
+  it('한글 시리즈명의 공백만 하이픈으로 바꾼다', () => {
+    expect(toSeriesSlug('자바스크립트로 구현하는 자료구조')).toBe('자바스크립트로-구현하는-자료구조')
+  })
+})
+
+describe('getSeriesSummaries', () => {
+  it('2편 미만 시리즈는 제외한다', () => {
+    const posts = [
+      meta('a', '2026-01-01', 'Greedy', 1),
+      meta('b', '2026-01-02', 'Greedy', 2),
+      meta('solo', '2026-01-03', 'DP', 1),
+    ]
+    const summaries = getSeriesSummaries(posts)
+    expect(summaries.map(s => s.name)).toEqual(['Greedy'])
+  })
+
+  it('count·slug·latestDate를 정확히 집계한다', () => {
+    const posts = [
+      meta('a', '2026-01-01', 'DFS/BFS', 1),
+      meta('b', '2026-03-10', 'DFS/BFS', 2),
+      meta('c', '2026-02-05', 'DFS/BFS', 3),
+    ]
+    const summaries = getSeriesSummaries(posts)
+    expect(summaries).toHaveLength(1)
+    expect(summaries[0].name).toBe('DFS/BFS')
+    expect(summaries[0].slug).toBe('dfs-bfs')
+    expect(summaries[0].count).toBe(3)
+    expect(summaries[0].latestDate).toBe('2026-03-10')
+  })
+
+  it('latestDate 내림차순으로 정렬한다', () => {
+    const posts = [
+      meta('a1', '2026-01-01', 'A', 1),
+      meta('a2', '2026-01-05', 'A', 2),
+      meta('b1', '2026-02-01', 'B', 1),
+      meta('b2', '2026-03-01', 'B', 2),
+    ]
+    const summaries = getSeriesSummaries(posts)
+    expect(summaries.map(s => s.name)).toEqual(['B', 'A'])
+  })
+
+  it('latestDate 동점은 name 오름차순으로 정렬한다', () => {
+    const posts = [
+      meta('z1', '2026-01-01', 'Zebra', 1),
+      meta('z2', '2026-05-01', 'Zebra', 2),
+      meta('a1', '2026-02-01', 'Apple', 1),
+      meta('a2', '2026-05-01', 'Apple', 2),
+    ]
+    const summaries = getSeriesSummaries(posts)
+    expect(summaries.map(s => s.name)).toEqual(['Apple', 'Zebra'])
+  })
+
+  it('series 없는 글은 무시한다', () => {
+    const posts = [
+      meta('a', '2026-01-01', 'Greedy', 1),
+      meta('b', '2026-01-02', 'Greedy', 2),
+      meta('plain1', '2026-01-03'),
+      meta('plain2', '2026-01-04'),
+    ]
+    const summaries = getSeriesSummaries(posts)
+    expect(summaries).toHaveLength(1)
+    expect(summaries[0].name).toBe('Greedy')
+  })
+
+  it('빈 배열은 빈 결과를 반환한다', () => {
+    expect(getSeriesSummaries([])).toEqual([])
   })
 })
