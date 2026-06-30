@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>와이어프레임 — 시리즈</title>
+<link rel="stylesheet" href="wireframe.css">
+</head>
+<body>
+
+<nav class="toolbar">
+  <a href="index.html">← 인덱스</a>
+  <a href="list.html">글 목록</a>
+  <a href="series.html" class="active">시리즈</a>
+  <a href="detail.html">글 상세</a>
+</nav>
+
+<div class="frame">
+  <div class="frame-label">화면 — 시리즈 상세 (/series/[name])</div>
+
+  <header class="site">
+    <div class="logo"></div>
+    <nav class="site">
+      <a href="list.html" class="on">글</a>
+      <a href="notes.html">메모</a>
+      <a href="library.html">책장</a>
+      <a href="about.html">소개</a>
+      <span class="gh"></span>
+    </nav>
+  </header>
+
+  <div class="pad-narrow">
+
+    <!-- breadcrumb -->
+    <div class="breadcrumb">
+      <a href="home.html">홈</a>
+      <span class="sep">›</span>
+      <a href="list.html">글</a>
+      <span class="sep">›</span>
+      <span class="crumb-current">Greedy</span>
+    </div>
+
+    <!-- 시리즈 제목 + 편수 -->
+    <div style="margin-bottom:28px">
+      <div class="sec-title" style="font-size:26px; margin-bottom:8px">Greedy</div>
+      <div class="annot" style="color:var(--muted); font-size:13px">10편</div>
+    </div>
+
+    <!-- 시리즈 소개 (MDX) -->
+    <div style="background:#fff; border:1px solid var(--line); border-radius:8px; padding:22px 24px; margin-bottom:36px">
+      <div class="eyebrow" style="margin-bottom:14px">시리즈 소개</div>
+      <div class="line w90" style="margin-bottom:10px"></div>
+      <div class="line w80" style="margin-bottom:10px"></div>
+      <div class="line w90" style="margin-bottom:10px"></div>
+      <div class="line w60" style="margin-bottom:0"></div>
+      <div class="annot" style="margin-top:14px; color:#666; font-size:11px; font-style:italic">
+        src/content/series/greedy.mdx — MDX로 작성한 소개글 렌더링 영역
+      </div>
+    </div>
+
+    <!-- 글 목록 -->
+    <div class="sec-title" style="font-size:14px; color:var(--muted); margin-bottom:14px">글 목록</div>
+
+    <div class="rows">
+      <a class="post" href="detail.html" style="display:flex; align-items:baseline; gap:14px; text-decoration:none; color:inherit">
+        <span style="font-size:12px; color:var(--muted); flex:none; width:18px">1</span>
+        <div style="flex:1">
+          <div class="line w70" style="height:14px; margin-bottom:8px"></div>
+          <div class="annot" style="color:var(--muted)">2026.03.10 · 6분 읽기</div>
+        </div>
+      </a>
+      <a class="post" href="detail.html" style="display:flex; align-items:baseline; gap:14px; text-decoration:none; color:inherit">
+        <span style="font-size:12px; color:var(--muted); flex:none; width:18px">2</span>
+        <div style="flex:1">
+          <div class="line w60" style="height:14px; margin-bottom:8px"></div>
+          <div class="annot" style="color:var(--muted)">2026.03.18 · 5분 읽기</div>
+        </div>
+      </a>
+      <a class="post" href="detail.html" style="display:flex; align-items:baseline; gap:14px; text-decoration:none; color:inherit">
+        <span style="font-size:12px; color:var(--muted); flex:none; width:18px">3</span>
+        <div style="flex:1">
+          <div class="line w80" style="height:14px; margin-bottom:8px"></div>
+          <div class="annot" style="color:var(--muted)">2026.04.02 · 8분 읽기</div>
+        </div>
+      </a>
+      <a class="post" href="detail.html" style="display:flex; align-items:baseline; gap:14px; text-decoration:none; color:inherit">
+        <span style="font-size:12px; color:var(--muted); flex:none; width:18px">4</span>
+        <div style="flex:1">
+          <div class="line w55" style="height:14px; margin-bottom:8px"></div>
+          <div class="annot" style="color:var(--muted)">2026.04.15 · 4분 읽기</div>
+        </div>
+      </a>
+      <a class="post" href="detail.html" style="display:flex; align-items:baseline; gap:14px; text-decoration:none; color:inherit">
+        <span style="font-size:12px; color:var(--muted); flex:none; width:18px">5</span>
+        <div style="flex:1">
+          <div class="line w65" style="height:14px; margin-bottom:8px"></div>
+          <div class="annot" style="color:var(--muted)">2026.05.01 · 7분 읽기</div>
+        </div>
+      </a>
+    </div>
+
+  </div>
+
+  <footer class="site-footer">
+    <div class="ft-top">
+      <div class="ft-brand">
+        <div class="logo"></div>
+        <div class="line sm" style="width:170px; margin-top:14px"></div>
+      </div>
+      <div class="ft-cols">
+        <div class="ft-col">
+          <div class="ft-h">탐색</div>
+          <a href="list.html">글</a>
+          <a href="notes.html">메모</a>
+          <a href="library.html">책장</a>
+          <a href="about.html">소개</a>
+        </div>
+        <div class="ft-col">
+          <div class="ft-h">둘러보기</div>
+          <a href="tag.html">태그</a>
+          <a href="archive-index.html">아카이브</a>
+          <a href="archive.html">아카이브 연도</a>
+          <a href="#">RSS</a>
+        </div>
+        <div class="ft-col">
+          <div class="ft-h">연결</div>
+          <a href="#">GitHub</a>
+          <a href="#">LinkedIn</a>
+          <a href="#">Email</a>
+        </div>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <span>© 2026. 와이어프레임</span>
+      <span>Seoul, Korea</span>
+    </div>
+  </footer>
+</div>
+
+</body>
+</html>
