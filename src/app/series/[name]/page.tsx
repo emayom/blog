@@ -54,7 +54,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function SeriesDetailPage({ params }: Props) {
-  const { name: slug } = await params
+  const { name: rawSlug } = await params
+  const slug = decodeURIComponent(rawSlug)
   const name = findSeriesName(slug)
   if (!name) notFound()
 
@@ -82,13 +83,13 @@ export default async function SeriesDetailPage({ params }: Props) {
           <p className="mb-3.5 text-xs font-semibold uppercase tracking-[0.4px] text-ink-muted-48 dark:text-body-muted">
             시리즈 소개
           </p>
-          <div className="text-[17px] leading-[1.47] tracking-[-0.374px] text-ink-muted-80 dark:text-body-muted">
+          <div className="text-md leading-[1.47] tracking-[-0.374px] text-ink-muted-80 dark:text-body-muted">
             {intro}
           </div>
         </div>
       )}
 
-      <Heading size="sm" className="mb-[18px]">글 목록</Heading>
+      <Heading size="sm" className="mb-4.5">글 목록</Heading>
       <ol className="list-none space-y-5">
         {seriesPosts.map((post, index) => (
           <li key={post.slug}>
@@ -100,7 +101,7 @@ export default async function SeriesDetailPage({ params }: Props) {
                 {index + 1}
               </span>
               <span className="flex-1">
-                <span className="block text-[17px] font-semibold leading-[1.24] tracking-[-0.374px] text-ink group-hover:text-primary dark:text-body-on-dark dark:group-hover:text-primary-on-dark">
+                <span className="block text-md font-semibold leading-[1.24] tracking-[-0.374px] text-ink group-hover:text-primary dark:text-body-on-dark dark:group-hover:text-primary-on-dark">
                   {post.title}
                 </span>
                 <span className="mt-1.5 block text-sm text-ink-muted-48 dark:text-body-muted">
