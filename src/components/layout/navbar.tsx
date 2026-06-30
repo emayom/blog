@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { mainNav, siteConfig, social } from '@/config/site'
+import { mainNav, siteConfig } from '@/config/site'
 import { NavLink } from '@/components/layout/nav-link'
 import { ThemeToggle } from '@/components/ui/theme-toggle'
 import { MobileMenu } from '@/components/layout/mobile-menu'
@@ -22,7 +22,7 @@ export function Navbar() {
             <NavLink
               key={item.href}
               href={item.href}
-              className="text-xs text-ink-muted-48 transition-colors hover:text-ink dark:text-body-muted dark:hover:text-body-on-dark"
+              className="text-sm text-ink-muted-48 transition-colors hover:text-ink dark:text-body-muted dark:hover:text-body-on-dark"
               activeClassName="font-semibold text-ink dark:text-body-on-dark"
             >
               {item.label}
@@ -34,7 +34,7 @@ export function Navbar() {
           <ThemeToggle />
 
           <div className="md:hidden">
-            <MobileMenu items={mainNav} social={social} />
+            <MobileMenu items={mainNav} />
           </div>
         </div>
       </div>
