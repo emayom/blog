@@ -1,0 +1,58 @@
+---
+title: "커스텀 MDX 컴포넌트 데모"
+date: "2026-06-30"
+tags: ["mdx", "demo"]
+draft: true
+description: "Callout·Steps·Collapse·FileTree·CodeGroup·Kbd 동작을 확인하는 dev 전용 픽스처입니다."
+thumbnail: ""
+---
+
+`draft: true` · `_` prefix 픽스처. prod 빌드에서 발행되지 않습니다.
+
+## Callout
+
+<Callout>기본값은 info 타입입니다.</Callout>
+
+<Callout type="warning" title="주의하세요">되돌릴 수 없는 작업입니다.</Callout>
+
+<Callout type="tip">단축키 <Kbd>⌘</Kbd> <Kbd>K</Kbd> 로 검색을 열 수 있습니다.</Callout>
+
+## Steps
+
+<Steps>
+  <Step title="저장소 클론">레포를 클론합니다.</Step>
+  <Step title="의존성 설치">`npm install` 을 실행합니다.</Step>
+  <Step title="개발 서버 실행">`npm run dev` 로 서버를 띄웁니다.</Step>
+</Steps>
+
+## Collapse
+
+<Collapse title="자세히 보기">접혀 있던 내용이 펼쳐집니다.</Collapse>
+
+<Collapse title="처음부터 열림" open>open prop 으로 기본 펼침 상태가 됩니다.</Collapse>
+
+## FileTree
+
+<FileTree>
+  <FileTree.Folder name="src" defaultOpen>
+    <FileTree.Folder name="components">
+      <FileTree.File name="callout.tsx" />
+    </FileTree.Folder>
+    <FileTree.File name="index.ts" comment="진입점" />
+  </FileTree.Folder>
+  <FileTree.File name="package.json" />
+</FileTree>
+
+## CodeGroup
+
+<CodeGroup labels={["npm", "pnpm"]}>
+
+```bash
+npm install
+```
+
+```bash
+pnpm install
+```
+
+</CodeGroup>
