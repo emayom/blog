@@ -7,6 +7,7 @@ import { JsonLd } from '@/components/seo/json-ld'
 import { ThemeProvider } from '@/components/theme-provider'
 import { Navbar } from '@/components/layout/navbar'
 import { Footer } from '@/components/layout/footer'
+import { GoogleAnalytics } from '@/components/analytics/google-analytics'
 import './globals.css'
 
 const geistSans = Geist({
@@ -58,6 +59,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <GoogleAnalytics />
         <JsonLd data={buildWebSiteJsonLd()} />
         <JsonLd data={buildPersonJsonLd({ includeContext: true })} />
         <ThemeProvider>
