@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { getPostMetaList } from '@/lib/mdx'
 import { getTagCounts } from '@/lib/tags'
 import { buildMetadata } from '@/lib/seo'
-import { getSeriesSummaries } from '@/lib/series'
+import { getSeriesBrowseItems } from '@/lib/series'
 import { PostList } from '@/components/writing/post-list'
 import { FeaturedPosts } from '@/components/writing/featured-posts'
 import { SeriesSection } from '@/components/writing/series-section'
@@ -21,7 +21,7 @@ export default function WritingPage() {
   const posts = getPostMetaList()
   const tags = getTagCounts(posts)
   const featured = posts.filter(p => p.featured)
-  const series = getSeriesSummaries(posts)
+  const series = getSeriesBrowseItems(posts)
 
   return (
     <SearchProvider posts={posts}>
