@@ -2,6 +2,12 @@ import type { ComponentPropsWithoutRef } from 'react'
 import type { MDXComponents } from 'mdx/types'
 import { CodeBlock } from '@/components/mdx/code-block'
 import { HeadingAnchor } from '@/components/mdx/heading-anchor'
+import { Callout } from '@/components/mdx/callout'
+import { CodeGroup } from '@/components/mdx/code-group'
+import { Collapse } from '@/components/mdx/collapse'
+import { FileTree } from '@/components/mdx/file-tree'
+import { Step, Steps } from '@/components/mdx/steps'
+import { Kbd } from '@/components/ui/kbd'
 
 export const mdxComponents: MDXComponents = {
   a: ({ className, ...props }: ComponentPropsWithoutRef<'a'>) => {
@@ -115,4 +121,11 @@ export const mdxComponents: MDXComponents = {
       {...props}
     />
   ),
+  Callout,
+  CodeGroup,
+  Collapse,
+  FileTree,
+  Steps,
+  Step,
+  Kbd,
 }
