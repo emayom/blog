@@ -33,10 +33,10 @@ export default function AboutPage() {
         </div>
 
         <div>
-          <h1 className="mb-1 font-display text-[28px] font-semibold leading-[1.14] text-ink dark:text-body-on-dark">
+          <h1 className="mb-1.5 font-display text-3xl font-semibold leading-tight tracking-tight text-ink dark:text-body-on-dark">
             {siteConfig.name}
           </h1>
-          <p className="mb-md text-[17px] text-ink-muted-48 dark:text-body-muted">
+          <p className="mb-md text-lg leading-relaxed tracking-tight text-ink-muted-48 dark:text-body-muted">
             배우고 기록하는 개발자입니다.
           </p>
 
@@ -60,13 +60,21 @@ export default function AboutPage() {
         </div>
       </div>
 
-      <div className="mt-8 text-[17px] leading-[1.47] text-ink-muted-80 dark:text-body-muted">
-        <p className="mb-md">
-          안녕하세요. 배운 것과 만든 것을 글로 정리하며 천천히 쌓아가는 것을 좋아합니다.
-        </p>
-        <p>
-          이곳에는 개발하면서 마주한 결정과 그 배경, 그리고 읽고 생각한 것들을 기록합니다.
-        </p>
+      <div className="mt-10 text-base leading-relaxed tracking-tight text-ink-muted-80 dark:text-body-muted">
+        <div className="space-y-1">
+          <p>
+            안녕하세요. 배우고 만든 것을 글로 정리하면서 제 나름의 관점을 만들어가는 것을 좋아합니다.
+          </p>
+          <p>
+            무엇이든 ‘왜?’에서 출발해, 이해한 것을 제 언어로 재구성하고 그 위에 생각들을 쌓아갑니다.
+          </p>
+        </div>
+
+        <div className="space-y-1 mt-6">
+          <p>
+            산책을 아주 좋아해서, 막힌 생각은 대체로 걸으면서 풉니다.
+          </p>
+        </div>
       </div>
     </main>
   )
