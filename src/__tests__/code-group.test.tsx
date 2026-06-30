@@ -5,7 +5,7 @@ import { CodeGroup } from '@/components/mdx/code-group'
 
 function setup() {
   return render(
-    <CodeGroup labels={['npm', 'pnpm']}>
+    <CodeGroup labels="npm, pnpm">
       <pre>npm install</pre>
       <pre>pnpm install</pre>
     </CodeGroup>,

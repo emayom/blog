@@ -88,6 +88,22 @@ body {
 
 /* ── MDX 코드 블록 (rehype-pretty-code, keepBackground:false) ── */
 
+/* CodeGroup 패널 내부 — CodeBlock의 CopyButton 숨김, 헤더 버튼으로 대체 */
+[data-code-group-panel] .relative > button { display: none; }
+
+/* CodeGroup 패널 내부 pre — 컨테이너가 border/radius를 담당 */
+[data-code-group-panel] pre[data-theme],
+[data-code-group-panel] pre:has(code[data-language]) {
+  border: none;
+  border-top: 1px solid var(--color-hairline);
+  border-radius: 0;
+  margin-block: 0;
+}
+.dark [data-code-group-panel] pre[data-theme],
+.dark [data-code-group-panel] pre:has(code[data-language]) {
+  border-top-color: var(--color-ink-muted-80);
+}
+
 pre[data-theme],
 pre:has(code[data-language]) {
   background-color: var(--color-canvas-parchment);

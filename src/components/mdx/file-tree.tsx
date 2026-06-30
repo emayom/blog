@@ -42,7 +42,7 @@ function Folder({ name, defaultOpen = false, children }: FolderProps) {
           {name}
         </summary>
         {children && (
-          <ul className="ml-[7px] border-l border-hairline pl-4 dark:border-ink-muted-80">
+          <ul className="ml-[7px] mt-1 space-y-1 border-l border-hairline pl-4 dark:border-ink-muted-80">
             {children}
           </ul>
         )}
@@ -66,7 +66,7 @@ function FileItem({ name, comment }: FileItemProps) {
 function FileTreeRoot({ children }: FileTreeProps) {
   return (
     <div className="my-lg rounded-lg bg-canvas-parchment p-4 dark:bg-surface-tile-3">
-      <ul className="space-y-0.5">{children}</ul>
+      <ul className="space-y-2">{children}</ul>
     </div>
   )
 }
