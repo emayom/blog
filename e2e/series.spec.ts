@@ -1,19 +1,19 @@
 import { expect, test } from '@playwright/test'
 
-test.describe('시리즈 섹션 (글 목록)', () => {
-  test('글 목록 하단에 시리즈 섹션이 렌더된다', async ({ page }) => {
+test.describe('엮은 글 섹션 (글 목록)', () => {
+  test('글 목록 하단에 엮은 글 섹션이 렌더된다', async ({ page }) => {
     await page.goto('/writing')
 
-    const section = page.getByRole('region', { name: '시리즈' })
-    await expect(section.getByRole('heading', { name: '시리즈' })).toBeVisible()
-    await expect(section.getByRole('link', { name: /Greedy/ })).toBeVisible()
+    const section = page.getByRole('region', { name: '엮은 글' })
+    await expect(section.getByRole('heading', { name: '엮은 글' })).toBeVisible()
+    await expect(section.getByRole('link', { name: /Problem Solving/ })).toBeVisible()
   })
 
-  test('시리즈 카드를 클릭하면 상세 페이지로 이동한다', async ({ page }) => {
+  test('카테고리 카드를 클릭하면 상세 페이지로 이동한다', async ({ page }) => {
     await page.goto('/writing')
 
-    await page.getByRole('region', { name: '시리즈' }).getByRole('link', { name: /Greedy/ }).click()
-    await expect(page).toHaveURL(/\/series\/greedy$/)
+    await page.getByRole('region', { name: '엮은 글' }).getByRole('link', { name: /Problem Solving/ }).click()
+    await expect(page).toHaveURL(/\/series\/problem-solving$/)
   })
 })
 
