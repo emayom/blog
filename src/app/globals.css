@@ -53,6 +53,17 @@
   /* Font size — Tailwind 기본(text-base 16 / text-lg 18)의 빈 자리를 채우는 md.
      DESIGN.md body=17px와 일치. text-sm/base/lg/xl 등 기본 스케일은 그대로 유지된다 */
   --text-md: 17px;
+
+  /* Callout semantic alias — 기존 토큰 재참조 (커스텀 MDX 컴포넌트) */
+  --color-callout-info: var(--color-primary);
+  --color-callout-warning: var(--color-ink);
+  --color-callout-tip: var(--color-ink-muted-48);
+}
+
+/* dark에서 callout alias 재지정 */
+.dark {
+  --color-callout-info: var(--color-primary-on-dark);
+  --color-callout-warning: var(--color-body-on-dark);
 }
 
 @theme inline {
@@ -193,4 +204,42 @@ code[data-line-numbers] > [data-line]::before {
 }
 @media (prefers-reduced-motion: reduce) {
   .skeleton-shimmer::after { animation: none; }
+}
+
+/* ── 커스텀 MDX 컴포넌트 ── */
+
+/* native <details> — Collapse / FileTree 공용 */
+details > summary { list-style: none; }
+details > summary::-webkit-details-marker { display: none; }
+details[open] > summary .details-chevron { transform: rotate(90deg); }
+.details-chevron { transition: transform 0.15s ease; }
+@media (prefers-reduced-motion: reduce) { .details-chevron { transition: none; } }
+
+/* Steps counter */
+.steps { counter-reset: step; list-style: none; padding-left: 0; }
+.steps > li {
+  counter-increment: step;
+  position: relative;
+  padding-left: var(--spacing-xl);
+  padding-bottom: var(--spacing-lg);
+  border-left: 1px solid var(--color-hairline);
+  margin-left: 13px;
+}
+.dark .steps > li { border-left-color: var(--color-ink-muted-80); }
+.steps > li:last-child { border-left-color: transparent; }
+.steps > li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0; top: 0;
+  transform: translateX(-50%);
+  display: flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-canvas-parchment);
+  color: var(--color-ink);
+  font-size: 14px; font-weight: 600; letter-spacing: -0.224px;
+}
+.dark .steps > li::before {
+  background-color: var(--color-surface-tile-2);
+  color: var(--color-body-on-dark);
 }
