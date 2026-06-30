@@ -12,3 +12,10 @@ export interface SeriesNavigation {
   currentPosition: number
   items: SeriesPostItem[]
 }
+
+export interface SeriesSummary {
+  name: string
+  slug: string
+  count: number
+  latestDate: string
+}
