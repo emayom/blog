@@ -64,7 +64,7 @@ export default async function SeriesDetailPage({ params }: Props) {
   const intro = await renderSeriesIntro(slug)
 
   return (
-    <main className="mx-auto max-w-3xl px-6 py-12">
+    <main className="mx-auto max-w-4xl px-6 py-12">
       <nav aria-label="breadcrumb" className="mb-6 text-xs tracking-[-0.12px] text-ink-muted-48">
         <Link href="/" className="text-primary hover:underline dark:text-primary-on-dark">홈</Link>
         <span aria-hidden="true"> / </span>

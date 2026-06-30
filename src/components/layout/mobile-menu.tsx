@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useId, useRef, useState } from 'react'
+import { useCallback, useEffect, useId, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -8,22 +8,83 @@ import type { NavItem } from '@/types/nav'
 
 interface MobileMenuProps {
   items: NavItem[]
-  social: NavItem[]
 }
 
-export function MobileMenu({ items, social }: MobileMenuProps) {
-  const [open, setOpen] = useState(false)
+// 페이드 인/아웃 전환 시간(ms) — Tailwind duration-200과 일치시켜 언마운트 타이밍을 맞춘다
+const TRANSITION_MS = 200
+
+const iconClass = 'block'
+
+function HamburgerIcon() {
+  return (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      aria-hidden="true"
+      className={iconClass}
+    >
+      <path d="M3 6h18M3 12h18M3 18h18" />
+    </svg>
+  )
+}
+
+function CloseIcon() {
+  return (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      aria-hidden="true"
+      className={iconClass}
+    >
+      <path d="M18 6 6 18M6 6l12 12" />
+    </svg>
+  )
+}
+
+export function MobileMenu({ items }: MobileMenuProps) {
+  const [open, setOpen] = useState(false) // 패널을 DOM에 두는지 (마운트 의도)
+  const [shown, setShown] = useState(false) // 페이드 인 상태 (애니메이션)
   const pathname = usePathname()
   const trayId = useId()
   const trayRef = useRef<HTMLDivElement>(null)
   const triggerRef = useRef<HTMLButtonElement>(null)
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const enabledItems = items.filter(item => item.enabled)
-  const enabledSocial = social.filter(item => item.enabled)
 
-  // 라우트 변경 시 자동 닫힘 — pathname(외부 URL 상태) 동기화
+  // 페이드 아웃 후 언마운트
+  const requestClose = useCallback(() => {
+    setShown(false)
+    if (closeTimer.current) clearTimeout(closeTimer.current)
+    closeTimer.current = setTimeout(() => setOpen(false), TRANSITION_MS)
+  }, [])
+
+  const requestOpen = useCallback(() => {
+    if (closeTimer.current) clearTimeout(closeTimer.current)
+    setOpen(true)
+  }, [])
+
+  // 마운트 다음 프레임에 페이드 인 — opacity 0 → 100 트랜지션 트리거
+  useEffect(() => {
+    if (!open) return
+    const id = requestAnimationFrame(() => setShown(true))
+    return () => cancelAnimationFrame(id)
+  }, [open])
+
+  // 라우트 변경 시 즉시 닫힘 — pathname(외부 URL 상태) 동기화
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
+    setShown(false)
     setOpen(false)
   }, [pathname])
 
@@ -33,7 +94,7 @@ export function MobileMenu({ items, social }: MobileMenuProps) {
 
     function onKeyDown(event: KeyboardEvent) {
       if (event.key === 'Escape') {
-        setOpen(false)
+        requestClose()
         triggerRef.current?.focus()
       }
     }
@@ -42,47 +103,36 @@ export function MobileMenu({ items, social }: MobileMenuProps) {
     const previousOverflow = document.body.style.overflow
     document.body.style.overflow = 'hidden'
 
-    const firstLink = trayRef.current?.querySelector<HTMLElement>('a, button')
-    firstLink?.focus()
+    const firstFocusable = trayRef.current?.querySelector<HTMLElement>('a, button')
+    firstFocusable?.focus()
 
     return () => {
       document.removeEventListener('keydown', onKeyDown)
       document.body.style.overflow = previousOverflow
     }
-  }, [open])
+  }, [open, requestClose])
 
   return (
     <>
       <button
         ref={triggerRef}
         type="button"
-        onClick={() => setOpen(prev => !prev)}
-        aria-label="메뉴 열기"
+        onClick={() => (open ? requestClose() : requestOpen())}
+        aria-label={open ? '메뉴 닫기' : '메뉴 열기'}
         aria-expanded={open}
         aria-controls={trayId}
         className="inline-flex size-11 shrink-0 items-center justify-center rounded-full text-ink transition-transform active:scale-95 dark:text-body-on-dark"
       >
-        <svg
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          aria-hidden="true"
-        >
-          <path d="M3 6h18M3 12h18M3 18h18" />
-        </svg>
+        {open ? <CloseIcon /> : <HamburgerIcon />}
       </button>
 
       {open && createPortal(
-        // navbar의 header에 걸린 backdrop-filter가 position:fixed 자손의
-        // containing block이 되므로, 메뉴를 body로 portal해 뷰포트 기준으로 렌더한다 (#48)
-        <div className="fixed inset-0 z-50 md:hidden">
+        <div className="fixed inset-x-0 bottom-0 top-11 z-30 md:hidden">
           <div
-            onClick={() => setOpen(false)}
-            className="absolute inset-0 bg-black/[0.32]"
+            onClick={requestClose}
+            className={`absolute inset-0 bg-canvas/50 backdrop-blur-[3px] transition-opacity duration-200 ease-out dark:bg-surface-tile-1/50 ${
+              shown ? 'opacity-100' : 'opacity-0'
+            }`}
             aria-hidden="true"
           />
           <div
@@ -91,9 +141,11 @@ export function MobileMenu({ items, social }: MobileMenuProps) {
             role="dialog"
             aria-modal="true"
             aria-label="모바일 메뉴"
-            className="absolute inset-y-0 right-0 flex w-4/5 max-w-[20rem] flex-col bg-canvas pt-11 dark:bg-surface-tile-1"
+            className={`absolute inset-x-0 top-0 flex flex-col bg-canvas pb-3 shadow-[0_16px_48px_rgba(0,0,0,0.06)] transition-opacity duration-200 ease-out dark:border-ink-muted-80 dark:bg-surface-tile-1 ${
+              shown ? 'opacity-100' : 'opacity-0'
+            }`}
           >
-            <nav className="flex flex-col">
+            <nav className="flex flex-col py-2">
               {enabledItems.map((item) => {
                 const isActive
                   = pathname === item.href
@@ -103,8 +155,10 @@ export function MobileMenu({ items, social }: MobileMenuProps) {
                     key={item.href}
                     href={item.href}
                     aria-current={isActive ? 'page' : undefined}
-                    className={`flex min-h-11 items-center border-b border-divider-soft px-6 py-3 text-[17px] text-ink dark:border-ink-muted-80 dark:text-body-on-dark ${
-                      isActive ? 'font-semibold' : ''
+                    className={`flex min-h-[3.25rem] items-center px-6 text-base transition-colors hover:bg-black/[0.03] dark:hover:bg-white/[0.04] ${
+                      isActive
+                        ? 'font-semibold text-ink dark:text-body-on-dark'
+                        : 'font-medium text-ink-muted-80 dark:text-body-muted'
                     }`}
                   >
                     {item.label}
@@ -112,22 +166,6 @@ export function MobileMenu({ items, social }: MobileMenuProps) {
                 )
               })}
             </nav>
-
-            {enabledSocial.length > 0 && (
-              <div className="mt-auto flex flex-col gap-1 px-6 py-4">
-                {enabledSocial.map(item => (
-                  <a
-                    key={item.label}
-                    href={item.href}
-                    target={item.external ? '_blank' : undefined}
-                    rel={item.external ? 'noopener noreferrer' : undefined}
-                    className="flex min-h-11 items-center text-[17px] text-primary dark:text-primary-on-dark"
-                  >
-                    {item.label}
-                  </a>
-                ))}
-              </div>
-            )}
           </div>
         </div>,
         document.body,
