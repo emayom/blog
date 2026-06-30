@@ -1,4 +1,4 @@
-import type { NavGroup, NavItem } from '@/types/nav'
+import type { MetaGroup, NavGroup, NavItem } from '@/types/nav'
 
 export const siteConfig = {
   url: 'https://ayounglim.dev',
@@ -7,6 +7,7 @@ export const siteConfig = {
   description: '배우고 기록하는 것들',
   locale: 'ko_KR',
   location: 'Seoul, Korea',
+  repoUrl: 'https://github.com/emayom/blog',
 } as const
 
 export const mainNav: NavItem[] = [
@@ -61,3 +62,22 @@ export const footerNav: NavGroup[] = [
     items: social,
   },
 ]
+
+// 배포 메타데이터 — 커밋 해시는 빌드 시 next.config가 주입하는 NEXT_PUBLIC_ 값에서 읽는다
+const commitSha = process.env.NEXT_PUBLIC_COMMIT_SHA ?? ''
+
+export const footerMeta: MetaGroup = {
+  title: '메타데이터',
+  items: [
+    {
+      label: '커밋',
+      value: commitSha ? commitSha.slice(0, 7) : 'dev',
+      href: commitSha ? `${siteConfig.repoUrl}/commit/${commitSha}` : siteConfig.repoUrl,
+    },
+    {
+      label: '소스',
+      value: 'blog',
+      href: siteConfig.repoUrl,
+    },
+  ],
+}
