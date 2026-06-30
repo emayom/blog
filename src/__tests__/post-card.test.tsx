@@ -22,11 +22,16 @@ describe('PostCard', () => {
     expect(link).toHaveAttribute('href', '/writing/hello-world')
   })
 
-  // 날짜·읽기시간 블록이 PostCard에서 주석 처리됨 (WIP). 복원 시 skip 해제할 것.
-  it.skip('날짜를 점 형식으로, 읽기 시간을 표시한다', () => {
-    render(<PostCard post={post} />)
+  it('showDate면 날짜를 점 형식으로, 읽기 시간을 표시한다', () => {
+    render(<PostCard post={post} showDate />)
     expect(screen.getByText('2026.06.18')).toBeInTheDocument()
     expect(screen.getByText('3분 읽기')).toBeInTheDocument()
+  })
+
+  it('showDate가 false면 날짜·읽기시간을 렌더하지 않는다', () => {
+    render(<PostCard post={post} showDate={false} />)
+    expect(screen.queryByText('2026.06.18')).not.toBeInTheDocument()
+    expect(screen.queryByText('3분 읽기')).not.toBeInTheDocument()
   })
 
   it('태그를 /tag/[tag]로 링크한다', () => {

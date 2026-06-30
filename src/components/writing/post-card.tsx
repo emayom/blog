@@ -1,14 +1,15 @@
 import Link from 'next/link'
-// import { formatDate } from '@/lib/format-date'
+import { formatDate } from '@/lib/format-date'
 import { Tag } from '@/components/writing/tag'
 import type { PostMeta } from '@/types/post'
 
 interface PostCardProps {
   post: PostMeta
   showTags?: boolean
+  showDate?: boolean
 }
 
-export function PostCard({ post, showTags = true }: PostCardProps) {
+export function PostCard({ post, showTags = true, showDate = false }: PostCardProps) {
   const hasTags = showTags && post.tags.length > 0
   return (
     <article className={`group cursor-pointer bg-canvas dark:border-ink-muted-80 dark:bg-surface-tile-2 ${hasTags ? 'py-md' : 'py-lg'}`}>
@@ -36,11 +37,13 @@ export function PostCard({ post, showTags = true }: PostCardProps) {
           ))}
         </ul>
       )}
-      {/* <p className="text-sm text-ink-muted-48 dark:text-body-muted">
-        <time dateTime={post.date}>{formatDate(post.date)}</time>
-        <span aria-hidden="true"> · </span>
-        <span>{`${post.readingTime}분 읽기`}</span>
-      </p> */}
+      {showDate && (
+        <p className="mt-3 text-sm text-ink-muted-48 dark:text-body-muted">
+          <time dateTime={post.date}>{formatDate(post.date)}</time>
+          <span aria-hidden="true"> · </span>
+          <span>{`${post.readingTime}분 읽기`}</span>
+        </p>
+      )}
     </article>
   )
 }
