@@ -8,6 +8,7 @@ import { Collapse } from '@/components/mdx/collapse'
 import { FileTree } from '@/components/mdx/file-tree'
 import { Step, Steps } from '@/components/mdx/steps'
 import { Kbd } from '@/components/ui/kbd'
+import { Heading } from '@/components/ui/heading'
 
 export const mdxComponents: MDXComponents = {
   a: ({ className, ...props }: ComponentPropsWithoutRef<'a'>) => {
@@ -22,38 +23,32 @@ export const mdxComponents: MDXComponents = {
     )
   },
   h2: (props: ComponentPropsWithoutRef<'h2'>) => (
-    <h2
-      className="group relative text-ink dark:text-body-on-dark font-semibold text-[34px] leading-[1.47] tracking-[-0.374px] mt-xxl mb-md scroll-mt-[80px]"
-      {...props}
-    />
+    <Heading as="h2" size="md" className="group relative mt-xxl mb-md scroll-mt-[80px]" {...props} />
   ),
   h3: (props: ComponentPropsWithoutRef<'h3'>) => (
-    <h3
-      className="group relative text-ink dark:text-body-on-dark font-semibold text-[21px] leading-[1.19] tracking-[0.231px] mt-xl mb-sm scroll-mt-[80px]"
-      {...props}
-    />
+    <Heading as="h3" size="sm" className="group relative mt-xl mb-sm scroll-mt-[80px]" {...props} />
   ),
   h4: (props: ComponentPropsWithoutRef<'h4'>) => (
     <h4
-      className="group relative text-ink dark:text-body-on-dark font-semibold text-[19px] leading-[1.3] tracking-[-0.374px] mt-lg mb-xs scroll-mt-[80px]"
+      className="group relative text-ink dark:text-body-on-dark font-semibold text-md leading-[1.3] tracking-[-0.374px] mt-lg mb-xs scroll-mt-[80px]"
       {...props}
     />
   ),
   h5: (props: ComponentPropsWithoutRef<'h5'>) => (
     <h5
-      className="group relative text-ink dark:text-body-on-dark font-semibold text-[17px] leading-[1.24] tracking-[-0.374px] mt-5 mb-xs scroll-mt-[80px]"
+      className="group relative text-ink dark:text-body-on-dark font-semibold text-sm leading-[1.24] tracking-[-0.374px] mt-5 mb-xs scroll-mt-[80px]"
       {...props}
     />
   ),
   h6: (props: ComponentPropsWithoutRef<'h6'>) => (
     <h6
-      className="group relative text-ink-muted-80 dark:text-body-muted font-semibold text-[15px] leading-[1.33] tracking-[-0.224px] mt-4 mb-xs scroll-mt-[80px]"
+      className="group relative text-ink-muted-80 dark:text-body-muted font-semibold text-sm leading-[1.33] tracking-[-0.224px] mt-4 mb-xs scroll-mt-[80px]"
       {...props}
     />
   ),
   p: (props: ComponentPropsWithoutRef<'p'>) => (
     <p
-      className="text-body dark:text-body-on-dark text-[17px] leading-[1.47] tracking-[-0.374px] my-md"
+      className="text-body dark:text-body-on-dark text-sm leading-[1.47] tracking-[-0.374px] my-md"
       {...props}
     />
   ),
@@ -83,7 +78,7 @@ export const mdxComponents: MDXComponents = {
   ),
   li: (props: ComponentPropsWithoutRef<'li'>) => (
     <li
-      className="text-body dark:text-body-on-dark text-[17px] leading-[1.47] my-xs"
+      className="text-body dark:text-body-on-dark text-sm leading-[1.47] my-xs"
       {...props}
     />
   ),
