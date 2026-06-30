@@ -12,3 +12,14 @@ export interface NavGroup {
   title: string
   items: NavItem[]
 }
+
+export interface MetaItem {
+  label: string
+  value: string
+  href?: string
+}
+
+export interface MetaGroup {
+  title: string
+  items: MetaItem[]
+}

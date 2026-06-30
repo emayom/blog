@@ -2,7 +2,11 @@ import { render, screen } from '@testing-library/react'
 import { describe, expect, it, vi } from 'vitest'
 
 vi.mock('@/config/site', () => ({
-  siteConfig: { name: 'Ayoung Lim', location: 'Seoul, Korea' },
+  siteConfig: {
+    name: 'Ayoung Lim',
+    location: 'Seoul, Korea',
+    repoUrl: 'https://github.com/emayom/blog',
+  },
   footerNav: [
     {
       title: '탐색',
@@ -22,6 +26,13 @@ vi.mock('@/config/site', () => ({
       items: [{ label: '비활성', href: '/x', enabled: false }],
     },
   ],
+  footerMeta: {
+    title: '메타데이터',
+    items: [
+      { label: '커밋', value: 'abc1234', href: 'https://github.com/emayom/blog/commit/abc1234' },
+      { label: '소스', value: 'blog', href: 'https://github.com/emayom/blog' },
+    ],
+  },
 }))
 
 import { Footer } from './footer'
@@ -54,5 +65,15 @@ describe('Footer', () => {
     const gh = screen.getByRole('link', { name: 'GitHub' })
     expect(gh).toHaveAttribute('target', '_blank')
     expect(gh).toHaveAttribute('rel', 'noopener noreferrer')
+  })
+
+  it('메타데이터 그룹(커밋 · 소스)을 표시한다', () => {
+    render(<Footer />)
+    expect(screen.getByText('메타데이터')).toBeInTheDocument()
+    expect(screen.getByText('커밋')).toBeInTheDocument()
+    expect(screen.getByText('소스')).toBeInTheDocument()
+
+    const source = screen.getByRole('link', { name: /blog/ })
+    expect(source).toHaveAttribute('href', 'https://github.com/emayom/blog')
   })
 })
