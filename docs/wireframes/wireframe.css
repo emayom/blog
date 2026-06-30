@@ -336,6 +336,11 @@ footer.site { padding: 28px 40px; border-top:1px solid var(--line); background:#
   transform:translateX(-100%); animation:shimmer 1.4s infinite; }
 @keyframes shimmer { 100% { transform:translateX(100%); } }
 
+/* 캐러셀 버튼 */
+.carousel-btn { width:32px; height:32px; border-radius:50%; border:1px solid var(--line); background:#fff;
+  color:var(--muted); font-size:13px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; }
+.carousel-btn:hover { border-color:var(--muted); }
+
 /* ===== 반응형: 좁은 화면에서 데스크톱 프레임 reflow ===== */
 @media (max-width: 760px) {
   .with-aside, .sidebar { grid-template-columns: 1fr; }
