@@ -5,10 +5,10 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { compileMDX } from 'next-mdx-remote/rsc'
 import { getPostMetaList } from '@/lib/mdx'
-import { getSeriesSummaries, sortSeriesPosts } from '@/lib/series'
+import { getSeriesCategory, getSeriesSummaries, sortSeriesPosts, toSeriesSlug } from '@/lib/series'
 import { buildMetadata } from '@/lib/seo'
-import { formatDate } from '@/lib/format-date'
 import { mdxComponents } from '@/components/mdx/mdx-components'
+import { PostCard } from '@/components/writing/post-card'
 import { Heading } from '@/components/ui/heading'
 import type { PostMeta } from '@/types/post'
 
@@ -17,7 +17,12 @@ type Props = { params: Promise<{ name: string }> }
 const SERIES_DIR = path.join(process.cwd(), 'src/content/series')
 
 export function generateStaticParams() {
-  return getSeriesSummaries(getPostMetaList()).map(s => ({ name: s.slug }))
+  const summaries = getSeriesSummaries(getPostMetaList())
+  const seriesSlugs = summaries.map(s => s.slug)
+  const categorySlugs = summaries
+    .filter(s => s.category !== '')
+    .map(s => toSeriesSlug(s.category))
+  return [...new Set([...seriesSlugs, ...categorySlugs])].map(name => ({ name }))
 }
 
 export const dynamicParams = false
@@ -42,7 +47,19 @@ async function renderSeriesIntro(slug: string) {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { name: slug } = await params
+  const { name: rawSlug } = await params
+  const slug = decodeURIComponent(rawSlug)
+  const posts = getPostMetaList()
+
+  const category = getSeriesCategory(slug, posts)
+  if (category) {
+    return buildMetadata({
+      title: `${category.name} 시리즈`,
+      description: `${category.name} 시리즈에 속한 글 목록`,
+      path: `/series/${slug}`,
+    })
+  }
+
   const name = findSeriesName(slug)
   if (!name) return {}
 
@@ -53,34 +70,84 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   })
 }
 
+// 번호가 매겨진 글 목록 — 단일 시리즈와 카테고리 섹션 양쪽에서 재사용한다.
+function PostOrderedList({ posts }: { posts: PostMeta[] }) {
+  return (
+    <ol className="flex flex-col divide-y divide-hairline dark:divide-ink-muted-80">
+      {posts.map((post, index) => (
+        <li key={post.slug} className="flex gap-3.5">
+          <span className="w-5 flex-none pt-lg text-sm text-ink-muted-48 dark:text-body-muted">
+            {index + 1}
+          </span>
+          <div className="flex-1">
+            <PostCard post={post} showTags={false} showDate />
+          </div>
+        </li>
+      ))}
+    </ol>
+  )
+}
+
+function Breadcrumb({ name }: { name: string }) {
+  return (
+    <nav aria-label="breadcrumb" className="mb-6 text-xs tracking-[-0.12px] text-ink-muted-48">
+      <Link href="/" className="text-primary hover:underline dark:text-primary-on-dark">홈</Link>
+      <span aria-hidden="true"> / </span>
+      <Link href="/writing" className="text-primary hover:underline dark:text-primary-on-dark">글</Link>
+      <span aria-hidden="true"> / </span>
+      <span>{name}</span>
+    </nav>
+  )
+}
+
 export default async function SeriesDetailPage({ params }: Props) {
   const { name: rawSlug } = await params
   const slug = decodeURIComponent(rawSlug)
+  const posts = getPostMetaList()
+
+  // 카테고리(예: 알고리즘) — 소속 시리즈를 subtitle 섹션으로 나눠 보여준다
+  const category = getSeriesCategory(slug, posts)
+  if (category) {
+    return (
+      <main className="mx-auto max-w-4xl px-6 py-12">
+        <Breadcrumb name={category.name} />
+
+        <Heading as="h1" size="md" className="mb-2">{category.name}</Heading>
+        <p className="mb-9 text-sm tracking-[-0.224px] text-ink-muted-48 dark:text-body-muted">
+          {`${category.count}편`}
+        </p>
+
+        <div className="flex flex-col gap-10">
+          {category.sections.map(section => (
+            <section key={section.slug}>
+              <Heading as="h2" size="sm" className="mb-4">{section.name}</Heading>
+              <PostOrderedList posts={section.posts} />
+            </section>
+          ))}
+        </div>
+      </main>
+    )
+  }
+
+  // 단일 시리즈
   const name = findSeriesName(slug)
   if (!name) notFound()
 
-  const posts = getPostMetaList()
-  const seriesPosts: PostMeta[] = sortSeriesPosts(posts.filter(p => p.series === name))
+  const seriesPosts = sortSeriesPosts(posts.filter(p => p.series === name))
   const intro = await renderSeriesIntro(slug)
 
   return (
     <main className="mx-auto max-w-4xl px-6 py-12">
-      <nav aria-label="breadcrumb" className="mb-6 text-xs tracking-[-0.12px] text-ink-muted-48">
-        <Link href="/" className="text-primary hover:underline dark:text-primary-on-dark">홈</Link>
-        <span aria-hidden="true"> / </span>
-        <Link href="/writing" className="text-primary hover:underline dark:text-primary-on-dark">글</Link>
-        <span aria-hidden="true"> / </span>
-        <span>{name}</span>
-      </nav>
+      <Breadcrumb name={name} />
 
-      <Heading as="h1" size="xl" className="mb-2">{name}</Heading>
+      <Heading as="h1" size="md" className="mb-2">{name}</Heading>
       <p className="mb-7 text-sm tracking-[-0.224px] text-ink-muted-48 dark:text-body-muted">
         {`${seriesPosts.length}편`}
       </p>
 
       {intro && (
         <div className="mb-9 rounded-lg bg-canvas-parchment p-6 dark:bg-surface-tile-2">
-          <p className="mb-3.5 text-xs font-semibold uppercase tracking-[0.4px] text-ink-muted-48 dark:text-body-muted">
+          <p className="sr-only">
             시리즈 소개
           </p>
           <div className="text-md leading-[1.47] tracking-[-0.374px] text-ink-muted-80 dark:text-body-muted">
@@ -89,31 +156,8 @@ export default async function SeriesDetailPage({ params }: Props) {
         </div>
       )}
 
-      <Heading size="sm" className="mb-4.5">글 목록</Heading>
-      <ol className="list-none space-y-5">
-        {seriesPosts.map((post, index) => (
-          <li key={post.slug}>
-            <Link
-              href={`/writing/${post.slug}`}
-              className="group flex items-baseline gap-3.5 rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-focus"
-            >
-              <span className="w-5 flex-none text-sm text-ink-muted-48 dark:text-body-muted">
-                {index + 1}
-              </span>
-              <span className="flex-1">
-                <span className="block text-md font-semibold leading-[1.24] tracking-[-0.374px] text-ink group-hover:text-primary dark:text-body-on-dark dark:group-hover:text-primary-on-dark">
-                  {post.title}
-                </span>
-                <span className="mt-1.5 block text-sm text-ink-muted-48 dark:text-body-muted">
-                  <time dateTime={post.date}>{formatDate(post.date)}</time>
-                  <span aria-hidden="true"> · </span>
-                  <span>{`${post.readingTime}분 읽기`}</span>
-                </span>
-              </span>
-            </Link>
-          </li>
-        ))}
-      </ol>
+      <Heading size="sm" className="sr-only">글 목록</Heading>
+      <PostOrderedList posts={seriesPosts} />
     </main>
   )
 }

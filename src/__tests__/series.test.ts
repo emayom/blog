@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { getSeriesNavigation, getSeriesSummaries, sortSeriesPosts, toSeriesSlug } from '@/lib/series'
+import { getSeriesBrowseItems, getSeriesCategory, getSeriesNavigation, getSeriesSummaries, getSeriesThumbnail, sortSeriesPosts, toSeriesSlug } from '@/lib/series'
 import type { PostMeta } from '@/types/post'
 
 function meta(
@@ -181,6 +181,14 @@ describe('getSeriesSummaries', () => {
     expect(summaries[0].latestDate).toBe('2026-03-10')
   })
 
+  it('series MDX가 없는 슬러그의 thumbnail은 빈 문자열이다', () => {
+    const posts = [
+      meta('a', '2026-01-01', '존재하지 않는 시리즈', 1),
+      meta('b', '2026-03-10', '존재하지 않는 시리즈', 2),
+    ]
+    expect(getSeriesSummaries(posts)[0].thumbnail).toBe('')
+  })
+
   it('latestDate 내림차순으로 정렬한다', () => {
     const posts = [
       meta('a1', '2026-01-01', 'A', 1),
@@ -217,5 +225,62 @@ describe('getSeriesSummaries', () => {
 
   it('빈 배열은 빈 결과를 반환한다', () => {
     expect(getSeriesSummaries([])).toEqual([])
+  })
+})
+
+describe('getSeriesThumbnail', () => {
+  it('series MDX frontmatter의 thumbnail을 읽는다', () => {
+    expect(getSeriesThumbnail('자바스크립트로-구현하는-자료구조')).toBe(
+      '/images/series/js-data-structure.png',
+    )
+  })
+
+  it('파일이 없으면 빈 문자열을 반환한다', () => {
+    expect(getSeriesThumbnail('does-not-exist')).toBe('')
+  })
+})
+
+// category 값은 실제 series MDX frontmatter에서 읽는다 (DFS/BFS·DP·정렬 알고리즘 → "Problem Solving")
+describe('getSeriesBrowseItems', () => {
+  it('같은 category 시리즈는 하나의 카드로 합치고 count를 합산한다', () => {
+    const posts = [
+      meta('a', '2026-01-01', 'DFS/BFS', 1),
+      meta('b', '2026-01-02', 'DFS/BFS', 2),
+      meta('c', '2026-02-01', 'DP', 1),
+      meta('d', '2026-02-02', 'DP', 2),
+      meta('e', '2026-03-01', 'SQLD', 1),
+      meta('f', '2026-03-02', 'SQLD', 2),
+    ]
+    const items = getSeriesBrowseItems(posts)
+    expect(items).toHaveLength(2)
+
+    const category = items.find(i => i.name === 'Problem Solving')
+    expect(category?.slug).toBe('problem-solving')
+    expect(category?.count).toBe(4)
+    expect(items.find(i => i.name === 'SQLD')?.count).toBe(2)
+  })
+})
+
+describe('getSeriesCategory', () => {
+  it('멤버를 categoryOrder 순 subtitle 섹션으로 반환한다', () => {
+    const posts = [
+      meta('a', '2026-01-01', 'DP', 1),
+      meta('b', '2026-01-02', 'DP', 2),
+      meta('c', '2026-02-01', '정렬 알고리즘', 1),
+      meta('d', '2026-02-02', '정렬 알고리즘', 2),
+    ]
+    const category = getSeriesCategory('problem-solving', posts)
+    expect(category?.name).toBe('Problem Solving')
+    expect(category?.count).toBe(4)
+    // 정렬 알고리즘(categoryOrder 1)이 DP(6)보다 앞
+    expect(category?.sections.map(s => s.name)).toEqual(['정렬 알고리즘', 'DP'])
+  })
+
+  it('카테고리가 아닌 슬러그는 null', () => {
+    const posts = [
+      meta('a', '2026-01-01', 'SQLD', 1),
+      meta('b', '2026-01-02', 'SQLD', 2),
+    ]
+    expect(getSeriesCategory('sqld', posts)).toBeNull()
   })
 })
