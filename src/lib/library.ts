@@ -40,6 +40,7 @@ function normalizeFrontmatter(raw: Record<string, unknown>): LibraryItemFrontmat
     status: typeof raw.status === 'string' && raw.status !== '' ? raw.status : undefined,
     // id는 항상 string으로 흡수 — ISBN이 number로 파싱돼도 정밀도 손실 방지
     id: raw.id != null ? String(raw.id) : undefined,
+    featured: raw.featured === true,
     draft: raw.draft === true,
   }
 }
@@ -58,4 +59,18 @@ export function getAllLibraryItems(): LibraryItemMeta[] {
 
 export function getLibraryItemsByType(type: LibraryType): LibraryItemMeta[] {
   return getAllLibraryItems().filter(item => item.type === type)
+}
+
+// date 앞 4자리를 연도로, 없으면 '' 그룹. 연도 내림차순, '' 그룹은 맨 뒤.
+export function groupByYear(items: LibraryItemMeta[]): [string, LibraryItemMeta[]][] {
+  const groups: Record<string, LibraryItemMeta[]> = {}
+  for (const item of items) {
+    const year = item.date?.slice(0, 4) ?? ''
+    ;(groups[year] ??= []).push(item)
+  }
+  return Object.entries(groups).sort(([a], [b]) => {
+    if (a === '') return 1
+    if (b === '') return -1
+    return b.localeCompare(a)
+  })
 }

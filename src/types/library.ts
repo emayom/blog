@@ -10,6 +10,7 @@ export interface LibraryItemFrontmatter {
   genres?: string[]
   status?: string
   id?: string
+  featured?: boolean
   draft: boolean
 }
 
