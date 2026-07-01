@@ -8,6 +8,7 @@ import { ThemeProvider } from '@/components/theme-provider'
 import { Navbar } from '@/components/layout/navbar'
 import { Footer } from '@/components/layout/footer'
 import { GoogleAnalytics } from '@/components/analytics/google-analytics'
+import { WebVitals } from '@/components/analytics/web-vitals'
 import './globals.css'
 
 const geistSans = Geist({
@@ -60,6 +61,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <GoogleAnalytics />
+        <WebVitals />
         <JsonLd data={buildWebSiteJsonLd()} />
         <JsonLd data={buildPersonJsonLd({ includeContext: true })} />
         <ThemeProvider>

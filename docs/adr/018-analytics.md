@@ -12,13 +12,13 @@ M5 운영/분석 마일스톤에서 블로그 방문자 데이터와 Core Web Vi
 
 **Google Analytics 4**를 선택한다.
 
-구현 방식: Next.js 내장 `<Script>` 컴포넌트 + gtag.js. 추가 패키지 없이 `NEXT_PUBLIC_GA_ID` 환경변수 하나로 활성화한다.
+구현 방식: Next.js 내장 `<Script>` 컴포넌트 + gtag.js로 GA4를 로드하고, Core Web Vitals는 `web-vitals` 패키지(`onLCP`/`onCLS`/`onINP`)로 측정하여 `web_vitals` 커스텀 이벤트로 전송한다. `NEXT_PUBLIC_GA_ID` 환경변수 하나로 활성화한다.
 
 ## Consequences
 
 **장점**
-- 추가 npm 패키지 불필요 — 번들 사이즈 영향 없음
-- GA4 Enhanced Measurement로 Web Vitals 자동 수집 (별도 구현 불필요)
+- `web-vitals`(~2KB gzip) 외 추가 패키지 없음
+- Core Web Vitals(LCP/CLS/INP)는 `web-vitals` 패키지로 직접 측정해 `web_vitals` 커스텀 이벤트로 전송한다. GA4 Enhanced Measurement는 CWV를 자동 수집하지 않으므로 커스텀 이벤트 구현이 필요하다.
 - Google Search Console과 연동하여 CWV 리포트 확인 가능
 - 업계 표준 — 레퍼런스와 디버깅 리소스가 풍부함
 
