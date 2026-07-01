@@ -40,3 +40,9 @@
 ## Related Issues / Links
 
 - 와이어프레임: [list](../wireframes/list.html), [series](../wireframes/series.html)
+- #61 — Featured Posts 목록 상단 고정
+- #64 — 커스텀 MDX 컴포넌트 추가
+- #65 — 헤딩 앵커 링크 (클릭 시 URL 클립보드 복사)
+- #67 — 글 상세 breadcrumb 추가
+- #69 — 글 목록 하단 시리즈 섹션 추가
+- #76 — UI·콘텐츠 개선 (모바일 메뉴 · 푸터 메타데이터 · 시리즈 카테고리)

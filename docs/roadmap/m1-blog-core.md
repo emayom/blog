@@ -50,3 +50,13 @@
 ## Related Issues / Links
 
 - 와이어프레임: [home](../wireframes/home.html), [list](../wireframes/list.html), [detail](../wireframes/detail.html), [about](../wireframes/about.html), [states](../wireframes/states.html), [mobile](../wireframes/mobile.html), [layout](../wireframes/layout.html)
+- #11 — 레이아웃 기반 인프라 구축
+- #13 — MDX 파이프라인 구축
+- #15 — 글 읽기 경험 (목록·상세·태그·소개·상태 UI)
+- #17 — 홈 페이지 (Hero + 최근 글 + 아카이브 사이드바)
+- #24 — 기존 md/mdx 글 마이그레이션
+- #45 — fix: MDX 테이블 렌더링 오류 (remark-gfm 누락)
+- #48 — fix: 모바일 햄버거 메뉴 미표시
+- #53 — 소개·푸터 소셜 링크 중복 제거 및 env 매핑
+- #55 — 소개 페이지 프로필 사진 추가
+- #58 — 소개 페이지 소셜 링크 아이콘 추가
