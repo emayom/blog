@@ -1,6 +1,6 @@
 # M5 — 운영 / 분석
 
-- **진행 상태:** 미시작
+- **진행 상태:** 완료
 - **목표 일자:** —
 - **목표:** 블로그 운영에 필요한 도구와 독자 데이터를 확보한다
 - **목표 버전:** v0.5.0
@@ -10,8 +10,9 @@
 ## Tasks
 
 - [x] RSS 피드 (`/feed.xml`)
-- [ ] 방문자 분석 — Google Analytics 4 (ADR-018)
-- [ ] Web Vitals 모니터링 — GA4 Enhanced Measurement
+- [x] 방문자 분석 — Google Analytics 4 (ADR-018)
+- [x] Web Vitals 모니터링 — GA4 커스텀 이벤트 (`web_vitals`) via `web-vitals` 패키지 (PR #79)
+- [x] `NEXT_PUBLIC_GA_ID` — `.env.example` 환경변수 항목 추가
 
 ## Out of Scope
 
@@ -33,4 +34,5 @@
 
 ## Related Issues / Links
 
--
+- #74 — GA4 연동
+- #78 — Web Vitals GA4 커스텀 이벤트 전송 (PR #79)
