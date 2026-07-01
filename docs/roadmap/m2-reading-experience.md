@@ -38,3 +38,6 @@
 ## Related Issues / Links
 
 - 와이어프레임: [detail](../wireframes/detail.html)
+- #20 — TOC + Back to Top 버튼
+- #21 — 이전/다음 글 · 연관 글
+- #22 — 시리즈 네비게이션

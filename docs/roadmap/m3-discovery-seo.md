@@ -44,3 +44,11 @@
 
 - 와이어프레임: [list](../wireframes/list.html), [search](../wireframes/search.html), [tag](../wireframes/tag.html), [archive](../wireframes/archive.html)
 - ADR: [ADR-004 검색 구현 방식](../adr/004-search.md), [ADR-005 댓글](../adr/005-comments.md)
+- #29 — 탐색 페이지 (태그 페이지 + 연도별 아카이브)
+- #30 — 검색 모달 (클라이언트 사이드 퍼지 검색)
+- #31 — SEO 기반 (메타데이터 + 동적 OG 이미지 + 사이트맵)
+- #32 — 공유 버튼 + giscus 댓글
+- #34 — RSS 피드 (`/feed.xml`)
+- #41 — 구조화 데이터 (JSON-LD)
+- #50 — 연도별 아카이브 개선 (`/archive` 인덱스 + 연도 페이지)
+- #52 — 아카이브 폴더 인터랙티브 UI 교체
