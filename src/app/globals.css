@@ -31,6 +31,9 @@
   --color-divider-soft: #f0f0f0;
   --color-hairline: #e0e0e0;
 
+  /* 사이드바 active 항목 배경 — /library (M8 #83) */
+  --color-sidebar-active-bg: rgba(0, 102, 204, 0.08);
+
   /* Spacing — DESIGN.md */
   --spacing-xxs: 4px;
   --spacing-xs: 8px;
