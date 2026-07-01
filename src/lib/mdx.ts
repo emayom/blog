@@ -56,7 +56,7 @@ function stripFrontmatter(source: string): string {
 }
 
 // frontmatter 블록만 파싱 (목록 빌드 시 본문 컴파일 비용을 피하기 위한 경량 파서)
-function parseFrontmatterBlock(source: string): Record<string, unknown> {
+export function parseFrontmatterBlock(source: string): Record<string, unknown> {
   const match = source.match(/^---\r?\n([\s\S]*?)\r?\n---/)
   if (!match) return {}
 
