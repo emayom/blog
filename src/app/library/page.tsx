@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { getLibraryItemsByType, groupByYear } from '@/lib/library'
+import { getLibraryItemsByType, groupByYear, collapseBySeries } from '@/lib/library'
 import { buildMetadata } from '@/lib/seo'
 import { FinderWindow } from '@/components/ui/finder-window'
 import { ShelfSidebar } from '@/components/library/shelf-sidebar'
@@ -27,7 +27,7 @@ export default async function LibraryPage({ searchParams }: LibraryPageProps) {
 
   const items = getLibraryItemsByType(validType)
   const featuredItems = items.filter(item => item.featured)
-  const yearGroups = groupByYear(items.filter(item => !item.featured))
+  const yearGroups = groupByYear(collapseBySeries(items.filter(item => !item.featured)))
 
   const sections = (
     <>

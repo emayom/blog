@@ -40,6 +40,7 @@ function normalizeFrontmatter(raw: Record<string, unknown>): LibraryItemFrontmat
     status: typeof raw.status === 'string' && raw.status !== '' ? raw.status : undefined,
     // id는 항상 string으로 흡수 — ISBN이 number로 파싱돼도 정밀도 손실 방지
     id: raw.id != null ? String(raw.id) : undefined,
+    series: typeof raw.series === 'string' && raw.series !== '' ? raw.series : undefined,
     width: typeof raw.width === 'number' ? raw.width : undefined,
     height: typeof raw.height === 'number' ? raw.height : undefined,
     featured: raw.featured === true,
@@ -61,6 +62,30 @@ export function getAllLibraryItems(): LibraryItemMeta[] {
 
 export function getLibraryItemsByType(type: LibraryType): LibraryItemMeta[] {
   return getAllLibraryItems().filter(item => item.type === type)
+}
+
+// 같은 series 항목을 가장 최신 항목(대표) 하나로 collapse. seriesCount에 총 편수 기록.
+export function collapseBySeries(items: LibraryItemMeta[]): LibraryItemMeta[] {
+  const seriesMap = new Map<string, LibraryItemMeta[]>()
+  const result: LibraryItemMeta[] = []
+
+  for (const item of items) {
+    if (!item.series) {
+      result.push(item)
+      continue
+    }
+    const group = seriesMap.get(item.series) ?? []
+    group.push(item)
+    seriesMap.set(item.series, group)
+  }
+
+  for (const group of seriesMap.values()) {
+    const byDateDesc = [...group].sort((a, b) => (b.date ?? '').localeCompare(a.date ?? ''))
+    const byDateAsc = [...group].sort((a, b) => (a.date ?? '').localeCompare(b.date ?? ''))
+    result.push({ ...byDateDesc[0], seriesCount: group.length, seriesItems: byDateAsc })
+  }
+
+  return result.sort((a, b) => (b.date ?? '').localeCompare(a.date ?? ''))
 }
 
 // date 앞 4자리를 연도로, 없으면 '' 그룹. 연도 내림차순, '' 그룹은 맨 뒤.

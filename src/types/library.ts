@@ -10,6 +10,7 @@ export interface LibraryItemFrontmatter {
   genres?: string[]
   status?: string
   id?: string
+  series?: string
   width?: number
   height?: number
   featured?: boolean
@@ -18,4 +19,6 @@ export interface LibraryItemFrontmatter {
 
 export interface LibraryItemMeta extends LibraryItemFrontmatter {
   slug: string
+  seriesCount?: number
+  seriesItems?: LibraryItemMeta[]
 }
