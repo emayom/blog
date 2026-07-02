@@ -24,4 +24,13 @@ test.describe('책장 페이지', () => {
     await page.getByRole('link', { name: '책장' }).first().click()
     await expect(page).toHaveURL(/\/library$/)
   })
+
+  test('PC에서 FinderWindow와 카테고리 사이드바가 렌더된다', async ({ page }) => {
+    await page.goto('/library')
+    // 사이드바의 카테고리 링크(anime는 현재 페이지)
+    await expect(page.getByRole('link', { name: 'anime' }).first()).toBeVisible()
+    // CoverCard placeholder(제목 텍스트)가 캐러셀 안에 렌더된다
+    const heading = await page.getByRole('heading', { level: 2 }).first().textContent()
+    expect(heading).toBeTruthy()
+  })
 })
