@@ -10,6 +10,19 @@ test.describe('책장 페이지', () => {
     await expect(page.getByRole('heading', { level: 2 }).first()).toBeVisible()
   })
 
+  test('anime 카테고리는 Featured 섹션을 표시한다', async ({ page }) => {
+    await page.goto('/library')
+    // frieren-beyond-journeys-end-s1 이 featured: true
+    await expect(page.getByText('Featured').first()).toBeVisible()
+  })
+
+  test('books 카테고리는 Featured 섹션을 표시하지 않는다', async ({ page }) => {
+    await page.goto('/library?type=book')
+    await expect(page.getByRole('heading', { level: 1 }).first()).toHaveText('books')
+    // featured book 없음 → Featured 섹션 미노출
+    await expect(page.getByText('Featured')).not.toBeVisible()
+  })
+
   test('books 카테고리로 이동하면 연도 섹션이 보인다', async ({ page }) => {
     await page.goto('/library')
     await page.getByRole('link', { name: 'books' }).first().click()
