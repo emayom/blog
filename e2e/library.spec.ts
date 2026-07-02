@@ -45,4 +45,24 @@ test.describe('책장 페이지', () => {
     const heading = await page.getByRole('heading', { level: 2 }).first().textContent()
     expect(heading).toBeTruthy()
   })
+
+  test('검색 아이콘 클릭 시 입력창이 열리고 검색어 입력 시 Featured 섹션이 숨겨진다', async ({ page }) => {
+    await page.goto('/library')
+    // Featured 섹션이 초기에 보임 (anime 기본, frieren featured)
+    await expect(page.getByText('Featured').first()).toBeVisible()
+    // 검색 아이콘 클릭
+    await page.getByRole('button', { name: '검색' }).click()
+    const input = page.getByPlaceholder('제목 검색')
+    await expect(input).toBeVisible()
+    // 검색어 입력 시 Featured 섹션 숨겨짐
+    await input.fill('프리렌')
+    await expect(page.getByText('Featured')).not.toBeVisible()
+  })
+
+  test('검색어와 일치하는 항목이 없으면 빈 상태를 표시한다', async ({ page }) => {
+    await page.goto('/library')
+    await page.getByRole('button', { name: '검색' }).click()
+    await page.getByPlaceholder('제목 검색').fill('xyzxyzxyz')
+    await expect(page.getByText('검색 결과가 없어요')).toBeVisible()
+  })
 })

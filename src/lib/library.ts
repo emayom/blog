@@ -3,6 +3,8 @@ import path from 'node:path'
 import { parseFrontmatterBlock } from '@/lib/mdx'
 import type { LibraryItemFrontmatter, LibraryItemMeta, LibraryType } from '@/types/library'
 
+export { collapseBySeries, groupByYear } from '@/lib/library-group'
+
 const CONTENT_DIR = path.join(process.cwd(), 'src/content/library')
 
 const isDev = process.env.NODE_ENV !== 'production'
@@ -62,42 +64,4 @@ export function getAllLibraryItems(): LibraryItemMeta[] {
 
 export function getLibraryItemsByType(type: LibraryType): LibraryItemMeta[] {
   return getAllLibraryItems().filter(item => item.type === type)
-}
-
-// 같은 series 항목을 가장 최신 항목(대표) 하나로 collapse. seriesCount에 총 편수 기록.
-export function collapseBySeries(items: LibraryItemMeta[]): LibraryItemMeta[] {
-  const seriesMap = new Map<string, LibraryItemMeta[]>()
-  const result: LibraryItemMeta[] = []
-
-  for (const item of items) {
-    if (!item.series) {
-      result.push(item)
-      continue
-    }
-    const group = seriesMap.get(item.series) ?? []
-    group.push(item)
-    seriesMap.set(item.series, group)
-  }
-
-  for (const group of seriesMap.values()) {
-    const byDateDesc = [...group].sort((a, b) => (b.date ?? '').localeCompare(a.date ?? ''))
-    const byDateAsc = [...group].sort((a, b) => (a.date ?? '').localeCompare(b.date ?? ''))
-    result.push({ ...byDateDesc[0], seriesCount: group.length, seriesItems: byDateAsc })
-  }
-
-  return result.sort((a, b) => (b.date ?? '').localeCompare(a.date ?? ''))
-}
-
-// date 앞 4자리를 연도로, 없으면 '' 그룹. 연도 내림차순, '' 그룹은 맨 뒤.
-export function groupByYear(items: LibraryItemMeta[]): [string, LibraryItemMeta[]][] {
-  const groups: Record<string, LibraryItemMeta[]> = {}
-  for (const item of items) {
-    const year = item.date?.slice(0, 4) ?? ''
-    ;(groups[year] ??= []).push(item)
-  }
-  return Object.entries(groups).sort(([a], [b]) => {
-    if (a === '') return 1
-    if (b === '') return -1
-    return b.localeCompare(a)
-  })
 }
