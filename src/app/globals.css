@@ -74,6 +74,13 @@
   --font-mono: var(--font-geist-mono);
   /* 디스플레이/헤딩용 — 별도 폰트 로딩 없이 system-ui 스택 매핑 (M1 #15) */
   --font-display: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  --animate-slide-in: slide-in 0.15s ease-out;
+}
+
+@keyframes slide-in {
+  from { opacity: 0; transform: translateX(-8px); }
+  to   { opacity: 1; transform: translateX(0); }
 }
 
 body {

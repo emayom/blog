@@ -27,6 +27,8 @@ interface CoverCardProps {
   coverHeight?: number
   showLabel?: boolean
   badges?: ReactNode
+  isExpanded?: boolean
+  onToggle?: () => void
 }
 
 export function CoverCard({
@@ -34,6 +36,8 @@ export function CoverCard({
   coverHeight = DEFAULT_COVER_HEIGHT,
   showLabel = false,
   badges,
+  isExpanded,
+  onToggle,
 }: CoverCardProps) {
   const [loaded, setLoaded] = useState(false)
   const imgRef = useRef<HTMLImageElement>(null)
@@ -50,7 +54,15 @@ export function CoverCard({
   const cover = (
     <div
       aria-label={item.title}
-      className="relative shrink-0 overflow-hidden rounded outline outline-black/4 -outline-offset-1"
+      role={onToggle ? 'button' : undefined}
+      tabIndex={onToggle ? 0 : undefined}
+      onClick={onToggle}
+      onKeyDown={onToggle ? (e) => { if (e.key === 'Enter' || e.key === ' ') onToggle() } : undefined}
+      className={cn(
+        'relative shrink-0 overflow-hidden rounded outline outline-black/4 -outline-offset-1',
+        onToggle && 'cursor-pointer',
+        isExpanded && 'ring-2 ring-inset ring-primary/60',
+      )}
       style={{ width: renderWidth, height: coverHeight }}
     >
       {item.cover
@@ -83,9 +95,12 @@ export function CoverCard({
               </span>
             </div>
           )}
-      {badges && (
-        <div className="pointer-events-none absolute left-1 top-1 flex gap-1">{badges}</div>
-      )}
+      <div className="pointer-events-none absolute left-1 top-1 flex gap-1">
+        {badges}
+        {(item.seriesCount ?? 0) > 1 && (
+          <CoverBadge>series</CoverBadge>
+        )}
+      </div>
     </div>
   )
 

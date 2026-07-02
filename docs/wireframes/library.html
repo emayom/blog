@@ -3,138 +3,209 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>와이어프레임 — 책장</title>
+<title>와이어프레임 — 책장 (PC)</title>
 <link rel="stylesheet" href="wireframe.css">
+<style>
+  /* 메인 영역 패딩 */
+  .bg-page {
+    background: var(--bg);
+    padding: 28px 32px;
+  }
+
+  /* 콘텐츠 카드 (overlay 아님, 일반 콘텐츠) */
+  .overlay-card {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    border: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    overflow: hidden;
+  }
+
+  /* 사이드바 */
+  .shelf-sidebar {
+    border-right: 1px solid var(--line);
+    background: #fafafa;
+    padding: 20px 0;
+  }
+  .sn-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 9px 16px; font-size: 13px; color: var(--muted);
+    text-decoration: none; cursor: pointer;
+  }
+  .sn-item.on { color: var(--ink); font-weight: 600; background: #e8f0fe; }
+  .sn-icon { width: 16px; height: 16px; border-radius: 3px; background: var(--fill); flex: none; }
+  .sn-item.on .sn-icon { background: #4a6cf7; }
+
+  /* 메인 콘텐츠 */
+  .shelf-main { padding: 24px 28px; overflow-y: auto; }
+  .shelf-main-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 24px;
+  }
+  .shelf-main-title { font-size: 16px; font-weight: 600; color: var(--ink); }
+
+  /* Featured */
+  .featured-label {
+    font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 12px;
+  }
+  .featured-poster-wrap { position: relative; display: inline-block; margin-bottom: 36px; }
+  .featured-poster-wrap .ph-img { width: 150px; height: 210px; border-radius: 8px; }
+  .featured-pin {
+    position: absolute; top: 8px; left: 8px;
+    width: 22px; height: 22px; border-radius: 50%; background: var(--ink);
+  }
+  .featured-poster-title { margin-top: 8px; width: 150px; }
+
+  /* 연도 섹션 */
+  .year-section { margin-bottom: 32px; }
+  .year-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .year-title { font-size: 15px; font-weight: 600; color: var(--ink); }
+  .see-all { font-size: 12px; color: var(--muted); text-decoration: none; }
+
+  /* 캐러셀: 오른쪽 버튼만 */
+  .carousel-row { display: flex; align-items: center; gap: 8px; }
+  .carousel-row .carousel-inner { flex: 1; overflow: hidden; }
+  .shelf-row { display: flex; gap: 12px; }
+  .shelf-row .poster { flex: none; width: 110px; }
+  .shelf-row .poster .ph-img { height: 155px; border-radius: 6px; }
+  .shelf-row .poster .body { padding: 6px 2px; text-align: center; }
+</style>
 </head>
 <body>
 
 <nav class="toolbar">
   <a href="index.html">← 인덱스</a>
+  <a href="library-mobile.html">모바일 →</a>
 </nav>
 
 <div class="frame">
-  <div class="frame-label">화면 4 — 책장 (본 것들)</div>
+  <div class="frame-label">화면 4 — 책장 PC (콘텐츠 카드)</div>
 
   <header class="site">
     <div class="logo"></div>
     <nav class="site">
       <a href="list.html">글</a>
-      <a href="notes.html">메모</a>
       <a href="library.html" class="on">책장</a>
       <a href="about.html">소개</a>
+      <div class="search-ico" style="width:16px;height:16px;border-width:2px;flex:none;"></div>
       <span class="gh"></span>
     </nav>
   </header>
 
-  <div class="pad">
-    <div class="eyebrow">본 것들</div>
-    <div class="line" style="height:24px; width:200px; margin-bottom:6px"></div>
-    <div class="line sm w40" style="margin-bottom:24px"></div>
+  <div class="bg-page">
 
-    <!-- 카테고리 탭 -->
-    <div class="tabs">
-      <span class="tab on">전체</span>
-      <span class="tab">책</span>
-      <span class="tab">애니</span>
-      <span class="tab">영화</span>
-    </div>
+    <!-- 콘텐츠 카드 -->
+    <div class="overlay-card">
 
-    <!-- 포스터 그리드 -->
-    <div class="shelf">
-      <div class="poster">
-        <div class="ph-img">포스터</div>
-        <div class="body">
-          <div class="line sm w90"></div>
-          <div class="stars" style="margin-top:8px">★★★★☆</div>
-        </div>
+      <!-- 사이드바 -->
+      <div class="shelf-sidebar">
+        <a class="sn-item on">
+          <div class="sn-icon"></div>
+          anime
+        </a>
+        <a class="sn-item">
+          <div class="sn-icon"></div>
+          books
+        </a>
+        <a class="sn-item">
+          <div class="sn-icon"></div>
+          movies
+        </a>
       </div>
-      <div class="poster">
-        <div class="ph-img">포스터</div>
-        <div class="body">
-          <div class="line sm w80"></div>
-          <div class="stars" style="margin-top:8px">★★★★★</div>
-        </div>
-      </div>
-      <div class="poster">
-        <div class="ph-img">포스터</div>
-        <div class="body">
-          <div class="line sm w90"></div>
-          <div class="stars" style="margin-top:8px">★★★☆☆</div>
-        </div>
-      </div>
-      <div class="poster">
-        <div class="ph-img">포스터</div>
-        <div class="body">
-          <div class="line sm w70"></div>
-          <div class="stars" style="margin-top:8px">★★★★☆</div>
-        </div>
-      </div>
-      <div class="poster">
-        <div class="ph-img">포스터</div>
-        <div class="body">
-          <div class="line sm w80"></div>
-          <div class="stars" style="margin-top:8px">★★★★★</div>
-        </div>
-      </div>
-      <div class="poster">
-        <div class="ph-img">포스터</div>
-        <div class="body">
-          <div class="line sm w90"></div>
-          <div class="stars" style="margin-top:8px">★★★☆☆</div>
-        </div>
-      </div>
-      <div class="poster">
-        <div class="ph-img">포스터</div>
-        <div class="body">
-          <div class="line sm w70"></div>
-          <div class="stars" style="margin-top:8px">★★★★☆</div>
-        </div>
-      </div>
-      <div class="poster">
-        <div class="ph-img">포스터</div>
-        <div class="body">
-          <div class="line sm w80"></div>
-          <div class="stars" style="margin-top:8px">★★★★★</div>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <footer class="site-footer">
-    <div class="ft-top">
-      <div class="ft-brand">
-        <div class="logo"></div>
-        <div class="line sm" style="width:170px; margin-top:14px"></div>
-      </div>
-      <div class="ft-cols">
-        <div class="ft-col">
-          <div class="ft-h">탐색</div>
-          <a href="list.html">글</a>
-          <a href="notes.html">메모</a>
-          <a href="library.html">책장</a>
-          <a href="about.html">소개</a>
+      <!-- 메인 -->
+      <div class="shelf-main">
+
+        <div class="shelf-main-header">
+          <span class="shelf-main-title">anime</span>
+          <div class="search-ico" style="width:16px;height:16px;border-width:2px;"></div>
         </div>
-        <div class="ft-col">
-          <div class="ft-h">둘러보기</div>
-          <a href="tag.html">태그</a>
-          <a href="archive-index.html">아카이브</a>
-  <a href="archive.html">아카이브 연도</a>
-          <a href="#">RSS</a>
+
+        <!-- Featured -->
+        <div class="featured-label">Featured</div>
+        <div class="featured-poster-wrap">
+          <div class="ph-img" style="width:150px;height:210px;border-radius:8px;">포스터</div>
+          <div class="featured-pin"></div>
         </div>
-        <div class="ft-col">
-          <div class="ft-h">연결</div>
-          <a href="#">GitHub</a>
-          <a href="#">LinkedIn</a>
-          <a href="#">Email</a>
+        <div class="featured-poster-title">
+          <div class="line sm w90" style="margin-bottom:36px;"></div>
         </div>
-      </div>
-    </div>
-    <div class="ft-bottom">
-      <span>© 2026. 와이어프레임</span>
-      <span>Seoul, Korea</span>
-    </div>
+
+        <!-- 2026년 -->
+        <div class="year-section">
+          <div class="year-header">
+            <span class="year-title">2026년</span>
+            <a class="see-all" href="#">모두 보기</a>
+          </div>
+          <div class="carousel-row">
+            <div class="carousel-inner">
+              <div class="shelf-row">
+                <div class="poster"><div class="ph-img">포스터</div><div class="body"><div class="line sm w90" style="margin-bottom:0;"></div></div></div>
+                <div class="poster"><div class="ph-img">포스터</div><div class="body"><div class="line sm w80" style="margin-bottom:0;"></div></div></div>
+                <div class="poster"><div class="ph-img">포스터</div><div class="body"><div class="line sm w70" style="margin-bottom:0;"></div></div></div>
+                <div class="poster"><div class="ph-img">포스터</div><div class="body"><div class="line sm w90" style="margin-bottom:0;"></div></div></div>
+                <div class="poster"><div class="ph-img">포스터</div><div class="body"><div class="line sm w80" style="margin-bottom:0;"></div></div></div>
+              </div>
+            </div>
+            <button class="carousel-btn">›</button>
+          </div>
+        </div>
+
+        <!-- 2025년 -->
+        <div class="year-section">
+          <div class="year-header">
+            <span class="year-title">2025년</span>
+            <a class="see-all" href="#">모두 보기</a>
+          </div>
+          <div class="carousel-row">
+            <div class="carousel-inner">
+              <div class="shelf-row">
+                <div class="poster"><div class="ph-img">포스터</div><div class="body"><div class="line sm w80" style="margin-bottom:0;"></div></div></div>
+                <div class="poster"><div class="ph-img">포스터</div><div class="body"><div class="line sm w90" style="margin-bottom:0;"></div></div></div>
+                <div class="poster"><div class="ph-img">포스터</div><div class="body"><div class="line sm w70" style="margin-bottom:0;"></div></div></div>
+                <div class="poster"><div class="ph-img">포스터</div><div class="body"><div class="line sm w80" style="margin-bottom:0;"></div></div></div>
+                <div class="poster"><div class="ph-img">포스터</div><div class="body"><div class="line sm w60" style="margin-bottom:0;"></div></div></div>
+              </div>
+            </div>
+            <button class="carousel-btn">›</button>
+          </div>
+        </div>
+
+        <!-- 2023년 -->
+        <div class="year-section">
+          <div class="year-header">
+            <span class="year-title">2023년</span>
+            <a class="see-all" href="#">모두 보기</a>
+          </div>
+          <div class="carousel-row">
+            <div class="carousel-inner">
+              <div class="shelf-row">
+                <div class="poster"><div class="ph-img">포스터</div><div class="body"><div class="line sm w70" style="margin-bottom:0;"></div></div></div>
+                <div class="poster"><div class="ph-img">포스터</div><div class="body"><div class="line sm w90" style="margin-bottom:0;"></div></div></div>
+                <div class="poster"><div class="ph-img">포스터</div><div class="body"><div class="line sm w80" style="margin-bottom:0;"></div></div></div>
+                <div class="poster"><div class="ph-img">포스터</div><div class="body"><div class="line sm w60" style="margin-bottom:0;"></div></div></div>
+                <div class="poster"><div class="ph-img">포스터</div><div class="body"><div class="line sm w90" style="margin-bottom:0;"></div></div></div>
+              </div>
+            </div>
+            <button class="carousel-btn">›</button>
+          </div>
+        </div>
+
+      </div><!-- /shelf-main -->
+    </div><!-- /overlay-card -->
+  </div><!-- /bg-page -->
+
+  <footer class="site" style="justify-content:center;">
+    <span>© 2026. 와이어프레임</span>
   </footer>
-</div>
+
+</div><!-- /frame -->
 
 </body>
 </html>
