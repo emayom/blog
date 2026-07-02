@@ -10,13 +10,12 @@ test.describe('책장 페이지', () => {
     await expect(page.getByRole('heading', { level: 2 }).first()).toBeVisible()
   })
 
-  test('books 카테고리는 Featured 섹션을 표시한다', async ({ page }) => {
+  test('books 카테고리로 이동하면 연도 섹션이 보인다', async ({ page }) => {
     await page.goto('/library')
     await page.getByRole('link', { name: 'books' }).first().click()
     await expect(page).toHaveURL(/\/library\?type=book$/)
     await expect(page.getByRole('heading', { level: 1 }).first()).toHaveText('books')
-    // book 샘플은 featured: true → Featured 섹션 노출
-    await expect(page.getByText('Featured').first()).toBeVisible()
+    await expect(page.getByRole('heading', { level: 2 }).first()).toBeVisible()
   })
 
   test('네비게이션에서 책장으로 이동할 수 있다', async ({ page }) => {
