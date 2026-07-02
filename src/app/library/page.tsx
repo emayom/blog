@@ -7,6 +7,7 @@ import { CategoryTabs } from '@/components/library/category-tabs'
 import { FeaturedSection } from '@/components/library/featured-section'
 import { YearSection } from '@/components/library/year-section'
 import { Heading } from '@/components/ui/heading'
+import { EmptyState } from '@/components/ui/empty-state'
 import type { LibraryType } from '@/types/library'
 
 export const metadata: Metadata = buildMetadata({
@@ -29,14 +30,16 @@ export default async function LibraryPage({ searchParams }: LibraryPageProps) {
   const featuredItems = items.filter(item => item.featured)
   const yearGroups = groupByYear(collapseBySeries(items.filter(item => !item.featured)))
 
-  const sections = (
-    <>
-      <FeaturedSection items={featuredItems} />
-      {yearGroups.map(([year, yearItems]) => (
-        <YearSection key={year} year={year} items={yearItems} />
-      ))}
-    </>
-  )
+  const sections = yearGroups.length === 0 && featuredItems.length === 0
+    ? <EmptyState title="아직 기록된 항목이 없어요" className="flex-1" />
+    : (
+        <>
+          <FeaturedSection items={featuredItems} />
+          {yearGroups.map(([year, yearItems]) => (
+            <YearSection key={year} year={year} items={yearItems} />
+          ))}
+        </>
+      )
 
   return (
     <div className="mx-auto flex min-h-0 w-full min-w-0 max-w-270 flex-1 flex-col px-4 py-12 md:px-8 md:py-18">
