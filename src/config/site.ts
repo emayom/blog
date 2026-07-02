@@ -12,9 +12,9 @@ export const siteConfig = {
 
 export const mainNav: NavItem[] = [
   { label: '글', href: '/writing', enabled: true },
-  { label: '소개', href: '/about', enabled: true },
   { label: '메모', href: '/notes', enabled: false },
   { label: '책장', href: '/library', enabled: true },
+  { label: '소개', href: '/about', enabled: true },
 ]
 
 export const social: NavItem[] = [
