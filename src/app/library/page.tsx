@@ -1,12 +1,10 @@
 import type { Metadata } from 'next'
 import { getLibraryItemsByType, groupByYear, collapseBySeries } from '@/lib/library'
 import { buildMetadata } from '@/lib/seo'
-import { FinderWindow } from '@/components/ui/finder-window'
-import { ShelfSidebar } from '@/components/library/shelf-sidebar'
+import { LibraryShelf } from '@/components/library/library-shelf'
 import { CategoryTabs } from '@/components/library/category-tabs'
 import { FeaturedSection } from '@/components/library/featured-section'
 import { YearSection } from '@/components/library/year-section'
-import { Heading } from '@/components/ui/heading'
 import { EmptyState } from '@/components/ui/empty-state'
 import type { LibraryType } from '@/types/library'
 
@@ -30,7 +28,7 @@ export default async function LibraryPage({ searchParams }: LibraryPageProps) {
   const featuredItems = items.filter(item => item.featured)
   const yearGroups = groupByYear(collapseBySeries(items.filter(item => !item.featured)))
 
-  const sections = yearGroups.length === 0 && featuredItems.length === 0
+  const mobileSections = yearGroups.length === 0 && featuredItems.length === 0
     ? <EmptyState title="아직 기록된 항목이 없어요" className="flex-1" />
     : (
         <>
@@ -43,22 +41,16 @@ export default async function LibraryPage({ searchParams }: LibraryPageProps) {
 
   return (
     <div className="mx-auto flex min-h-0 w-full min-w-0 max-w-270 flex-1 flex-col px-4 py-12 md:px-8 md:py-18">
-      {/* 데스크탑: FinderWindow (검색은 #84에서 연결) */}
-      <FinderWindow
-        className="hidden md:flex md:max-h-[calc(100vh-14.2rem)]"
-        sidebar={<ShelfSidebar active={validType} />}
-        title={<Heading as="h1" className="text-sm">{LABEL[validType]}</Heading>}
-      >
-        {sections}
-      </FinderWindow>
+      {/* 데스크톱: FinderWindow + 인라인 검색 */}
+      <LibraryShelf items={items} activeType={validType} label={LABEL[validType]} />
 
-      {/* 모바일: 상단 탭 + 섹션 */}
+      {/* 모바일: 상단 탭 + 섹션 (검색 미포함 — 후속 이슈) */}
       <div className="md:hidden">
         <CategoryTabs active={validType} />
         <h1 className="mb-5 mt-4 text-[13px] font-semibold text-ink dark:text-body-on-dark">
           {LABEL[validType]}
         </h1>
-        {sections}
+        {mobileSections}
       </div>
     </div>
   )
