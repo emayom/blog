@@ -22,6 +22,12 @@ const eslintConfig = defineConfig([
     'coverage/**',
   ]),
   ...storybook.configs['flat/recommended'],
+  {
+    files: ['src/components/mdx/mdx-components.tsx'],
+    rules: {
+      '@next/next/no-img-element': 'off',
+    },
+  },
 ])
 
 export default eslintConfig
