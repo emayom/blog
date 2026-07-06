@@ -24,6 +24,7 @@
     "*.{ts,tsx,js,mjs}": "eslint --fix"
   },
   "dependencies": {
+    "@chenglou/pretext": "^0.0.8",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "fuse.js": "^7.4.2",
