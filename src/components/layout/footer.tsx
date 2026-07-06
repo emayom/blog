@@ -44,9 +44,9 @@ export function Footer() {
           </div>
 
           {/* Nav 컬럼 */}
-          <div className="grid grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-4">
             {groups.map(group => (
-              <div key={group.title} className="ml-auto w-max min-w-28">
+              <div key={group.title} className="w-max min-w-28">
                 <h2 className="pb-4 text-sm font-semibold text-ink dark:text-body-on-dark">
                   {group.title}
                 </h2>
@@ -78,7 +78,7 @@ export function Footer() {
             ))}
 
             {/* 메타데이터 */}
-            <div className="ml-auto w-max min-w-28">
+            <div className="w-max min-w-28">
               <h2 className="pb-4 text-sm font-semibold text-ink dark:text-body-on-dark">
                 {footerMeta.title}
               </h2>
