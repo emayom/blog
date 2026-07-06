@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { footerNav, siteConfig } from '@/config/site'
+import { footerMeta, footerNav, siteConfig } from '@/config/site'
 import profileImg from '@/assets/profile.png'
 
 const linkClass
@@ -31,7 +31,6 @@ export function Footer() {
                 fill
                 sizes="64px"
                 className="object-cover"
-                placeholder="blur"
               />
             </div>
             <div className="flex flex-col gap-1">
@@ -45,7 +44,7 @@ export function Footer() {
           </div>
 
           {/* Nav 컬럼 */}
-          <div className="grid grid-cols-3 gap-8">
+          <div className="grid grid-cols-4 gap-8">
             {groups.map(group => (
               <div key={group.title} className="ml-auto w-max min-w-28">
                 <h2 className="pb-4 text-sm font-semibold text-ink dark:text-body-on-dark">
@@ -77,6 +76,25 @@ export function Footer() {
                 </ul>
               </div>
             ))}
+
+            {/* 메타데이터 */}
+            <div className="ml-auto w-max min-w-28">
+              <h2 className="pb-4 text-sm font-semibold text-ink dark:text-body-on-dark">
+                {footerMeta.title}
+              </h2>
+              <dl className="flex flex-col gap-1.5">
+                {footerMeta.items.map(({ label, value, href }) => (
+                  <div key={label} className="flex items-baseline gap-2">
+                    <dt className="w-8 shrink-0 text-sm text-ink-muted-48 dark:text-body-muted">{label}</dt>
+                    <dd>
+                      {href
+                        ? <a href={href} target="_blank" rel="noopener noreferrer" className={linkClass}>{value}</a>
+                        : <span className="text-sm text-ink-muted-48 dark:text-body-muted">{value}</span>}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
           </div>
         </div>
 
