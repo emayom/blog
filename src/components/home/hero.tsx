@@ -37,7 +37,7 @@ export function Hero({ latestPost, nowReading, children }: HeroProps) {
               </span>
               <ArrowUpRightIcon className="shrink-0 text-body-muted transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transition-none dark:text-on-primary/90" />
             </div>
-            <h2 className="font-display text-xl font-semibold leading-tight tracking-tight text-body-on-dark line-clamp-3">
+            <h2 className="font-display text-base font-semibold leading-tight tracking-tight text-body-on-dark line-clamp-3 sm:text-xl">
               {latestPost.title}
             </h2>
           </Link>
@@ -54,7 +54,7 @@ export function Hero({ latestPost, nowReading, children }: HeroProps) {
             </span>
             <div className="flex items-end justify-between gap-3">
               <div className="min-w-0">
-                <h2 className="font-display text-xl font-semibold leading-tight tracking-tight text-ink line-clamp-2 dark:text-body-on-dark">
+                <h2 className="font-display text-base font-semibold leading-tight tracking-tight text-ink line-clamp-2 sm:text-xl dark:text-body-on-dark">
                   {nowReading.title}
                 </h2>
                 {nowReading.author && (
