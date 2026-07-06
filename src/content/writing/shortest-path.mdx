@@ -7,7 +7,9 @@ description: "최단 경로 문제의 종류와 다익스트라 알고리즘(순
 thumbnail: ""
 ---
 
-> 너비 우선 탐색(BFS) 알고리즘은 특정 상황에서 최단 경로를 보장할 수 있는 탐색 알고리즘이다.
+<Callout type="info">
+  너비 우선 탐색(BFS) 알고리즘은 특정 상황에서 최단 경로를 보장할 수 있는 탐색 알고리즘이다.
+</Callout>
 
 최단 경로 탐색 알고리즘은 **그래프에서 두 노드 간의 가장 짧은 경로를 찾는 알고리즘**을 의미한다.
 
@@ -27,7 +29,9 @@ thumbnail: ""
 - SPFA(Shortest Path Faster Algorithm)
 
 ## 다익스트라(Dijkstra)
-> **음수 사이클**이 존재한다면 사용할 수 없다.
+<Callout type="warning">
+  **음수 사이클**이 존재한다면 사용할 수 없다.
+</Callout>
 
 다익스트라 알고리즘은 음수 사이클이 존재하지 않는 가중치 그래프에서 **하나의 정점에서 모든 다른 정점으로 가는, 즉, 단일 출발지 최단 경로(Single Source Shortest Path, SSSP)** 문제를 해결하는 대표적인 알고리즘이다.
 
@@ -107,7 +111,9 @@ dijkstra(input, 0); // [0, 2, 3, 1, 2, 4]
 - `distance` 배열을 반환한다.
 
 ### 개선된 다익스트라 알고리즘 구현 - 우선순위 큐(Priority Queue)
-> 아래 예시는 별도의 우선순위 큐(Priority Queue) 구현을 사용한다.
+<Callout type="info">
+  아래 예시는 별도의 우선순위 큐(Priority Queue) 구현을 사용한다.
+</Callout>
 
 ```js
 // O((V + E) log V) → E = 간선의 수
@@ -156,7 +162,9 @@ function dijkstra(graph, source){
 - `distance` 배열을 반환한다.
 
 ## 벨먼-포드(Bellman–Ford)
-> 그래프에서 음수 가중치를 가진 간선이 있을 때 최단거리를 구하는 알고리즘 (음수 사이클이 있으면 동작하지 않습니다.)
+<Callout type="info">
+  그래프에서 음수 가중치를 가진 간선이 있을 때 최단거리를 구하는 알고리즘 (음수 사이클이 있으면 동작하지 않습니다.)
+</Callout>
 
 ## 플로이드 워셜(Floyd Warshall)
 

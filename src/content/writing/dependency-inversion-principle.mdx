@@ -84,7 +84,9 @@ const switchButton = new Switch(lightBulb);
 switchButton.operate();
 ```
 
-> 의존 관계를 맺을 때는 **자신보다 변화하기 쉬운 것을 의존해서는 안 되고, 거의 변화가 없는 개념에 의존해야 합니다.**
+<Callout type="tip">
+  의존 관계를 맺을 때는 **자신보다 변화하기 쉬운 것을 의존해서는 안 되고, 거의 변화가 없는 개념에 의존해야 합니다.**
+</Callout>
 
 이제 `Switch` 클래스는 `LightBulb` 대신 추상화된 `Switchable` 인터페이스에 의존합니다.  
 결국 두 모듈 간의 느슨한 결합(Loose Coupling)이 달성되어, 이후 `LightBulb`가 아닌 다른 장치로 교체가 필요하더라도 `Switch` 내부 로직은 전혀 변경할 필요가 없습니다.

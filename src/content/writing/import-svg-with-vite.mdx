@@ -44,8 +44,9 @@ SVG는 기존 래스터(Raster) 그래픽 포멧의 이미지 포멧(`.png`, `.j
 
 하지만, SVG 파일은 DOM의 한 부분이 아닌 외부 파일로 취급되기에 `currentColor` CSS 값 및 CSS 커스텀 props(--variable) 사용이 어렵다. 또한 SVG에 포함된 `<a>` 태그는 클릭되지 않는다. ~~(SVG를 포함한 `<a>` 태그는 클릭이 가능하다.)~~
 
-> :bulb: Perf tips:
-> - `loading="lazy"`와 같은 속성을 사용하여 지연 로딩을 설정하거나 `importance="high"`와 같은 속성을 사용하여 fetch 우선 순위를 조정할 수 있다. ⚡️
+<Callout type="tip">
+  Perf tips: `loading="lazy"`와 같은 속성을 사용하여 지연 로딩을 설정하거나 `importance="high"`와 같은 속성을 사용하여 fetch 우선 순위를 조정할 수 있다.
+</Callout>
 
 ```html
 <img src={foo} className="App-logo" alt="logo" />

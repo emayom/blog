@@ -89,4 +89,6 @@ function MessagesList({ messagesPromise }) {
 3. **Promise는 컴포넌트 외부에서 생성** — `use`는 Promise를 만들지 않고 *읽기만* 함 (렌더 중 직접 fetch 시작 금지)
 4. **Server → Client 스트리밍** — RSC에서 생성한 Promise를 그대로 클라이언트 컴포넌트에 전달 가능
 
-> **주의**: Promise를 렌더 함수 안에서 직접 생성하면 매 렌더마다 새 Promise가 만들어집니다. `use`에 넘길 Promise는 **state, ref, 또는 서버 컴포넌트의 props**로 안정적으로 관리해야 합니다.
+<Callout type="warning">
+  **주의**: Promise를 렌더 함수 안에서 직접 생성하면 매 렌더마다 새 Promise가 만들어집니다. `use`에 넘길 Promise는 **state, ref, 또는 서버 컴포넌트의 props**로 안정적으로 관리해야 합니다.
+</Callout>
