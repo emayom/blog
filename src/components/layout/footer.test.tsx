@@ -7,6 +7,13 @@ vi.mock('@/config/site', () => ({
     location: 'Seoul, Korea',
     repoUrl: 'https://github.com/emayom/blog',
   },
+  footerMeta: {
+    title: '메타데이터',
+    items: [
+      { label: '커밋', value: 'abc1234', href: 'https://github.com/emayom/blog/commit/abc1234' },
+      { label: '소스', value: 'blog', href: 'https://github.com/emayom/blog' },
+    ],
+  },
   footerNav: [
     {
       title: '탐색',
@@ -26,13 +33,6 @@ vi.mock('@/config/site', () => ({
       items: [{ label: '비활성', href: '/x', enabled: false }],
     },
   ],
-  footerMeta: {
-    title: '메타데이터',
-    items: [
-      { label: '커밋', value: 'abc1234', href: 'https://github.com/emayom/blog/commit/abc1234' },
-      { label: '소스', value: 'blog', href: 'https://github.com/emayom/blog' },
-    ],
-  },
 }))
 
 import { Footer } from './footer'
@@ -51,11 +51,20 @@ describe('Footer', () => {
     expect(screen.getByText('연결')).toBeInTheDocument()
   })
 
+  it('메타데이터 그룹(커밋 · 소스)을 표시한다', () => {
+    render(<Footer />)
+    expect(screen.getByText('메타데이터')).toBeInTheDocument()
+    expect(screen.getByText('커밋')).toBeInTheDocument()
+    expect(screen.getByText('소스')).toBeInTheDocument()
+    const source = screen.getByRole('link', { name: /blog/ })
+    expect(source).toHaveAttribute('href', 'https://github.com/emayom/blog')
+  })
+
   it('legal row에 연도와 사이트명, 위치를 표시한다', () => {
     render(<Footer />)
     const year = new Date().getFullYear()
     expect(
-      screen.getByText(`© ${year}. Ayoung Lim`),
+      screen.getByText(`©${year} Ayoung Lim. All rights reserved.`),
     ).toBeInTheDocument()
     expect(screen.getByText('Seoul, Korea')).toBeInTheDocument()
   })
@@ -65,15 +74,5 @@ describe('Footer', () => {
     const gh = screen.getByRole('link', { name: 'GitHub' })
     expect(gh).toHaveAttribute('target', '_blank')
     expect(gh).toHaveAttribute('rel', 'noopener noreferrer')
-  })
-
-  it('메타데이터 그룹(커밋 · 소스)을 표시한다', () => {
-    render(<Footer />)
-    expect(screen.getByText('메타데이터')).toBeInTheDocument()
-    expect(screen.getByText('커밋')).toBeInTheDocument()
-    expect(screen.getByText('소스')).toBeInTheDocument()
-
-    const source = screen.getByRole('link', { name: /blog/ })
-    expect(source).toHaveAttribute('href', 'https://github.com/emayom/blog')
   })
 })
