@@ -46,8 +46,9 @@ function solution(n) {
 ```
 
 ### 풀이 3: Top-Down 방식 - 테스트 13~14 런타임 에러 ❌
-> JavaScript에서는 Python과 다르게 재귀의 최대 깊이를 직접 설정할 수 없다.
-> 재귀 호출의 최대 깊이는 브라우저나 Node.js 환경의 엔진에 따라 달라지며, 일반적으로 약 10,000회 내외이다.
+<Callout type="warning">
+  JavaScript에서는 Python과 다르게 재귀의 최대 깊이를 직접 설정할 수 없다. 재귀 호출의 최대 깊이는 브라우저나 Node.js 환경의 엔진에 따라 달라지며, 일반적으로 약 10,000회 내외이다.
+</Callout>
 
 ```js
 function solution(n) {

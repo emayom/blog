@@ -7,44 +7,66 @@ description: "IEEE 754 부동소숫점 형식을 사용하는 자바스크립트
 thumbnail: ""
 ---
 
-# 자바스크립트에서 안전한 최대 정수 값은 얼마일까?
+자바스크립트에서 아래 두 수는 같을까요?
 
-### 정수에서의 안전함
+```js
+console.log(9007199254740992 === 9007199254740993); // ?
+```
 
-자바스크립트에서 **"안전한"** 최대 정수의 값은 얼마일까?  
-여기서의 안전함이란 정수를 정확하고 올바르게 비교할 수 있음을 의미한다. 
+직관적으로는 당연히 다른 수입니다. 그런데 자바스크립트에서 실행해보면 `true`가 반환됩니다.
 
-자바스크립트의 `Number` 자료형은 ECMAScript는 [IEEE 754](https://en.wikipedia.org/wiki/IEEE_754)에 기술된 배정밀도 부동소숫점 형식 숫자 체계를 사용한다.  
-따라서, -(2<sup>53</sup>- 1)과 2<sup>53</sup> - 1 사이의 숫자만 안전하게 표현할 수 있으며 범위를 벗어나면, 더 이상 정수를 안전하게 표시할 수 없다. 
+자바스크립트는 정수를 2<sup>53</sup> - 1까지만 안전하게 표현할 수 있습니다. 이 범위를 넘으면 에러가 나지 않고, 조용히 틀린 값을 반환합니다. 바로 위처럼요.
 
-### 안전한 최대 정수 값 확인하기
+## 왜 자바스크립트는 큰 정수를 제대로 표현하지 못할까요?
 
-`Number`로 사용 가능한 최대 정수 값은 Number의 정적 속성 [Number.MAX_SAFE_INTEGER](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_SAFE_INTEGER)을 통해 확인할 수 있으며,  
-전달된 정수의 값이 2<sup>53</sup> - 1을 초과하지 않는 안전한 값인지 확인하기 위해서는 [Number.isSafeInteger()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Number/isSafeInteger) 매서드를 사용하여 확인할 수 있다. 
+자바스크립트의 `Number` 자료형은 [IEEE 754](https://en.wikipedia.org/wiki/IEEE_754) 배정밀도 부동소수점 형식을 사용합니다. 64비트로 실수를 표현하는데, 구조가 이렇습니다.
 
+| 비트 | 역할 |
+|------|------|
+| 1비트 | 부호 |
+| 11비트 | 지수부 |
+| 52비트 | 소수부(가수부) |
+
+정수도 이 구조를 벗어날 수 없습니다. 소수부 52비트에 암묵적인 1비트를 더한 **53비트**가 정수를 안전하게 표현할 수 있는 한계입니다.
+
+결국 -(2<sup>53</sup> - 1)에서 2<sup>53</sup> - 1 사이를 벗어나는 정수는 더 이상 정확하게 표현할 수 없습니다.
+
+## 자바스크립트에서 "안전한" 정수 범위를 어떻게 알 수 있을까요?
+
+여기서 **"안전하다"**는 건 정수를 정확하게 표현하고 올바르게 비교할 수 있다는 뜻입니다.
+
+`Number.MAX_SAFE_INTEGER`로 안전한 최댓값을 확인할 수 있습니다. 값은 2<sup>53</sup> - 1, 즉 9007199254740991입니다.
 
 ```js
 const x = Number.MAX_SAFE_INTEGER + 1;
 const y = Number.MAX_SAFE_INTEGER + 2;
 
-console.log(Number.isSafeInteger(x));   // false
-console.log(Number.isSafeInteger(y));   // false
+console.log(Number.MAX_SAFE_INTEGER); // 9007199254740991
+console.log(Number.isSafeInteger(x)); // false
+console.log(Number.isSafeInteger(y)); // false
 
-console.log(Number.MAX_SAFE_INTEGER);   // 9007199254740991
-console.log(x === y);                   // true
+console.log(x === y); // true ← 다른 값인데 같다고 나옵니다
 ```
 
-`Number.MAX_SAFE_INTEGER`보다 큰 값은 실제로는 `Number.MAX_SAFE_INTEGER`와 같은 값으로 취급되어 정확한 비교를 할 수 없다.  
+`Number.isSafeInteger()`로 특정 값이 안전한 범위 안에 있는지도 검사할 수 있습니다. 처음 예시로 돌아가면, `id1`과 `id2`가 같다고 나온 이유가 바로 이것입니다. 두 값 모두 `Number.MAX_SAFE_INTEGER`를 넘었기 때문에 같은 부동소수점 값으로 수렴한 것입니다.
 
-### BigInt를 통한 큰 정수 처리
+## 2<sup>53</sup> - 1을 초과하는 정수는 어떻게 다뤄야 할까요?
 
-자바스크립트에서 `Number`의 최댓값인 2<sup>53</sup> - 1. 보다 큰 정수 숫자를 다뤄야 한다면 명시적으로 `BigInt`를 사용해야 한다.  
-`BigInt`는 `Number` 자료형과는 달리 2<sup>53</sup> - 1 보다 큰 정수를 안전하게 처리할 수 있다.
+그래서 자바스크립트는 `BigInt`를 제공합니다. `BigInt`는 `Number`와 달리 크기 제한 없이 정수를 안전하게 처리할 수 있습니다.
 
 ```js
+// 리터럴 뒤에 n을 붙입니다
 const theBiggestInt = 9007199254740991n;
 
+// BigInt() 함수로도 만들 수 있습니다
 const alsoHuge = BigInt(9007199254740991); // 9007199254740991n
 ```
 
-`BigInt`를 `Number`로 변환하는 과정에서 정확도를 유실할 수 있으므로, 2<sup>53</sup>보다 큰 값을 예상할 수 있는 경우에는 `BigInt`만 사용하는 것이 좋다.
+단, `BigInt`를 다시 `Number`로 변환하면 정확도를 잃을 수 있습니다. 2<sup>53</sup>을 초과하는 값을 다룬다면 처음부터 `BigInt`만 사용하는 것이 안전합니다.
+
+## 정리하면
+
+- 자바스크립트 `Number`는 IEEE 754 배정밀도 부동소수점 형식을 사용하기 때문에 표현 가능한 안전한 정수 범위가 존재합니다.
+- 안전한 최대 정수는 `Number.MAX_SAFE_INTEGER`(2<sup>53</sup> - 1 = 9007199254740991)이며, `Number.isSafeInteger()`로 검사할 수 있습니다.
+- 이 범위를 벗어나면 서로 다른 정수가 같은 값으로 취급되어 비교 연산이 의도대로 동작하지 않습니다.
+- 큰 정수를 안전하게 다루려면 `BigInt`를 사용하고, 한 번 `BigInt`를 쓰기 시작했다면 `Number`로 다시 변환하지 않는 것이 좋습니다.
