@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import { formatDate } from '@/lib/format-date'
 import { absoluteUrl } from '@/lib/seo'
@@ -31,6 +32,18 @@ export function ArticleLayout({ post, adjacent, related, series }: ArticleLayout
           <span aria-hidden="true"> / </span>
           <span className="max-w-[40ch] truncate">{post.title}</span>
         </nav>
+
+        {post.thumbnail && (
+          <div className="relative mb-8 aspect-7/4 overflow-hidden rounded-xl">
+            <Image
+              src={post.thumbnail}
+              alt={post.title}
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
+        )}
 
         <Heading as="h1" size="xl" className="mb-3.5">
           {post.title}
