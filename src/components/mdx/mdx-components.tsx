@@ -1,4 +1,4 @@
-import type { ComponentPropsWithoutRef } from 'react'
+import { Children, isValidElement, type ComponentPropsWithoutRef, type ReactElement } from 'react'
 import type { MDXComponents } from 'mdx/types'
 import { CodeBlock } from '@/components/mdx/code-block'
 import { HeadingAnchor } from '@/components/mdx/heading-anchor'
@@ -11,15 +11,36 @@ import { Kbd } from '@/components/ui/kbd'
 import { Heading } from '@/components/ui/heading'
 
 export const mdxComponents: MDXComponents = {
-  a: ({ className, ...props }: ComponentPropsWithoutRef<'a'>) => {
+  a: ({ className, children, ...props }: ComponentPropsWithoutRef<'a'>) => {
     if (className?.includes('heading-anchor')) {
-      return <HeadingAnchor href={props.href} {...props} />
+      return <HeadingAnchor href={props.href} {...props}>{children}</HeadingAnchor>
     }
+    const isExternal = typeof props.href === 'string' && props.href.startsWith('http')
     return (
       <a
         className="text-primary underline underline-offset-2 decoration-1 hover:decoration-2 dark:text-primary-on-dark"
+        target={isExternal ? '_blank' : undefined}
+        rel={isExternal ? 'noopener noreferrer' : undefined}
         {...props}
-      />
+      >
+        {children}
+        {isExternal && (
+          <svg
+            width="10"
+            height="10"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+            className="mb-0.5 ml-0.5 inline opacity-60"
+          >
+            <path d="M7 17 17 7M9 7h8v8" />
+          </svg>
+        )}
+      </a>
     )
   },
   h2: (props: ComponentPropsWithoutRef<'h2'>) => (
@@ -46,15 +67,35 @@ export const mdxComponents: MDXComponents = {
       {...props}
     />
   ),
-  p: (props: ComponentPropsWithoutRef<'p'>) => (
-    <p
-      className="text-body dark:text-body-on-dark text-sm leading-[1.47] tracking-[-0.374px] my-md"
-      {...props}
-    />
-  ),
+  code: ({ className, ...props }: ComponentPropsWithoutRef<'code'>) => {
+    // rehype-pretty-code는 펜스드 블록 code에 data-language를 항상 주입
+    if ('data-language' in props) return <code className={className} {...props} />
+    return (
+      <code
+        className="rounded-xs border border-hairline bg-canvas-parchment px-0.5 py-0.5 font-mono dark:border-ink-muted-80 dark:bg-surface-tile-2"
+        {...props}
+      />
+    )
+  },
+  p: ({ children, ...props }: ComponentPropsWithoutRef<'p'>) => {
+    // MDX는 standalone 이미지를 <p>로 감싸는데, img 컴포넌트가 <figure>를 반환하면
+    // <p><figure> 구조가 되어 hydration 에러 발생 → figure 단독 자식이면 <p> 제거
+    const arr = Children.toArray(children)
+    if (arr.length === 1 && isValidElement(arr[0]) && (arr[0] as ReactElement).type === 'figure') {
+      return <>{children}</>
+    }
+    return (
+      <p
+        className="text-body dark:text-body-on-dark text-sm sm:text-md leading-[1.7] tracking-[-0.374px] my-md"
+        {...props}
+      >
+        {children}
+      </p>
+    )
+  },
   blockquote: (props: ComponentPropsWithoutRef<'blockquote'>) => (
     <blockquote
-      className="border-l-2 border-primary dark:border-primary-on-dark bg-canvas-parchment dark:bg-surface-tile-2 pl-lg pr-md py-sm my-lg text-ink-muted-80 dark:text-body-muted"
+      className="border-l-2 border-primary dark:border-primary-on-dark bg-canvas-parchment dark:bg-surface-tile-2 pl-lg pr-md py-sm my-lg text-ink-muted-80 dark:text-body-muted [&>p]:my-0"
       {...props}
     />
   ),
@@ -78,15 +119,30 @@ export const mdxComponents: MDXComponents = {
   ),
   li: (props: ComponentPropsWithoutRef<'li'>) => (
     <li
-      className="text-body dark:text-body-on-dark text-sm leading-[1.47] my-xs"
+      className="text-body dark:text-body-on-dark text-sm sm:text-md leading-[1.7] my-xs"
       {...props}
     />
+  ),
+  img: ({ src, alt, ...props }: ComponentPropsWithoutRef<'img'>) => (
+    <figure className="my-xl">
+      <img
+        src={src}
+        alt={alt ?? ''}
+        className="w-full rounded-sm"
+        {...props}
+      />
+      {alt && (
+        <figcaption className="mt-xs text-center text-sm text-ink-muted-48 dark:text-body-muted">
+          {alt}
+        </figcaption>
+      )}
+    </figure>
   ),
   pre: CodeBlock,
   table: (props: ComponentPropsWithoutRef<'table'>) => (
     <div className="my-lg overflow-x-auto">
       <table
-        className="w-full border-collapse text-[15px]"
+        className="w-full border-collapse text-sm sm:text-md"
         {...props}
       />
     </div>
@@ -106,13 +162,13 @@ export const mdxComponents: MDXComponents = {
   ),
   th: (props: ComponentPropsWithoutRef<'th'>) => (
     <th
-      className="px-sm py-[10px] text-left font-semibold text-ink dark:text-body-on-dark"
+      className="px-sm py-2.5 text-left font-semibold text-ink dark:text-body-on-dark"
       {...props}
     />
   ),
   td: (props: ComponentPropsWithoutRef<'td'>) => (
     <td
-      className="px-sm py-[10px] text-body dark:text-body-on-dark"
+      className="px-sm py-2.5 text-body dark:text-body-on-dark"
       {...props}
     />
   ),
