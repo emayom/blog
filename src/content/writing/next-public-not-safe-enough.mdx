@@ -1,0 +1,179 @@
+---
+title: ".env를 .gitignore에 올렸으니 안전할 거라는 착각에 대하여"
+date: "2026-07-07"
+tags: ["env"]
+draft: false
+featured: false
+description: ".env를 Git에 올리지 않아도 브라우저가 받는 번들은 public입니다. 클라이언트에 실리면 secret이 아니라 문자열입니다."
+---
+
+코드에 시크릿을 직접 적지 않는 것은 개발자들의 상식입니다. API 키 같은 민감한 정보는 `.env` 파일로 분리하고, `.gitignore`에 등록해 Git에 올라가지 않도록 관리합니다.
+
+그런데 이 정석을 전부 지키고도 API 키가 통째로 노출되는 배포가 있습니다. 에러도 없고, 코드도 잘 동작합니다. 간단한 뉴스레터 폼으로 이 상황을 재연해 보겠습니다.
+
+`NewsletterForm.tsx`는 입력받은 이메일을 메일 전송 API로 보내는 `'use client'` 컴포넌트입니다. API 호출에 키가 필요하니, `.env`에 넣어둔 키를 불러와 사용합니다.
+
+```tsx
+'use client'
+
+import { useState } from 'react';
+
+export default function NewsletterForm() {
+  const [email, setEmail] = useState('');
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success'>('idle');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus('loading');
+
+    const apiKey = process.env.NEXT_PUBLIC_EMAIL_API_KEY;
+
+    await fetch('https://api.emailservice.com/subscribe', {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${apiKey}` },
+      body: JSON.stringify({ email }),
+    });
+
+    setStatus('success');
+  };
+  // ...
+}
+```
+
+막상 테스트해 보면 API 키 값은 허무하게도 빈 문자열로 뜹니다. Next.js가 노출을 막기 위해 접두사 없는 변수를 클라이언트 번들에서 빈 문자열로 치환하기 때문입니다. 
+환경변수명 앞에 `NEXT_PUBLIC_`을 붙여봅니다. 코드가 정상 작동하고, 메일도 잘 전송됩니다. "아, 원래 이렇게 쓰는 거구나!" 하고 기분 좋게 배포를 진행합니다.
+
+분리도 잘했고, Git에도 올리지 않았습니다. 하지만 안전하지 않습니다. 
+
+`.env`가 Git에 올라가지 않았을 뿐, 키는 이미 빌드된 번들 안에 박혀 있습니다. 
+클라이언트에 실리는 순간, 아무리 꽁꽁 숨겼던 시크릿이라도 누구나 읽을 수 있는 문자열이 됩니다.
+
+## 번들러는 환경변수를 어떻게 처리할까요?
+
+번들러는 빌드가 시작되면 `.env` 파일을 읽어 환경변수를 메모리에 올립니다.
+그런 다음 소스 코드를 분석하면서 `process.env.VARIABLE_NAME` 형태의 표현식을 찾아, 해당 값의 문자열 리터럴로 직접 치환합니다.
+
+```ts
+// 소스 코드
+const key = process.env.NEXT_PUBLIC_EMAIL_API_KEY
+
+// 빌드 후 번들
+const key = "api-key-abcdef1234567890"
+```
+
+문제는 이 번들 파일을 누구나 열어볼 수 있다는 점입니다. Chrome DevTools의 Sources 탭에서 열면 값이 평문으로 바로 보이고, 소스맵이 있다면 원본 코드에서 어디에 쓰였는지 위치까지 드러납니다.
+
+## 그렇다면 접두사 규칙은 어떤 역할을 할까요?
+
+이 문제를 제어하기 위해 프론트엔드 빌드 도구들은 접두사 규칙을 도입했습니다. CRA는 `REACT_APP_`, Vite는 `VITE_`, Next.js는 `NEXT_PUBLIC_` 접두사가 붙은 변수만 번들에 포함합니다.
+
+Next.js 기준으로 정리하면 다음과 같습니다.
+
+| 변수 형식 | 클라이언트 접근 | 서버 접근 |
+|-----------|----------------|----------|
+| `NEXT_PUBLIC_*` | 가능 (번들에 인라인) | 가능 |
+| 접두사 없음 | 빈 문자열로 치환 | 가능 |
+
+그래서 **`NEXT_PUBLIC_`은 "브라우저에 공개해도 괜찮은 값"에만 붙여야 합니다.**
+
+```bash
+# 붙여도 되는 것들
+NEXT_PUBLIC_SITE_URL=https://example.com        # 공개 도메인
+NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX                  # 공개 추적 ID — 페이지 소스에 이미 노출됨
+NEXT_PUBLIC_KAKAO_MAP_KEY=abcdef1234            # 도메인 제한 키 — 콘솔에서 허용 도메인 등록 시
+NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGci...       # RLS로 접근 제어된 공개 키
+
+# 절대 붙이면 안 되는 것들
+DATABASE_URL=postgresql://...                   # 직접 DB 접근
+JWT_SECRET=...                                  # 서명 키
+OPENAI_API_KEY=sk-...                           # 과금 발생
+```
+
+## 그럼 메일 API 키는 어떻게 써야 할까요?
+
+키를 브라우저로 보내지 않으면 됩니다. 외부 API 호출을 서버로 옮기고, 클라이언트는 우리 서버의 Route Handler만 호출하는 구조입니다.
+
+```ts
+// app/api/subscribe/route.ts
+export async function POST(request: Request) {
+  const { email } = await request.json();
+
+  // 접두사가 없으므로 번들에 포함되지 않고, 서버에서만 읽힙니다
+  const apiKey = process.env.EMAIL_API_KEY;
+
+  const res = await fetch('https://api.emailservice.com/subscribe', {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${apiKey}` },
+    body: JSON.stringify({ email }),
+  });
+
+  return Response.json({ ok: res.ok });
+}
+```
+
+이제 `NewsletterForm.tsx`는 키의 존재 자체를 모릅니다.
+
+```tsx
+'use client'
+
+import { useState } from 'react';
+
+export default function NewsletterForm() {
+  const [email, setEmail] = useState('');
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success'>('idle');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus('loading');
+
+    await fetch('/api/subscribe', {
+      method: 'POST',
+      body: JSON.stringify({ email }),
+    });
+
+    setStatus('success');
+  };
+  // ...
+}
+```
+
+브라우저가 받는 번들에 남는 것은 `/api/subscribe`라는 경로뿐입니다. 키는 처음부터 끝까지 서버 밖으로 나가지 않습니다.
+
+## 접두사 규칙을 지켜도 값은 샐 수 있습니다
+
+접두사 규칙만으로는 막지 못하는 문제가 두 가지 더 있습니다. 하나는 값이 조용히 사라지는 문제고, 하나는 실제로 새는 문제입니다.
+
+#### `'use client'`를 추가하면 어떻게 될까요?
+
+처음에는 Server Component로 만들었지만, 인터랙션이 필요해서 `'use client'`를 추가하는 경우가 있습니다. 이때 서버 전용 변수를 그대로 쓰고 있다면, 에러 없이 조용히 빈 문자열로 바뀝니다.
+
+```tsx
+'use client'
+
+// Server Component일 때는 잘 동작했지만
+// 'use client'를 붙인 순간부터 빈 문자열
+const dbUrl = process.env.DATABASE_URL  
+```
+
+해결 방법은 앞서 본 메일 API 키와 같습니다. 서버 전용 변수를 읽는 로직을 Server Action이나 Route Handler로 분리하고, 클라이언트는 호출만 하도록 바꾸면 됩니다.
+
+#### 서버에서 클라이언트로 props를 넘길 때는요?
+
+접두사가 없어도 props로 전달하면 클라이언트에 노출됩니다.
+
+```tsx
+// hydration 페이로드에 포함되어 브라우저에서 읽힙니다
+export default function Page() {
+  return <ClientComponent secret={process.env.SOME_SECRET} />
+}
+```
+
+Next.js는 Server Component의 렌더링 결과를 직렬화해서 클라이언트로 전송합니다. 
+그래서 서버 전용 값은 서버에서 처리를 완료하고, 그 결과만 props로 넘겨야 합니다.
+
+## 정리하면
+
+- `.env`를 Git에 올리지 않아도 브라우저가 받는 번들은 public입니다.
+- 클라이언트에 실리면 secret이 아니라 문자열입니다.
+- `NEXT_PUBLIC_`은 브라우저에 공개해도 괜찮은 값에만 붙입니다. 나머지는 서버에서만 읽습니다.
+- 접두사 규칙 밖의 함정도 있습니다: `'use client'` 전환 시 서버 전용 변수는 조용히 빈 문자열이 되고, Server Component props로 넘기면 직렬화되어 노출됩니다.
