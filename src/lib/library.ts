@@ -65,3 +65,10 @@ export function getAllLibraryItems(): LibraryItemMeta[] {
 export function getLibraryItemsByType(type: LibraryType): LibraryItemMeta[] {
   return getAllLibraryItems().filter(item => item.type === type)
 }
+
+/* frontmatter 블록을 제거한 본문 텍스트. 본문 없으면 빈 문자열. */
+export function getLibraryBody(slug: string): string {
+  const source = readSource(slug)
+  if (source === null) return ''
+  return source.replace(/^---\r?\n[\s\S]*?\r?\n---/, '').trim()
+}
