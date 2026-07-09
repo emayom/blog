@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { getAllLibraryItems, getLibraryItemsByType, groupByYear } from './library'
+import { getAllLibraryItems, getLibraryBody, getLibraryItemsByType, groupByYear } from './library'
 import type { LibraryItemMeta } from '@/types/library'
 
 function item(slug: string, date?: string): LibraryItemMeta {
@@ -21,6 +21,17 @@ describe('library', () => {
     items.forEach((item) => {
       if (item.id !== undefined) expect(typeof item.id).toBe('string')
     })
+  })
+})
+
+describe('getLibraryBody', () => {
+  it('본문 있는 slug는 frontmatter 없는 텍스트 반환', () => {
+    const body = getLibraryBody('a-short-philosophy-from-birds')
+    expect(body).not.toContain('---')
+    expect(body).toContain('티티새')
+  })
+  it('존재하지 않는 slug는 빈 문자열', () => {
+    expect(getLibraryBody('does-not-exist')).toBe('')
   })
 })
 
