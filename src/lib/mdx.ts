@@ -61,14 +61,26 @@ export function parseFrontmatterBlock(source: string): Record<string, unknown> {
   if (!match) return {}
 
   const result: Record<string, unknown> = {}
-  for (const line of match[1].split(/\r?\n/)) {
+  const lines = match[1].split(/\r?\n/)
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i]
     const fieldMatch = line.match(/^(\w+):\s*(.*)$/)
     if (!fieldMatch) continue
 
     const key = fieldMatch[1]
     const rawValue = fieldMatch[2].trim()
 
-    if (rawValue.startsWith('[') && rawValue.endsWith(']')) {
+    // 값이 빈 키 다음에 `  - ...` 가 이어지면 YAML 블록 리스트 — 쉼표가 든
+    // 문자열도 안전하게 담긴다(인라인 [a,b]는 쉼표로 쪼개져 못 씀)
+    if (rawValue === '') {
+      const items: string[] = []
+      while (i + 1 < lines.length && /^\s*-\s+/.test(lines[i + 1])) {
+        i++
+        items.push(lines[i].replace(/^\s*-\s+/, '').trim().replace(/^["']|["']$/g, ''))
+      }
+      result[key] = items.length > 0 ? items : ''
+    }
+    else if (rawValue.startsWith('[') && rawValue.endsWith(']')) {
       result[key] = rawValue
         .slice(1, -1)
         .split(',')

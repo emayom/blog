@@ -68,14 +68,14 @@ test.describe('책장 페이지', () => {
 })
 
 test.describe('책장 항목 상세 페이지', () => {
-  test('본문 있는 항목은 감상 본문과 복귀 링크를 표시한다', async ({ page }) => {
+  test('공유 문장이 있는 항목은 문장 섹션과 복귀 링크를 표시한다', async ({ page }) => {
     await page.goto('/library/a-short-philosophy-from-birds')
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('새들이 전하는 짧은 철학')
     await expect(page.getByText('티티새', { exact: false })).toBeVisible()
     await expect(page.getByRole('link', { name: '← 책장으로' })).toBeVisible()
   })
 
-  test('본문 없는 항목은 메타와 빈 상태를 표시한다', async ({ page }) => {
+  test('문장·감상이 없는 항목은 메타와 빈 상태를 표시한다', async ({ page }) => {
     await page.goto('/library/frieren-beyond-journeys-end-s1')
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('장송의 프리렌 1기')
     await expect(page.getByText('아직 감상 기록이 없어요')).toBeVisible()

@@ -31,10 +31,28 @@ describe('LibraryDetail', () => {
     expect(screen.getByRole('link', { name: '책장' })).toHaveAttribute('href', '/library')
   })
 
-  it('본문이 없으면 EmptyState를 렌더한다', () => {
+  it('문장·감상이 모두 없으면 EmptyState를 렌더한다', () => {
     render(<LibraryDetail item={item()} hasBody={false} />)
     expect(screen.getByText('아직 감상 기록이 없어요')).toBeInTheDocument()
     expect(screen.getByRole('link', { name: '책장으로 돌아가기' })).toHaveAttribute('href', '/library')
+  })
+
+  it('quotes가 있으면 문장 섹션과 복귀 링크를 렌더한다', () => {
+    render(<LibraryDetail item={item({ quotes: ['공유하고 싶은 문장 하나'] })} hasBody={false} />)
+    expect(screen.getByText('공유하고 싶은 문장 하나')).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: '← 책장으로' })).toBeInTheDocument()
+    expect(screen.queryByText('아직 감상 기록이 없어요')).not.toBeInTheDocument()
+  })
+
+  it('quotes와 감상이 모두 있으면 둘 다 렌더한다', () => {
+    render(
+      <LibraryDetail
+        item={item({ quotes: ['밑줄 문장'], content: <p>감상 본문입니다</p> })}
+        hasBody
+      />,
+    )
+    expect(screen.getByText('밑줄 문장')).toBeInTheDocument()
+    expect(screen.getByText('감상 본문입니다')).toBeInTheDocument()
   })
 
   it('본문이 있으면 content와 복귀 링크를 렌더한다', () => {
