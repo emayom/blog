@@ -12,7 +12,7 @@ export const siteConfig = {
 
 export const mainNav: NavItem[] = [
   { label: '글', href: '/writing', enabled: true },
-  { label: '메모', href: '/notes', enabled: false },
+  { label: '메모', href: '/notes', enabled: true },
   { label: '책장', href: '/library', enabled: true },
   { label: '소개', href: '/about', enabled: true },
 ]
@@ -46,6 +46,7 @@ export const footerNav: NavGroup[] = [
     title: '탐색',
     items: [
       { label: '글', href: '/writing', enabled: true },
+      { label: '메모', href: '/notes', enabled: true },
       { label: '소개', href: '/about', enabled: true },
       { label: '아카이브', href: '/archive', enabled: true },
     ],
@@ -53,7 +54,6 @@ export const footerNav: NavGroup[] = [
   {
     title: '둘러보기',
     items: [
-      { label: '메모', href: '/notes', enabled: false },
       { label: '책장', href: '/library', enabled: true },
     ],
   },
