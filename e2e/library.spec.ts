@@ -87,6 +87,13 @@ test.describe('책장 항목 상세 페이지', () => {
     await expect(page).toHaveURL(/\/library$/)
   })
 
+  test('book 항목에서 복귀하면 books 탭(?type=book)으로 이동한다', async ({ page }) => {
+    await page.goto('/library/a-short-philosophy-from-birds')
+    await page.getByRole('link', { name: '← 책장으로' }).click()
+    await expect(page).toHaveURL(/\/library\?type=book$/)
+    await expect(page.getByRole('heading', { level: 1 }).first()).toHaveText('books')
+  })
+
   test('존재하지 않는 slug는 404', async ({ page }) => {
     const res = await page.goto('/library/does-not-exist-slug')
     expect(res?.status()).toBe(404)
