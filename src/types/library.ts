@@ -6,7 +6,6 @@ export interface LibraryItemFrontmatter {
   title: string
   type: LibraryType
   date?: string
-  rating?: number
   cover?: string
   author?: string
   genres?: string[]

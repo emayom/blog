@@ -9,26 +9,14 @@ interface LibraryDetailProps {
   hasBody: boolean
 }
 
-function Rating({ rating }: { rating: number }) {
-  const filled = Math.round(rating)
-  return (
-    <span aria-label={`별점 ${rating}/5`}>
-      {[1, 2, 3, 4, 5].map(n => (
-        <span key={n} aria-hidden="true" className={n <= filled ? 'text-primary' : 'text-ink-muted-48'}>
-          ★
-        </span>
-      ))}
-    </span>
-  )
-}
-
 export function LibraryDetail({ item, hasBody }: LibraryDetailProps) {
   const ratio = item.width && item.height ? item.width / item.height : 0.6
   const hasQuotes = item.quotes !== undefined && item.quotes.length > 0
+  // 목록으로 복귀 시 항목의 카테고리 탭을 유지 (book만 파라미터 필요 — anime는 기본값)
+  const backHref = item.type === 'book' ? '/library?type=book' : '/library'
 
   const metaParts = [
     item.date && <time key="date" dateTime={item.date}>{formatDate(item.date)}</time>,
-    item.rating !== undefined && <Rating key="rating" rating={item.rating} />,
     item.genres && item.genres.length > 0 && <span key="genres">{item.genres.join('·')}</span>,
   ].filter(Boolean)
 
@@ -37,7 +25,7 @@ export function LibraryDetail({ item, hasBody }: LibraryDetailProps) {
       <nav aria-label="breadcrumb" className="mb-6 text-xs tracking-[-0.12px] text-ink-muted-48">
         <Link href="/" className="text-primary hover:underline dark:text-primary-on-dark">홈</Link>
         <span aria-hidden="true"> / </span>
-        <Link href="/library" className="text-primary hover:underline dark:text-primary-on-dark">책장</Link>
+        <Link href={backHref} className="text-primary hover:underline dark:text-primary-on-dark">책장</Link>
         <span aria-hidden="true"> / </span>
         <span className="max-w-[40ch] truncate">{item.title}</span>
       </nav>
@@ -101,28 +89,34 @@ export function LibraryDetail({ item, hasBody }: LibraryDetailProps) {
         ? (
             <>
               {hasQuotes && (
-                <section aria-label="공유하고 싶은 문장" className="space-y-lg">
-                  {item.quotes!.map((quote, i) => (
-                    <blockquote
-                      key={i}
-                      className="border-l-2 border-primary bg-canvas-parchment py-sm pl-lg pr-md text-[17px] leading-[1.47] tracking-[-0.374px] text-ink-muted-80 dark:border-primary-on-dark dark:bg-surface-tile-2 dark:text-body-muted"
-                    >
-                      {quote}
-                    </blockquote>
-                  ))}
+                <section aria-label="문장수집">
+                  <Heading as="h2" size="sm" className="mb-4">문장수집</Heading>
+                  <div className="space-y-lg">
+                    {item.quotes!.map((quote, i) => (
+                      <blockquote
+                        key={i}
+                        className="border-l-2 border-primary bg-canvas-parchment py-sm pl-lg pr-md text-[17px] leading-[1.47] tracking-[-0.374px] text-ink-muted-80 dark:border-primary-on-dark dark:bg-surface-tile-2 dark:text-body-muted"
+                      >
+                        {quote}
+                      </blockquote>
+                    ))}
+                  </div>
                 </section>
               )}
 
               {hasQuotes && hasBody && <div className="my-8 h-px bg-hairline dark:bg-ink-muted-80" />}
 
               {hasBody && (
-                <div className="text-[17px] leading-[1.47] tracking-[-0.374px] text-ink-muted-80 dark:text-body-muted [&_p]:mb-md">
-                  {item.content}
-                </div>
+                <section>
+                  <Heading as="h2" size="sm" className="mb-4">서평</Heading>
+                  <div className="text-base leading-[1.47] tracking-[-0.374px] text-ink-muted-80 dark:text-body-muted [&_p]:mb-md">
+                    {item.content}
+                  </div>
+                </section>
               )}
 
               <Link
-                href="/library"
+                href={backHref}
                 className="mt-12 inline-block text-sm tracking-[-0.224px] text-primary dark:text-primary-on-dark"
               >
                 ← 책장으로
@@ -133,7 +127,7 @@ export function LibraryDetail({ item, hasBody }: LibraryDetailProps) {
             <EmptyState
               variant="empty"
               title="아직 감상 기록이 없어요"
-              action={{ label: '책장으로 돌아가기', href: '/library' }}
+              action={{ label: '책장으로 돌아가기', href: backHref }}
             />
           )}
     </div>

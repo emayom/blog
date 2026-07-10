@@ -36,7 +36,6 @@ function normalizeFrontmatter(raw: Record<string, unknown>): LibraryItemFrontmat
     title: typeof raw.title === 'string' ? raw.title : '',
     type: raw.type === 'anime' ? 'anime' : 'book',
     date: typeof raw.date === 'string' && raw.date !== '' ? raw.date : undefined,
-    rating: typeof raw.rating === 'number' && Number.isFinite(raw.rating) ? raw.rating : undefined,
     cover: typeof raw.cover === 'string' && raw.cover !== '' ? raw.cover : undefined,
     author: typeof raw.author === 'string' && raw.author !== '' ? raw.author : undefined,
     genres: Array.isArray(raw.genres)
