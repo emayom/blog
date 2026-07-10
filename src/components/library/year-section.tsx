@@ -49,6 +49,7 @@ export function YearSection({ year, items }: YearSectionProps) {
                 showLabel
                 isExpanded={isRep && expandedSeries === item.series}
                 onToggle={isRep ? () => toggle(item.series!) : undefined}
+                href={isRep ? undefined : `/library/${item.slug}`}
               />
             </div>
           )

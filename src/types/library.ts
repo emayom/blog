@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react'
+
 export type LibraryType = 'book' | 'anime'
 
 export interface LibraryItemFrontmatter {
@@ -21,4 +23,8 @@ export interface LibraryItemMeta extends LibraryItemFrontmatter {
   slug: string
   seriesCount?: number
   seriesItems?: LibraryItemMeta[]
+}
+
+export interface LibraryItem extends LibraryItemMeta {
+  content: ReactNode
 }
