@@ -83,7 +83,7 @@ test.describe('책장 항목 상세 페이지', () => {
 
   test('breadcrumb으로 책장 목록에 복귀한다', async ({ page }) => {
     await page.goto('/library/frieren-beyond-journeys-end-s1')
-    await page.getByRole('link', { name: '책장' }).click()
+    await page.getByLabel('breadcrumb').getByRole('link', { name: '책장' }).click()
     await expect(page).toHaveURL(/\/library$/)
   })
 
