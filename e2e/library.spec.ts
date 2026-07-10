@@ -66,3 +66,36 @@ test.describe('책장 페이지', () => {
     await expect(page.getByText('검색 결과가 없어요')).toBeVisible()
   })
 })
+
+test.describe('책장 항목 상세 페이지', () => {
+  test('본문 있는 항목은 감상 본문과 복귀 링크를 표시한다', async ({ page }) => {
+    await page.goto('/library/a-short-philosophy-from-birds')
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('새들이 전하는 짧은 철학')
+    await expect(page.getByText('티티새', { exact: false })).toBeVisible()
+    await expect(page.getByRole('link', { name: '← 책장으로' })).toBeVisible()
+  })
+
+  test('본문 없는 항목은 메타와 빈 상태를 표시한다', async ({ page }) => {
+    await page.goto('/library/frieren-beyond-journeys-end-s1')
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('장송의 프리렌 1기')
+    await expect(page.getByText('아직 감상 기록이 없어요')).toBeVisible()
+  })
+
+  test('breadcrumb으로 책장 목록에 복귀한다', async ({ page }) => {
+    await page.goto('/library/frieren-beyond-journeys-end-s1')
+    await page.getByRole('link', { name: '책장' }).click()
+    await expect(page).toHaveURL(/\/library$/)
+  })
+
+  test('존재하지 않는 slug는 404', async ({ page }) => {
+    const res = await page.goto('/library/does-not-exist-slug')
+    expect(res?.status()).toBe(404)
+  })
+
+  test('Featured 카드 클릭 시 상세 페이지로 이동한다', async ({ page }) => {
+    await page.goto('/library')
+    await page.getByRole('link', { name: '장송의 프리렌 1기' }).first().click()
+    await expect(page).toHaveURL(/\/library\/frieren-beyond-journeys-end-s1$/)
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('장송의 프리렌 1기')
+  })
+})

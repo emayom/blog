@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState, type ReactNode } from 'react'
+import Link from 'next/link'
 import { cn } from '@/lib/cn'
 import type { LibraryItemMeta } from '@/types/library'
 
@@ -29,6 +30,7 @@ interface CoverCardProps {
   badges?: ReactNode
   isExpanded?: boolean
   onToggle?: () => void
+  href?: string
 }
 
 export function CoverCard({
@@ -38,6 +40,7 @@ export function CoverCard({
   badges,
   isExpanded,
   onToggle,
+  href,
 }: CoverCardProps) {
   const [loaded, setLoaded] = useState(false)
   const imgRef = useRef<HTMLImageElement>(null)
@@ -106,12 +109,27 @@ export function CoverCard({
 
   if (!showLabel) return cover
 
-  return (
-    <div className="flex shrink-0 flex-col gap-1.5" style={{ width: renderWidth }}>
+  const card = (
+    <>
       {cover}
-      <span className="line-clamp-2 text-center text-xs leading-tight text-ink dark:text-body-on-dark">
+      <span className="line-clamp-2 text-center text-xs leading-tight text-ink group-hover:underline dark:text-body-on-dark">
         {item.title}
       </span>
+    </>
+  )
+
+  // onToggle(시리즈 펼침)이 있으면 토글이 우선 — Link 래핑하지 않는다.
+  if (href && !onToggle) {
+    return (
+      <Link href={href} className="group flex shrink-0 flex-col gap-1.5" style={{ width: renderWidth }}>
+        {card}
+      </Link>
+    )
+  }
+
+  return (
+    <div className="group flex shrink-0 flex-col gap-1.5" style={{ width: renderWidth }}>
+      {card}
     </div>
   )
 }

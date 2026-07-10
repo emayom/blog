@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { getAllLibraryItems, getLibraryBody, getLibraryItemsByType, groupByYear } from './library'
+import { getAllLibraryItems, getLibraryBody, getLibraryItem, getLibraryItemsByType, groupByYear } from './library'
 import type { LibraryItemMeta } from '@/types/library'
 
 function item(slug: string, date?: string): LibraryItemMeta {
@@ -32,6 +32,27 @@ describe('getLibraryBody', () => {
   })
   it('존재하지 않는 slug는 빈 문자열', () => {
     expect(getLibraryBody('does-not-exist')).toBe('')
+  })
+})
+
+describe('getLibraryItem', () => {
+  it('존재하는 slug는 메타와 content를 반환한다', async () => {
+    const item = await getLibraryItem('a-short-philosophy-from-birds')
+    expect(item).not.toBeNull()
+    expect(item?.slug).toBe('a-short-philosophy-from-birds')
+    expect(item?.title).toBe('새들이 전하는 짧은 철학')
+    expect(item?.content).toBeDefined()
+  })
+
+  it('본문 없는 항목도 메타를 반환한다', async () => {
+    const item = await getLibraryItem('frieren-beyond-journeys-end-s1')
+    expect(item).not.toBeNull()
+    expect(item?.title).toBe('장송의 프리렌 1기')
+    expect(getLibraryBody('frieren-beyond-journeys-end-s1')).toBe('')
+  })
+
+  it('존재하지 않는 slug는 null', async () => {
+    expect(await getLibraryItem('does-not-exist')).toBeNull()
   })
 })
 

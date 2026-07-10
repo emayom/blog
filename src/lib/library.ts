@@ -1,7 +1,10 @@
 import fs from 'node:fs'
 import path from 'node:path'
+import { compileMDX } from 'next-mdx-remote/rsc'
 import { parseFrontmatterBlock } from '@/lib/mdx'
-import type { LibraryItemFrontmatter, LibraryItemMeta, LibraryType } from '@/types/library'
+import { mdxComponents } from '@/components/mdx/mdx-components'
+import { rehypePlugins, remarkPlugins } from '@/lib/mdx-options'
+import type { LibraryItem, LibraryItemFrontmatter, LibraryItemMeta, LibraryType } from '@/types/library'
 
 export { collapseBySeries, groupByYear } from '@/lib/library-group'
 
@@ -64,6 +67,26 @@ export function getAllLibraryItems(): LibraryItemMeta[] {
 
 export function getLibraryItemsByType(type: LibraryType): LibraryItemMeta[] {
   return getAllLibraryItems().filter(item => item.type === type)
+}
+
+// prod에서 draft 항목 접근 시 null 반환 (generateStaticParams 미생성과 일관)
+export async function getLibraryItem(slug: string): Promise<LibraryItem | null> {
+  const source = readSource(slug)
+  if (source === null) return null
+
+  const { content } = await compileMDX({
+    source,
+    components: mdxComponents,
+    options: {
+      parseFrontmatter: true,
+      mdxOptions: { remarkPlugins, rehypePlugins },
+    },
+  })
+
+  const meta = { ...normalizeFrontmatter(parseFrontmatterBlock(source)), slug } satisfies LibraryItemMeta
+  if (!isVisible(meta.draft)) return null
+
+  return { ...meta, content }
 }
 
 /* frontmatter 블록을 제거한 본문 텍스트. 본문 없으면 빈 문자열. */

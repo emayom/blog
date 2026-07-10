@@ -26,6 +26,7 @@ export function FeaturedSection({ items }: FeaturedSectionProps) {
             item={item}
             coverHeight={180}
             showLabel
+            href={`/library/${item.slug}`}
             badges={(
               <CoverBadge variant="dark">
                 <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
