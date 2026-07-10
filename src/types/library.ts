@@ -10,6 +10,8 @@ export interface LibraryItemFrontmatter {
   cover?: string
   author?: string
   genres?: string[]
+  /* 공유하고 싶은 문장(밑줄) — 홈 히어로 글귀·상세 문장 섹션에 쓰인다. 본문(감상)과 구분 */
+  quotes?: string[]
   status?: string
   id?: string
   series?: string

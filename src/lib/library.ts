@@ -42,6 +42,9 @@ function normalizeFrontmatter(raw: Record<string, unknown>): LibraryItemFrontmat
     genres: Array.isArray(raw.genres)
       ? raw.genres.filter((g): g is string => typeof g === 'string')
       : undefined,
+    quotes: Array.isArray(raw.quotes)
+      ? raw.quotes.filter((q): q is string => typeof q === 'string')
+      : undefined,
     status: typeof raw.status === 'string' && raw.status !== '' ? raw.status : undefined,
     // id는 항상 string으로 흡수 — ISBN이 number로 파싱돼도 정밀도 손실 방지
     id: raw.id != null ? String(raw.id) : undefined,

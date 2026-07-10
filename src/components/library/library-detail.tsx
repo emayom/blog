@@ -24,6 +24,7 @@ function Rating({ rating }: { rating: number }) {
 
 export function LibraryDetail({ item, hasBody }: LibraryDetailProps) {
   const ratio = item.width && item.height ? item.width / item.height : 0.6
+  const hasQuotes = item.quotes !== undefined && item.quotes.length > 0
 
   const metaParts = [
     item.date && <time key="date" dateTime={item.date}>{formatDate(item.date)}</time>,
@@ -96,12 +97,30 @@ export function LibraryDetail({ item, hasBody }: LibraryDetailProps) {
 
       <div className="my-8 h-px bg-hairline dark:bg-ink-muted-80" />
 
-      {hasBody
+      {hasQuotes || hasBody
         ? (
             <>
-              <div className="text-[17px] leading-[1.47] tracking-[-0.374px] text-ink-muted-80 dark:text-body-muted [&_p]:mb-md">
-                {item.content}
-              </div>
+              {hasQuotes && (
+                <section aria-label="공유하고 싶은 문장" className="space-y-lg">
+                  {item.quotes!.map((quote, i) => (
+                    <blockquote
+                      key={i}
+                      className="border-l-2 border-primary bg-canvas-parchment py-sm pl-lg pr-md text-[17px] leading-[1.47] tracking-[-0.374px] text-ink-muted-80 dark:border-primary-on-dark dark:bg-surface-tile-2 dark:text-body-muted"
+                    >
+                      {quote}
+                    </blockquote>
+                  ))}
+                </section>
+              )}
+
+              {hasQuotes && hasBody && <div className="my-8 h-px bg-hairline dark:bg-ink-muted-80" />}
+
+              {hasBody && (
+                <div className="text-[17px] leading-[1.47] tracking-[-0.374px] text-ink-muted-80 dark:text-body-muted [&_p]:mb-md">
+                  {item.content}
+                </div>
+              )}
+
               <Link
                 href="/library"
                 className="mt-12 inline-block text-sm tracking-[-0.224px] text-primary dark:text-primary-on-dark"

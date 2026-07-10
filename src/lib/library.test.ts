@@ -25,13 +25,23 @@ describe('library', () => {
 })
 
 describe('getLibraryBody', () => {
-  it('본문 있는 slug는 frontmatter 없는 텍스트 반환', () => {
-    const body = getLibraryBody('a-short-philosophy-from-birds')
-    expect(body).not.toContain('---')
-    expect(body).toContain('티티새')
+  it('quotes가 frontmatter로 분리된 항목은 본문이 비어 있다', () => {
+    expect(getLibraryBody('a-short-philosophy-from-birds')).toBe('')
   })
   it('존재하지 않는 slug는 빈 문자열', () => {
     expect(getLibraryBody('does-not-exist')).toBe('')
+  })
+})
+
+describe('quotes frontmatter', () => {
+  it('quotes 리스트를 문자열 배열로 파싱한다', () => {
+    const bird = getLibraryItemsByType('book').find(b => b.slug === 'a-short-philosophy-from-birds')
+    expect(bird?.quotes).toHaveLength(5)
+    expect(bird?.quotes?.[0]).toContain('티티새')
+  })
+  it('quotes 없는 항목은 undefined', () => {
+    const frieren = getLibraryItemsByType('anime').find(a => a.slug === 'frieren-beyond-journeys-end-s1')
+    expect(frieren?.quotes).toBeUndefined()
   })
 })
 

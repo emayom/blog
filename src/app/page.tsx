@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { getPostMetaList } from '@/lib/mdx'
 import { getArchiveCounts } from '@/lib/archive'
-import { getLibraryBody, getLibraryItemsByType } from '@/lib/library'
+import { getLibraryItemsByType } from '@/lib/library'
 import { buildMetadata } from '@/lib/seo'
 import { Hero } from '@/components/home/hero'
 import { MagnifierHero } from '@/components/home/magnifier-hero'
@@ -13,14 +13,14 @@ export const metadata: Metadata = buildMetadata({
   path: '/',
 })
 
-/* nowReading에 본문 감상이 없을 때의 히어로 폴백 문구 */
+/* nowReading에 공유 문장(quotes)이 없을 때의 히어로 폴백 문구 */
 const HERO_FALLBACK = '읽고, 만들고, 씁니다.'
 
 export default function Home() {
   const posts = getPostMetaList()
   const years = getArchiveCounts(posts)
   const nowReading = getLibraryItemsByType('book')[0]
-  const heroBody = (nowReading ? getLibraryBody(nowReading.slug) : '') || HERO_FALLBACK
+  const heroBody = nowReading?.quotes?.join(' ') || HERO_FALLBACK
 
   return (
     <div className="mx-auto max-w-4xl px-6">
