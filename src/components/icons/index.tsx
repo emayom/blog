@@ -10,6 +10,7 @@ export { LinkIcon } from './link'
 export { MailIcon } from './mail'
 export { MoonIcon } from './moon'
 export { SunIcon } from './sun'
+export { PinIcon } from './pin'
 export { ArrowUpRightIcon } from './arrow-up-right'
 
 // config(데이터)는 표시 라벨이 아니라 이 키로 아이콘을 가리켜, 라벨이 바뀌어도
