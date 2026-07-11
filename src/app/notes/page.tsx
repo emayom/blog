@@ -1,7 +1,10 @@
 import type { Metadata } from 'next'
+import { Suspense } from 'react'
 import { getAllNotes } from '@/lib/notes'
+import { getNoteTagCounts } from '@/lib/note-tags'
 import { buildMetadata } from '@/lib/seo'
-import { NotesGrid } from '@/components/notes/notes-grid'
+import { NoteCard } from '@/components/notes/note-card'
+import { NotesView, type NoteCardEntry } from '@/components/notes/notes-view'
 import { EmptyState } from '@/components/ui/empty-state'
 import { Heading } from '@/components/ui/heading'
 
@@ -13,8 +16,11 @@ export const metadata: Metadata = buildMetadata({
 
 export default function NotesPage() {
   const notes = getAllNotes()
-  const pinned = notes.filter(n => n.pinned)
-  const rest = notes.filter(n => !n.pinned)
+  // 고정 메모를 최상단으로 — 각 그룹은 getAllNotes의 최신순을 유지한다.
+  const ordered = [...notes.filter(n => n.pinned), ...notes.filter(n => !n.pinned)]
+  const entries: NoteCardEntry[] = ordered.map(note => ({ note, card: <NoteCard note={note} /> }))
+
+  const tags = getNoteTagCounts(notes)
 
   return (
     <main className="mx-auto max-w-4xl px-6 py-12">
@@ -25,18 +31,9 @@ export default function NotesPage() {
             <EmptyState variant="empty" title="아직 남긴 메모가 없어요" />
           )
         : (
-            <div className="flex flex-col gap-7">
-              {pinned.length > 0 && (
-                <section className="flex flex-col gap-7">
-                  <Heading size="sm">고정된 메모</Heading>
-                  <NotesGrid notes={pinned} />
-                </section>
-              )}
-              <section className="flex flex-col gap-7">
-                {pinned.length > 0 && <Heading size="sm">모든 메모</Heading>}
-                <NotesGrid notes={rest} />
-              </section>
-            </div>
+            <Suspense>
+              <NotesView entries={entries} tags={tags} total={notes.length} />
+            </Suspense>
           )}
     </main>
   )
