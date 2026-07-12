@@ -1,9 +1,12 @@
 import type { Metadata } from 'next'
-import Image from 'next/image'
 import { siteConfig, social } from '@/config/site'
-import profileImg from '@/assets/profile.png'
+import { activities, education, experience } from '@/config/about'
 import { Icon } from '@/components/icons'
+import { ProfileFlipAvatar } from '@/components/profile-flip-avatar'
+import { Heading } from '@/components/ui/heading'
+import { formatExperiencePeriod } from '@/lib/about'
 import { buildMetadata } from '@/lib/seo'
+import { EntryRow } from '@/components/about/entry-row'
 
 export const metadata: Metadata = buildMetadata({
   title: '소개',
@@ -12,25 +15,13 @@ export const metadata: Metadata = buildMetadata({
 })
 
 export default function AboutPage() {
+  const today = new Date()
+  const now = { year: today.getFullYear(), month: today.getMonth() + 1 }
+
   return (
     <main className="mx-auto max-w-4xl px-6 py-12">
-      <div className="grid grid-cols-1 items-center gap-8 sm:grid-cols-[160px_1fr]">
-        <div className="relative size-[150px]">
-          <div className="absolute inset-0 overflow-hidden rounded-full border border-hairline bg-canvas-parchment dark:border-ink-muted-80 dark:bg-surface-tile-2">
-            <Image
-              src={profileImg}
-              alt={`${siteConfig.name} 프로필`}
-              fill
-              sizes="150px"
-              className="object-cover"
-              placeholder="blur"
-              priority
-            />
-          </div>
-          <span className="absolute bottom-1 right-1 rounded-full border border-hairline bg-canvas px-2.5 py-1 text-xs text-ink dark:border-ink-muted-80 dark:bg-surface-tile-1 dark:text-body-on-dark">
-            Seoul
-          </span>
-        </div>
+      <div className="grid grid-cols-1 items-center gap-8 sm:grid-cols-[180px_1fr]">
+        <ProfileFlipAvatar name={siteConfig.name} />
 
         <div>
           <h1 className="mb-1.5 font-display text-3xl font-semibold leading-tight tracking-tight text-ink dark:text-body-on-dark">
@@ -76,6 +67,64 @@ export default function AboutPage() {
           </p>
         </div>
       </div>
+
+      <section className="mt-12">
+        <Heading as="h2" size="sm" className="mb-5">
+          경험
+        </Heading>
+        <ul className="space-y-6">
+          {experience.map(item => (
+            <EntryRow
+              key={`${item.period}-${item.org}`}
+              image={item.image}
+              alt={item.org}
+              title={item.role}
+              subtitle={item.org}
+              meta={formatExperiencePeriod(item.period, now)}
+              description={item.description}
+              href={item.href}
+            />
+          ))}
+        </ul>
+      </section>
+
+      <section className="mt-10">
+        <Heading as="h2" size="sm" className="mb-5">
+          활동
+        </Heading>
+        <ul className="space-y-6">
+          {activities.map(item => (
+            <EntryRow
+              key={`${item.period}-${item.title}`}
+              image={item.image}
+              alt={item.title}
+              title={item.role ?? item.title}
+              subtitle={item.role ? item.title : undefined}
+              meta={formatExperiencePeriod(item.period, now)}
+              href={item.href}
+            />
+          ))}
+        </ul>
+      </section>
+
+      <section className="mt-10">
+        <Heading as="h2" size="sm" className="mb-5">
+          교육
+        </Heading>
+        <ul className="space-y-6">
+          {education.map(item => (
+            <EntryRow
+              key={`${item.period}-${item.school}`}
+              image={item.image}
+              alt={item.school}
+              title={item.school}
+              subtitle={item.degree}
+              meta={formatExperiencePeriod(item.period, now, false)}
+              description={item.note}
+            />
+          ))}
+        </ul>
+      </section>
     </main>
   )
 }
