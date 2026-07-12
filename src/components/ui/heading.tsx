@@ -9,7 +9,7 @@ const headingVariants = cva('font-semibold text-ink dark:text-body-on-dark', {
       xl: 'font-display text-[40px] leading-[1.1] tracking-[-0.374px]',
       lg: 'font-display text-[34px] leading-[1.47] tracking-[-0.374px]',
       md: 'text-[22px] sm:text-[28px] leading-[1.1] tracking-[-0.2px]',
-      sm: 'font-display text-[18px] sm:text-[21px] leading-[1.19] tracking-[0.231px]',
+      sm: 'font-display text-lg leading-[1.19] tracking-[0.231px]',
     },
   },
   defaultVariants: { size: 'md' },
