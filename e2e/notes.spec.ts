@@ -4,27 +4,26 @@ test.describe('메모 페이지', () => {
   test('메모 목록과 제목이 렌더된다', async ({ page }) => {
     await page.goto('/notes')
     await expect(page.getByRole('heading', { level: 1 }).first()).toHaveText('메모')
-    // 샘플 메모 본문이 렌더된다
-    await expect(page.getByText('좋은 이름은 구현을 숨기고')).toBeVisible()
+    // 발행된 메모 본문이 렌더된다
+    await expect(page.getByText('내가 가지고 있는 재능 중에')).toBeVisible()
   })
 
-  test('고정된 메모 그룹이 모든 메모 그룹보다 위에 있다', async ({ page }) => {
+  test('태그 필터 바에서 태그로 필터할 수 있다', async ({ page }) => {
     await page.goto('/notes')
-    const pinnedHeading = page.getByRole('heading', { name: '고정된 메모' })
-    const allHeading = page.getByRole('heading', { name: '모든 메모' })
-    await expect(pinnedHeading).toBeVisible()
-    await expect(allHeading).toBeVisible()
+    const filterNav = page.getByRole('navigation', { name: '주제 필터' })
+    await expect(filterNav).toBeVisible()
+    await expect(filterNav.getByRole('link', { name: /전체/ })).toBeVisible()
 
-    const pinnedBox = await pinnedHeading.boundingBox()
-    const allBox = await allHeading.boundingBox()
-    expect(pinnedBox!.y).toBeLessThan(allBox!.y)
+    // 태그 칩 클릭 → /notes?tag= 스코프 필터로 이동
+    await filterNav.getByRole('link', { name: /inspiration/ }).click()
+    await expect(page).toHaveURL(/\/notes\?tag=inspiration$/)
+    await expect(page.getByText('내가 가지고 있는 재능 중에')).toBeVisible()
   })
 
-  test('자유형식 코드 스니펫이 렌더된다', async ({ page }) => {
-    await page.goto('/notes')
-    // date-locale-compare 메모의 코드블록
-    await expect(page.locator('pre').first()).toBeVisible()
-    await expect(page.getByText('localeCompare').first()).toBeVisible()
+  test('일치하는 메모가 없는 태그는 빈 상태를 보여준다', async ({ page }) => {
+    await page.goto('/notes?tag=no-such-tag')
+    await expect(page.getByText(/메모가 없어요/)).toBeVisible()
+    await expect(page.getByRole('link', { name: '전체 메모 보기' })).toBeVisible()
   })
 
   test('네비게이션에서 메모로 이동할 수 있다', async ({ page }) => {
