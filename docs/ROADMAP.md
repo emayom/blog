@@ -9,8 +9,9 @@
 | [M2 — 읽기 경험](roadmap/m2-reading-experience.md) | 읽기 중 탐색과 집중 | 완료 |
 | [M3 — 탐색 / SEO](roadmap/m3-discovery-seo.md) | 탐색 경로 확장 + 검색 노출 | 완료 |
 | [M4 — 콘텐츠 경험 고도화](roadmap/m4-content-experience.md) | 표현력 향상 + 목록 개선 | 완료 |
-| [M5 — 운영 / 분석](roadmap/m5-analytics.md) | 운영 도구 + 방문자 데이터 | 미시작 |
-| [M6 — UX 폴리시](roadmap/m6-ux-polish.md) | 세부 인터랙션 완성도 | 미시작 |
-| [M7 — 메모](roadmap/m7-notes.md) | 짧은 기록(메모) 영역 | 미시작 |
-| [M8 — 감상](roadmap/m8-library.md) | 감상 기록(책·애니) + 메타 자동 수집 | 미시작 |
+| [M5 — 운영 / 분석](roadmap/m5-analytics.md) | 운영 도구 + 방문자 데이터 | 완료 |
+| [M6 — 감상 (Library)](roadmap/m6-library.md) | 감상 기록(책·애니) 영역 | 완료 |
+| [M7 — 메모 (Notes)](roadmap/m7-notes.md) | 짧은 기록(메모) 영역 | 완료 |
+| [M8 — 디자인 시스템](roadmap/m8-design-system.md) | 디자인 토큰·공통 컴포넌트 기반 정리 | 예정 |
+| [M9 — UX 폴리시](roadmap/m9-ux-polish.md) | 세부 인터랙션 완성도 | 예정 |
 | [백로그](roadmap/backlog.md) | 우선순위 미정 | — |

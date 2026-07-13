@@ -48,10 +48,10 @@
 
 ## Definition of Done
 
-- `npx vitest run` 실행 가능 (설정 파일 존재)
-- `npx playwright test` 실행 가능 (설정 파일 존재)
-- `npm run build` 통과
-- CI `ci.yml` 트리거 활성화 상태
+- [x] `npx vitest run` 실행 가능 (설정 파일 존재)
+- [x] `npx playwright test` 실행 가능 (설정 파일 존재)
+- [x] `npm run build` 통과
+- [x] CI `ci.yml` 트리거 활성화 상태
 
 ## Related Issues / Links
 

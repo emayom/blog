@@ -1,6 +1,6 @@
 # M5 — 운영 / 분석
 
-- **진행 상태:** 완료
+- **진행 상태:** 완료 (2026-07-01, v0.5.0)
 - **목표 일자:** —
 - **목표:** 블로그 운영에 필요한 도구와 독자 데이터를 확보한다
 - **목표 버전:** v0.5.0
@@ -11,7 +11,7 @@
 
 - [x] RSS 피드 (`/feed.xml`)
 - [x] 방문자 분석 — Google Analytics 4 (ADR-018)
-- [x] Web Vitals 모니터링 — GA4 커스텀 이벤트 (`web_vitals`) via `web-vitals` 패키지 (PR #79)
+- [x] Web Vitals 모니터링 — GA4 커스텀 이벤트 (`web_vitals`) via `web-vitals` 패키지
 - [x] `NEXT_PUBLIC_GA_ID` — `.env.example` 환경변수 항목 추가
 
 ## Out of Scope
@@ -23,14 +23,10 @@
 
 ## Definition of Done
 
-- `/feed.xml`이 RSS 리더에서 정상 파싱된다
-- 방문자 대시보드에서 페이지뷰 데이터를 확인할 수 있다
-- Core Web Vitals 지표가 대시보드에 수집된다
-- `npm run build` 통과
-
-## Technical Risks
-
-- GA4 측정 ID(`NEXT_PUBLIC_GA_ID`)를 `.env.local`에 설정해야 실제 데이터 수집 가능
+- [x] `/feed.xml`이 RSS 리더에서 정상 파싱된다
+- [x] 방문자 대시보드에서 페이지뷰 데이터를 확인할 수 있다
+- [x] Core Web Vitals 지표가 대시보드에 수집된다
+- [x] `npm run build` 통과
 
 ## Related Issues / Links
 

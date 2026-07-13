@@ -108,7 +108,10 @@ git commit -m "docs(adr): {주제} 의사결정 기록"
 | M3 — 탐색 / SEO | 4 |
 | M4 — 콘텐츠 경험 고도화 | 5 |
 | M5 — 운영 / 분석 | 6 |
-| M6 — UX 폴리시 | 7 |
+| M6 — 감상 (Library) | 10 |
+| M7 — 메모 (Notes) | 11 |
+| M8 — 디자인 시스템 | 13 |
+| M9 — UX 폴리시 | 12 |
 
 ```bash
 ISSUE_URL=$(gh issue create \
