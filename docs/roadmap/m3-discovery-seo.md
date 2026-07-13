@@ -1,6 +1,6 @@
 # M3 — 탐색 / SEO
 
-- **진행 상태:** 완료
+- **진행 상태:** 완료 (2026-06-26, v0.3.0)
 - **목표 일자:** —
 - **목표:** 글 탐색 경로를 확장하고, 검색 엔진 노출을 위한 SEO를 정비한다
 - **목표 버전:** v0.3.0
@@ -28,17 +28,11 @@
 
 ## Definition of Done
 
-- 사용자가 태그 클릭으로 같은 태그의 글 목록을 볼 수 있다
-- 사용자가 검색 모달에서 키워드로 글을 찾을 수 있다
-- Google Search Console에 사이트맵 제출 가능한 상태
-- 글 공유 시 OG 미리보기가 정상 노출된다 (공유 디버거 확인)
-- `npm run build` + Vitest + Playwright 통과
-
-## Technical Risks
-
-- 퍼지 검색 성능 — 글 수 증가 시 클라이언트 사이드 인덱스 크기 문제 (Fuse.js 기준 ~500개까지 무난)
-- 동적 OG 이미지 생성 — `next/og` Edge Runtime 제약, 한글 폰트 로드 필요
-- giscus — GitHub 계정 없는 독자는 댓글 불가 (의도된 트레이드오프)
+- [x] 사용자가 태그 클릭으로 같은 태그의 글 목록을 볼 수 있다
+- [x] 사용자가 검색 모달에서 키워드로 글을 찾을 수 있다
+- [x] Google Search Console에 사이트맵 제출 가능한 상태
+- [x] 글 공유 시 OG 미리보기가 정상 노출된다 (공유 디버거 확인)
+- [x] `npm run build` + Vitest + Playwright 통과
 
 ## Related Issues / Links
 
