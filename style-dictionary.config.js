@@ -2,10 +2,11 @@ import StyleDictionary from 'style-dictionary'
 import { fileHeader, formattedVariables, outputReferencesFilter } from 'style-dictionary/utils'
 import { propertyFormatNames } from 'style-dictionary/enums'
 
-// Warning comment prepended to the top of generated tokens.css
+// Warning comment prepended to the top of generated tokens.css.
+// Glob notation (**/*) is avoided here — it contains "*/" which closes the CSS comment early.
 const HEADER_LINES = [
   'Generated file — do not edit directly, regenerate with npm run tokens:build',
-  'Source: src/styles/tokens/**/*.json',
+  'Source: JSON files under src/styles/tokens/',
 ]
 
 // base 팔레트(원시 hex)는 CSS 변수로 내보내지 않는다.
