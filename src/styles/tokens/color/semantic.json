@@ -1,0 +1,45 @@
+{
+  "color": {
+    "primary": { "$value": "{color.blue.600}", "$type": "color" },
+    "primary-focus": { "$value": "{color.blue.500}", "$type": "color" },
+    "primary-on-dark": { "$value": "{color.blue.400}", "$type": "color" },
+
+    "fg": { "$value": "{color.gray.900}", "$type": "color" },
+    "fg-muted": { "$value": "{color.gray.800}", "$type": "color" },
+    "fg-subtle": { "$value": "{color.gray.500}", "$type": "color" },
+
+    "ink": { "$value": "{color.gray.900}", "$type": "color" },
+    "ink-muted-80": { "$value": "{color.gray.800}", "$type": "color" },
+    "ink-muted-48": { "$value": "{color.gray.500}", "$type": "color" },
+
+    "canvas": { "$value": "{color.white}", "$type": "color" },
+    "canvas-parchment": { "$value": "{color.gray.50}", "$type": "color" },
+    "surface-pearl": { "$value": "{color.gray.25}", "$type": "color" },
+    "surface-tile-1": { "$value": "{color.near-black.1}", "$type": "color" },
+    "surface-tile-2": { "$value": "{color.near-black.2}", "$type": "color" },
+    "surface-tile-3": { "$value": "{color.near-black.3}", "$type": "color" },
+    "surface-black": { "$value": "{color.black}", "$type": "color" },
+    "surface-chip-translucent": { "$value": "{color.gray.200}", "$type": "color" },
+
+    "body": { "$value": "{color.gray.900}", "$type": "color" },
+    "body-on-dark": { "$value": "{color.white}", "$type": "color" },
+    "body-muted": { "$value": "{color.gray.300}", "$type": "color" },
+    "on-primary": { "$value": "{color.white}", "$type": "color" },
+    "on-dark": { "$value": "{color.white}", "$type": "color" },
+
+    "divider-soft": { "$value": "{color.gray.100}", "$type": "color" },
+    "hairline": { "$value": "{color.gray.150}", "$type": "color" },
+
+    "callout-info": {
+      "$value": "{color.primary}",
+      "$type": "color",
+      "$extensions": { "dark": "{color.primary-on-dark}" }
+    },
+    "callout-warning": {
+      "$value": "{color.ink}",
+      "$type": "color",
+      "$extensions": { "dark": "{color.body-on-dark}" }
+    },
+    "callout-tip": { "$value": "{color.ink-muted-48}", "$type": "color" }
+  }
+}
