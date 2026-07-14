@@ -1,5 +1,10 @@
 @AGENTS.md
 
+## Core Documents
+
+- @TECH.md — 아키텍처 · 기술 상세
+- @DESIGN.md — 디자인 원칙 · 토큰 규약
+
 ## Commands
 
 모든 명령은 레포 루트에서 실행:
