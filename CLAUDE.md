@@ -75,7 +75,7 @@ perf:     성능 개선
 | 콘텐츠 | MDX — `src/content/` (ADR-002) |
 | 검색 | 클라이언트 사이드 (ADR-004) |
 | 댓글 | giscus (ADR-005) |
-| 디자인 토큰 | DESIGN.md (getdesign Apple) → 장기적으로 `src/styles/tokens.css`로 이전 예정 |
+| 디자인 토큰 | Style Dictionary 파이프라인 — 원천 `src/styles/tokens/**/*.json` (카테고리별 base·semantic) → `npm run tokens:build` → 생성물 `src/styles/tokens.css` (`@theme`). 생성물 직접 수정 금지, DESIGN.md는 참조 문서 (ADR-019) |
 
 상세 결정 배경: `docs/adr/`
 

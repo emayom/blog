@@ -1,79 +1,15 @@
 @import "tailwindcss";
 
+/* 디자인 토큰 — 생성물 (원천: src/styles/tokens/, 파이프라인: ADR-019) */
+@import "../styles/tokens.css";
+
 /* next-themes attribute="class" 연동: .dark 클래스 기반 dark variant */
 @variant dark (&:where(.dark, .dark *));
 
-@theme {
-  /* Colors — DESIGN.md */
-  --color-primary: #0066cc;
-  --color-primary-focus: #0071e3;
-  --color-primary-on-dark: #2997ff;
-
-  --color-ink: #1d1d1f;
-  --color-ink-muted-80: #333333;
-  --color-ink-muted-48: #7a7a7a;
-
-  --color-canvas: #ffffff;
-  --color-canvas-parchment: #f5f5f7;
-  --color-surface-pearl: #fafafc;
-  --color-surface-tile-1: #272729;
-  --color-surface-tile-2: #2a2a2c;
-  --color-surface-tile-3: #252527;
-  --color-surface-black: #000000;
-  --color-surface-chip-translucent: #d2d2d7;
-
-  --color-body: #1d1d1f;
-  --color-body-on-dark: #ffffff;
-  --color-body-muted: #cccccc;
-  --color-on-primary: #ffffff;
-  --color-on-dark: #ffffff;
-
-  --color-divider-soft: #f0f0f0;
-  --color-hairline: #e0e0e0;
-
-  /* 사이드바 active 항목 배경 — /library (M8 #83) */
-  --color-sidebar-active-bg: rgba(0, 102, 204, 0.08);
-
-  /* Spacing — DESIGN.md */
-  --spacing-xxs: 4px;
-  --spacing-xs: 8px;
-  --spacing-sm: 12px;
-  --spacing-md: 17px;
-  --spacing-lg: 24px;
-  --spacing-xl: 32px;
-  --spacing-xxl: 48px;
-  --spacing-section: 80px;
-
-  /* Border radius — DESIGN.md */
-  --radius-none: 0px;
-  --radius-xs: 5px;
-  --radius-sm: 8px;
-  --radius-md: 11px;
-  --radius-lg: 18px;
-  --radius-pill: 9999px;
-  --radius-full: 9999px;
-
-  /* Font size — Tailwind 기본(text-base 16 / text-lg 18)의 빈 자리를 채우는 md.
-     DESIGN.md body=17px와 일치. text-sm/base/lg/xl 등 기본 스케일은 그대로 유지된다 */
-  --text-md: 17px;
-
-  /* Callout semantic alias — 기존 토큰 재참조 (커스텀 MDX 컴포넌트) */
-  --color-callout-info: var(--color-primary);
-  --color-callout-warning: var(--color-ink);
-  --color-callout-tip: var(--color-ink-muted-48);
-}
-
-/* dark에서 callout alias 재지정 */
-.dark {
-  --color-callout-info: var(--color-primary-on-dark);
-  --color-callout-warning: var(--color-body-on-dark);
-}
-
 @theme inline {
+  /* next/font 런타임 변수 참조 — 토큰 원천이 소유할 수 없어 여기 유지 (font-display는 토큰) */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  /* 디스플레이/헤딩용 — 별도 폰트 로딩 없이 system-ui 스택 매핑 (M1 #15) */
-  --font-display: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
   --animate-slide-in: slide-in 0.15s ease-out;
 }

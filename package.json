@@ -4,6 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "tokens:build": "style-dictionary build --config style-dictionary.config.js",
+    "tokens:check": "npm run tokens:build && git diff --exit-code src/styles/tokens.css",
+    "prebuild": "npm run tokens:build",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
@@ -72,6 +75,7 @@
     "lint-staged": "^17.0.8",
     "playwright": "^1.60.0",
     "storybook": "^10.4.4",
+    "style-dictionary": "^5.5.0",
     "tailwindcss": "^4",
     "typescript": "^6",
     "vite": "^8.1.2",

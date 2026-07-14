@@ -273,6 +273,8 @@ components:
     padding: 64px
 ---
 
+> **참조 문서** — ADR-019에 따라 이 문서는 디자인 토큰 값의 원천 지위를 잃었다. 색·간격·반경 등 토큰 값의 단일 원천은 `src/styles/tokens/`(카테고리별 base·semantic JSON)이며, 소비되는 CSS 변수는 `npm run tokens:build`로 `src/styles/tokens.css`에 생성된다. 이 문서는 디자인 의도·근거·사용 맥락을 설명하는 참조용으로만 유지한다. 여기 적힌 hex·px 값과 실제 토큰이 어긋나면 `src/styles/tokens/`가 정답이다.
+
 ## Overview
 
 Apple's web presence is a masterclass in **reverent product photography framed by near-invisible UI**. Every page is a stack of edge-to-edge product "tiles" — alternating light and dark canvases, each centered on a hero headline, a one-line tagline, two tiny blue pill CTAs, and an impossibly crisp product render. Nothing competes with the product. Typography is confident but quiet; color is either pure white, an off-white parchment, or a near-black tile; interactive elements are a single, quiet blue.
