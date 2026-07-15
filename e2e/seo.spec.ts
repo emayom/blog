@@ -96,4 +96,33 @@ test.describe('JSON-LD 구조화 데이터', () => {
     expect(post.url).toBe(`${SITE_URL}/writing/${slug}`)
     expect(JSON.stringify(post)).not.toContain('localhost')
   })
+
+  test('메모 목록에 BreadcrumbList JSON-LD가 존재한다', async ({ page }) => {
+    await page.goto('/notes')
+
+    const scripts = await page.locator('script[type="application/ld+json"]').allTextContents()
+    const breadcrumb = scripts
+      .map(s => JSON.parse(s))
+      .find(d => d['@type'] === 'BreadcrumbList')
+
+    expect(breadcrumb).toBeDefined()
+    expect(breadcrumb.itemListElement).toHaveLength(2)
+    expect(breadcrumb.itemListElement[0].item).toBe(SITE_URL)
+    expect(JSON.stringify(breadcrumb)).not.toContain('localhost')
+  })
+
+  test('책장 상세에 BreadcrumbList JSON-LD가 존재한다', async ({ page }) => {
+    const slug = 'a-short-philosophy-from-birds'
+    await page.goto(`/library/${slug}`)
+
+    const scripts = await page.locator('script[type="application/ld+json"]').allTextContents()
+    const breadcrumb = scripts
+      .map(s => JSON.parse(s))
+      .find(d => d['@type'] === 'BreadcrumbList')
+
+    expect(breadcrumb).toBeDefined()
+    expect(breadcrumb.itemListElement).toHaveLength(3)
+    expect(breadcrumb.itemListElement.at(-1).item).toBe(`${SITE_URL}/library/${slug}`)
+    expect(JSON.stringify(breadcrumb)).not.toContain('localhost')
+  })
 })

@@ -26,6 +26,13 @@ test.describe('메모 페이지', () => {
     await expect(page.getByRole('link', { name: '전체 메모 보기' })).toBeVisible()
   })
 
+  test('breadcrumb이 렌더되고 홈 링크가 있다', async ({ page }) => {
+    await page.goto('/notes')
+    const breadcrumb = page.getByRole('navigation', { name: 'breadcrumb' })
+    await expect(breadcrumb).toBeVisible()
+    await expect(breadcrumb.getByRole('link', { name: '홈' })).toHaveAttribute('href', '/')
+  })
+
   test('네비게이션에서 메모로 이동할 수 있다', async ({ page }) => {
     await page.goto('/')
     await page.getByRole('link', { name: '메모' }).first().click()
