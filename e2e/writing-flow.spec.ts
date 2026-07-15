@@ -16,7 +16,7 @@ test.describe('글 읽기 플로우', () => {
     await expect(article.locator('> h1')).toBeVisible()
     await expect(article.locator('> p').filter({ has: page.locator('time') })).toContainText('분 읽기')
 
-    await page.getByRole('link', { name: '← 모든 글' }).first().click()
+    await page.getByRole('link', { name: '모든 글' }).first().click()
     await expect(page).toHaveURL(/\/writing$/)
     await expect(page.getByRole('heading', { level: 1, name: '글' })).toBeVisible()
   })
