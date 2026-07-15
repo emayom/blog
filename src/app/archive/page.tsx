@@ -6,6 +6,7 @@ import { buildBreadcrumbJsonLd } from '@/lib/json-ld'
 import { JsonLd } from '@/components/seo/json-ld'
 import { FolderCard } from '@/components/archive/folder-card'
 import { Breadcrumb } from '@/components/ui/breadcrumb'
+import { EmptyState } from '@/components/ui/empty-state'
 import { Heading } from '@/components/ui/heading'
 
 export const metadata: Metadata = buildMetadata({
@@ -38,9 +39,7 @@ export default function ArchivePage() {
 
         {years.length === 0
           ? (
-              <p className="text-[14px] text-ink-muted-48 dark:text-body-muted">
-                아직 작성한 글이 없습니다.
-              </p>
+              <EmptyState title="아직 작성된 글이 없습니다." />
             )
           : (
               <div className="grid grid-cols-4 gap-8 md:flex md:flex-wrap">
