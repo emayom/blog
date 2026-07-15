@@ -1,7 +1,9 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { getAllLibraryItems, getLibraryBody, getLibraryItem } from '@/lib/library'
-import { buildMetadata } from '@/lib/seo'
+import { absoluteUrl, buildMetadata } from '@/lib/seo'
+import { buildBreadcrumbJsonLd } from '@/lib/json-ld'
+import { JsonLd } from '@/components/seo/json-ld'
 import { LibraryDetail } from '@/components/library/library-detail'
 
 // Next.js 16: params는 Promise — await 필수
@@ -32,6 +34,18 @@ export default async function LibraryItemPage({ params }: Props) {
   if (!item) notFound()
 
   const hasBody = getLibraryBody(slug).length > 0
+  const backHref = item.type === 'book' ? '/library?type=book' : '/library'
 
-  return <LibraryDetail item={item} hasBody={hasBody} />
+  return (
+    <>
+      <JsonLd
+        data={buildBreadcrumbJsonLd([
+          { name: '홈', url: absoluteUrl('/') },
+          { name: '책장', url: absoluteUrl(backHref) },
+          { name: item.title, url: absoluteUrl(`/library/${slug}`) },
+        ])}
+      />
+      <LibraryDetail item={item} hasBody={hasBody} />
+    </>
+  )
 }

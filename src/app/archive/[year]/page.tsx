@@ -1,6 +1,5 @@
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
-import Link from 'next/link'
 import { getPostMetaList } from '@/lib/mdx'
 import { getArchiveCounts, getPostsByYear, getTopTagsByYear } from '@/lib/archive'
 import { absoluteUrl, buildMetadata } from '@/lib/seo'
@@ -8,6 +7,7 @@ import { buildBreadcrumbJsonLd } from '@/lib/json-ld'
 import { JsonLd } from '@/components/seo/json-ld'
 import { PostCard } from '@/components/writing/post-card'
 import { Tag } from '@/components/writing/tag'
+import { Breadcrumb } from '@/components/ui/breadcrumb'
 import { Heading } from '@/components/ui/heading'
 
 type Props = { params: Promise<{ year: string }> }
@@ -46,13 +46,13 @@ export default async function ArchiveYearPage({ params }: Props) {
         ])}
       />
       <main className="mx-auto max-w-4xl px-6 py-12">
-        <nav aria-label="breadcrumb" className="mb-4 text-xs tracking-[-0.12px] text-ink-muted-48">
-          <Link href="/" className="text-primary dark:text-primary-on-dark">홈</Link>
-          <span aria-hidden="true"> / </span>
-          <Link href="/archive" className="text-primary dark:text-primary-on-dark">아카이브</Link>
-          <span aria-hidden="true"> / </span>
-          <span>{year}</span>
-        </nav>
+        <Breadcrumb
+          items={[
+            { label: '홈', href: '/' },
+            { label: '아카이브', href: '/archive' },
+            { label: year },
+          ]}
+        />
 
         <Heading as="h1" size="md" className="mb-[22px]">
           {year}

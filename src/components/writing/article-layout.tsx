@@ -9,6 +9,7 @@ import { RelatedPosts } from '@/components/writing/related-posts'
 import { SeriesNavigation } from '@/components/writing/series-navigation'
 import { ShareButton } from '@/components/writing/share-button'
 import { TableOfContents } from '@/components/writing/table-of-contents'
+import { Breadcrumb } from '@/components/ui/breadcrumb'
 import { Heading } from '@/components/ui/heading'
 import type { Post, PostMeta } from '@/types/post'
 import type { AdjacentPosts } from '@/types/post-navigation'
@@ -25,13 +26,13 @@ export function ArticleLayout({ post, adjacent, related, series }: ArticleLayout
   return (
     <div className="mx-auto grid max-w-4xl grid-cols-1 gap-8 px-6 py-12 lg:grid-cols-[1fr_260px] xl:gap-8">
       <article className="min-w-0 max-w-[680px]">
-        <nav aria-label="breadcrumb" className="mb-6 text-xs tracking-[-0.12px] text-ink-muted-48">
-          <Link href="/" className="text-primary hover:underline dark:text-primary-on-dark">홈</Link>
-          <span aria-hidden="true"> / </span>
-          <Link href="/writing" className="text-primary hover:underline dark:text-primary-on-dark">글</Link>
-          <span aria-hidden="true"> / </span>
-          <span className="max-w-[40ch] truncate">{post.title}</span>
-        </nav>
+        <Breadcrumb
+          items={[
+            { label: '홈', href: '/' },
+            { label: '글', href: '/writing' },
+            { label: post.title, truncate: true },
+          ]}
+        />
 
         {post.thumbnail && (
           <div className="relative mb-8 aspect-7/4 overflow-hidden rounded-xl">
