@@ -1,5 +1,5 @@
-import Link from 'next/link'
 import { formatDate } from '@/lib/format-date'
+import { BackLink } from '@/components/ui/back-link'
 import { Breadcrumb } from '@/components/ui/breadcrumb'
 import { EmptyState } from '@/components/ui/empty-state'
 import { Heading } from '@/components/ui/heading'
@@ -116,12 +116,7 @@ export function LibraryDetail({ item, hasBody }: LibraryDetailProps) {
                 </section>
               )}
 
-              <Link
-                href={backHref}
-                className="mt-12 inline-block text-sm tracking-[-0.224px] text-primary dark:text-primary-on-dark"
-              >
-                ← 책장으로
-              </Link>
+              <BackLink href={backHref} className="mt-12">책장으로</BackLink>
             </>
           )
         : (

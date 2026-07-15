@@ -46,7 +46,7 @@ describe('LibraryDetail', () => {
   it('quotes가 있으면 문장 섹션과 복귀 링크를 렌더한다', () => {
     render(<LibraryDetail item={item({ quotes: ['공유하고 싶은 문장 하나'] })} hasBody={false} />)
     expect(screen.getByText('공유하고 싶은 문장 하나')).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: '← 책장으로' })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: '책장으로' })).toBeInTheDocument()
     expect(screen.queryByText('아직 감상 기록이 없어요')).not.toBeInTheDocument()
   })
 
@@ -64,7 +64,7 @@ describe('LibraryDetail', () => {
   it('본문이 있으면 content와 복귀 링크를 렌더한다', () => {
     render(<LibraryDetail item={item({ content: <p>감상 본문입니다</p> })} hasBody />)
     expect(screen.getByText('감상 본문입니다')).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: '← 책장으로' })).toHaveAttribute('href', '/library?type=book')
+    expect(screen.getByRole('link', { name: '책장으로' })).toHaveAttribute('href', '/library?type=book')
     expect(screen.queryByText('아직 감상 기록이 없어요')).not.toBeInTheDocument()
   })
 

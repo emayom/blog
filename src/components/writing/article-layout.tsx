@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import Link from 'next/link'
 import { formatDate } from '@/lib/format-date'
 import { absoluteUrl } from '@/lib/seo'
 import { BackToTop } from '@/components/writing/back-to-top'
@@ -9,6 +8,7 @@ import { RelatedPosts } from '@/components/writing/related-posts'
 import { SeriesNavigation } from '@/components/writing/series-navigation'
 import { ShareButton } from '@/components/writing/share-button'
 import { TableOfContents } from '@/components/writing/table-of-contents'
+import { BackLink } from '@/components/ui/back-link'
 import { Breadcrumb } from '@/components/ui/breadcrumb'
 import { Heading } from '@/components/ui/heading'
 import type { Post, PostMeta } from '@/types/post'
@@ -75,12 +75,7 @@ export function ArticleLayout({ post, adjacent, related, series }: ArticleLayout
 
         <div className="my-12 h-px bg-hairline dark:bg-ink-muted-80" />
 
-        <Link
-          href="/writing"
-          className="inline-block text-sm tracking-[-0.224px] text-primary dark:text-primary-on-dark"
-        >
-          ← 모든 글
-        </Link>
+        <BackLink href="/writing">모든 글</BackLink>
 
         <Comments />
       </article>

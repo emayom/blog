@@ -72,7 +72,7 @@ test.describe('책장 항목 상세 페이지', () => {
     await page.goto('/library/a-short-philosophy-from-birds')
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('새들이 전하는 짧은 철학')
     await expect(page.getByText('티티새', { exact: false })).toBeVisible()
-    await expect(page.getByRole('link', { name: '← 책장으로' })).toBeVisible()
+    await expect(page.getByRole('link', { name: '책장으로' })).toBeVisible()
   })
 
   test('문장·감상이 없는 항목은 메타와 빈 상태를 표시한다', async ({ page }) => {
@@ -89,7 +89,7 @@ test.describe('책장 항목 상세 페이지', () => {
 
   test('book 항목에서 복귀하면 books 탭(?type=book)으로 이동한다', async ({ page }) => {
     await page.goto('/library/a-short-philosophy-from-birds')
-    await page.getByRole('link', { name: '← 책장으로' }).click()
+    await page.getByRole('link', { name: '책장으로' }).click()
     await expect(page).toHaveURL(/\/library\?type=book$/)
     await expect(page.getByRole('heading', { level: 1 }).first()).toHaveText('books')
   })
