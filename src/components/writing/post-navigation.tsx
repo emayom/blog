@@ -1,10 +1,11 @@
 import Link from 'next/link'
 import { cn } from '@/lib/cn'
+import { Text } from '@/components/ui/text'
 import type { AdjacentPosts } from '@/types/post-navigation'
 
-const labelClass = 'text-sm tracking-[-0.224px] text-ink-muted-48 dark:text-body-muted'
+const labelClass = 'text-ink-muted-48 dark:text-body-muted'
 const titleClass
-  = 'mt-2.5 text-[17px] font-semibold leading-[1.24] tracking-[-0.374px] text-ink group-hover:text-primary dark:text-body-on-dark dark:group-hover:text-primary-on-dark'
+  = 'mt-2.5 text-ink group-hover:text-primary dark:text-body-on-dark dark:group-hover:text-primary-on-dark'
 
 export function PostNavigation({ prev, next }: AdjacentPosts) {
   if (!prev && !next) return null
@@ -19,8 +20,8 @@ export function PostNavigation({ prev, next }: AdjacentPosts) {
             href={`/writing/${prev.slug}`}
             className="group flex flex-col rounded-sm text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-focus"
           >
-            <span className={labelClass}>이전 글</span>
-            <span className={titleClass}>{prev.title}</span>
+            <Text as="span" variant="caption" className={labelClass}>이전 글</Text>
+            <Text as="span" weight="semibold" className={titleClass}>{prev.title}</Text>
           </Link>
         )}
 
@@ -32,8 +33,8 @@ export function PostNavigation({ prev, next }: AdjacentPosts) {
               !prev && 'sm:col-start-2',
             )}
           >
-            <span className={labelClass}>다음 글</span>
-            <span className={titleClass}>{next.title}</span>
+            <Text as="span" variant="caption" className={labelClass}>다음 글</Text>
+            <Text as="span" weight="semibold" className={titleClass}>{next.title}</Text>
           </Link>
         )}
       </nav>

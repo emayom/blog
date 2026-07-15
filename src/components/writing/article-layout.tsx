@@ -11,6 +11,7 @@ import { TableOfContents } from '@/components/writing/table-of-contents'
 import { BackLink } from '@/components/ui/back-link'
 import { Breadcrumb } from '@/components/ui/breadcrumb'
 import { Heading } from '@/components/ui/heading'
+import { Text } from '@/components/ui/text'
 import type { Post, PostMeta } from '@/types/post'
 import type { AdjacentPosts } from '@/types/post-navigation'
 import type { SeriesNavigation as SeriesNavigationData } from '@/types/series-navigation'
@@ -50,11 +51,11 @@ export function ArticleLayout({ post, adjacent, related, series }: ArticleLayout
           {post.title}
         </Heading>
 
-        <p className="mb-4 text-sm tracking-[-0.224px] text-ink-muted-48 dark:text-body-muted">
+        <Text variant="caption" className="mb-4 text-ink-muted-48 dark:text-body-muted">
           <time dateTime={post.date}>{formatDate(post.date)}</time>
           <span aria-hidden="true"> · </span>
           <span>{`${post.readingTime}분 읽기`}</span>
-        </p>
+        </Text>
 
         <div className="mb-8 flex items-center gap-2">
           <ShareButton
@@ -63,9 +64,9 @@ export function ArticleLayout({ post, adjacent, related, series }: ArticleLayout
           />
         </div>
 
-        <div className="text-[17px] leading-[1.47] tracking-[-0.374px] text-ink-muted-80 dark:text-body-muted [&_p]:mb-md">
+        <Text as="div" className="text-ink-muted-80 dark:text-body-muted [&_p]:mb-md">
           {post.content}
-        </div>
+        </Text>
 
         <SeriesNavigation series={series} />
 

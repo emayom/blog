@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { Heading } from '@/components/ui/heading'
+import { Text } from '@/components/ui/text'
 import type { SeriesNavigation as SeriesNavigationData } from '@/types/series-navigation'
 
 interface SeriesNavigationProps {
@@ -7,7 +8,7 @@ interface SeriesNavigationProps {
 }
 
 const itemLinkClass
-  = 'flex rounded-sm text-[17px] leading-[1.47] tracking-[-0.374px] text-ink-muted-80 transition-colors hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-focus dark:text-body-muted dark:hover:text-primary-on-dark'
+  = 'flex rounded-sm text-ink-muted-80 transition-colors hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-focus dark:text-body-muted dark:hover:text-primary-on-dark'
 
 const currentItemClass
   = 'flex text-[17px] font-semibold leading-[1.47] tracking-[-0.374px] text-primary dark:text-primary-on-dark'
@@ -38,9 +39,9 @@ export function SeriesNavigation({ series }: SeriesNavigationProps) {
                     </span>
                   )
                 : (
-                    <Link href={`/writing/${item.post.slug}`} className={itemLinkClass}>
+                    <Text as={Link} href={`/writing/${item.post.slug}`} className={itemLinkClass}>
                       {`${item.order}. ${item.post.title}`}
-                    </Link>
+                    </Text>
                   )}
             </li>
           ))}
