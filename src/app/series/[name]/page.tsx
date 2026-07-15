@@ -10,6 +10,7 @@ import { mdxComponents } from '@/components/mdx/mdx-components'
 import { PostCard } from '@/components/writing/post-card'
 import { Breadcrumb } from '@/components/ui/breadcrumb'
 import { Heading } from '@/components/ui/heading'
+import { Text } from '@/components/ui/text'
 import type { PostMeta } from '@/types/post'
 
 type Props = { params: Promise<{ name: string }> }
@@ -113,9 +114,9 @@ export default async function SeriesDetailPage({ params }: Props) {
         <SeriesBreadcrumb name={category.name} />
 
         <Heading as="h1" size="md" className="mb-2">{category.name}</Heading>
-        <p className="mb-9 text-sm tracking-[-0.224px] text-ink-muted-48 dark:text-body-muted">
+        <Text variant="caption" className="mb-9 text-ink-muted-48 dark:text-body-muted">
           {`${category.count}편`}
-        </p>
+        </Text>
 
         <div className="flex flex-col gap-10">
           {category.sections.map(section => (
@@ -141,9 +142,9 @@ export default async function SeriesDetailPage({ params }: Props) {
       <SeriesBreadcrumb name={name} />
 
       <Heading as="h1" size="md" className="mb-2">{name}</Heading>
-      <p className="mb-7 text-sm tracking-[-0.224px] text-ink-muted-48 dark:text-body-muted">
+      <Text variant="caption" className="mb-7 text-ink-muted-48 dark:text-body-muted">
         {`${seriesPosts.length}편`}
-      </p>
+      </Text>
 
       {intro && (
         <div className="mb-9 rounded-lg bg-canvas-parchment p-6 dark:bg-surface-tile-2">

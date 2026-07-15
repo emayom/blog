@@ -4,6 +4,7 @@ import { Badge } from '@/components/ui/badge'
 import { Breadcrumb } from '@/components/ui/breadcrumb'
 import { EmptyState } from '@/components/ui/empty-state'
 import { Heading } from '@/components/ui/heading'
+import { Text } from '@/components/ui/text'
 import type { LibraryItem } from '@/types/library'
 
 interface LibraryDetailProps {
@@ -67,14 +68,14 @@ export function LibraryDetail({ item, hasBody }: LibraryDetailProps) {
           )}
 
           {metaParts.length > 0 && (
-            <p className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm tracking-[-0.224px] text-ink-muted-48 dark:text-body-muted">
+            <Text variant="caption" className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-ink-muted-48 dark:text-body-muted">
               {metaParts.map((part, i) => (
                 <span key={i} className="flex items-center gap-x-2">
                   {i > 0 && <span aria-hidden="true">·</span>}
                   {part}
                 </span>
               ))}
-            </p>
+            </Text>
           )}
 
           {item.status && (
@@ -93,12 +94,13 @@ export function LibraryDetail({ item, hasBody }: LibraryDetailProps) {
                   <Heading as="h2" size="sm" className="mb-4">문장수집</Heading>
                   <div className="space-y-lg">
                     {item.quotes!.map((quote, i) => (
-                      <blockquote
+                      <Text
+                        as="blockquote"
                         key={i}
-                        className="border-l-2 border-primary bg-canvas-parchment py-sm pl-lg pr-md text-[17px] leading-[1.47] tracking-[-0.374px] text-ink-muted-80 dark:border-primary-on-dark dark:bg-surface-tile-2 dark:text-body-muted"
+                        className="border-l-2 border-primary bg-canvas-parchment py-sm pl-lg pr-md text-ink-muted-80 dark:border-primary-on-dark dark:bg-surface-tile-2 dark:text-body-muted"
                       >
                         {quote}
-                      </blockquote>
+                      </Text>
                     ))}
                   </div>
                 </section>
