@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { formatDate } from '@/lib/format-date'
+import { Breadcrumb } from '@/components/ui/breadcrumb'
 import { EmptyState } from '@/components/ui/empty-state'
 import { Heading } from '@/components/ui/heading'
 import type { LibraryItem } from '@/types/library'
@@ -22,13 +23,13 @@ export function LibraryDetail({ item, hasBody }: LibraryDetailProps) {
 
   return (
     <div className="mx-auto max-w-3xl px-6 py-12">
-      <nav aria-label="breadcrumb" className="mb-6 text-xs tracking-[-0.12px] text-ink-muted-48">
-        <Link href="/" className="text-primary hover:underline dark:text-primary-on-dark">홈</Link>
-        <span aria-hidden="true"> / </span>
-        <Link href={backHref} className="text-primary hover:underline dark:text-primary-on-dark">책장</Link>
-        <span aria-hidden="true"> / </span>
-        <span className="max-w-[40ch] truncate">{item.title}</span>
-      </nav>
+      <Breadcrumb
+        items={[
+          { label: '홈', href: '/' },
+          { label: '책장', href: backHref },
+          { label: item.title, truncate: true },
+        ]}
+      />
 
       <div className="flex items-start gap-6">
         <div

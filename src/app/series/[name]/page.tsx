@@ -1,7 +1,6 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import type { Metadata } from 'next'
-import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { compileMDX } from 'next-mdx-remote/rsc'
 import { getPostMetaList } from '@/lib/mdx'
@@ -9,6 +8,7 @@ import { getSeriesCategory, getSeriesSummaries, sortSeriesPosts, toSeriesSlug } 
 import { buildMetadata } from '@/lib/seo'
 import { mdxComponents } from '@/components/mdx/mdx-components'
 import { PostCard } from '@/components/writing/post-card'
+import { Breadcrumb } from '@/components/ui/breadcrumb'
 import { Heading } from '@/components/ui/heading'
 import type { PostMeta } from '@/types/post'
 
@@ -88,15 +88,15 @@ function PostOrderedList({ posts }: { posts: PostMeta[] }) {
   )
 }
 
-function Breadcrumb({ name }: { name: string }) {
+function SeriesBreadcrumb({ name }: { name: string }) {
   return (
-    <nav aria-label="breadcrumb" className="mb-6 text-xs tracking-[-0.12px] text-ink-muted-48">
-      <Link href="/" className="text-primary hover:underline dark:text-primary-on-dark">홈</Link>
-      <span aria-hidden="true"> / </span>
-      <Link href="/writing" className="text-primary hover:underline dark:text-primary-on-dark">글</Link>
-      <span aria-hidden="true"> / </span>
-      <span>{name}</span>
-    </nav>
+    <Breadcrumb
+      items={[
+        { label: '홈', href: '/' },
+        { label: '글', href: '/writing' },
+        { label: name },
+      ]}
+    />
   )
 }
 
@@ -110,7 +110,7 @@ export default async function SeriesDetailPage({ params }: Props) {
   if (category) {
     return (
       <main className="mx-auto max-w-4xl px-6 py-12">
-        <Breadcrumb name={category.name} />
+        <SeriesBreadcrumb name={category.name} />
 
         <Heading as="h1" size="md" className="mb-2">{category.name}</Heading>
         <p className="mb-9 text-sm tracking-[-0.224px] text-ink-muted-48 dark:text-body-muted">
@@ -138,7 +138,7 @@ export default async function SeriesDetailPage({ params }: Props) {
 
   return (
     <main className="mx-auto max-w-4xl px-6 py-12">
-      <Breadcrumb name={name} />
+      <SeriesBreadcrumb name={name} />
 
       <Heading as="h1" size="md" className="mb-2">{name}</Heading>
       <p className="mb-7 text-sm tracking-[-0.224px] text-ink-muted-48 dark:text-body-muted">

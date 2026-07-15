@@ -2,9 +2,12 @@ import type { Metadata } from 'next'
 import { Suspense } from 'react'
 import { getAllNotes } from '@/lib/notes'
 import { getNoteTagCounts } from '@/lib/note-tags'
-import { buildMetadata } from '@/lib/seo'
+import { absoluteUrl, buildMetadata } from '@/lib/seo'
+import { buildBreadcrumbJsonLd } from '@/lib/json-ld'
+import { JsonLd } from '@/components/seo/json-ld'
 import { NoteCard } from '@/components/notes/note-card'
 import { NotesView, type NoteCardEntry } from '@/components/notes/notes-view'
+import { Breadcrumb } from '@/components/ui/breadcrumb'
 import { EmptyState } from '@/components/ui/empty-state'
 import { Heading } from '@/components/ui/heading'
 
@@ -23,18 +26,32 @@ export default function NotesPage() {
   const tags = getNoteTagCounts(notes)
 
   return (
-    <main className="mx-auto max-w-4xl px-6 py-12">
-      <Heading as="h1" size="md" className="mb-7">메모</Heading>
+    <>
+      <JsonLd
+        data={buildBreadcrumbJsonLd([
+          { name: '홈', url: absoluteUrl('/') },
+          { name: '메모', url: absoluteUrl('/notes') },
+        ])}
+      />
+      <main className="mx-auto max-w-4xl px-6 py-12">
+        <Breadcrumb
+          items={[
+            { label: '홈', href: '/' },
+            { label: '메모' },
+          ]}
+        />
+        <Heading as="h1" size="md" className="mb-7">메모</Heading>
 
-      {notes.length === 0
-        ? (
-            <EmptyState variant="empty" title="아직 남긴 메모가 없어요" />
-          )
-        : (
-            <Suspense>
-              <NotesView entries={entries} tags={tags} total={notes.length} />
-            </Suspense>
-          )}
-    </main>
+        {notes.length === 0
+          ? (
+              <EmptyState variant="empty" title="아직 남긴 메모가 없어요" />
+            )
+          : (
+              <Suspense>
+                <NotesView entries={entries} tags={tags} total={notes.length} />
+              </Suspense>
+            )}
+      </main>
+    </>
   )
 }
