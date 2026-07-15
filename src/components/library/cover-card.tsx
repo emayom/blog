@@ -3,25 +3,10 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react'
 import Link from 'next/link'
 import { cn } from '@/lib/cn'
+import { Badge } from '@/components/ui/badge'
 import type { LibraryItemMeta } from '@/types/library'
 
 const DEFAULT_COVER_HEIGHT = 128
-
-type BadgeVariant = 'dark' | 'light'
-
-interface BadgeProps {
-  children: ReactNode
-  variant?: BadgeVariant
-}
-
-export function CoverBadge({ children, variant = 'light' }: BadgeProps) {
-  const styles = variant === 'dark' ? 'bg-black/80 text-white/90' : 'bg-white/80 text-black/90'
-  return (
-    <span className={cn('rounded px-1 py-1 text-xs font-semibold leading-none', styles)}>
-      {children}
-    </span>
-  )
-}
 
 interface CoverCardProps {
   item: LibraryItemMeta
@@ -101,7 +86,7 @@ export function CoverCard({
       <div className="pointer-events-none absolute left-1 top-1 flex gap-1">
         {badges}
         {(item.seriesCount ?? 0) > 1 && (
-          <CoverBadge>series</CoverBadge>
+          <Badge variant="solid" tone="light">series</Badge>
         )}
       </div>
     </div>

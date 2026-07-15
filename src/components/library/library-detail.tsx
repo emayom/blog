@@ -1,5 +1,6 @@
 import { formatDate } from '@/lib/format-date'
 import { BackLink } from '@/components/ui/back-link'
+import { Badge } from '@/components/ui/badge'
 import { Breadcrumb } from '@/components/ui/breadcrumb'
 import { EmptyState } from '@/components/ui/empty-state'
 import { Heading } from '@/components/ui/heading'
@@ -77,9 +78,7 @@ export function LibraryDetail({ item, hasBody }: LibraryDetailProps) {
           )}
 
           {item.status && (
-            <span className="mt-3 inline-flex rounded-md border border-hairline bg-surface-pearl px-3 py-1 text-xs text-ink-muted-80 dark:border-ink-muted-80 dark:bg-surface-tile-2 dark:text-body-muted">
-              {item.status}
-            </span>
+            <Badge variant="outline" className="mt-3">{item.status}</Badge>
           )}
         </div>
       </div>
