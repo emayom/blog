@@ -1,5 +1,6 @@
 import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '@/lib/cn'
+import { Button, buttonVariants } from '@/components/ui/button'
 import { Text } from '@/components/ui/text'
 
 const iconBoxVariants = cva(
@@ -50,19 +51,15 @@ export function EmptyState({
         ? (
             <a
               href={action.href}
-              className="inline-block rounded-full bg-primary px-[22px] py-[11px] text-[17px] text-on-primary transition-transform active:scale-95"
+              className={buttonVariants({ variant: 'primary' })}
             >
               {action.label}
             </a>
           )
         : (
-            <button
-              type="button"
-              onClick={action.onClick}
-              className="inline-block rounded-full bg-primary px-[22px] py-[11px] text-[17px] text-on-primary transition-transform active:scale-95"
-            >
+            <Button variant="primary" onClick={action.onClick}>
               {action.label}
-            </button>
+            </Button>
           ))}
     </div>
   )
