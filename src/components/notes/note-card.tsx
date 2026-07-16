@@ -2,6 +2,7 @@ import type { ReactNode } from 'react'
 import { MdxContent } from '@/components/mdx/mdx-content'
 import { PinIcon } from '@/components/icons'
 import { Tag } from '@/components/writing/tag'
+import { Text } from '@/components/ui/text'
 import { formatNoteDate } from '@/lib/format-date'
 import { getNoteBody } from '@/lib/notes'
 import type { NoteMeta } from '@/types/note'
@@ -13,7 +14,7 @@ export function NoteCardShell({ note, children }: { note: NoteMeta, children: Re
       {note.pinned && (
         <div className="mb-2 flex items-center gap-1 text-ink-muted-48 dark:text-body-muted">
           <PinIcon />
-          <span className="text-xs tracking-[-0.12px]">고정</span>
+          <Text as="span" variant="fine-print">고정</Text>
         </div>
       )}
       <div className="min-w-0 max-h-80 overflow-y-auto break-words [&>*:first-child]:mt-0 [&>*:last-child]:mb-0">
@@ -24,9 +25,9 @@ export function NoteCardShell({ note, children }: { note: NoteMeta, children: Re
         {note.tags[0] !== undefined && (
           <Tag href={`/notes?tag=${encodeURIComponent(note.tags[0])}`} variant="soft" size="sm" label={note.tags[0]} />
         )}
-        <span className="text-xs tracking-[-0.12px] text-ink-muted-48 dark:text-body-muted ml-auto">
+        <Text as="span" variant="fine-print" className="text-fg-subtle dark:text-body-muted ml-auto">
           {formatNoteDate(note.date)}
-        </span>
+        </Text>
       </div>
     </article>
   )

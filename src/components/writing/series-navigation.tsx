@@ -10,8 +10,8 @@ interface SeriesNavigationProps {
 const itemLinkClass
   = 'flex rounded-sm text-ink-muted-80 transition-colors hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-focus dark:text-body-muted dark:hover:text-primary-on-dark'
 
-const currentItemClass
-  = 'flex text-[17px] font-semibold leading-[1.47] tracking-[-0.374px] text-primary dark:text-primary-on-dark'
+// 목록 리듬 우선 — body-strong의 행간 조임(1.24) 대신 형제 링크(body 1.47)와 정렬
+const currentItemClass = 'flex leading-[1.47] text-primary dark:text-primary-on-dark'
 
 export function SeriesNavigation({ series }: SeriesNavigationProps) {
   if (!series) return null
@@ -34,9 +34,9 @@ export function SeriesNavigation({ series }: SeriesNavigationProps) {
             <li key={item.post.slug}>
               {item.isCurrent
                 ? (
-                    <span aria-current="true" className={currentItemClass}>
+                    <Text as="span" weight="semibold" aria-current="true" className={currentItemClass}>
                       {`${item.order}. ${item.post.title}`}
-                    </span>
+                    </Text>
                   )
                 : (
                     <Text as={Link} href={`/writing/${item.post.slug}`} className={itemLinkClass}>

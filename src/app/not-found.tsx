@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { Text } from '@/components/ui/text'
 
 export default function NotFound() {
   return (
@@ -6,9 +7,9 @@ export default function NotFound() {
       <h1 className="text-[40px] font-semibold text-ink dark:text-body-on-dark">
         404
       </h1>
-      <p className="mt-4 text-[17px] text-ink-muted-48 dark:text-body-muted">
+      <Text className="mt-4 text-fg-subtle dark:text-body-muted">
         요청하신 페이지를 찾을 수 없습니다.
-      </p>
+      </Text>
       <Link
         href="/"
         className="mt-8 inline-flex rounded-full bg-primary px-[22px] py-[11px] text-[17px] text-on-primary transition-transform active:scale-95"
