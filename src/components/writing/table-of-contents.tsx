@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { cva } from 'class-variance-authority'
 import { cn } from '@/lib/cn'
+import { Text } from '@/components/ui/text'
 import type { TocItem } from '@/types/post'
 
 const linkVariants = cva('block text-sm tracking-[-0.224px] transition-colors', {
@@ -50,9 +51,9 @@ export function TableOfContents({ items }: TableOfContentsProps) {
 
   return (
     <nav aria-label="목차" className="space-y-2.5">
-      <p className="text-sm font-semibold tracking-[-0.224px] text-ink-muted-48 dark:text-body-muted">
+      <Text variant="caption" weight="semibold" className="text-fg dark:text-body-on-dark">
         목차
-      </p>
+      </Text>
       <ul className="space-y-2.5">
         {items.map((item) => {
           const isActive = item.id === activeId

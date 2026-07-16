@@ -10,6 +10,7 @@ import { SeriesSection } from '@/components/writing/series-section'
 import { SearchProvider } from '@/components/search/search-provider'
 import { SearchTrigger } from '@/components/search/search-trigger'
 import { Heading } from '@/components/ui/heading'
+import { Text } from '@/components/ui/text'
 
 export const metadata: Metadata = buildMetadata({
   title: '글',
@@ -37,9 +38,9 @@ export default function WritingPage() {
           <Heading as="h1" size="md">글</Heading>
           <SearchTrigger />
         </div>
-        <p className="mb-7 text-[17px] text-ink-muted-80 dark:text-body-muted">
+        <Text className="mb-7 text-fg-muted dark:text-body-muted">
           개발, 경험, 생각을 기록합니다.
-        </p>
+        </Text>
 
         <FeaturedPosts posts={featured} />
         <PostList posts={posts} tags={tags} />

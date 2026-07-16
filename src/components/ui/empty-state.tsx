@@ -1,5 +1,6 @@
 import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '@/lib/cn'
+import { Text } from '@/components/ui/text'
 
 const iconBoxVariants = cva(
   'mb-md inline-flex size-14 items-center justify-center',
@@ -42,9 +43,9 @@ export function EmptyState({
       <span className={iconBoxVariants({ variant })} aria-hidden="true">
         {variant === 'error' ? <AlertIcon /> : <InboxIcon />}
       </span>
-      <p className="mb-md text-[17px] text-ink-muted-80 dark:text-body-muted">
+      <Text className="mb-md text-fg-muted dark:text-body-muted">
         {title}
-      </p>
+      </Text>
       {action && (action.href
         ? (
             <a
