@@ -2,7 +2,7 @@
 
 이 디렉토리는 디자인 토큰의 **단일 원천**이다. 체계 설명·계층 구조·카테고리·절차는 [docs/design-tokens.md](../../docs/design-tokens.md)가 정본이고, 여기는 작업 시 지켜야 할 규칙만 적는다.
 
-1. **`tokens.css`는 생성물 — 직접 수정 금지.** 값은 `tokens/**/*.json` 원천을 고치고 `npm run tokens:build`로 재생성한다. 손으로 고친 변경은 다음 빌드에서 소실된다.
+1. **`tokens.css`·`tokens.groups.ts`는 생성물 — 직접 수정 금지.** 값은 `tokens/**/*.json` 원천을 고치고 `npm run tokens:build`로 재생성한다. 손으로 고친 변경은 다음 빌드에서 소실된다.
 
 2. **새 토큰은 base → semantic 2단.** 원시값(hex·px)은 base(순수 스케일 — 역할명 금지, 색은 밝기 역순 번호), 역할명은 semantic에서 `{color.gray.900}`처럼 base 참조. base 팔레트는 CSS로 내보내지 않으므로(config 필터) 컴포넌트가 쓸 값은 반드시 semantic에 정의한다.
 

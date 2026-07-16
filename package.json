@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "tokens:build": "style-dictionary build --config style-dictionary.config.js",
-    "tokens:check": "npm run tokens:build && git diff --exit-code src/styles/tokens.css",
+    "tokens:check": "npm run tokens:build && git diff --exit-code src/styles/tokens.css src/styles/tokens.groups.ts",
     "prebuild": "npm run tokens:build",
     "build": "next build",
     "start": "next start",
