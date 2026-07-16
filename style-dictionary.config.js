@@ -71,6 +71,26 @@ StyleDictionary.registerFormat({
   },
 })
 
+// tailwind-merge는 @theme 커스텀 토큰 유틸리티(px-lg, text-caption 등)를 모른다.
+// 같은 원천에서 그룹 키 목록을 생성해 cn이 소비하게 하면 토큰 추가·삭제가 자동 반영된다.
+StyleDictionary.registerFormat({
+  name: 'javascript/token-groups',
+  format: async ({ dictionary, file }) => {
+    const header = await fileHeader({ file })
+    const keysOf = category => [...new Set(
+      dictionary.allTokens.filter(t => t.path[0] === category).map(t => t.path[1]),
+    )]
+    // 레포 stylistic 규칙(홑따옴표·콤마 공백)에 맞춰 출력해 생성물도 lint를 통과시킨다
+    const asArray = keys => `[${keys.map(k => `'${k}'`).join(', ')}] as const`
+    const lines = [
+      `export const spacingTokenKeys = ${asArray(keysOf('spacing'))}`,
+      `export const radiusTokenKeys = ${asArray(keysOf('radius'))}`,
+      `export const textTokenKeys = ${asArray(keysOf('text'))}`,
+    ]
+    return `${header}${lines.join('\n')}\n`
+  },
+})
+
 const config = {
   source: ['src/styles/tokens/**/*.json'],
   usesDtcg: true,
@@ -89,6 +109,10 @@ const config = {
           destination: 'tokens.css',
           format: 'css/tailwind-theme',
           filter: token => !isBasePalette(token),
+        },
+        {
+          destination: 'tokens.groups.ts',
+          format: 'javascript/token-groups',
         },
       ],
     },
