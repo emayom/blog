@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { buttonVariants } from '@/components/ui/button'
 import { Text } from '@/components/ui/text'
 
 export default function NotFound() {
@@ -12,7 +13,7 @@ export default function NotFound() {
       </Text>
       <Link
         href="/"
-        className="mt-8 inline-flex rounded-full bg-primary px-[22px] py-[11px] text-[17px] text-on-primary transition-transform active:scale-95"
+        className={buttonVariants({ variant: 'primary', className: 'mt-8' })}
       >
         홈으로 돌아가기
       </Link>
