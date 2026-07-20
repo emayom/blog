@@ -1,6 +1,6 @@
 'use client'
 
-import { CarouselRow } from '@/components/ui/carousel-row'
+import { CarouselRow } from '@/components/library/carousel-row'
 import { Badge } from '@/components/ui/badge'
 import { CoverCard } from '@/components/library/cover-card'
 import type { LibraryItemMeta } from '@/types/library'

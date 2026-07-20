@@ -7,7 +7,7 @@ import type { PostMeta } from '@/types/post'
 import { useSearch } from '@/components/search/search-provider'
 import { SearchResultItem } from '@/components/search/search-result-item'
 import { Kbd } from '@/components/ui/kbd'
-import { ModalEmptyState } from '@/components/ui/modal-empty-state'
+import { ModalEmptyState } from '@/components/search/modal-empty-state'
 import { SearchIcon } from '@/components/ui/search-icon'
 
 const MAX_RESULTS = 8
