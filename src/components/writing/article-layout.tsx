@@ -1,6 +1,8 @@
 import Image from 'next/image'
+import { Divider } from '@/components/ui/divider'
 import { formatDate } from '@/lib/format-date'
 import { absoluteUrl } from '@/lib/seo'
+import { writingPath } from '@/lib/routes'
 import { BackToTop } from '@/components/writing/back-to-top'
 import { Comments } from '@/components/writing/comments'
 import { PostNavigation } from '@/components/writing/post-navigation'
@@ -41,6 +43,7 @@ export function ArticleLayout({ post, adjacent, related, series }: ArticleLayout
               src={post.thumbnail}
               alt={post.title}
               fill
+              sizes="(min-width: 680px) 680px, 100vw"
               className="object-cover"
               priority
             />
@@ -59,7 +62,7 @@ export function ArticleLayout({ post, adjacent, related, series }: ArticleLayout
 
         <div className="mb-8 flex items-center gap-2">
           <ShareButton
-            url={absoluteUrl(`/writing/${post.slug}`)}
+            url={absoluteUrl(writingPath(post.slug))}
             title={post.title}
           />
         </div>
@@ -74,7 +77,7 @@ export function ArticleLayout({ post, adjacent, related, series }: ArticleLayout
 
         <PostNavigation prev={adjacent.prev} next={adjacent.next} />
 
-        <div className="my-12 h-px bg-hairline dark:bg-ink-muted-80" />
+        <Divider className="my-12" />
 
         <BackLink href="/writing">모든 글</BackLink>
 

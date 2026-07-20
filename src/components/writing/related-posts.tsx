@@ -1,4 +1,5 @@
 import { PostCard } from '@/components/writing/post-card'
+import { Divider } from '@/components/ui/divider'
 import { Heading } from '@/components/ui/heading'
 import type { PostMeta } from '@/types/post'
 
@@ -11,7 +12,7 @@ export function RelatedPosts({ posts }: RelatedPostsProps) {
 
   return (
     <>
-      <div className="my-12 h-px bg-hairline dark:bg-ink-muted-80" />
+      <Divider className="my-12" />
 
       <section>
         <Heading size="md">관련 글</Heading>
