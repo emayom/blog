@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { cn } from '@/lib/cn'
 import { IconButton } from '@/components/ui/icon-button'
+import { CheckIcon, ShareIcon } from '@/components/icons'
 
 interface ShareButtonProps {
   url: string
@@ -56,40 +57,5 @@ export function ShareButton({ url, title, className }: ShareButtonProps) {
     >
       {copied ? <CheckIcon /> : <ShareIcon />}
     </IconButton>
-  )
-}
-
-function ShareIcon() {
-  return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      aria-hidden="true"
-    >
-      <circle cx="18" cy="5" r="3" />
-      <circle cx="6" cy="12" r="3" />
-      <circle cx="18" cy="19" r="3" />
-      <path d="m8.59 13.51 6.83 3.98M15.41 6.51l-6.82 3.98" />
-    </svg>
-  )
-}
-
-function CheckIcon() {
-  return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      aria-hidden="true"
-    >
-      <path d="M20 6 9 17l-5-5" />
-    </svg>
   )
 }

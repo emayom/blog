@@ -5,6 +5,7 @@ import { createPortal } from 'react-dom'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { IconButton } from '@/components/ui/icon-button'
+import { CloseIcon, HamburgerIcon } from '@/components/icons'
 import type { NavItem } from '@/types/nav'
 
 interface MobileMenuProps {
@@ -15,42 +16,6 @@ interface MobileMenuProps {
 const TRANSITION_MS = 200
 
 const iconClass = 'block'
-
-function HamburgerIcon() {
-  return (
-    <svg
-      width="20"
-      height="20"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      aria-hidden="true"
-      className={iconClass}
-    >
-      <path d="M3 6h18M3 12h18M3 18h18" />
-    </svg>
-  )
-}
-
-function CloseIcon() {
-  return (
-    <svg
-      width="20"
-      height="20"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      aria-hidden="true"
-      className={iconClass}
-    >
-      <path d="M18 6 6 18M6 6l12 12" />
-    </svg>
-  )
-}
 
 export function MobileMenu({ items }: MobileMenuProps) {
   const [open, setOpen] = useState(false) // 패널을 DOM에 두는지 (마운트 의도)
@@ -126,7 +91,7 @@ export function MobileMenu({ items }: MobileMenuProps) {
         aria-controls={trayId}
         className="transition-transform"
       >
-        {open ? <CloseIcon /> : <HamburgerIcon />}
+        {open ? <CloseIcon className={iconClass} /> : <HamburgerIcon className={iconClass} />}
       </IconButton>
 
       {open && createPortal(

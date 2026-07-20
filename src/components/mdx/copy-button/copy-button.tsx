@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { cn } from '@/lib/cn'
 import { IconButton } from '@/components/ui/icon-button'
+import { CheckIcon, CopyIcon } from '@/components/icons'
 
 interface CopyButtonProps {
   code: string
@@ -38,38 +39,5 @@ export function CopyButton({ code, className }: CopyButtonProps) {
     >
       {copied ? <CheckIcon /> : <CopyIcon />}
     </IconButton>
-  )
-}
-
-function CopyIcon() {
-  return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      aria-hidden="true"
-    >
-      <rect x="9" y="9" width="11" height="11" rx="2" />
-      <path d="M5 15V5a2 2 0 0 1 2-2h10" />
-    </svg>
-  )
-}
-
-function CheckIcon() {
-  return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      aria-hidden="true"
-    >
-      <path d="M20 6 9 17l-5-5" />
-    </svg>
   )
 }
