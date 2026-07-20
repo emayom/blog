@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { cn } from '@/lib/cn'
+import { IconButton } from '@/components/ui/icon-button'
 
 interface ShareButtonProps {
   url: string
@@ -42,18 +43,19 @@ export function ShareButton({ url, title, className }: ShareButtonProps) {
   }
 
   return (
-    <button
-      type="button"
+    <IconButton
+      size="md"
+      shape="square"
+      variant="outline"
       onClick={handleShare}
-      aria-label={copied ? '링크 복사됨' : '글 공유'}
+      label={copied ? '링크 복사됨' : '글 공유'}
       className={cn(
-        'inline-flex size-9 items-center justify-center rounded-sm border border-hairline bg-canvas text-ink-muted-48 transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-focus active:scale-95 dark:border-ink-muted-80 dark:bg-surface-tile-1 dark:text-body-muted',
         copied && 'text-primary dark:text-primary-on-dark',
         className,
       )}
     >
       {copied ? <CheckIcon /> : <ShareIcon />}
-    </button>
+    </IconButton>
   )
 }
 

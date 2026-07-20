@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useTheme } from 'next-themes'
 import { MoonIcon, SunIcon } from '@/components/icons'
+import { IconButton } from '@/components/ui/icon-button'
 
 export function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme()
@@ -27,13 +28,14 @@ export function ThemeToggle() {
   const isDark = resolvedTheme === 'dark'
 
   return (
-    <button
-      type="button"
+    <IconButton
+      size="lg"
+      shape="circle"
+      variant="bare"
       onClick={() => setTheme(isDark ? 'light' : 'dark')}
-      aria-label={isDark ? '라이트 모드로 전환' : '다크 모드로 전환'}
-      className="inline-flex size-11 shrink-0 items-center justify-center rounded-full text-ink transition-transform focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-focus active:scale-95 dark:text-body-on-dark"
+      label={isDark ? '라이트 모드로 전환' : '다크 모드로 전환'}
     >
       {isDark ? <MoonIcon /> : <SunIcon />}
-    </button>
+    </IconButton>
   )
 }
