@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { formatDate } from '@/lib/format-date'
-import { Tag } from '@/components/writing/tag'
+import { Tag } from '@/components/ui/tag'
 import type { PostMeta } from '@/types/post'
 
 interface PostCardProps {

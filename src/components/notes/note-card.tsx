@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 import { MdxContent } from '@/components/mdx/mdx-content'
 import { PinIcon } from '@/components/icons'
-import { Tag } from '@/components/writing/tag'
+import { Tag } from '@/components/ui/tag'
 import { Text } from '@/components/ui/text'
 import { formatNoteDate } from '@/lib/format-date'
 import { getNoteBody } from '@/lib/notes'

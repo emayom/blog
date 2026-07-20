@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Heading } from '@/components/ui/heading'
-import { Tag } from '@/components/writing/tag'
+import { Tag } from '@/components/ui/tag'
 import type { SeriesBrowseItem } from '@/types/series-navigation'
 
 const DESKTOP_PER_PAGE = 4
