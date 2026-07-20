@@ -6,7 +6,7 @@ import { absoluteUrl, buildMetadata } from '@/lib/seo'
 import { buildBreadcrumbJsonLd } from '@/lib/json-ld'
 import { JsonLd } from '@/components/seo/json-ld'
 import { PostCard } from '@/components/writing/post-card'
-import { Tag } from '@/components/writing/tag'
+import { Tag } from '@/components/ui/tag'
 import { Breadcrumb } from '@/components/ui/breadcrumb'
 import { Heading } from '@/components/ui/heading'
 

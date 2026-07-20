@@ -1,6 +1,6 @@
 'use client'
 
-import { Tag } from '@/components/writing/tag'
+import { Tag } from '@/components/ui/tag'
 import type { TagCount } from '@/types/tag'
 
 interface NotesTagFilterProps {
