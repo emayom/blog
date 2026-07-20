@@ -6,22 +6,10 @@ import { Callout } from '@/components/mdx/callout'
 import { CodeGroup } from '@/components/mdx/code-group'
 import { Collapse } from '@/components/mdx/collapse'
 import { FileTree } from '@/components/mdx/file-tree'
+import { MdxImage } from '@/components/mdx/image'
 import { Step, Steps } from '@/components/mdx/steps'
 import { Kbd } from '@/components/ui/kbd'
 import { Heading } from '@/components/ui/heading'
-
-function imgComponent({ src, alt, ...props }: ComponentPropsWithoutRef<'img'>) {
-  return (
-    <figure className="my-xl">
-      <img src={src} alt={alt ?? ''} className="w-full rounded-sm" {...props} />
-      {alt && (
-        <figcaption className="mt-xs text-center text-sm text-ink-muted-48 dark:text-body-muted">
-          {alt}
-        </figcaption>
-      )}
-    </figure>
-  )
-}
 
 export const mdxComponents: MDXComponents = {
   a: ({ className, children, ...props }: ComponentPropsWithoutRef<'a'>) => {
@@ -94,7 +82,7 @@ export const mdxComponents: MDXComponents = {
     // MDX는 standalone 이미지를 <p>로 감싸는데, img 컴포넌트가 <figure>를 반환하면
     // <p><figure> 구조가 되어 hydration 에러 발생 → figure 단독 자식이면 <p> 제거
     const arr = Children.toArray(children)
-    if (arr.length === 1 && isValidElement(arr[0]) && (arr[0] as ReactElement).type === imgComponent) {
+    if (arr.length === 1 && isValidElement(arr[0]) && (arr[0] as ReactElement).type === MdxImage) {
       return <>{children}</>
     }
     return (
@@ -136,7 +124,7 @@ export const mdxComponents: MDXComponents = {
       {...props}
     />
   ),
-  img: imgComponent,
+  img: MdxImage,
   pre: CodeBlock,
   table: (props: ComponentPropsWithoutRef<'table'>) => (
     <div className="my-lg overflow-x-auto">
