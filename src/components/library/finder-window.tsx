@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef, useState, type ChangeEvent, type KeyboardEvent, type ReactNode } from 'react'
-import { SearchIcon } from '@/components/ui/search-icon'
+import { SearchIcon } from '@/components/icons'
 import { cn } from '@/lib/cn'
 
 interface FinderWindowProps {
