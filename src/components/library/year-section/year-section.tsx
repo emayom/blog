@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { Divider } from '@/components/ui/divider'
-import { CarouselRow } from '@/components/library/carousel-row'
+import { CarouselRow } from '@/components/ui/carousel-row'
 import { CoverCard } from '@/components/library/cover-card'
 import type { LibraryItemMeta } from '@/types/library'
 
