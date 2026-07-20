@@ -7,6 +7,12 @@
 - **`icons/`** — 모든 아이콘. 컴포넌트 파일 안에 로컬 아이콘 정의 금지 (`{ size?, className? }` props + 배럴 export 관례)
 - **`layout/`·`mdx/`** — 전역 셸·MDX 렌더 전용
 
+## 엔트리 파일
+
+- `components/ui/index.ts` — 프리미티브 배럴 (디자인 시스템 표면)
+- `components/index.ts` — 공유 표면 = `ui` + `icons`. **도메인 컴포넌트는 넣지 않는다** — 각자 경로로 import한다
+- 새 프리미티브를 추가하면 `ui/index.ts`에 한 줄 등록한다
+
 ## 공통 컴포넌트 디렉토리 컨벤션
 
 신규 공통 컴포넌트는 **디렉토리 단위**로 만든다 (kebab-case — 파일명 규칙 유지):
