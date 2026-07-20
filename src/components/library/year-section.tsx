@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { CarouselRow } from '@/components/ui/carousel-row'
+import { CarouselRow } from '@/components/library/carousel-row'
 import { CoverCard } from '@/components/library/cover-card'
 import type { LibraryItemMeta } from '@/types/library'
 

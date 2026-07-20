@@ -1,7 +1,7 @@
 'use client'
 
 import { useMemo, useState } from 'react'
-import { FinderWindow } from '@/components/ui/finder-window'
+import { FinderWindow } from '@/components/library/finder-window'
 import { ShelfSidebar } from '@/components/library/shelf-sidebar'
 import { FeaturedSection } from '@/components/library/featured-section'
 import { YearSection } from '@/components/library/year-section'
