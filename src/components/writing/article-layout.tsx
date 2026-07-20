@@ -2,7 +2,6 @@ import Image from 'next/image'
 import { Divider } from '@/components/ui/divider'
 import { formatDate } from '@/lib/format-date'
 import { absoluteUrl } from '@/lib/seo'
-import { writingPath } from '@/lib/routes'
 import { BackToTop } from '@/components/writing/back-to-top'
 import { Comments } from '@/components/writing/comments'
 import { PostNavigation } from '@/components/writing/post-navigation'
@@ -62,7 +61,7 @@ export function ArticleLayout({ post, adjacent, related, series }: ArticleLayout
 
         <div className="mb-8 flex items-center gap-2">
           <ShareButton
-            url={absoluteUrl(writingPath(post.slug))}
+            url={absoluteUrl(`/writing/${post.slug}`)}
             title={post.title}
           />
         </div>
