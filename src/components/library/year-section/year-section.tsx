@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { Divider } from '@/components/ui/divider'
 import { CarouselRow } from '@/components/library/carousel-row'
 import { CoverCard } from '@/components/library/cover-card'
 import type { LibraryItemMeta } from '@/types/library'
@@ -34,7 +35,7 @@ export function YearSection({ year, items }: YearSectionProps) {
           {year === '' ? '연도 미상' : `${year}년`}
         </h2>
       </div>
-      <hr className="border-hairline dark:border-ink-muted-80" />
+      <Divider />
       <CarouselRow items={displayItems} className="md:mx-5">
         {(item) => {
           const isSub = expandedSubSlugs.has(item.slug)

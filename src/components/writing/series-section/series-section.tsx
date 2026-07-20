@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { Divider } from '@/components/ui/divider'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
@@ -38,7 +39,7 @@ export function SeriesSection({ series }: SeriesSectionProps) {
 
   return (
     <section aria-label="엮은 글">
-      <hr className="my-12 border-hairline dark:border-ink-muted-80" />
+      <Divider className="my-12" />
       <div className="mb-4.5 flex items-center justify-between">
         <Heading size="sm">엮은 글</Heading>
         {totalPages > 1 && (
