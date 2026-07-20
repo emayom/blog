@@ -3,6 +3,7 @@
 import { Children, isValidElement, useRef, useState } from 'react'
 import type { ReactNode } from 'react'
 import { cn } from '@/lib/cn'
+import { CheckIcon, CopyIcon } from '@/components/icons'
 
 interface CodeGroupProps {
   labels: string
@@ -58,7 +59,7 @@ export function CodeGroup({ labels, children }: CodeGroupProps) {
             copied && 'text-primary dark:text-primary-on-dark',
           )}
         >
-          {copied ? <CheckIcon /> : <CopyIcon />}
+          {copied ? <CheckIcon size={15} /> : <CopyIcon size={15} />}
         </button>
       </div>
       <div ref={panelsRef}>
@@ -69,22 +70,5 @@ export function CodeGroup({ labels, children }: CodeGroupProps) {
         ))}
       </div>
     </div>
-  )
-}
-
-function CopyIcon() {
-  return (
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
-      <rect x="9" y="9" width="11" height="11" rx="2" />
-      <path d="M5 15V5a2 2 0 0 1 2-2h10" />
-    </svg>
-  )
-}
-
-function CheckIcon() {
-  return (
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
-      <path d="M20 6 9 17l-5-5" />
-    </svg>
   )
 }
