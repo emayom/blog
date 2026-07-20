@@ -2,9 +2,10 @@
 
 import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { cn } from '@/lib/cn'
+import { IconButton } from '@/components/ui/icon-button'
 
 const navBtn
-  = 'absolute top-1/2 z-10 flex size-7 -translate-y-1/2 items-center justify-center rounded-full border border-hairline bg-canvas text-ink shadow-sm transition-all duration-150 hover:shadow-md disabled:pointer-events-none disabled:opacity-0 dark:border-ink-muted-80 dark:bg-surface-tile-2 dark:text-body-on-dark'
+  = 'absolute top-1/2 z-10 -translate-y-1/2 text-fg shadow-sm transition-all duration-150 hover:shadow-md disabled:pointer-events-none disabled:opacity-0 dark:bg-surface-tile-2 dark:text-body-on-dark'
 
 interface CarouselRowProps<T> {
   items: T[]
@@ -37,11 +38,13 @@ export function CarouselRow<T>({ items, className, children }: CarouselRowProps<
 
   return (
     <div className={cn('relative min-w-0 py-1', className)}>
-      <button
-        type="button"
+      <IconButton
+        size="sm"
+        shape="circle"
+        variant="outline"
         onClick={() => scroll(-1)}
         disabled={!canPrev}
-        aria-label="이전"
+        label="이전"
         className={cn(navBtn, '-left-3.5')}
       >
         <svg
@@ -57,7 +60,7 @@ export function CarouselRow<T>({ items, className, children }: CarouselRowProps<
         >
           <path d="M15 18l-6-6 6-6" />
         </svg>
-      </button>
+      </IconButton>
 
       <div className="overflow-hidden">
         <div
@@ -69,11 +72,13 @@ export function CarouselRow<T>({ items, className, children }: CarouselRowProps<
         </div>
       </div>
 
-      <button
-        type="button"
+      <IconButton
+        size="sm"
+        shape="circle"
+        variant="outline"
         onClick={() => scroll(1)}
         disabled={!canNext}
-        aria-label="다음"
+        label="다음"
         className={cn(navBtn, '-right-3.5')}
       >
         <svg
@@ -89,7 +94,7 @@ export function CarouselRow<T>({ items, className, children }: CarouselRowProps<
         >
           <path d="M9 18l6-6-6-6" />
         </svg>
-      </button>
+      </IconButton>
     </div>
   )
 }

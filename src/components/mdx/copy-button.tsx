@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { cn } from '@/lib/cn'
+import { IconButton } from '@/components/ui/icon-button'
 
 interface CopyButtonProps {
   code: string
@@ -23,18 +24,20 @@ export function CopyButton({ code, className }: CopyButtonProps) {
   }
 
   return (
-    <button
-      type="button"
+    <IconButton
+      size="md"
+      shape="square"
+      variant="outline"
       onClick={handleCopy}
-      aria-label={copied ? '복사됨' : '코드 복사'}
+      label={copied ? '복사됨' : '코드 복사'}
       className={cn(
-        'absolute top-[12px] right-[12px] inline-flex size-9 items-center justify-center rounded-sm border border-hairline bg-canvas text-ink-muted-48 transition active:scale-95 dark:border-ink-muted-80 dark:bg-surface-tile-1 dark:text-body-muted',
+        'absolute top-[12px] right-[12px]',
         copied && 'text-primary dark:text-primary-on-dark',
         className,
       )}
     >
       {copied ? <CheckIcon /> : <CopyIcon />}
-    </button>
+    </IconButton>
   )
 }
 

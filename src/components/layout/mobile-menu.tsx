@@ -4,6 +4,7 @@ import { useCallback, useEffect, useId, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { IconButton } from '@/components/ui/icon-button'
 import type { NavItem } from '@/types/nav'
 
 interface MobileMenuProps {
@@ -114,17 +115,19 @@ export function MobileMenu({ items }: MobileMenuProps) {
 
   return (
     <>
-      <button
+      <IconButton
         ref={triggerRef}
-        type="button"
+        size="lg"
+        shape="circle"
+        variant="bare"
         onClick={() => (open ? requestClose() : requestOpen())}
-        aria-label={open ? '메뉴 닫기' : '메뉴 열기'}
+        label={open ? '메뉴 닫기' : '메뉴 열기'}
         aria-expanded={open}
         aria-controls={trayId}
-        className="inline-flex size-11 shrink-0 items-center justify-center rounded-full text-ink transition-transform active:scale-95 dark:text-body-on-dark"
+        className="transition-transform"
       >
         {open ? <CloseIcon /> : <HamburgerIcon />}
-      </button>
+      </IconButton>
 
       {open && createPortal(
         <div className="fixed inset-x-0 bottom-0 top-11 z-30 md:hidden">

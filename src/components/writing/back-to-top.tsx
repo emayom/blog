@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { cn } from '@/lib/cn'
+import { IconButton } from '@/components/ui/icon-button'
 
 const SCROLL_THRESHOLD = 400
 
@@ -23,17 +24,19 @@ export function BackToTop() {
   }
 
   return (
-    <button
-      type="button"
+    <IconButton
+      size="lg"
+      shape="circle"
+      variant="outline"
       onClick={scrollToTop}
-      aria-label="맨 위로"
+      label="맨 위로"
       className={cn(
-        'fixed bottom-8 right-8 inline-flex size-11 items-center justify-center rounded-full border border-hairline bg-canvas text-ink-muted-48 transition-opacity active:scale-95 hover:text-ink motion-reduce:transition-none dark:border-ink-muted-80 dark:bg-surface-tile-2 dark:text-body-muted dark:hover:text-body-on-dark',
+        'fixed bottom-8 right-8 transition-opacity hover:text-fg motion-reduce:transition-none dark:bg-surface-tile-2 dark:hover:text-body-on-dark',
         visible ? 'opacity-100' : 'pointer-events-none opacity-0',
       )}
     >
       <ArrowUpIcon />
-    </button>
+    </IconButton>
   )
 }
 

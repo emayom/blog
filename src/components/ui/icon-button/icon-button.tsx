@@ -1,4 +1,4 @@
-import type { ButtonHTMLAttributes } from 'react'
+import type { ButtonHTMLAttributes, Ref } from 'react'
 import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '@/lib/cn'
 
@@ -34,6 +34,8 @@ interface IconButtonProps
   VariantProps<typeof iconButtonCva> {
   // 필수 — 아이콘 전용 버튼은 접근 가능한 이름이 없으면 안 된다. 타입 레벨로 강제한다.
   label: string
+  // React 19에서 ref는 일반 prop — 런타임은 ...props로 이미 전달된다. 타입만 열어준다.
+  ref?: Ref<HTMLButtonElement>
 }
 
 export function IconButton({ size, shape, variant, label, className, type, ...props }: IconButtonProps) {
