@@ -119,7 +119,7 @@ export function MobileMenu({ items }: MobileMenuProps) {
         ref={triggerRef}
         size="lg"
         shape="circle"
-        variant="bare"
+        variant="ghost"
         onClick={() => (open ? requestClose() : requestOpen())}
         label={open ? '메뉴 닫기' : '메뉴 열기'}
         aria-expanded={open}

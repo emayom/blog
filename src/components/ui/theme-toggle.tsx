@@ -31,7 +31,7 @@ export function ThemeToggle() {
     <IconButton
       size="lg"
       shape="circle"
-      variant="bare"
+      variant="ghost"
       onClick={() => setTheme(isDark ? 'light' : 'dark')}
       label={isDark ? '라이트 모드로 전환' : '다크 모드로 전환'}
     >

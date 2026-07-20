@@ -38,8 +38,8 @@ describe('IconButton', () => {
     expect(screen.getByRole('button')).toHaveClass('rounded-sm')
   })
 
-  it('variant bare는 text-fg를 포함한다', () => {
-    render(<IconButton label="x" variant="bare" />)
+  it('variant ghost는 text-fg를 포함한다', () => {
+    render(<IconButton label="x" variant="ghost" />)
     expect(screen.getByRole('button')).toHaveClass('text-fg', 'dark:text-body-on-dark')
   })
 
@@ -78,7 +78,7 @@ describe('IconButton', () => {
     expect(el).not.toHaveClass('size-9')
   })
 
-  it('defaultVariants는 md·circle·bare이다', () => {
+  it('defaultVariants는 md·circle·ghost이다', () => {
     render(<IconButton label="x" />)
     const el = screen.getByRole('button')
     expect(el).toHaveClass('size-9', 'rounded-full', 'text-fg')
