@@ -1,4 +1,5 @@
 import { formatDate } from '@/lib/format-date'
+import { Divider } from '@/components/ui/divider'
 import { BackLink } from '@/components/ui/back-link'
 import { Badge } from '@/components/ui/badge'
 import { Breadcrumb } from '@/components/ui/breadcrumb'
@@ -84,7 +85,7 @@ export function LibraryDetail({ item, hasBody }: LibraryDetailProps) {
         </div>
       </div>
 
-      <div className="my-8 h-px bg-hairline dark:bg-ink-muted-80" />
+      <Divider className="my-8" />
 
       {hasQuotes || hasBody
         ? (
@@ -106,7 +107,7 @@ export function LibraryDetail({ item, hasBody }: LibraryDetailProps) {
                 </section>
               )}
 
-              {hasQuotes && hasBody && <div className="my-8 h-px bg-hairline dark:bg-ink-muted-80" />}
+              {hasQuotes && hasBody && <Divider className="my-8" />}
 
               {hasBody && (
                 <section>

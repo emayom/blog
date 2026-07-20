@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import { Divider } from '@/components/ui/divider'
 import { Heading } from '@/components/ui/heading'
 import { useTheme } from 'next-themes'
 import { giscusConfig, isGiscusEnabled } from '@/config/giscus'
@@ -70,7 +71,7 @@ export function Comments() {
 
   return (
     <>
-      <div className="my-12 h-px bg-hairline dark:bg-ink-muted-80" />
+      <Divider className="my-12" />
       <section>
         <Heading size="md">댓글</Heading>
         <div ref={containerRef} className="mt-6" />
