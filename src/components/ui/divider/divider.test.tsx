@@ -1,20 +1,26 @@
-import { render } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
 import { Divider } from '@/components/ui/divider'
 
 describe('Divider', () => {
-  it('구분선 기본 클래스를 렌더한다', () => {
-    const { container } = render(<Divider />)
-    const el = container.firstElementChild
+  it('separator 역할의 hr로 렌더한다', () => {
+    render(<Divider />)
 
-    expect(el?.className).toContain('h-px')
-    expect(el?.className).toContain('bg-hairline')
-    expect(el?.className).toContain('dark:bg-fg-muted')
+    expect(screen.getByRole('separator').tagName).toBe('HR')
+  })
+
+  it('구분선 기본 클래스를 렌더한다', () => {
+    render(<Divider />)
+    const cls = screen.getByRole('separator').className
+
+    expect(cls).toContain('border-t')
+    expect(cls).toContain('border-hairline')
+    expect(cls).toContain('dark:border-fg-muted')
   })
 
   it('className으로 여백을 지정할 수 있다', () => {
-    const { container } = render(<Divider className="my-12" />)
+    render(<Divider className="my-12" />)
 
-    expect(container.firstElementChild?.className).toContain('my-12')
+    expect(screen.getByRole('separator').className).toContain('my-12')
   })
 })

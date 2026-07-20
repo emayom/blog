@@ -1,6 +1,7 @@
 'use client'
 
 import { CarouselRow } from '@/components/library/carousel-row'
+import { Divider } from '@/components/ui/divider'
 import { Badge } from '@/components/ui/badge'
 import { CoverCard } from '@/components/library/cover-card'
 import type { LibraryItemMeta } from '@/types/library'
@@ -19,7 +20,7 @@ export function FeaturedSection({ items }: FeaturedSectionProps) {
           Featured
         </span>
       </div>
-      <hr className="border-hairline dark:border-ink-muted-80" />
+      <Divider />
       <CarouselRow items={items} className="md:mx-5">
         {item => (
           <CoverCard
