@@ -1,5 +1,10 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
+// mdx.ts가 모듈 스코프에서 NODE_ENV를 읽어, env를 바꾸는 테스트마다 resetModules 후
+// next-mdx-remote·shiki 그래프를 다시 로드한다. CI 병렬 부하에서 기본 5초를 넘겨
+// 간헐 실패하므로 이 파일만 여유를 준다.
+vi.setConfig({ testTimeout: 30_000 })
+
 const files: Record<string, string> = {}
 
 function setFiles(map: Record<string, string>) {
