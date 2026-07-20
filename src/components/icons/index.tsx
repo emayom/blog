@@ -14,6 +14,7 @@ export { PinIcon } from './pin'
 export { ArrowUpRightIcon } from './arrow-up-right'
 export { BuildingIcon } from './building'
 export { MoveLeftIcon } from './move-left'
+export { SearchIcon } from './search'
 
 // config(데이터)는 표시 라벨이 아니라 이 키로 아이콘을 가리켜, 라벨이 바뀌어도
 // 아이콘이 깨지지 않는다. 토글 등 직접 쓰는 UI 아이콘(Sun/Moon)은 registry 대상이

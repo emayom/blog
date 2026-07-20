@@ -1,6 +1,6 @@
 'use client'
 
-import { SearchIcon } from '@/components/ui/search-icon'
+import { SearchIcon } from '@/components/icons'
 import { useSearch } from '@/components/search/search-provider'
 
 export function SearchTrigger() {
