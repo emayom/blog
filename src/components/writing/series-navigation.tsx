@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import { Divider } from '@/components/ui/divider'
-import { writingPath } from '@/lib/routes'
 import { Heading } from '@/components/ui/heading'
 import { Text } from '@/components/ui/text'
 import type { SeriesNavigation as SeriesNavigationData } from '@/types/series-navigation'
@@ -41,7 +40,7 @@ export function SeriesNavigation({ series }: SeriesNavigationProps) {
                     </Text>
                   )
                 : (
-                    <Text as={Link} href={writingPath(item.post.slug)} className={itemLinkClass}>
+                    <Text as={Link} href={`/writing/${item.post.slug}`} className={itemLinkClass}>
                       {`${item.order}. ${item.post.title}`}
                     </Text>
                   )}

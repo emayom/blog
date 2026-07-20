@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import { Divider } from '@/components/ui/divider'
 import { cn } from '@/lib/cn'
-import { writingPath } from '@/lib/routes'
 import { Text } from '@/components/ui/text'
 import type { AdjacentPosts } from '@/types/post-navigation'
 
@@ -19,7 +18,7 @@ export function PostNavigation({ prev, next }: AdjacentPosts) {
       <nav aria-label="이전·다음 글" className="grid grid-cols-1 gap-6 sm:grid-cols-2">
         {prev && (
           <Link
-            href={writingPath(prev.slug)}
+            href={`/writing/${prev.slug}`}
             className="group flex flex-col rounded-sm text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-focus"
           >
             <Text as="span" variant="caption" className={labelClass}>이전 글</Text>
@@ -29,7 +28,7 @@ export function PostNavigation({ prev, next }: AdjacentPosts) {
 
         {next && (
           <Link
-            href={writingPath(next.slug)}
+            href={`/writing/${next.slug}`}
             className={cn(
               'group flex flex-col rounded-sm text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-focus sm:items-end sm:text-right',
               !prev && 'sm:col-start-2',
