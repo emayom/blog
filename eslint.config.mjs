@@ -5,6 +5,7 @@ import { defineConfig, globalIgnores } from 'eslint/config'
 import nextVitals from 'eslint-config-next/core-web-vitals'
 import nextTs from 'eslint-config-next/typescript'
 import stylistic from '@stylistic/eslint-plugin'
+import designGuardrails from './eslint-rules/index.ts'
 
 const eslintConfig = defineConfig([
   ...nextVitals,
@@ -23,9 +24,19 @@ const eslintConfig = defineConfig([
   ]),
   ...storybook.configs['flat/recommended'],
   {
-    files: ['src/components/mdx/mdx-components.tsx'],
+    files: ['src/components/mdx/mdx-components/mdx-components.tsx'],
     rules: {
       '@next/next/no-img-element': 'off',
+    },
+  },
+  {
+    // 토큰 가드레일 — 정리 완료 전까지 warn, 잔여 0이 되면 error로 승격한다.
+    // 테스트도 포함한다 — toHaveClass가 클래스명을 단언하므로 개명이 여기까지 따라가야 한다.
+    files: ['src/**/*.tsx'],
+    ignores: ['src/app/wireframe/**', 'src/stories/**'],
+    plugins: { design: designGuardrails },
+    rules: {
+      'design/no-untokenized-classname': 'warn',
     },
   },
 ])
