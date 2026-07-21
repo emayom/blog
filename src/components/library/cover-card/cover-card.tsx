@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, type ReactNode } from 'react'
 import Link from 'next/link'
 import { cn } from '@/lib/cn'
 import { Badge } from '@/components/ui/badge'
+import { Skeleton } from '@/components/ui/skeleton'
 import type { LibraryItemMeta } from '@/types/library'
 
 const DEFAULT_COVER_HEIGHT = 128
@@ -57,7 +58,7 @@ export function CoverCard({
         ? (
             <>
               {!loaded && (
-                <div className="absolute inset-0 animate-pulse rounded bg-neutral-200 dark:bg-neutral-700" />
+                <Skeleton className="absolute inset-0 rounded-none" />
               )}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
