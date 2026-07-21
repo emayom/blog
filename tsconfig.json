@@ -10,6 +10,8 @@
     "module": "esnext",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
+    // eslint-rules가 Node 타입 스트리핑으로 .ts를 직접 import한다 (noEmit이므로 허용 조건 충족)
+    "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "jsx": "react-jsx",
     "incremental": true,
