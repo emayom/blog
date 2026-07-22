@@ -8,9 +8,9 @@
 
 3. **semantic 이름은 Tailwind 네임스페이스를 따른다** — `--color-*` / `--spacing-*` / `--radius-*` / `--text-*` / `--font-*`. 토큰 path가 그대로 유틸리티 클래스명이 되므로 벗어나면 유틸리티가 생성되지 않는다.
 
-4. **색과 타이포 semantic 토큰 이름은 서로 충돌 금지** — 색(`--color-*`)과 타이포(`--text-*`)는 Tailwind `text-*` 유틸리티 네임스페이스를 공유한다. 같은 이름이면 색 유틸이 우선해 타이포가 유실된다. (현재 `body` 충돌은 색 토큰 `ink→fg` 마이그레이션에서 `body` 삭제로 해소 예정 — 그때까지 Text 프리미티브가 `--text-body` 변수를 직접 참조로 우회.)
+4. **색과 타이포 semantic 토큰 이름은 서로 충돌 금지** — 색(`--color-*`)과 타이포(`--text-*`)는 Tailwind `text-*` 유틸리티 네임스페이스를 공유한다. 같은 이름이면 색 유틸이 우선해 타이포가 유실된다. 색 토큰에 `body`·`caption` 같은 타이포 이름을 쓰지 않는다.
 
-5. **전경색 새 코드는 `fg` 계열만** (`fg`/`fg-muted`/`fg-subtle`). `ink` 계열은 구명칭 — 사용 금지.
+5. **전경색은 `fg` 계열** (`fg`/`fg-muted`/`fg-subtle`).
 
 6. **텍스트 스타일은 DTCG typography composite** (`tokens/typography/text-styles.json`, 4축). fontFamily는 composite에 넣지 않는다. `--font-sans`·`--font-mono`는 next/font 런타임 변수라 토큰화 불가 — globals.css `@theme inline` 소관.
 
@@ -18,5 +18,4 @@
 
 ## 삭제 예약 (컴포넌트 마이그레이션 시 처리)
 
-- `text.md` — `text.body`와 값 중복. `text-md` 클래스 사용 컴포넌트 6개 파일 수정 시 함께 삭제
-- `ink`/`ink-muted-80`/`ink-muted-48` — fg 계열 구명칭. 81개 파일(204곳) 치환 시 함께 삭제
+- `text.md` — `text.body`와 값 중복. 크기 전용 토큰이라 `leading`·`tracking`을 손으로 덧붙이게 만든다. `text-md` 사용처를 composite 토큰으로 옮길 때 함께 삭제

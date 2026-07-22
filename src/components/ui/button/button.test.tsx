@@ -9,18 +9,10 @@ describe('Button', () => {
     expect(el).toHaveClass('border', 'border-hairline', 'text-fg', 'px-sm', 'py-xxs')
   })
 
-  it('primary variant는 pill·bg-primary·body 타이포 4축 클래스를 포함한다', () => {
+  it('primary variant는 pill·bg-primary·body 타이포를 포함한다', () => {
     render(<Button variant="primary">buy</Button>)
     const el = screen.getByRole('button')
-    expect(el).toHaveClass(
-      'rounded-pill',
-      'bg-primary',
-      'text-on-primary',
-      'text-(length:--text-body)',
-      'leading-(--text-body--line-height)',
-      'tracking-(--text-body--letter-spacing)',
-      'font-(--text-body--font-weight)',
-    )
+    expect(el).toHaveClass('rounded-pill', 'bg-primary', 'text-on-primary', 'text-body')
   })
 
   it('primary는 size 패딩을 px-lg py-sm로 무효화한다', () => {
@@ -63,10 +55,10 @@ describe('Button', () => {
 
 describe('buttonVariants — 병합 보장', () => {
   it('primary 결과에 size 축의 충돌 클래스가 남지 않는다', () => {
-    const merged = buttonVariants({ variant: 'primary' })
+    const merged = buttonVariants({ variant: 'primary' }).split(/\s+/)
     expect(merged).not.toContain('text-sm')
     expect(merged).not.toContain('px-sm')
     expect(merged).toContain('px-lg')
-    expect(merged).toContain('text-(length:--text-body)')
+    expect(merged).toContain('text-body')
   })
 })
