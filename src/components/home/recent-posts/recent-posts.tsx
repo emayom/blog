@@ -35,7 +35,7 @@ export function RecentPosts({ posts, className }: RecentPostsProps) {
               {recent.map(post => (
                 <li
                   key={post.slug}
-                  className="border-b border-hairline lg:odd:pr-4 lg:even:pl-4 dark:border-ink-muted-80"
+                  className="border-b border-hairline lg:odd:pr-4 lg:even:pl-4 dark:border-fg-muted"
                 >
                   <PostCard post={post} />
                 </li>

@@ -11,7 +11,7 @@ const linkVariants = cva('block text-sm tracking-[-0.224px] transition-colors', 
     active: {
       true: 'font-semibold text-primary dark:text-primary-on-dark',
       false:
-        'text-ink-muted-48 hover:text-ink dark:text-body-muted dark:hover:text-body-on-dark',
+        'text-fg-subtle hover:text-fg dark:text-body-muted dark:hover:text-body-on-dark',
     },
   },
   defaultVariants: { active: false },

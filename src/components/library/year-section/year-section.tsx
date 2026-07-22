@@ -31,7 +31,7 @@ export function YearSection({ year, items }: YearSectionProps) {
   return (
     <div className="flex flex-col gap-2 py-4">
       <div className="flex items-center justify-between self-stretch md:px-5">
-        <h2 className="text-sm font-semibold leading-none tracking-[-0.03em] text-ink-muted-48 dark:text-body-muted">
+        <h2 className="text-sm font-semibold leading-none tracking-[-0.03em] text-fg-subtle dark:text-body-muted">
           {year === '' ? '연도 미상' : `${year}년`}
         </h2>
       </div>

@@ -79,7 +79,7 @@ export function CoverCard({
           )
         : (
             <div className="flex h-full w-full items-center justify-center bg-neutral-200 p-2 dark:bg-neutral-700">
-              <span className="text-center text-xs font-medium leading-tight text-ink-muted-48 dark:text-body-muted">
+              <span className="text-center text-xs font-medium leading-tight text-fg-subtle dark:text-body-muted">
                 {item.title}
               </span>
             </div>
@@ -98,7 +98,7 @@ export function CoverCard({
   const card = (
     <>
       {cover}
-      <span className="line-clamp-2 text-center text-xs leading-tight text-ink group-hover:underline dark:text-body-on-dark">
+      <span className="line-clamp-2 text-center text-xs leading-tight text-fg group-hover:underline dark:text-body-on-dark">
         {item.title}
       </span>
     </>

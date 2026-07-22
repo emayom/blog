@@ -21,13 +21,13 @@ export function HeadingAnchor({ href, children }: ComponentPropsWithoutRef<'a'>)
         href={href}
         onClick={handleClick}
         aria-label={copied ? '복사되었습니다!' : '링크를 제목에 복사'}
-        className="opacity-0 group-hover:opacity-100 text-ink-muted-48 no-underline dark:text-body-muted"
+        className="opacity-0 group-hover:opacity-100 text-fg-subtle no-underline dark:text-body-muted"
       >
         {children}
       </a>
       <span
         role="tooltip"
-        className="pointer-events-none absolute bottom-full left-1/2 mb-1.5 -translate-x-1/2 whitespace-nowrap rounded bg-ink px-2 py-1 text-xs text-canvas opacity-0 transition-opacity duration-150 group-hover/anchor:opacity-100 dark:bg-canvas dark:text-ink"
+        className="pointer-events-none absolute bottom-full left-1/2 mb-1.5 -translate-x-1/2 whitespace-nowrap rounded bg-fg px-2 py-1 text-xs text-canvas opacity-0 transition-opacity duration-150 group-hover/anchor:opacity-100 dark:bg-canvas dark:text-fg"
       >
         {copied ? '복사되었습니다!' : '링크를 제목에 복사'}
       </span>

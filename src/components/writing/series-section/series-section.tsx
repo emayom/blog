@@ -54,7 +54,7 @@ export function SeriesSection({ series }: SeriesSectionProps) {
           <Link
             key={s.slug}
             href={`/series/${s.slug}`}
-            className="group block overflow-hidden rounded-lg border border-hairline bg-canvas focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-focus dark:border-ink-muted-80 dark:bg-surface-tile-2"
+            className="group block overflow-hidden rounded-lg border border-hairline bg-canvas focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-focus dark:border-fg-muted dark:bg-surface-tile-2"
           >
             <div className="relative aspect-square w-full overflow-hidden bg-canvas-parchment dark:bg-surface-tile-2">
               {s.thumbnail && (
@@ -68,7 +68,7 @@ export function SeriesSection({ series }: SeriesSectionProps) {
               )}
             </div>
             <div className="px-4 py-3.5">
-              <div className="text-md font-semibold leading-[1.24] tracking-[-0.374px] text-ink group-hover:text-primary dark:text-body-on-dark dark:group-hover:text-primary-on-dark">
+              <div className="text-md font-semibold leading-[1.24] tracking-[-0.374px] text-fg group-hover:text-primary dark:text-body-on-dark dark:group-hover:text-primary-on-dark">
                 {s.name}
               </div>
               <Tag as="span" label={`${s.count}편`} className="mt-2" />

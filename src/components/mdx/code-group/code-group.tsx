@@ -32,7 +32,7 @@ export function CodeGroup({ labels, children }: CodeGroupProps) {
   }
 
   return (
-    <div className="my-lg overflow-hidden rounded-lg border border-hairline dark:border-ink-muted-80">
+    <div className="my-lg overflow-hidden rounded-lg border border-hairline dark:border-fg-muted">
       <div className="flex items-center gap-1 px-3 py-2 bg-canvas-parchment dark:bg-surface-tile-3">
         {labelList.map((label, i) => (
           <button
@@ -43,8 +43,8 @@ export function CodeGroup({ labels, children }: CodeGroupProps) {
             className={cn(
               'rounded px-2.5 py-0.5 text-[13px] tracking-[-0.224px] transition-colors',
               active === i
-                ? 'bg-ink text-canvas dark:bg-ink-muted-80 dark:text-body-on-dark'
-                : 'text-ink-muted-48 hover:text-ink dark:text-body-muted dark:hover:text-body-on-dark',
+                ? 'bg-fg text-canvas dark:bg-fg-muted dark:text-body-on-dark'
+                : 'text-fg-subtle hover:text-fg dark:text-body-muted dark:hover:text-body-on-dark',
             )}
           >
             {label}
@@ -55,7 +55,7 @@ export function CodeGroup({ labels, children }: CodeGroupProps) {
           onClick={handleCopy}
           aria-label={copied ? '복사됨' : '코드 복사'}
           className={cn(
-            'ml-auto inline-flex size-7 items-center justify-center rounded-sm text-ink-muted-48 transition-colors hover:text-ink dark:text-body-muted dark:hover:text-body-on-dark',
+            'ml-auto inline-flex size-7 items-center justify-center rounded-sm text-fg-subtle transition-colors hover:text-fg dark:text-body-muted dark:hover:text-body-on-dark',
             copied && 'text-primary dark:text-primary-on-dark',
           )}
         >

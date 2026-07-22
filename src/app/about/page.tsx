@@ -23,7 +23,7 @@ export default function AboutPage() {
     <main className="mx-auto max-w-4xl px-6 py-12">
       <div className="grid grid-cols-1 items-center gap-8 sm:grid-cols-[160px_1fr]">
         <div className="relative size-[150px]">
-          <div className="absolute inset-0 overflow-hidden rounded-full border border-hairline bg-canvas-parchment dark:border-ink-muted-80 dark:bg-surface-tile-2">
+          <div className="absolute inset-0 overflow-hidden rounded-full border border-hairline bg-canvas-parchment dark:border-fg-muted dark:bg-surface-tile-2">
             <Image
               src={profileImg}
               alt={`${siteConfig.name} 프로필`}
@@ -34,16 +34,16 @@ export default function AboutPage() {
               priority
             />
           </div>
-          <span className="absolute bottom-1 right-1 rounded-full border border-hairline bg-canvas px-2.5 py-1 text-xs text-ink dark:border-ink-muted-80 dark:bg-surface-tile-1 dark:text-body-on-dark">
+          <span className="absolute bottom-1 right-1 rounded-full border border-hairline bg-canvas px-2.5 py-1 text-xs text-fg dark:border-fg-muted dark:bg-surface-tile-1 dark:text-body-on-dark">
             Seoul
           </span>
         </div>
 
         <div>
-          <h1 className="mb-1.5 font-display text-3xl font-semibold leading-tight tracking-tight text-ink dark:text-body-on-dark">
+          <h1 className="mb-1.5 font-display text-3xl font-semibold leading-tight tracking-tight text-fg dark:text-body-on-dark">
             {siteConfig.name}
           </h1>
-          <p className="mb-md text-lg leading-relaxed tracking-tight text-ink-muted-48 dark:text-body-muted">
+          <p className="mb-md text-lg leading-relaxed tracking-tight text-fg-subtle dark:text-body-muted">
             배우고 기록하는 개발자입니다.
           </p>
 
@@ -57,7 +57,7 @@ export default function AboutPage() {
                     aria-label={item.label}
                     target={item.external ? '_blank' : undefined}
                     rel={item.external ? 'noopener noreferrer' : undefined}
-                    className="inline-flex size-9 items-center justify-center rounded-full text-ink-muted-80 transition-colors hover:bg-canvas-parchment hover:text-ink dark:text-body-muted dark:hover:bg-surface-tile-2 dark:hover:text-body-on-dark"
+                    className="inline-flex size-9 items-center justify-center rounded-full text-fg-muted transition-colors hover:bg-canvas-parchment hover:text-fg dark:text-body-muted dark:hover:bg-surface-tile-2 dark:hover:text-body-on-dark"
                   >
                     <Icon name={item.icon} />
                   </a>
@@ -67,7 +67,7 @@ export default function AboutPage() {
         </div>
       </div>
 
-      <div className="mt-10 text-base leading-relaxed tracking-tight text-ink-muted-80 dark:text-body-muted">
+      <div className="mt-10 text-base leading-relaxed tracking-tight text-fg-muted dark:text-body-muted">
         <div className="space-y-1">
           <p>
             안녕하세요. 배우고 만든 것을 글로 정리하면서 제 나름의 관점을 만들어가는 것을 좋아합니다.

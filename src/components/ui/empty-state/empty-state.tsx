@@ -10,9 +10,9 @@ const iconBoxVariants = cva(
     variants: {
       variant: {
         empty:
-          'rounded-[11px] border border-hairline bg-canvas-parchment text-ink-muted-48 dark:border-ink-muted-80 dark:bg-surface-tile-2 dark:text-body-muted',
+          'rounded-md border border-hairline bg-canvas-parchment text-fg-subtle dark:border-fg-muted dark:bg-surface-tile-2 dark:text-body-muted',
         error:
-          'rounded-[11px] border border-dashed border-ink-muted-48 text-ink-muted-48 dark:text-body-muted',
+          'rounded-md border border-dashed border-fg-subtle text-fg-subtle dark:text-body-muted',
       },
     },
     defaultVariants: { variant: 'empty' },

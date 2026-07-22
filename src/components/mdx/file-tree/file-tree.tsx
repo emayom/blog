@@ -9,9 +9,9 @@ function Folder({ name, defaultOpen = false, children }: FolderProps) {
   return (
     <li>
       <details open={defaultOpen}>
-        <summary className="flex cursor-pointer select-none list-none items-center gap-1.5 font-mono text-sm text-ink dark:text-body-on-dark [&::-webkit-details-marker]:hidden">
+        <summary className="flex cursor-pointer select-none list-none items-center gap-1.5 font-mono text-sm text-fg dark:text-body-on-dark [&::-webkit-details-marker]:hidden">
           <svg
-            className="details-chevron size-3 shrink-0 text-ink-muted-48"
+            className="details-chevron size-3 shrink-0 text-fg-subtle"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             fill="none"
@@ -23,11 +23,11 @@ function Folder({ name, defaultOpen = false, children }: FolderProps) {
           >
             <path d="m9 18 6-6-6-6" />
           </svg>
-          <FolderIcon className="size-4 shrink-0 text-ink-muted-48" />
+          <FolderIcon className="size-4 shrink-0 text-fg-subtle" />
           {name}
         </summary>
         {children && (
-          <ul className="ml-[7px] mt-1 space-y-1 border-l border-hairline pl-4 dark:border-ink-muted-80">
+          <ul className="ml-[7px] mt-1 space-y-1 border-l border-hairline pl-4 dark:border-fg-muted">
             {children}
           </ul>
         )}
@@ -38,11 +38,11 @@ function Folder({ name, defaultOpen = false, children }: FolderProps) {
 
 function FileItem({ name, comment }: FileItemProps) {
   return (
-    <li className="flex items-center gap-1.5 font-mono text-sm text-ink-muted-80 dark:text-body-muted">
-      <FileIcon className="size-4 shrink-0 text-ink-muted-48" />
+    <li className="flex items-center gap-1.5 font-mono text-sm text-fg-muted dark:text-body-muted">
+      <FileIcon className="size-4 shrink-0 text-fg-subtle" />
       {name}
       {comment && (
-        <span className="text-ink-muted-48 dark:text-body-muted">{comment}</span>
+        <span className="text-fg-subtle dark:text-body-muted">{comment}</span>
       )}
     </li>
   )

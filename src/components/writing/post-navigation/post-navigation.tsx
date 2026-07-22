@@ -4,9 +4,9 @@ import { cn } from '@/lib/cn'
 import { Text } from '@/components/ui/text'
 import type { AdjacentPosts } from '@/types/post-navigation'
 
-const labelClass = 'text-ink-muted-48 dark:text-body-muted'
+const labelClass = 'text-fg-subtle dark:text-body-muted'
 const titleClass
-  = 'mt-2.5 text-ink group-hover:text-primary dark:text-body-on-dark dark:group-hover:text-primary-on-dark'
+  = 'mt-2.5 text-fg group-hover:text-primary dark:text-body-on-dark dark:group-hover:text-primary-on-dark'
 
 export function PostNavigation({ prev, next }: AdjacentPosts) {
   if (!prev && !next) return null

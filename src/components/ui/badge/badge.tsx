@@ -6,7 +6,7 @@ const badgeVariants = cva('inline-flex text-xs', {
   variants: {
     variant: {
       outline:
-        'rounded-md border border-hairline bg-surface-pearl px-3 py-1 text-fg-muted dark:border-ink-muted-80 dark:bg-surface-tile-2 dark:text-body-muted',
+        'rounded-md border border-hairline bg-surface-pearl px-3 py-1 text-fg-muted dark:border-fg-muted dark:bg-surface-tile-2 dark:text-body-muted',
       solid: 'rounded px-1 py-1 font-semibold leading-none',
     },
     tone: {

@@ -53,14 +53,14 @@ export default async function TagPage({ params }: Props) {
         <Heading as="h1" size="md" className="mb-[22px]">
           #
           {tag}
-          <span className="ml-2 text-xl font-normal text-ink-muted-48 dark:text-body-muted">
+          <span className="ml-2 text-xl font-normal text-fg-subtle dark:text-body-muted">
             (
             {filtered.length}
             )
           </span>
         </Heading>
 
-        <ul className="flex flex-col divide-y divide-hairline dark:divide-ink-muted-80">
+        <ul className="flex flex-col divide-y divide-hairline dark:divide-fg-muted">
           {filtered.map(post => (
             <li key={post.slug}>
               <PostCard post={post} showTags={false} />

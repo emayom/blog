@@ -10,12 +10,12 @@ export function Collapse({ title, open = false, children }: CollapseProps) {
   return (
     <details
       open={open}
-      className="my-lg rounded-md border border-hairline dark:border-ink-muted-80"
+      className="my-lg rounded-md border border-hairline dark:border-fg-muted"
     >
-      <summary className="flex cursor-pointer select-none list-none items-center justify-between px-4 py-3 text-sm font-semibold tracking-[-0.374px] text-ink dark:text-body-on-dark [&::-webkit-details-marker]:hidden">
+      <summary className="flex cursor-pointer select-none list-none items-center justify-between px-4 py-3 text-sm font-semibold tracking-[-0.374px] text-fg dark:text-body-on-dark [&::-webkit-details-marker]:hidden">
         {title}
         <svg
-          className="details-chevron size-4 shrink-0 text-ink-muted-48"
+          className="details-chevron size-4 shrink-0 text-fg-subtle"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           fill="none"
@@ -28,7 +28,7 @@ export function Collapse({ title, open = false, children }: CollapseProps) {
           <path d="m9 18 6-6-6-6" />
         </svg>
       </summary>
-      <div className="border-t border-hairline px-4 pb-4 pt-3 text-sm leading-[1.47] tracking-[-0.374px] text-ink-muted-80 dark:border-ink-muted-80 dark:text-body-muted">
+      <div className="border-t border-hairline px-4 pb-4 pt-3 text-sm leading-[1.47] tracking-[-0.374px] text-fg-muted dark:border-fg-muted dark:text-body-muted">
         {children}
       </div>
     </details>
