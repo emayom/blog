@@ -32,12 +32,12 @@ export function Hero({ latestPost, nowReading, children }: HeroProps) {
             className={`group flex min-h-[150px] flex-col justify-between rounded-lg bg-surface-tile-1 p-6 dark:bg-primary/85 ${tileLift} ${tileFocus}`}
           >
             <div className="flex items-start justify-between gap-3">
-              <span className="text-xs font-semibold uppercase tracking-wide text-body-muted dark:text-on-primary/75">
+              <span className="text-label-sm font-semibold uppercase tracking-wide text-body-muted dark:text-on-primary/75">
                 Latest
               </span>
               <ArrowUpRightIcon className="shrink-0 text-body-muted transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transition-none dark:text-on-primary/90" />
             </div>
-            <h2 className="font-display text-base font-semibold leading-tight tracking-tight text-body-on-dark line-clamp-3 sm:text-xl">
+            <h2 className="font-display text-title-md text-body-on-dark line-clamp-3 sm:text-title-lg">
               {latestPost.title}
             </h2>
           </Link>
@@ -49,16 +49,16 @@ export function Hero({ latestPost, nowReading, children }: HeroProps) {
             href="/library"
             className={`group flex min-h-[150px] flex-col justify-between rounded-lg border border-divider-soft bg-surface-pearl p-6 ${tileLift} ${tileFocus} dark:border-fg-muted dark:bg-surface-tile-3`}
           >
-            <span className="text-xs font-semibold uppercase tracking-wide text-fg-subtle dark:text-body-muted">
+            <span className="text-label-sm font-semibold uppercase tracking-wide text-fg-subtle dark:text-body-muted">
               Now reading
             </span>
             <div className="flex items-end justify-between gap-3">
               <div className="min-w-0">
-                <h2 className="font-display text-base font-semibold leading-tight tracking-tight text-fg line-clamp-2 sm:text-xl dark:text-body-on-dark">
+                <h2 className="font-display text-title-md text-fg line-clamp-2 sm:text-title-lg dark:text-body-on-dark">
                   {nowReading.title}
                 </h2>
                 {nowReading.author && (
-                  <span className="mt-1 block truncate text-sm text-fg-subtle dark:text-body-muted">
+                  <span className="mt-1 block truncate text-label-md text-fg-subtle dark:text-body-muted">
                     {nowReading.author}
                   </span>
                 )}

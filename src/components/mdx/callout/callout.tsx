@@ -30,7 +30,7 @@ export function Callout({ type = 'info', title, children }: CalloutProps) {
         <Icon />
       </span>
       <div>
-        <strong className="mb-1 block text-sm font-medium text-fg dark:text-body-on-dark">
+        <strong className="mb-1 block text-label-md font-medium text-fg dark:text-body-on-dark">
           {title ?? defaultTitles[type]}
         </strong>
         <div className="text-body-md text-fg-muted dark:text-body-muted">

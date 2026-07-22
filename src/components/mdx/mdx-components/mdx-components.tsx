@@ -73,7 +73,7 @@ export const mdxComponents: MDXComponents = {
     if ('data-language' in props) return <code className={className} {...props} />
     return (
       <code
-        className="rounded-xs border border-hairline bg-canvas-parchment px-0.5 py-0.5 font-mono dark:border-ink-muted-80 dark:bg-surface-tile-2"
+        className="rounded-xs border border-hairline bg-canvas-parchment px-0.5 py-0.5 font-mono dark:border-fg-muted dark:bg-surface-tile-2"
         {...props}
       />
     )
@@ -143,13 +143,13 @@ export const mdxComponents: MDXComponents = {
   tbody: (props: ComponentPropsWithoutRef<'tbody'>) => <tbody {...props} />,
   tr: (props: ComponentPropsWithoutRef<'tr'>) => (
     <tr
-      className="border-b border-hairline dark:border-ink-muted-80 last:border-0"
+      className="border-b border-hairline dark:border-fg-muted last:border-0"
       {...props}
     />
   ),
   th: (props: ComponentPropsWithoutRef<'th'>) => (
     <th
-      className="px-sm py-2.5 text-left font-semibold text-ink dark:text-body-on-dark"
+      className="px-sm py-2.5 text-left font-semibold text-fg dark:text-body-on-dark"
       {...props}
     />
   ),

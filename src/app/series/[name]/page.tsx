@@ -74,10 +74,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 // 번호가 매겨진 글 목록 — 단일 시리즈와 카테고리 섹션 양쪽에서 재사용한다.
 function PostOrderedList({ posts }: { posts: PostMeta[] }) {
   return (
-    <ol className="flex flex-col divide-y divide-hairline dark:divide-ink-muted-80">
+    <ol className="flex flex-col divide-y divide-hairline dark:divide-fg-muted">
       {posts.map((post, index) => (
         <li key={post.slug} className="flex gap-3.5">
-          <span className="w-5 flex-none pt-lg text-sm text-ink-muted-48 dark:text-body-muted">
+          <span className="w-5 flex-none pt-lg text-label-md text-fg-subtle dark:text-body-muted">
             {index + 1}
           </span>
           <div className="flex-1">

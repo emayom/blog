@@ -123,7 +123,7 @@ export function MobileMenu({ items }: MobileMenuProps) {
                     key={item.href}
                     href={item.href}
                     aria-current={isActive ? 'page' : undefined}
-                    className={`flex min-h-[3.25rem] items-center px-6 text-base transition-colors hover:bg-black/[0.03] dark:hover:bg-white/[0.04] ${
+                    className={`flex min-h-[3.25rem] items-center px-6 text-body-lg transition-colors hover:bg-black/[0.03] dark:hover:bg-white/[0.04] ${
                       isActive
                         ? 'font-semibold text-fg dark:text-body-on-dark'
                         : 'font-medium text-fg-muted dark:text-body-muted'

@@ -26,7 +26,7 @@ export function ShelfSidebar({ active }: ShelfSidebarProps) {
             href={item.href}
             aria-current={isActive ? 'page' : undefined}
             className={cn(
-              'flex shrink-0 items-center gap-2 rounded px-3 py-2 text-left text-sm transition-colors md:px-2 md:py-1 md:text-xs',
+              'flex shrink-0 items-center gap-2 rounded px-3 py-2 text-left text-label-md transition-colors md:px-2 md:py-1 md:text-label-sm',
               isActive
                 ? 'bg-fg/8 font-medium text-primary dark:text-primary-on-dark'
                 : 'text-fg-subtle hover:text-fg dark:text-body-muted dark:hover:text-body-on-dark',

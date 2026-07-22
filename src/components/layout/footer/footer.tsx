@@ -1,10 +1,15 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { footerMeta, footerNav, siteConfig } from '@/config/site'
+import { Text } from '@/components/ui/text'
 import profileImg from '@/assets/profile.png'
 
+// 크기는 Text의 variant가 정한다 — 여기는 링크 밑줄 애니메이션만 담당한다.
 const linkClass
-  = 'relative inline-block py-0.5 text-sm text-fg-subtle dark:text-body-muted transition-colors hover:text-fg dark:hover:text-body-on-dark after:content-[\'\'] after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-current after:transition-transform after:duration-200 after:ease-out hover:after:scale-x-100'
+  = 'relative inline-block py-0.5 text-fg-subtle dark:text-body-muted transition-colors hover:text-fg dark:hover:text-body-on-dark after:content-[\'\'] after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-current after:transition-transform after:duration-200 after:ease-out hover:after:scale-x-100'
+
+const columnTitleClass = 'pb-4 text-fg dark:text-body-on-dark'
+const mutedClass = 'text-fg-subtle dark:text-body-muted'
 
 export function Footer() {
   const year = new Date().getFullYear()
@@ -34,12 +39,12 @@ export function Footer() {
               />
             </div>
             <div className="flex flex-col gap-1">
-              <p className="text-sm font-semibold text-fg dark:text-body-on-dark">
+              <Text variant="label-md" weight="semibold" className="text-fg dark:text-body-on-dark">
                 {siteConfig.name}
-              </p>
-              <p className="text-sm text-fg-subtle dark:text-body-muted">
+              </Text>
+              <Text variant="label-md" className={mutedClass}>
                 {siteConfig.description}
-              </p>
+              </Text>
             </div>
           </div>
 
@@ -47,29 +52,31 @@ export function Footer() {
           <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-4">
             {groups.map(group => (
               <div key={group.title} className="w-max min-w-28">
-                <h2 className="pb-4 text-sm font-semibold text-fg dark:text-body-on-dark">
+                <Text as="h2" variant="label-md" weight="semibold" className={columnTitleClass}>
                   {group.title}
-                </h2>
+                </Text>
                 <ul className="flex flex-col gap-1.5">
                   {group.items.map(item =>
                     item.external
                       ? (
                           <li key={item.label}>
-                            <a
+                            <Text
+                              as="a"
+                              variant="label-md"
                               href={item.href}
                               target="_blank"
                               rel="noopener noreferrer"
                               className={linkClass}
                             >
                               {item.label}
-                            </a>
+                            </Text>
                           </li>
                         )
                       : (
                           <li key={item.href}>
-                            <Link href={item.href} className={linkClass}>
+                            <Text as={Link} variant="label-md" href={item.href} className={linkClass}>
                               {item.label}
-                            </Link>
+                            </Text>
                           </li>
                         ),
                   )}
@@ -79,17 +86,21 @@ export function Footer() {
 
             {/* 메타데이터 */}
             <div className="w-max min-w-28">
-              <h2 className="pb-4 text-sm font-semibold text-fg dark:text-body-on-dark">
+              <Text as="h2" variant="label-md" weight="semibold" className={columnTitleClass}>
                 {footerMeta.title}
-              </h2>
+              </Text>
               <dl className="flex flex-col gap-1.5">
                 {footerMeta.items.map(({ label, value, href }) => (
                   <div key={label} className="flex items-baseline gap-2">
-                    <dt className="w-8 shrink-0 text-sm text-fg-subtle dark:text-body-muted">{label}</dt>
+                    <Text as="dt" variant="label-md" className={`w-8 shrink-0 ${mutedClass}`}>{label}</Text>
                     <dd>
                       {href
-                        ? <a href={href} target="_blank" rel="noopener noreferrer" className={linkClass}>{value}</a>
-                        : <span className="text-sm text-fg-subtle dark:text-body-muted">{value}</span>}
+                        ? (
+                            <Text as="a" variant="label-md" href={href} target="_blank" rel="noopener noreferrer" className={linkClass}>
+                              {value}
+                            </Text>
+                          )
+                        : <Text as="span" variant="label-md" className={mutedClass}>{value}</Text>}
                     </dd>
                   </div>
                 ))}
@@ -99,17 +110,15 @@ export function Footer() {
         </div>
 
         {/* 하단 바 */}
-        <div className="mt-12 flex flex-col gap-1 border-t border-hairline pt-6 text-xs text-fg-subtle sm:flex-row sm:justify-between dark:border-fg-muted dark:text-body-muted">
-          <div className="flex items-center gap-3">
-            <span>
-              ©
-              {year}
-              {' '}
-              {siteConfig.name}
-              . All rights reserved.
-            </span>
-          </div>
-          <span>{siteConfig.location}</span>
+        <div className={`mt-12 flex flex-col gap-1 border-t border-hairline pt-6 sm:flex-row sm:justify-between dark:border-fg-muted ${mutedClass}`}>
+          <Text as="span" variant="label-sm">
+            ©
+            {year}
+            {' '}
+            {siteConfig.name}
+            . All rights reserved.
+          </Text>
+          <Text as="span" variant="label-sm">{siteConfig.location}</Text>
         </div>
 
       </div>

@@ -134,12 +134,12 @@ export function SearchModal() {
         aria-modal="true"
         aria-labelledby={labelId}
         aria-label="검색"
-        className="relative z-10 flex w-full max-w-145 flex-col overflow-hidden rounded-[14px] border border-hairline bg-canvas shadow-[0_24px_60px_rgba(0,0,0,0.3)] dark:border-ink-muted-80 dark:bg-surface-tile-2 max-h-[70vh]"
+        className="relative z-10 flex w-full max-w-145 flex-col overflow-hidden rounded-[14px] border border-hairline bg-canvas shadow-[0_24px_60px_rgba(0,0,0,0.3)] dark:border-fg-muted dark:bg-surface-tile-2 max-h-[70vh]"
         onClick={e => e.stopPropagation()}
       >
         {/* 검색 입력 행 */}
-        <div className="flex items-center gap-3 border-b border-hairline px-4.5 py-4 dark:border-ink-muted-80">
-          <SearchIcon size={16} className="shrink-0 text-ink-muted-48 dark:text-body-muted" />
+        <div className="flex items-center gap-3 border-b border-hairline px-4.5 py-4 dark:border-fg-muted">
+          <SearchIcon size={16} className="shrink-0 text-fg-subtle dark:text-body-muted" />
           <label id={labelId} htmlFor="search-input" className="sr-only">검색</label>
           <input
             ref={inputRef}
@@ -184,7 +184,7 @@ export function SearchModal() {
             />
           )}
           {!isInitial && !isEmpty && (
-            <ul className="divide-y divide-hairline dark:divide-ink-muted-80">
+            <ul className="divide-y divide-hairline dark:divide-fg-muted">
               {results.map((post, i) => (
                 <li key={post.slug}>
                   <SearchResultItem

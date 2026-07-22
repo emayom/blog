@@ -20,7 +20,7 @@ export function RecentPosts({ posts, className }: RecentPostsProps) {
         <Heading size="sm">최근 글</Heading>
         <Link
           href="/writing"
-          className="text-sm text-primary hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-focus dark:text-primary-on-dark"
+          className="text-label-md text-primary hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-focus dark:text-primary-on-dark"
         >
           전체 →
         </Link>

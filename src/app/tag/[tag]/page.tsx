@@ -53,7 +53,7 @@ export default async function TagPage({ params }: Props) {
         <Heading as="h1" size="md" className="mb-[22px]">
           #
           {tag}
-          <span className="ml-2 text-xl font-normal text-fg-subtle dark:text-body-muted">
+          <span className="ml-2 text-title-lg font-normal text-fg-subtle dark:text-body-muted">
             (
             {filtered.length}
             )
