@@ -37,8 +37,10 @@ function replacementsFrom(...sources: [file: string, prefix: string][]) {
 export const REPLACEMENTS = replacementsFrom(['radius.json', 'rounded'], ['text.json', 'text'])
 
 /**
- * 색 토큰 구명칭 → 새 이름. 값이 아니라 개명 이력이라 원천에서 파생시킬 수 없다.
- * 한시적 데이터 — `src/styles/AGENTS.md`의 "삭제 예약"이 처리되면 이 맵도 함께 삭제한다.
+ * deprecated 색 토큰 → 새 이름. 값이 아니라 이름 변경 이력이라 원천에서 파생시킬 수 없다.
+ *
+ * 원천에서 제거된 뒤에도 유지한다 — 없는 토큰을 참조하는 클래스는 팔레트도 임의값도 아니라
+ * 이 맵이 없으면 아무 경고 없이 스타일만 사라진다. 여기가 유일한 방어선이다.
  */
 export const COLOR_RENAMES = new Map<string, string>([
   ['ink-muted-80', 'fg-muted'],

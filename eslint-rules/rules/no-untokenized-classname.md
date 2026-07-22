@@ -43,7 +43,7 @@ const label = 'text-[13px]'
 | font-size 임의값 | `text-[13px]` | 타이포 토큰이 담당하는 축 |
 | tracking·leading 임의값 | `tracking-[-0.374px]` `leading-[1.47]` | 타이포 composite 토큰이 이미 함께 갖고 있는 축 |
 | radius 임의값 | `rounded-[14px]` | radius 토큰이 담당하는 축 |
-| 토큰 구명칭 | 개명 맵에 등록된 이름 | 새 이름으로 옮겨야 한다 |
+| deprecated 토큰 | 개명 맵에 등록된 이름 | 새 이름으로 옮겨야 한다 |
 
 토큰 축에 해당하면서 **순수 치수값이거나 기본 팔레트일 때만** 잡는다. `calc()`·`color-mix()`·`40ch`·`9deg`처럼 대응 토큰이 없는 값은 정당하므로 건드리지 않는다.
 
