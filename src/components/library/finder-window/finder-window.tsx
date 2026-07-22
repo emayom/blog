@@ -70,7 +70,7 @@ export function FinderWindow({
 
         <div className="flex min-h-0 min-w-0 flex-1 flex-col">
           {showHeader && (
-            <div className="hidden h-10 shrink-0 items-center gap-2 pl-4 pr-2 text-sm font-semibold text-fg-subtle md:flex dark:text-body-muted">
+            <div className="hidden h-10 shrink-0 items-center gap-2 pl-4 pr-2 text-label-md font-semibold text-fg-subtle md:flex dark:text-body-muted">
               {title && <span className="ml-1">{title}</span>}
               {onSearch && (
                 <div
@@ -109,7 +109,7 @@ export function FinderWindow({
                     placeholder={searchPlaceholder}
                     aria-label="검색"
                     className={cn(
-                      'min-w-0 border-0 bg-transparent text-xs text-fg outline-none placeholder:text-fg-subtle dark:text-body-on-dark dark:placeholder:text-body-muted',
+                      'min-w-0 border-0 bg-transparent text-label-sm text-fg outline-none placeholder:text-fg-subtle dark:text-body-on-dark dark:placeholder:text-body-muted',
                       expanded ? 'flex-1 opacity-100' : 'pointer-events-none w-0 opacity-0',
                     )}
                     tabIndex={expanded ? 0 : -1}

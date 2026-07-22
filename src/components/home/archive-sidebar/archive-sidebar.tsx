@@ -15,7 +15,7 @@ export function ArchiveSidebar({ years }: ArchiveSidebarProps) {
         <Heading size="sm">아카이브</Heading>
         <Link
           href="/archive"
-          className="text-sm text-primary hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-focus dark:text-primary-on-dark"
+          className="text-label-md text-primary hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-focus dark:text-primary-on-dark"
         >
           전체 →
         </Link>
@@ -28,7 +28,7 @@ export function ArchiveSidebar({ years }: ArchiveSidebarProps) {
           >
             <Link
               href={`/archive/${year}`}
-              className="min-w-9 shrink-0 text-sm text-fg hover:text-primary dark:text-body-on-dark dark:hover:text-primary-on-dark"
+              className="min-w-9 shrink-0 text-label-md text-fg hover:text-primary dark:text-body-on-dark dark:hover:text-primary-on-dark"
             >
               {year}
             </Link>
@@ -47,7 +47,7 @@ export function ArchiveSidebar({ years }: ArchiveSidebarProps) {
               </span>
               <span
                 role="tooltip"
-                className="pointer-events-none absolute bottom-full right-0 mb-1.5 whitespace-nowrap rounded bg-fg px-2 py-1 text-xs text-canvas opacity-0 transition-opacity duration-150 group-hover/bars:opacity-100 dark:bg-canvas dark:text-fg"
+                className="pointer-events-none absolute bottom-full right-0 mb-1.5 whitespace-nowrap rounded bg-fg px-2 py-1 text-label-sm text-canvas opacity-0 transition-opacity duration-150 group-hover/bars:opacity-100 dark:bg-canvas dark:text-fg"
               >
                 {count}
                 편

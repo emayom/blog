@@ -34,7 +34,7 @@ export function LibraryShelf({ items, activeType, label }: LibraryShelfProps) {
     <FinderWindow
       className="hidden md:flex md:h-140"
       sidebar={<ShelfSidebar active={activeType} />}
-      title={<Heading as="h1" className="text-sm">{label}</Heading>}
+      title={<Heading as="h1" className="text-label-md">{label}</Heading>}
       onSearch={setQuery}
       searchPlaceholder="제목 검색"
     >

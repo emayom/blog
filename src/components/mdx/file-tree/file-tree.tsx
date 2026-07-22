@@ -9,7 +9,7 @@ function Folder({ name, defaultOpen = false, children }: FolderProps) {
   return (
     <li>
       <details open={defaultOpen}>
-        <summary className="flex cursor-pointer select-none list-none items-center gap-1.5 font-mono text-sm text-fg dark:text-body-on-dark [&::-webkit-details-marker]:hidden">
+        <summary className="flex cursor-pointer select-none list-none items-center gap-1.5 font-mono text-label-md text-fg dark:text-body-on-dark [&::-webkit-details-marker]:hidden">
           <svg
             className="details-chevron size-3 shrink-0 text-fg-subtle"
             xmlns="http://www.w3.org/2000/svg"
@@ -38,7 +38,7 @@ function Folder({ name, defaultOpen = false, children }: FolderProps) {
 
 function FileItem({ name, comment }: FileItemProps) {
   return (
-    <li className="flex items-center gap-1.5 font-mono text-sm text-fg-muted dark:text-body-muted">
+    <li className="flex items-center gap-1.5 font-mono text-label-md text-fg-muted dark:text-body-muted">
       <FileIcon className="size-4 shrink-0 text-fg-subtle" />
       {name}
       {comment && (

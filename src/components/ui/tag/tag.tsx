@@ -11,7 +11,7 @@ const tagVariants = cva(
         outline: 'border border-hairline bg-canvas text-fg hover:border-fg-subtle dark:border-fg-muted dark:bg-surface-tile-2 dark:text-body-on-dark',
       },
       size: {
-        sm: 'px-3 py-1 text-xs',
+        sm: 'px-3 py-1 text-label-sm',
         md: 'h-[34px] px-4 text-label-md',
       },
     },

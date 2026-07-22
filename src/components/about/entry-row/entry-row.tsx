@@ -30,7 +30,7 @@ export function EntryRow({ image, alt, title, subtitle, meta, description, href 
   return (
     <li className="flex gap-3">
       <EntryThumb src={image} alt={alt} className="size-9 rounded-sm" />
-      <div className="min-w-0 flex-1 text-base leading-snug tracking-tight">
+      <div className="min-w-0 flex-1 text-body-lg">
         <p className="font-medium text-fg dark:text-body-on-dark">
           {title}
           {href && (
@@ -46,15 +46,15 @@ export function EntryRow({ image, alt, title, subtitle, meta, description, href 
           )}
         </p>
         {subtitle && (
-          <p className="text-sm text-fg-muted dark:text-body-muted">
+          <p className="text-label-md text-fg-muted dark:text-body-muted">
             {subtitle}
           </p>
         )}
-        <p className="text-xs text-fg-subtle dark:text-body-muted">
+        <p className="text-label-sm text-fg-subtle dark:text-body-muted">
           {meta}
         </p>
         {description && (
-          <p className="mt-1 text-sm text-fg-muted dark:text-body-muted">
+          <p className="mt-1 text-label-md text-fg-muted dark:text-body-muted">
             {description}
           </p>
         )}

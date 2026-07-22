@@ -12,7 +12,7 @@ export function Navbar() {
       <div className="mx-auto flex h-[44px] max-w-4xl items-center justify-between px-6">
         <Link
           href="/"
-          className="flex items-center gap-2 text-base font-semibold text-fg dark:text-body-on-dark"
+          className="flex items-center gap-2 text-title-md text-fg dark:text-body-on-dark"
         >
           <span>{siteConfig.logoText}</span>
         </Link>
@@ -22,7 +22,7 @@ export function Navbar() {
             <NavLink
               key={item.href}
               href={item.href}
-              className="text-sm text-fg-subtle transition-colors hover:text-fg dark:text-body-muted dark:hover:text-body-on-dark"
+              className="text-label-md text-fg-subtle transition-colors hover:text-fg dark:text-body-muted dark:hover:text-body-on-dark"
               activeClassName="font-semibold text-fg dark:text-body-on-dark"
             >
               {item.label}

@@ -38,7 +38,7 @@ export function PostCard({ post, showTags = true, showDate = false }: PostCardPr
         </ul>
       )}
       {showDate && (
-        <p className="mt-3 text-sm text-ink-muted-48 dark:text-body-muted">
+        <p className="mt-3 text-label-md text-fg-subtle dark:text-body-muted">
           <time dateTime={post.date}>{formatDate(post.date)}</time>
           <span aria-hidden="true"> · </span>
           <span>{`${post.readingTime}분 읽기`}</span>

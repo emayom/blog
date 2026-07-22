@@ -16,7 +16,7 @@ export function FeaturedSection({ items }: FeaturedSectionProps) {
   return (
     <div className="flex flex-col gap-2 py-4">
       <div className="flex items-center justify-between self-stretch md:px-5">
-        <span className="text-xs font-semibold text-fg-subtle dark:text-body-muted">
+        <span className="text-label-sm font-semibold text-fg-subtle dark:text-body-muted">
           Featured
         </span>
       </div>

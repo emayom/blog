@@ -34,16 +34,16 @@ export default function AboutPage() {
               priority
             />
           </div>
-          <span className="absolute bottom-1 right-1 rounded-full border border-hairline bg-canvas px-2.5 py-1 text-xs text-fg dark:border-fg-muted dark:bg-surface-tile-1 dark:text-body-on-dark">
+          <span className="absolute bottom-1 right-1 rounded-full border border-hairline bg-canvas px-2.5 py-1 text-label-sm text-fg dark:border-fg-muted dark:bg-surface-tile-1 dark:text-body-on-dark">
             Seoul
           </span>
         </div>
 
         <div>
-          <h1 className="mb-1.5 font-display text-3xl font-semibold leading-tight tracking-tight text-fg dark:text-body-on-dark">
+          <h1 className="mb-1.5 font-display text-display-md text-fg dark:text-body-on-dark">
             {siteConfig.name}
           </h1>
-          <p className="mb-md text-lg leading-relaxed tracking-tight text-fg-subtle dark:text-body-muted">
+          <p className="mb-md text-body-lg text-fg-subtle dark:text-body-muted">
             배우고 기록하는 개발자입니다.
           </p>
 
@@ -67,7 +67,7 @@ export default function AboutPage() {
         </div>
       </div>
 
-      <div className="mt-10 text-base leading-relaxed tracking-tight text-fg-muted dark:text-body-muted">
+      <div className="mt-10 text-prose-lg text-fg-muted dark:text-body-muted">
         <div className="space-y-1">
           <p>
             안녕하세요. 배우고 만든 것을 글로 정리하면서 제 나름의 관점을 만들어가는 것을 좋아합니다.

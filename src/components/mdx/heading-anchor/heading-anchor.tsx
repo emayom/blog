@@ -27,7 +27,7 @@ export function HeadingAnchor({ href, children }: ComponentPropsWithoutRef<'a'>)
       </a>
       <span
         role="tooltip"
-        className="pointer-events-none absolute bottom-full left-1/2 mb-1.5 -translate-x-1/2 whitespace-nowrap rounded bg-fg px-2 py-1 text-xs text-canvas opacity-0 transition-opacity duration-150 group-hover/anchor:opacity-100 dark:bg-canvas dark:text-fg"
+        className="pointer-events-none absolute bottom-full left-1/2 mb-1.5 -translate-x-1/2 whitespace-nowrap rounded bg-fg px-2 py-1 text-label-sm text-canvas opacity-0 transition-opacity duration-150 group-hover/anchor:opacity-100 dark:bg-canvas dark:text-fg"
       >
         {copied ? '복사되었습니다!' : '링크를 제목에 복사'}
       </span>

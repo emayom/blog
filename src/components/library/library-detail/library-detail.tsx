@@ -50,7 +50,7 @@ export function LibraryDetail({ item, hasBody }: LibraryDetailProps) {
               )
             : (
                 <div className="flex h-full w-full items-center justify-center bg-neutral-200 p-2 dark:bg-neutral-700">
-                  <span className="text-center text-xs font-medium leading-tight text-fg-subtle dark:text-body-muted">
+                  <span className="text-center text-label-sm font-medium leading-tight text-fg-subtle dark:text-body-muted">
                     {item.title}
                   </span>
                 </div>
