@@ -114,7 +114,7 @@ export default async function SeriesDetailPage({ params }: Props) {
         <SeriesBreadcrumb name={category.name} />
 
         <Heading as="h1" size="md" className="mb-2">{category.name}</Heading>
-        <Text variant="caption" className="mb-9 text-ink-muted-48 dark:text-body-muted">
+        <Text variant="label-md" className="mb-9 text-fg-subtle dark:text-body-muted">
           {`${category.count}편`}
         </Text>
 
@@ -142,7 +142,7 @@ export default async function SeriesDetailPage({ params }: Props) {
       <SeriesBreadcrumb name={name} />
 
       <Heading as="h1" size="md" className="mb-2">{name}</Heading>
-      <Text variant="caption" className="mb-7 text-ink-muted-48 dark:text-body-muted">
+      <Text variant="label-md" className="mb-7 text-fg-subtle dark:text-body-muted">
         {`${seriesPosts.length}편`}
       </Text>
 
@@ -151,7 +151,7 @@ export default async function SeriesDetailPage({ params }: Props) {
           <p className="sr-only">
             시리즈 소개
           </p>
-          <div className="text-md leading-[1.47] tracking-[-0.374px] text-ink-muted-80 dark:text-body-muted">
+          <div className="text-body-lg text-fg-muted dark:text-body-muted">
             {intro}
           </div>
         </div>

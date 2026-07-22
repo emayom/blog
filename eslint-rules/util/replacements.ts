@@ -34,7 +34,21 @@ function replacementsFrom(...sources: [file: string, prefix: string][]) {
   return map
 }
 
-export const REPLACEMENTS = replacementsFrom(['radius.json', 'rounded'], ['text.json', 'text'])
+export const REPLACEMENTS = replacementsFrom(['radius.json', 'rounded'])
+
+/**
+ * 이름이 바뀐 토큰의 클래스 전체 치환.
+ *
+ * 원천에서 제거된 뒤에도 유지한다 — 없는 토큰을 참조하는 클래스는 팔레트도 임의값도 아니라
+ * 이 맵이 없으면 아무 경고 없이 스타일만 사라진다.
+ */
+const CLASS_RENAMES = new Map<string, string>([
+  ['text-body', 'text-body-lg'],
+  ['text-body-strong', 'text-title-md'],
+  ['text-caption', 'text-label-md'],
+  ['text-caption-strong', 'text-title-sm'],
+  ['text-fine-print', 'text-label-sm'],
+])
 
 /**
  * deprecated 색 토큰 → 새 이름. 값이 아니라 이름 변경 이력이라 원천에서 파생시킬 수 없다.
@@ -55,7 +69,7 @@ const COLOR_RENAME_RE = new RegExp(
 
 /** 치환 후보를 찾는다. 없으면 null. 접두사(text-·border-…)와 투명도(/50)는 유지한다. */
 export function findReplacement(cls: string): string | null {
-  const exact = REPLACEMENTS.get(cls)
+  const exact = REPLACEMENTS.get(cls) ?? CLASS_RENAMES.get(cls)
   if (exact) return exact
 
   const renamed = cls.match(COLOR_RENAME_RE)

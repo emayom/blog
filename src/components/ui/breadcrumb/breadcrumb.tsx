@@ -16,7 +16,7 @@ export function Breadcrumb({ items, className }: BreadcrumbProps) {
   return (
     <nav
       aria-label="breadcrumb"
-      className={cn('mb-6 text-xs tracking-[-0.12px] text-fg-subtle', className)}
+      className={cn('mb-6 text-label-sm text-fg-subtle', className)}
     >
       {items.map((item, index) => (
         <span key={index}>

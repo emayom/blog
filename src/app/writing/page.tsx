@@ -27,7 +27,7 @@ export default function WritingPage() {
   return (
     <SearchProvider posts={posts}>
       <main className="mx-auto max-w-4xl px-6 py-12">
-        <nav className="mb-4 text-xs tracking-[-0.12px] text-fg-subtle">
+        <nav className="mb-4 text-label-sm text-fg-subtle">
           <Link href="/" className="text-primary dark:text-primary-on-dark">
             홈
           </Link>

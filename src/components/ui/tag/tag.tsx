@@ -12,7 +12,7 @@ const tagVariants = cva(
       },
       size: {
         sm: 'px-3 py-1 text-xs',
-        md: 'h-[34px] px-4 text-sm tracking-[-0.224px]',
+        md: 'h-[34px] px-4 text-label-md',
       },
     },
     defaultVariants: { variant: 'soft', size: 'sm' },

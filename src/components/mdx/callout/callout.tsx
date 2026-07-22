@@ -33,7 +33,7 @@ export function Callout({ type = 'info', title, children }: CalloutProps) {
         <strong className="mb-1 block text-sm font-medium text-fg dark:text-body-on-dark">
           {title ?? defaultTitles[type]}
         </strong>
-        <div className="text-sm leading-[1.47] tracking-[-0.374px] text-fg-muted dark:text-body-muted">
+        <div className="text-body-md text-fg-muted dark:text-body-muted">
           {children}
         </div>
       </div>

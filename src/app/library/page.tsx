@@ -47,7 +47,7 @@ export default async function LibraryPage({ searchParams }: LibraryPageProps) {
       {/* 모바일: 상단 탭 + 섹션 (검색 미포함 — 후속 이슈) */}
       <div className="md:hidden">
         <CategoryTabs active={validType} />
-        <h1 className="mb-5 mt-4 text-[13px] font-semibold text-fg dark:text-body-on-dark">
+        <h1 className="mb-5 mt-4 text-label-md font-semibold text-fg dark:text-body-on-dark">
           {LABEL[validType]}
         </h1>
         {mobileSections}

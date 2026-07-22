@@ -9,7 +9,7 @@ describe('토큰 원천 파생', () => {
 
   it('토큰 값을 임의값 클래스에 대응시킨다', () => {
     expect(REPLACEMENTS.get('rounded-[18px]')).toBe('rounded-lg')
-    expect(REPLACEMENTS.get('text-[17px]')).toBe('text-md')
+    expect(REPLACEMENTS.get('rounded-[11px]')).toBe('rounded-md')
   })
 
   it('값이 겹치면 원천에 먼저 정의된 이름을 쓴다 (pill·full = 9999px)', () => {
