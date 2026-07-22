@@ -7,12 +7,11 @@ colors:
   primary: "#0066cc"
   primary-focus: "#0071e3"
   primary-on-dark: "#2997ff"
-  ink: "#1d1d1f"
-  body: "#1d1d1f"
+  fg: "#1d1d1f"
+  fg-muted: "#333333"
+  fg-subtle: "#7a7a7a"
   body-on-dark: "#ffffff"
   body-muted: "#cccccc"
-  ink-muted-80: "#333333"
-  ink-muted-48: "#7a7a7a"
   divider-soft: "#f0f0f0"
   hairline: "#e0e0e0"
   canvas: "#ffffff"
@@ -165,14 +164,14 @@ components:
     rounded: "{rounded.pill}"
     padding: 11px 22px
   button-dark-utility:
-    backgroundColor: "{colors.ink}"
+    backgroundColor: "{colors.fg}"
     textColor: "{colors.on-dark}"
     typography: "{typography.button-utility}"
     rounded: "{rounded.sm}"
     padding: 8px 15px
   button-pearl-capsule:
     backgroundColor: "{colors.surface-pearl}"
-    textColor: "{colors.ink-muted-80}"
+    textColor: "{colors.fg-muted}"
     typography: "{typography.caption}"
     rounded: "{rounded.md}"
     padding: 8px 14px
@@ -184,7 +183,7 @@ components:
     padding: 14px 28px
   button-icon-circular:
     backgroundColor: "{colors.surface-chip-translucent}"
-    textColor: "{colors.ink}"
+    textColor: "{colors.fg}"
     rounded: "{rounded.full}"
     size: 44px
   text-link:
@@ -202,18 +201,18 @@ components:
     height: 44px
   sub-nav-frosted:
     backgroundColor: "{colors.canvas-parchment}"
-    textColor: "{colors.ink}"
+    textColor: "{colors.fg}"
     typography: "{typography.tagline}"
     height: 52px
   product-tile-light:
     backgroundColor: "{colors.canvas}"
-    textColor: "{colors.ink}"
+    textColor: "{colors.fg}"
     typography: "{typography.display-lg}"
     rounded: "{rounded.none}"
     padding: 80px
   product-tile-parchment:
     backgroundColor: "{colors.canvas-parchment}"
-    textColor: "{colors.ink}"
+    textColor: "{colors.fg}"
     typography: "{typography.display-lg}"
     rounded: "{rounded.none}"
     padding: 80px
@@ -233,30 +232,30 @@ components:
     rounded: "{rounded.none}"
   store-utility-card:
     backgroundColor: "{colors.canvas}"
-    textColor: "{colors.ink}"
+    textColor: "{colors.fg}"
     typography: "{typography.body-strong}"
     rounded: "{rounded.lg}"
     padding: 24px
   configurator-option-chip:
     backgroundColor: "{colors.canvas}"
-    textColor: "{colors.ink}"
+    textColor: "{colors.fg}"
     typography: "{typography.caption}"
     rounded: "{rounded.pill}"
     padding: 12px 16px
   configurator-option-chip-selected:
     backgroundColor: "{colors.canvas}"
-    textColor: "{colors.ink}"
+    textColor: "{colors.fg}"
     rounded: "{rounded.pill}"
   search-input:
     backgroundColor: "{colors.canvas}"
-    textColor: "{colors.ink}"
+    textColor: "{colors.fg}"
     typography: "{typography.body}"
     rounded: "{rounded.pill}"
     padding: 12px 20px
     height: 44px
   floating-sticky-bar:
     backgroundColor: "{colors.canvas-parchment}"
-    textColor: "{colors.ink}"
+    textColor: "{colors.fg}"
     typography: "{typography.body}"
     height: 64px
     padding: 12px 32px
@@ -268,7 +267,7 @@ components:
     padding: 80px
   footer:
     backgroundColor: "{colors.canvas-parchment}"
-    textColor: "{colors.ink-muted-80}"
+    textColor: "{colors.fg-muted}"
     typography: "{typography.fine-print}"
     padding: 64px
 ---
@@ -313,12 +312,11 @@ Store and shop surfaces retain the same chassis but switch modes. The product co
 - **Translucent Chip Gray** (`{colors.surface-chip-translucent}` — #d2d2d7): The base hex of the translucent gray chip used over photography for circular control buttons. In production, applied at ~64% alpha as `rgba(210, 210, 215, 0.64)`.
 
 ### Text
-- **Near-Black Ink** (`{colors.ink}` — #1d1d1f): The voice of every headline, every body paragraph, and the dark utility button's fill. Chosen instead of pure black to keep the page feeling photographic rather than printed.
-- **Body** (`{colors.body}` — #1d1d1f): Same hex as ink — Apple uses one near-black tone for all text on light surfaces.
+- **Foreground** (`{colors.fg}` — #1d1d1f): The voice of every headline and every body paragraph, and the dark utility button's fill. One near-black tone carries all text on light surfaces — chosen instead of pure black to keep the page feeling photographic rather than printed.
+- **Foreground Muted** (`{colors.fg-muted}` — #333333): Body text on the white Pearl Button surface — slightly softer than pure black.
+- **Foreground Subtle** (`{colors.fg-subtle}` — #7a7a7a): Disabled button text and legal fine-print.
 - **Body On Dark** (`{colors.body-on-dark}` — #ffffff): All text on dark tiles and on the global nav bar.
 - **Body Muted** (`{colors.body-muted}` — #cccccc): Secondary copy on dark tiles where pure white would be too loud.
-- **Ink Muted 80** (`{colors.ink-muted-80}` — #333333): Body text on the white Pearl Button surface — slightly softer than pure black.
-- **Ink Muted 48** (`{colors.ink-muted-48}` — #7a7a7a): Disabled button text and legal fine-print.
 
 ### Hairlines & Borders
 - **Divider Soft** (`{colors.divider-soft}` — #f0f0f0): The "border" tone on secondary buttons — functions as a ring shadow rather than a hard line. In production, often applied as `rgba(0, 0, 0, 0.04)`.
@@ -443,13 +441,13 @@ Apple's whitespace is the product's pedestal. Every tile begins with at least 64
 
 **`button-secondary-pill`** — Used as the second CTA when two blue pills appear together ("Learn more" / "Buy"). Background transparent, text `{colors.primary}`, 1px solid `{colors.primary}` border, rounded `{rounded.pill}`, padding 11px × 22px. Reads as a "ghost pill."
 
-**`button-dark-utility`** — Global nav actions (Sign In, Bag, language selector). Background `{colors.ink}` (#1d1d1f), text `{colors.on-dark}` in `{typography.button-utility}` (14px / 400 / -0.224px tracking), rounded `{rounded.sm}` (8px), padding 8px × 15px. Active state shrinks via `transform: scale(0.95)`.
+**`button-dark-utility`** — Global nav actions (Sign In, Bag, language selector). Background `{colors.fg}` (#1d1d1f), text `{colors.on-dark}` in `{typography.button-utility}` (14px / 400 / -0.224px tracking), rounded `{rounded.sm}` (8px), padding 8px × 15px. Active state shrinks via `transform: scale(0.95)`.
 
-**`button-pearl-capsule`** — Product-card secondary button. Background `{colors.surface-pearl}` (#fafafc), text `{colors.ink-muted-80}` in `{typography.caption}` (14px), 3px solid `{colors.divider-soft}` border (functions as a soft ring rather than a visible line), rounded `{rounded.md}` (11px), padding 8px × 14px.
+**`button-pearl-capsule`** — Product-card secondary button. Background `{colors.surface-pearl}` (#fafafc), text `{colors.fg-muted}` in `{typography.caption}` (14px), 3px solid `{colors.divider-soft}` border (functions as a soft ring rather than a visible line), rounded `{rounded.md}` (11px), padding 8px × 14px.
 
 **`button-store-hero`** — A larger primary CTA used on store hero surfaces. Same Action Blue + Paper White as `{component.button-primary}`, but with `{typography.button-large}` (18px / 300 — note the rare weight 300) and slightly more padding (14px × 28px). Used sparingly on the store landing.
 
-**`button-icon-circular`** — Floats over photography. 44 × 44px, background `{colors.surface-chip-translucent}` at ~64% alpha, icon in `{colors.ink}`, rounded `{rounded.full}`. Used for carousel controls, close buttons, and in-image controls (product image thumbnails on the iPhone buy page).
+**`button-icon-circular`** — Floats over photography. 44 × 44px, background `{colors.surface-chip-translucent}` at ~64% alpha, icon in `{colors.fg}`, rounded `{rounded.full}`. Used for carousel controls, close buttons, and in-image controls (product image thumbnails on the iPhone buy page).
 
 **`text-link`** — Inline body links in `{colors.primary}` (Action Blue). Underlined or non-underlined per context.
 
@@ -457,7 +455,7 @@ Apple's whitespace is the product's pedestal. Every tile begins with at least 64
 
 ### Cards & Containers
 
-**`product-tile-light`** — Full-bleed light tile. Background `{colors.canvas}` (white), text `{colors.ink}`, rounded `{rounded.none}` (0 — tiles touch edges), vertical padding `{spacing.section}` (80px). Centered stack: product name in `{typography.display-lg}` (40px / 600) → one-line tagline in `{typography.lead}` (28px / 400) → two `{component.button-primary}` CTAs ("Learn more" / "Buy") → product render resting on the surface with the system shadow.
+**`product-tile-light`** — Full-bleed light tile. Background `{colors.canvas}` (white), text `{colors.fg}`, rounded `{rounded.none}` (0 — tiles touch edges), vertical padding `{spacing.section}` (80px). Centered stack: product name in `{typography.display-lg}` (40px / 600) → one-line tagline in `{typography.lead}` (28px / 400) → two `{component.button-primary}` CTAs ("Learn more" / "Buy") → product render resting on the surface with the system shadow.
 
 **`product-tile-parchment`** — Same as `{component.product-tile-light}` but on `{colors.canvas-parchment}` (#f5f5f7). Used to break two consecutive white tiles.
 
@@ -469,7 +467,7 @@ Apple's whitespace is the product's pedestal. Every tile begins with at least 64
 
 **`store-utility-card`** — Used in store grid and accessories grid. Background `{colors.canvas}` (white), 1px solid `{colors.hairline}` border, rounded `{rounded.lg}` (18px), padding `{spacing.lg}` (24px). Top: product image (1:1 crop with `{rounded.sm}` (8px) inner image radius). Below: product name in `{typography.body-strong}` (17px / 600), price in `{typography.body}` (17px / 400), and a `{component.text-link}` ("Buy" or "Learn more"). No shadow by default; product render itself carries the system product-shadow.
 
-**`configurator-option-chip`** — Pill-shaped tappable cell used in the iPhone 17 Pro buy page. Background `{colors.canvas}`, text `{colors.ink}` in `{typography.caption}`, rounded `{rounded.pill}`, padding 12px × 16px. Contains a small product thumbnail + label + price delta. Arranged in a grid of 4–5 options per row.
+**`configurator-option-chip`** — Pill-shaped tappable cell used in the iPhone 17 Pro buy page. Background `{colors.canvas}`, text `{colors.fg}` in `{typography.caption}`, rounded `{rounded.pill}`, padding 12px × 16px. Contains a small product thumbnail + label + price delta. Arranged in a grid of 4–5 options per row.
 
 **`configurator-option-chip-selected`** — Selected state. Border upgrades to 2px solid `{colors.primary-focus}`. Same shape, same content.
 
@@ -479,13 +477,13 @@ Apple's whitespace is the product's pedestal. Every tile begins with at least 64
 
 ### Inputs & Forms
 
-**`search-input`** — The accessories search input. Background `{colors.canvas}`, text `{colors.ink}` in `{typography.body}` (17px), 1px solid `rgba(0, 0, 0, 0.08)` border, rounded `{rounded.pill}` (full pill — search is also pill-shaped, matching the CTA grammar), padding 12px × 20px, height 44px. Leading icon: search glyph at 14px, muted tint.
+**`search-input`** — The accessories search input. Background `{colors.canvas}`, text `{colors.fg}` in `{typography.body}` (17px), 1px solid `rgba(0, 0, 0, 0.08)` border, rounded `{rounded.pill}` (full pill — search is also pill-shaped, matching the CTA grammar), padding 12px × 20px, height 44px. Leading icon: search glyph at 14px, muted tint.
 
 Error and validation states were not surfaced in the analyzed pages.
 
 ### Footer
 
-**`footer`** — Background `{colors.canvas-parchment}` (#f5f5f7), text `{colors.ink-muted-80}`. Link columns in `{typography.dense-link}` (17px / 400 / 2.41 line-height — the relaxed leading is what makes the dense columns scannable). Column headings in `{typography.caption-strong}` (14px / 600). Legal row at the very bottom in `{typography.fine-print}` (12px / 400) with `{colors.ink-muted-48}` text. Vertical padding 64px.
+**`footer`** — Background `{colors.canvas-parchment}` (#f5f5f7), text `{colors.fg-muted}`. Link columns in `{typography.dense-link}` (17px / 400 / 2.41 line-height — the relaxed leading is what makes the dense columns scannable). Column headings in `{typography.caption-strong}` (14px / 600). Legal row at the very bottom in `{typography.fine-print}` (12px / 400) with `{colors.fg-subtle}` text. Vertical padding 64px.
 
 ## Do's and Don'ts
 
