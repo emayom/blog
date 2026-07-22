@@ -32,7 +32,7 @@ describe('findReplacement', () => {
     expect(findReplacement('bg-canvas')).toBeNull()
   })
 
-  it('색 구명칭은 접두사를 유지한 채 색 부분만 바꾼다', () => {
+  it('deprecated 토큰은 접두사를 유지한 채 색 부분만 바꾼다', () => {
     expect(findReplacement('text-ink')).toBe('text-fg')
     expect(findReplacement('border-ink-muted-80')).toBe('border-fg-muted')
     expect(findReplacement('divide-ink-muted-48')).toBe('divide-fg-subtle')
@@ -43,18 +43,18 @@ describe('findReplacement', () => {
   })
 
   // `ink`가 먼저 매칭되면 `ink-muted-80`이 `fg-muted-80`으로 잘려 나간다.
-  it('긴 구명칭을 먼저 매칭한다', () => {
+  it('긴 이름을 먼저 매칭한다', () => {
     expect(findReplacement('text-ink-muted-80')).toBe('text-fg-muted')
     expect(findReplacement('text-ink-muted-80')).not.toBe('text-fg-muted-80')
   })
 
-  it('구명칭이 부분 문자열로 들어간 클래스는 건드리지 않는다', () => {
+  it('deprecated 이름이 부분 문자열로 들어간 클래스는 건드리지 않는다', () => {
     expect(findReplacement('bg-pink-alt')).toBeNull()
     expect(findReplacement('text-inkling')).toBeNull()
   })
 
-  it('개명 맵은 마이그레이션이 끝나면 비워진다', () => {
-    // 이 테스트가 거슬리는 시점 = ink 계열 제거가 끝난 시점. 그때 맵과 함께 삭제한다.
+  it('원천에서 제거된 이름을 계속 붙든다', () => {
+    // 토큰이 사라진 뒤 이 맵을 지우면 `text-ink` 같은 클래스가 경고 없이 무효가 된다.
     expect([...COLOR_RENAMES.keys()]).toEqual(['ink-muted-80', 'ink-muted-48', 'ink'])
   })
 })

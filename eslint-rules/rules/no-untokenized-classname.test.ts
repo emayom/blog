@@ -40,7 +40,7 @@ ruleTester.run('no-untokenized-classname', rule, {
       errors: 2,
     },
     {
-      // 색 구명칭 개명 — 접두사·variant·투명도 보존
+      // deprecated 색 토큰 치환 — 접두사·variant·투명도 보존
       code: '<div className="text-ink dark:border-ink-muted-80 bg-ink-muted-48/50" />',
       output: '<div className="text-fg dark:border-fg-muted bg-fg-subtle/50" />',
       errors: 3,
