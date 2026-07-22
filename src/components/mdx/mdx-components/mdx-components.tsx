@@ -87,7 +87,7 @@ export const mdxComponents: MDXComponents = {
     }
     return (
       <p
-        className="text-body dark:text-body-on-dark text-sm sm:text-md leading-[1.7] tracking-[-0.374px] my-md"
+        className="text-fg dark:text-body-on-dark text-sm sm:text-md leading-[1.7] tracking-[-0.374px] my-md"
         {...props}
       >
         {children}
@@ -120,7 +120,7 @@ export const mdxComponents: MDXComponents = {
   ),
   li: (props: ComponentPropsWithoutRef<'li'>) => (
     <li
-      className="text-body dark:text-body-on-dark text-sm sm:text-md leading-[1.7] my-xs"
+      className="text-fg dark:text-body-on-dark text-sm sm:text-md leading-[1.7] my-xs"
       {...props}
     />
   ),
@@ -155,7 +155,7 @@ export const mdxComponents: MDXComponents = {
   ),
   td: (props: ComponentPropsWithoutRef<'td'>) => (
     <td
-      className="px-sm py-2.5 text-body dark:text-body-on-dark"
+      className="px-sm py-2.5 text-fg dark:text-body-on-dark"
       {...props}
     />
   ),
