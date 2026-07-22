@@ -26,12 +26,13 @@ export function FeaturedPosts({ posts }: FeaturedPostsProps) {
                     src={post.thumbnail}
                     alt={post.title}
                     fill
+                    sizes="(min-width: 640px) 33vw, 100vw"
                     className="object-cover"
                   />
                 )}
               </div>
               <div className="flex flex-1 flex-col py-3">
-                <p className="line-clamp-2 break-keep text-md font-semibold leading-[1.3] tracking-[-0.374px] md:text-base text-ink group-hover:text-primary dark:text-body-on-dark dark:group-hover:text-primary-on-dark">
+                <p className="line-clamp-2 break-keep text-title-md text-fg group-hover:text-primary dark:text-body-on-dark dark:group-hover:text-primary-on-dark">
                   {post.title}
                 </p>
               </div>

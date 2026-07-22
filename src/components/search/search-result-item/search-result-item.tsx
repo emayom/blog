@@ -28,15 +28,15 @@ export function SearchResultItem({ post, active = false, onClick, onMouseEnter }
         active && 'bg-canvas-parchment dark:bg-surface-tile-1',
       )}
     >
-      <p className="mb-1.5 text-[14px] font-semibold text-ink dark:text-body-on-dark">
+      <p className="mb-1.5 text-label-md font-semibold text-fg dark:text-body-on-dark">
         {post.title}
       </p>
       {post.description && (
-        <p className="mb-2 line-clamp-1 text-[13px] text-ink-muted-48 dark:text-body-muted">
+        <p className="mb-2 line-clamp-1 text-label-md text-fg-subtle dark:text-body-muted">
           {post.description}
         </p>
       )}
-      <p className="text-[11px] text-ink-muted-48 dark:text-body-muted">{meta}</p>
+      <p className="text-label-sm text-fg-subtle dark:text-body-muted">{meta}</p>
     </Link>
   )
 }

@@ -8,8 +8,8 @@ const buttonCva = cva(
   {
     variants: {
       variant: {
-        // primary 타이포는 body 텍스트 스타일을 합성한다 (단일 원천: textStyles)
-        primary: `rounded-pill bg-primary text-on-primary ${textStyles.body}`,
+        // primary 타이포는 body-lg 텍스트 스타일을 합성한다 (단일 원천: textStyles)
+        primary: `rounded-pill bg-primary text-on-primary ${textStyles['body-lg']}`,
         outline: 'border border-hairline bg-canvas text-fg hover:border-fg-subtle dark:border-fg-muted dark:bg-surface-tile-2 dark:text-body-on-dark',
         ghost: 'text-fg hover:text-primary dark:text-body-on-dark dark:hover:text-primary-on-dark',
       },
@@ -21,8 +21,8 @@ const buttonCva = cva(
     compoundVariants: [
       // size의 text-sm·패딩이 primary의 body 타이포·pill 패딩과 같은 그룹에서 충돌한다.
       // tailwind-merge는 뒤에 오는 클래스를 남기므로 compound에서 pill 패딩과 body 축을 다시 이긴다.
-      { variant: 'primary', size: 'sm', class: `px-lg py-sm ${textStyles.body}` },
-      { variant: 'primary', size: 'md', class: `px-lg py-sm ${textStyles.body}` },
+      { variant: 'primary', size: 'sm', class: `px-lg py-sm ${textStyles['body-lg']}` },
+      { variant: 'primary', size: 'md', class: `px-lg py-sm ${textStyles['body-lg']}` },
     ],
     defaultVariants: { variant: 'outline', size: 'sm' },
   },

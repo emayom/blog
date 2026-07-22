@@ -68,7 +68,7 @@ export function SeriesSection({ series }: SeriesSectionProps) {
               )}
             </div>
             <div className="px-4 py-3.5">
-              <div className="text-md font-semibold leading-[1.24] tracking-[-0.374px] text-fg group-hover:text-primary dark:text-body-on-dark dark:group-hover:text-primary-on-dark">
+              <div className="text-title-md text-fg group-hover:text-primary dark:text-body-on-dark dark:group-hover:text-primary-on-dark">
                 {s.name}
               </div>
               <Tag as="span" label={`${s.count}편`} className="mt-2" />

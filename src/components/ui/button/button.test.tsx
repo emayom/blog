@@ -12,7 +12,7 @@ describe('Button', () => {
   it('primary variant는 pill·bg-primary·body 타이포를 포함한다', () => {
     render(<Button variant="primary">buy</Button>)
     const el = screen.getByRole('button')
-    expect(el).toHaveClass('rounded-pill', 'bg-primary', 'text-on-primary', 'text-body')
+    expect(el).toHaveClass('rounded-pill', 'bg-primary', 'text-on-primary', 'text-body-lg')
   })
 
   it('primary는 size 패딩을 px-lg py-sm로 무효화한다', () => {
@@ -59,6 +59,6 @@ describe('buttonVariants — 병합 보장', () => {
     expect(merged).not.toContain('text-sm')
     expect(merged).not.toContain('px-sm')
     expect(merged).toContain('px-lg')
-    expect(merged).toContain('text-body')
+    expect(merged).toContain('text-body-lg')
   })
 })

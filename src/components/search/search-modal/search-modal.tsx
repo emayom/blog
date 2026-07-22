@@ -157,12 +157,12 @@ export function SearchModal() {
             autoCorrect="off"
             autoCapitalize="off"
             spellCheck={false}
-            className="flex-1 bg-transparent text-[15px] text-ink placeholder:text-ink-muted-48 outline-none dark:text-body-on-dark dark:placeholder:text-body-muted [&::-webkit-search-cancel-button]:hidden"
+            className="flex-1 bg-transparent text-body-md text-fg placeholder:text-fg-subtle outline-none dark:text-body-on-dark dark:placeholder:text-body-muted [&::-webkit-search-cancel-button]:hidden"
           />
         </div>
 
         {/* 스코프 라인 */}
-        <div className="border-b border-hairline px-4.5 py-2.25 text-[11px] text-ink-muted-48 dark:border-ink-muted-80 dark:text-body-muted">
+        <div className="border-b border-hairline px-4.5 py-2.25 text-label-sm text-fg-subtle dark:border-fg-muted dark:text-body-muted">
           {scopeLabel}
         </div>
 
@@ -201,7 +201,7 @@ export function SearchModal() {
 
         {/* 키보드 단축키 footer */}
         {!isInitial && !isEmpty && (
-          <div className="flex items-center gap-4 border-t border-hairline bg-canvas-parchment px-4.5 py-2.5 text-[11px] text-ink-muted-48 dark:border-ink-muted-80 dark:bg-surface-tile-1 dark:text-body-muted">
+          <div className="flex items-center gap-4 border-t border-hairline bg-canvas-parchment px-4.5 py-2.5 text-label-sm text-fg-subtle dark:border-fg-muted dark:bg-surface-tile-1 dark:text-body-muted">
             <span>
               <Kbd>↑</Kbd>
               <Kbd>↓</Kbd>

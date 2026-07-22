@@ -21,7 +21,7 @@ export function PostNavigation({ prev, next }: AdjacentPosts) {
             href={`/writing/${prev.slug}`}
             className="group flex flex-col rounded-sm text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-focus"
           >
-            <Text as="span" variant="caption" className={labelClass}>이전 글</Text>
+            <Text as="span" variant="label-md" className={labelClass}>이전 글</Text>
             <Text as="span" weight="semibold" className={titleClass}>{prev.title}</Text>
           </Link>
         )}
@@ -34,7 +34,7 @@ export function PostNavigation({ prev, next }: AdjacentPosts) {
               !prev && 'sm:col-start-2',
             )}
           >
-            <Text as="span" variant="caption" className={labelClass}>다음 글</Text>
+            <Text as="span" variant="label-md" className={labelClass}>다음 글</Text>
             <Text as="span" weight="semibold" className={titleClass}>{next.title}</Text>
           </Link>
         )}

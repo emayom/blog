@@ -6,7 +6,7 @@ import { cn } from '@/lib/cn'
 import { Text } from '@/components/ui/text'
 import type { TocItem } from '@/types/post'
 
-const linkVariants = cva('block text-sm tracking-[-0.224px] transition-colors', {
+const linkVariants = cva('block text-label-md transition-colors', {
   variants: {
     active: {
       true: 'font-semibold text-primary dark:text-primary-on-dark',
@@ -51,7 +51,7 @@ export function TableOfContents({ items }: TableOfContentsProps) {
 
   return (
     <nav aria-label="목차" className="space-y-2.5">
-      <Text variant="caption" weight="semibold" className="text-fg dark:text-body-on-dark">
+      <Text variant="label-md" weight="semibold" className="text-fg dark:text-body-on-dark">
         목차
       </Text>
       <ul className="space-y-2.5">

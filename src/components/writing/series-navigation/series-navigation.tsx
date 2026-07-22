@@ -11,8 +11,9 @@ interface SeriesNavigationProps {
 const itemLinkClass
   = 'flex rounded-sm text-fg-muted transition-colors hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-focus dark:text-body-muted dark:hover:text-primary-on-dark'
 
-// 목록 리듬 우선 — body-strong의 행간 조임(1.24) 대신 형제 링크(body 1.47)와 정렬
-const currentItemClass = 'flex leading-[1.47] text-primary dark:text-primary-on-dark'
+// weight prop 대신 font-semibold를 얹는다 — weight="semibold"는 title-md로 스냅해
+// 행간이 조여지고(1.3), 그러면 형제 링크(body-lg 1.47)와 목록 리듬이 어긋난다.
+const currentItemClass = 'flex font-semibold text-primary dark:text-primary-on-dark'
 
 export function SeriesNavigation({ series }: SeriesNavigationProps) {
   if (!series) return null
@@ -35,7 +36,7 @@ export function SeriesNavigation({ series }: SeriesNavigationProps) {
             <li key={item.post.slug}>
               {item.isCurrent
                 ? (
-                    <Text as="span" weight="semibold" aria-current="true" className={currentItemClass}>
+                    <Text as="span" aria-current="true" className={currentItemClass}>
                       {`${item.order}. ${item.post.title}`}
                     </Text>
                   )

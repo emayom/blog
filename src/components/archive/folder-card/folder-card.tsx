@@ -36,7 +36,7 @@ export function FolderCard({ year, count }: FolderCardProps) {
       </span>
 
       <span className="text-center">
-        <span className="block text-xs font-semibold tracking-[-0.224px] text-fg dark:text-body-on-dark">
+        <span className="block text-label-sm font-semibold text-fg dark:text-body-on-dark">
           {year}
         </span>
         <span className="mt-0.5 block text-xs text-fg-subtle dark:text-body-muted">

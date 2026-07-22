@@ -14,7 +14,7 @@ export function NoteCardShell({ note, children }: { note: NoteMeta, children: Re
       {note.pinned && (
         <div className="mb-2 flex items-center gap-1 text-fg-subtle dark:text-body-muted">
           <PinIcon />
-          <Text as="span" variant="fine-print">고정</Text>
+          <Text as="span" variant="label-sm">고정</Text>
         </div>
       )}
       <div className="min-w-0 max-h-80 overflow-y-auto break-words [&>*:first-child]:mt-0 [&>*:last-child]:mb-0">
@@ -25,7 +25,7 @@ export function NoteCardShell({ note, children }: { note: NoteMeta, children: Re
         {note.tags[0] !== undefined && (
           <Tag href={`/notes?tag=${encodeURIComponent(note.tags[0])}`} variant="soft" size="sm" label={note.tags[0]} />
         )}
-        <Text as="span" variant="fine-print" className="text-fg-subtle dark:text-body-muted ml-auto">
+        <Text as="span" variant="label-sm" className="text-fg-subtle dark:text-body-muted ml-auto">
           {formatNoteDate(note.date)}
         </Text>
       </div>

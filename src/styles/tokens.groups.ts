@@ -5,4 +5,4 @@
 
 export const spacingTokenKeys = ['xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl', 'section'] as const
 export const radiusTokenKeys = ['none', 'xs', 'sm', 'md', 'lg', 'pill', 'full'] as const
-export const textTokenKeys = ['md', 'hero-display', 'display-lg', 'display-md', 'lead', 'lead-airy', 'tagline', 'body-strong', 'body', 'dense-link', 'caption', 'caption-strong', 'button-large', 'button-utility', 'fine-print', 'micro-legal', 'nav-link'] as const
+export const textTokenKeys = ['display-lg', 'display-md', 'title-lg', 'title-md', 'title-sm', 'body-lg', 'body-md', 'label-md', 'label-sm', 'prose-lg', 'prose-md'] as const

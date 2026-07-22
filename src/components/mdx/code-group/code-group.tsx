@@ -41,7 +41,7 @@ export function CodeGroup({ labels, children }: CodeGroupProps) {
             onClick={() => setActive(i)}
             aria-pressed={active === i}
             className={cn(
-              'rounded px-2.5 py-0.5 text-[13px] tracking-[-0.224px] transition-colors',
+              'rounded px-2.5 py-0.5 text-label-md transition-colors',
               active === i
                 ? 'bg-fg text-canvas dark:bg-fg-muted dark:text-body-on-dark'
                 : 'text-fg-subtle hover:text-fg dark:text-body-muted dark:hover:text-body-on-dark',

@@ -53,7 +53,7 @@ export function ArticleLayout({ post, adjacent, related, series }: ArticleLayout
           {post.title}
         </Heading>
 
-        <Text variant="caption" className="mb-4 text-fg-subtle dark:text-body-muted">
+        <Text variant="label-md" className="mb-4 text-fg-subtle dark:text-body-muted">
           <time dateTime={post.date}>{formatDate(post.date)}</time>
           <span aria-hidden="true"> · </span>
           <span>{`${post.readingTime}분 읽기`}</span>

@@ -63,13 +63,13 @@ export function LibraryDetail({ item, hasBody }: LibraryDetailProps) {
           </Heading>
 
           {item.author && (
-            <p className="text-md font-semibold text-fg-muted dark:text-body-muted">
+            <p className="text-title-md text-fg-muted dark:text-body-muted">
               {item.author}
             </p>
           )}
 
           {metaParts.length > 0 && (
-            <Text variant="caption" className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-fg-subtle dark:text-body-muted">
+            <Text variant="label-md" className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-fg-subtle dark:text-body-muted">
               {metaParts.map((part, i) => (
                 <span key={i} className="flex items-center gap-x-2">
                   {i > 0 && <span aria-hidden="true">·</span>}
@@ -112,7 +112,7 @@ export function LibraryDetail({ item, hasBody }: LibraryDetailProps) {
               {hasBody && (
                 <section>
                   <Heading as="h2" size="sm" className="mb-4">서평</Heading>
-                  <div className="text-base leading-[1.47] tracking-[-0.374px] text-fg-muted dark:text-body-muted [&_p]:mb-md">
+                  <div className="text-body-lg text-fg-muted dark:text-body-muted [&_p]:mb-md">
                     {item.content}
                   </div>
                 </section>

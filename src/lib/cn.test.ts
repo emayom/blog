@@ -18,11 +18,15 @@ describe('cn', () => {
 
 describe('cn — 타이포 토큰', () => {
   it('타이포 토큰과 기본 폰트 크기 유틸을 병합한다', () => {
-    expect(cn('text-sm', 'text-caption')).toBe('text-caption')
-    expect(cn('text-caption', 'text-sm')).toBe('text-sm')
+    expect(cn('text-sm', 'text-label-md')).toBe('text-label-md')
+    expect(cn('text-label-md', 'text-sm')).toBe('text-sm')
+  })
+
+  it('같은 역할의 다른 크기는 마지막 것만 남긴다', () => {
+    expect(cn('text-body-md', 'text-body-lg')).toBe('text-body-lg')
   })
 
   it('색 유틸리티와 타이포 토큰은 서로 다른 그룹으로 공존한다', () => {
-    expect(cn('text-fg-subtle', 'text-caption')).toBe('text-fg-subtle text-caption')
+    expect(cn('text-fg-subtle', 'text-label-md')).toBe('text-fg-subtle text-label-md')
   })
 })

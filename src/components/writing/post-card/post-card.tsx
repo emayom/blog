@@ -13,17 +13,17 @@ export function PostCard({ post, showTags = true, showDate = false }: PostCardPr
   const hasTags = showTags && post.tags.length > 0
   return (
     <article className={`group cursor-pointer bg-canvas dark:border-fg-muted dark:bg-surface-tile-2 ${hasTags ? 'py-md' : 'py-lg'}`}>
-      <h2 className="text-md font-semibold leading-[1.3] tracking-[-0.374px] md:text-lg">
+      <h2 className="text-title-md">
         <Link
           href={`/writing/${post.slug}`}
-          className="text-ink group-hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-focus dark:text-body-on-dark dark:group-hover:text-primary-on-dark"
+          className="text-fg group-hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-focus dark:text-body-on-dark dark:group-hover:text-primary-on-dark"
         >
           {post.title}
         </Link>
       </h2>
 
       {post.description && (
-        <p className="mt-2 line-clamp-2 text-base leading-[1.47] text-ink-muted-80 dark:text-body-muted md:text-md">
+        <p className="mt-2 line-clamp-2 text-body-lg text-fg-muted dark:text-body-muted">
           {post.description}
         </p>
       )}
