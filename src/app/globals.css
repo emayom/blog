@@ -22,7 +22,7 @@
 body {
   color-scheme: light;
   background-color: var(--color-canvas);
-  color: var(--color-ink);
+  color: var(--color-fg);
 }
 
 /* DESIGN.md Known Gaps — dark counterpart 미정의. 기존 토큰 재활용 */
@@ -47,13 +47,13 @@ body {
 }
 .dark [data-code-group-panel] pre[data-theme],
 .dark [data-code-group-panel] pre:has(code[data-language]) {
-  border-top-color: var(--color-ink-muted-80);
+  border-top-color: var(--color-fg-muted);
 }
 
 pre[data-theme],
 pre:has(code[data-language]) {
   background-color: var(--color-canvas-parchment);
-  color: var(--color-ink);
+  color: var(--color-fg);
   border: 1px solid var(--color-hairline);
   border-radius: var(--radius-lg);
   padding: var(--spacing-md) var(--spacing-lg);
@@ -68,7 +68,7 @@ pre:has(code[data-language]) {
 .dark pre:has(code[data-language]) {
   background-color: var(--color-surface-tile-3);
   color: var(--color-body-on-dark);
-  border-color: var(--color-ink-muted-80);
+  border-color: var(--color-fg-muted);
 }
 
 /* shiki 듀얼 테마 색상 */
@@ -85,7 +85,7 @@ code[data-theme] span {
 pre[data-language]::before {
   content: attr(data-language);
   display: block;
-  color: var(--color-ink-muted-48);
+  color: var(--color-fg-subtle);
   font-size: 12px;
   letter-spacing: -0.12px;
   text-transform: uppercase;
@@ -124,7 +124,7 @@ code[data-line-numbers] > [data-line]::before {
   width: 1.5rem;
   margin-right: var(--spacing-md);
   text-align: right;
-  color: var(--color-ink-muted-48);
+  color: var(--color-fg-subtle);
 }
 
 /* 인라인 code */
@@ -132,7 +132,7 @@ code[data-line-numbers] > [data-line]::before {
   font-family: var(--font-mono);
   font-size: 0.875em;
   background-color: var(--color-canvas-parchment);
-  color: var(--color-ink);
+  color: var(--color-fg);
   border-radius: var(--radius-xs);
   padding: 2px 6px;
 }
@@ -187,7 +187,7 @@ details[open] > summary .details-chevron { transform: rotate(90deg); }
   border-left: 1px solid var(--color-hairline);
   margin-left: 13px;
 }
-.dark .steps > li { border-left-color: var(--color-ink-muted-80); }
+.dark .steps > li { border-left-color: var(--color-fg-muted); }
 .steps > li:last-child { border-left-color: transparent; }
 .steps > li::before {
   content: counter(step);
@@ -198,7 +198,7 @@ details[open] > summary .details-chevron { transform: rotate(90deg); }
   width: 28px; height: 28px;
   border-radius: var(--radius-full);
   background-color: var(--color-canvas-parchment);
-  color: var(--color-ink);
+  color: var(--color-fg);
   font-size: 14px; font-weight: 600; letter-spacing: -0.224px;
 }
 .dark .steps > li::before {

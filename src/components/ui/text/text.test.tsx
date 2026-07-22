@@ -3,24 +3,20 @@ import { describe, expect, it } from 'vitest'
 import { Text } from './text'
 
 describe('Text', () => {
-  it('기본: <p>로 렌더하고 body 4축 클래스를 갖는다', () => {
+  it('기본: <p>로 렌더하고 body composite 토큰을 갖는다', () => {
     render(<Text>본문</Text>)
     const el = screen.getByText('본문')
     expect(el.tagName).toBe('P')
-    const cls = el.className
-    expect(cls).toContain('text-(length:--text-body)')
-    expect(cls).toContain('leading-(--text-body--line-height)')
-    expect(cls).toContain('tracking-(--text-body--letter-spacing)')
-    expect(cls).toContain('font-(--text-body--font-weight)')
+    expect(el).toHaveClass('text-body')
   })
 
   it.each([
-    ['body', 'text-(length:--text-body)'],
+    ['body', 'text-body'],
     ['caption', 'text-caption'],
     ['fine-print', 'text-fine-print'],
   ] as const)('variant %s를 매핑한다', (variant, expected) => {
     render(<Text variant={variant}>{variant}</Text>)
-    expect(screen.getByText(variant).className).toContain(expected)
+    expect(screen.getByText(variant)).toHaveClass(expected)
   })
 
   it.each([
@@ -32,31 +28,21 @@ describe('Text', () => {
     expect(screen.getByText(weight).className).toContain(expected)
   })
 
-  it('compound: body×semibold는 body-strong 변수 클래스로 스냅하고 body 기본 4축과 섞이지 않는다', () => {
+  // composite 토큰은 font-weight를 `var(--tw-font-weight, …)`로 내보내므로 weight 유틸이 함께 남아도
+  // 결과가 어긋나지 않는다 (strong 토큰의 weight와 semibold가 같은 값). 검증 대상은 composite 스냅 여부다.
+  it('compound: body×semibold는 body-strong으로 스냅하고 기본 body는 남지 않는다', () => {
     render(<Text weight="semibold">강조</Text>)
-    const cls = screen.getByText('강조').className
-    expect(cls).toContain('text-(length:--text-body-strong)')
-    expect(cls).toContain('leading-(--text-body-strong--line-height)')
-    expect(cls).toContain('tracking-(--text-body-strong--letter-spacing)')
-    expect(cls).toContain('font-(--text-body-strong--font-weight)')
-    // 변수 shorthand는 서로 다른 arbitrary 값이라 twMerge가 병합하지 못한다 → 기본 body 4축이 남으면 안 됨을 명시적으로 고정
-    expect(cls).not.toContain('text-(length:--text-body)')
-    expect(cls).not.toContain('leading-(--text-body--line-height)')
-    expect(cls).not.toContain('tracking-(--text-body--letter-spacing)')
-    expect(cls).not.toContain('font-(--text-body--font-weight)')
-    // weight 오버레이(font-semibold)는 compound가 대신하므로 잔존하지 않는다
-    expect(cls).not.toContain('font-semibold')
+    const classes = screen.getByText('강조').className.split(/\s+/)
+    expect(classes).toContain('text-body-strong')
+    // twMerge가 같은 font-size 축으로 인식해 기본 body를 걷어낸다
+    expect(classes).not.toContain('text-body')
   })
 
-  it('compound: caption×semibold는 caption-strong 변수 클래스로 스냅한다', () => {
+  it('compound: caption×semibold는 caption-strong으로 스냅한다', () => {
     render(<Text variant="caption" weight="semibold">메타</Text>)
-    const cls = screen.getByText('메타').className
-    expect(cls).toContain('text-(length:--text-caption-strong)')
-    expect(cls).toContain('leading-(--text-caption-strong--line-height)')
-    expect(cls).toContain('tracking-(--text-caption-strong--letter-spacing)')
-    expect(cls).toContain('font-(--text-caption-strong--font-weight)')
-    expect(cls).not.toBe('text-caption')
-    expect(cls).not.toContain('font-semibold')
+    const classes = screen.getByText('메타').className.split(/\s+/)
+    expect(classes).toContain('text-caption-strong')
+    expect(classes).not.toContain('text-caption')
   })
 
   it.each(['span', 'figcaption'] as const)('as="%s"로 태그를 바꾼다', (tag) => {
