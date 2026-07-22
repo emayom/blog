@@ -28,7 +28,7 @@ export function ArchiveSidebar({ years }: ArchiveSidebarProps) {
           >
             <Link
               href={`/archive/${year}`}
-              className="min-w-9 shrink-0 text-sm text-ink hover:text-primary dark:text-body-on-dark dark:hover:text-primary-on-dark"
+              className="min-w-9 shrink-0 text-sm text-fg hover:text-primary dark:text-body-on-dark dark:hover:text-primary-on-dark"
             >
               {year}
             </Link>
@@ -47,7 +47,7 @@ export function ArchiveSidebar({ years }: ArchiveSidebarProps) {
               </span>
               <span
                 role="tooltip"
-                className="pointer-events-none absolute bottom-full right-0 mb-1.5 whitespace-nowrap rounded bg-ink px-2 py-1 text-xs text-canvas opacity-0 transition-opacity duration-150 group-hover/bars:opacity-100 dark:bg-canvas dark:text-ink"
+                className="pointer-events-none absolute bottom-full right-0 mb-1.5 whitespace-nowrap rounded bg-fg px-2 py-1 text-xs text-canvas opacity-0 transition-opacity duration-150 group-hover/bars:opacity-100 dark:bg-canvas dark:text-fg"
               >
                 {count}
                 편

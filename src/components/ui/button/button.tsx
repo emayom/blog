@@ -10,8 +10,8 @@ const buttonCva = cva(
       variant: {
         // primary 타이포는 body 텍스트 스타일을 합성한다 (단일 원천: textStyles)
         primary: `rounded-pill bg-primary text-on-primary ${textStyles.body}`,
-        outline: 'border border-hairline bg-canvas text-ink hover:border-ink-muted-48 dark:border-ink-muted-80 dark:bg-surface-tile-2 dark:text-body-on-dark',
-        ghost: 'text-ink hover:text-primary dark:text-body-on-dark dark:hover:text-primary-on-dark',
+        outline: 'border border-hairline bg-canvas text-fg hover:border-fg-subtle dark:border-fg-muted dark:bg-surface-tile-2 dark:text-body-on-dark',
+        ghost: 'text-fg hover:text-primary dark:text-body-on-dark dark:hover:text-primary-on-dark',
       },
       size: {
         sm: 'px-sm py-xxs text-sm',

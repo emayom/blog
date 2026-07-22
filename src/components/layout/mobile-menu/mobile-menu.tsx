@@ -109,7 +109,7 @@ export function MobileMenu({ items }: MobileMenuProps) {
             role="dialog"
             aria-modal="true"
             aria-label="모바일 메뉴"
-            className={`absolute inset-x-0 top-0 flex flex-col bg-canvas pb-3 shadow-[0_16px_48px_rgba(0,0,0,0.06)] transition-opacity duration-200 ease-out dark:border-ink-muted-80 dark:bg-surface-tile-1 ${
+            className={`absolute inset-x-0 top-0 flex flex-col bg-canvas pb-3 shadow-[0_16px_48px_rgba(0,0,0,0.06)] transition-opacity duration-200 ease-out dark:border-fg-muted dark:bg-surface-tile-1 ${
               shown ? 'opacity-100' : 'opacity-0'
             }`}
           >
@@ -125,8 +125,8 @@ export function MobileMenu({ items }: MobileMenuProps) {
                     aria-current={isActive ? 'page' : undefined}
                     className={`flex min-h-[3.25rem] items-center px-6 text-base transition-colors hover:bg-black/[0.03] dark:hover:bg-white/[0.04] ${
                       isActive
-                        ? 'font-semibold text-ink dark:text-body-on-dark'
-                        : 'font-medium text-ink-muted-80 dark:text-body-muted'
+                        ? 'font-semibold text-fg dark:text-body-on-dark'
+                        : 'font-medium text-fg-muted dark:text-body-muted'
                     }`}
                   >
                     {item.label}

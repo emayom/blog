@@ -9,7 +9,7 @@ interface SeriesNavigationProps {
 }
 
 const itemLinkClass
-  = 'flex rounded-sm text-ink-muted-80 transition-colors hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-focus dark:text-body-muted dark:hover:text-primary-on-dark'
+  = 'flex rounded-sm text-fg-muted transition-colors hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-focus dark:text-body-muted dark:hover:text-primary-on-dark'
 
 // 목록 리듬 우선 — body-strong의 행간 조임(1.24) 대신 형제 링크(body 1.47)와 정렬
 const currentItemClass = 'flex leading-[1.47] text-primary dark:text-primary-on-dark'
@@ -25,7 +25,7 @@ export function SeriesNavigation({ series }: SeriesNavigationProps) {
         <Heading size="md">
           {series.name}
           <span aria-hidden="true"> · </span>
-          <span className="font-normal text-ink-muted-48 dark:text-body-muted">
+          <span className="font-normal text-fg-subtle dark:text-body-muted">
             {`${series.total}편 중 ${series.currentPosition}번째`}
           </span>
         </Heading>

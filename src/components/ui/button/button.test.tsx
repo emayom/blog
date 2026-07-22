@@ -6,7 +6,7 @@ describe('Button', () => {
   it('기본값은 outline·sm이다 (px-sm 포함)', () => {
     render(<Button>default</Button>)
     const el = screen.getByRole('button')
-    expect(el).toHaveClass('border', 'border-hairline', 'text-ink', 'px-sm', 'py-xxs')
+    expect(el).toHaveClass('border', 'border-hairline', 'text-fg', 'px-sm', 'py-xxs')
   })
 
   it('primary variant는 pill·bg-primary·body 타이포 4축 클래스를 포함한다', () => {

@@ -9,7 +9,7 @@ export function FolderCard({ year, count }: FolderCardProps) {
   return (
     <Link
       href={`/archive/${year}`}
-      className="group flex flex-col items-center gap-2.5 rounded-[11px] pt-5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-focus"
+      className="group flex flex-col items-center gap-2.5 rounded-md pt-5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-focus"
     >
       <span aria-hidden="true" className="relative h-[51px] w-16 shrink-0">
         {/* 뒷판 — macOS 폴더 실루엣(탭 포함) */}
@@ -36,10 +36,10 @@ export function FolderCard({ year, count }: FolderCardProps) {
       </span>
 
       <span className="text-center">
-        <span className="block text-xs font-semibold tracking-[-0.224px] text-ink dark:text-body-on-dark">
+        <span className="block text-xs font-semibold tracking-[-0.224px] text-fg dark:text-body-on-dark">
           {year}
         </span>
-        <span className="mt-0.5 block text-xs text-ink-muted-48 dark:text-body-muted">
+        <span className="mt-0.5 block text-xs text-fg-subtle dark:text-body-muted">
           {count}
           편
         </span>

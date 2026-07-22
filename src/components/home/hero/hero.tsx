@@ -21,7 +21,7 @@ export function Hero({ latestPost, nowReading, children }: HeroProps) {
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-[1.5fr_1fr] sm:grid-rows-2">
         {/* 대표 타일 — 컨텐츠는 페이지에서 주입 (parchment, 2행 span).
             relative + overflow-hidden: 배경형 주입 요소(absolute inset-0)의 기준·클리핑 */}
-        <div className="relative col-span-2 flex min-h-[180px] flex-col overflow-hidden rounded-[18px] bg-canvas-parchment p-7 sm:col-span-1 sm:row-span-2 dark:bg-ink-muted-80">
+        <div className="relative col-span-2 flex min-h-[180px] flex-col overflow-hidden rounded-lg bg-canvas-parchment p-7 sm:col-span-1 sm:row-span-2 dark:bg-fg-muted">
           {children}
         </div>
 
@@ -29,7 +29,7 @@ export function Hero({ latestPost, nowReading, children }: HeroProps) {
         {latestPost && (
           <Link
             href={`/writing/${latestPost.slug}`}
-            className={`group flex min-h-[150px] flex-col justify-between rounded-[18px] bg-surface-tile-1 p-6 dark:bg-primary/85 ${tileLift} ${tileFocus}`}
+            className={`group flex min-h-[150px] flex-col justify-between rounded-lg bg-surface-tile-1 p-6 dark:bg-primary/85 ${tileLift} ${tileFocus}`}
           >
             <div className="flex items-start justify-between gap-3">
               <span className="text-xs font-semibold uppercase tracking-wide text-body-muted dark:text-on-primary/75">
@@ -47,18 +47,18 @@ export function Hero({ latestPost, nowReading, children }: HeroProps) {
         {nowReading && (
           <Link
             href="/library"
-            className={`group flex min-h-[150px] flex-col justify-between rounded-[18px] border border-divider-soft bg-surface-pearl p-6 ${tileLift} ${tileFocus} dark:border-ink-muted-80 dark:bg-surface-tile-3`}
+            className={`group flex min-h-[150px] flex-col justify-between rounded-lg border border-divider-soft bg-surface-pearl p-6 ${tileLift} ${tileFocus} dark:border-fg-muted dark:bg-surface-tile-3`}
           >
-            <span className="text-xs font-semibold uppercase tracking-wide text-ink-muted-48 dark:text-body-muted">
+            <span className="text-xs font-semibold uppercase tracking-wide text-fg-subtle dark:text-body-muted">
               Now reading
             </span>
             <div className="flex items-end justify-between gap-3">
               <div className="min-w-0">
-                <h2 className="font-display text-base font-semibold leading-tight tracking-tight text-ink line-clamp-2 sm:text-xl dark:text-body-on-dark">
+                <h2 className="font-display text-base font-semibold leading-tight tracking-tight text-fg line-clamp-2 sm:text-xl dark:text-body-on-dark">
                   {nowReading.title}
                 </h2>
                 {nowReading.author && (
-                  <span className="mt-1 block truncate text-sm text-ink-muted-48 dark:text-body-muted">
+                  <span className="mt-1 block truncate text-sm text-fg-subtle dark:text-body-muted">
                     {nowReading.author}
                   </span>
                 )}
