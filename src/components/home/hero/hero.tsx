@@ -21,7 +21,7 @@ export function Hero({ latestPost, nowReading, children }: HeroProps) {
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-[1.5fr_1fr] sm:grid-rows-2">
         {/* 대표 타일 — 컨텐츠는 페이지에서 주입 (parchment, 2행 span).
             relative + overflow-hidden: 배경형 주입 요소(absolute inset-0)의 기준·클리핑 */}
-        <div className="relative col-span-2 flex min-h-[180px] flex-col overflow-hidden rounded-lg bg-canvas-parchment p-7 sm:col-span-1 sm:row-span-2 dark:bg-surface-tile-2">
+        <div className="relative col-span-2 flex min-h-[180px] flex-col overflow-hidden rounded-lg bg-canvas-parchment p-7 sm:col-span-1 sm:row-span-2">
           {children}
         </div>
 
@@ -47,7 +47,7 @@ export function Hero({ latestPost, nowReading, children }: HeroProps) {
         {nowReading && (
           <Link
             href="/library"
-            className={`group flex min-h-[150px] flex-col justify-between rounded-lg border border-divider-soft bg-surface-pearl p-6 ${tileLift} ${tileFocus} dark:bg-surface-tile-3`}
+            className={`group flex min-h-[150px] flex-col justify-between rounded-lg border border-divider-soft bg-surface-pearl p-6 ${tileLift} ${tileFocus}`}
           >
             <span className="text-label-sm font-semibold uppercase tracking-wide text-fg-subtle">
               Now reading

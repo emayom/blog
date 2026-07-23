@@ -98,7 +98,7 @@ export function LibraryDetail({ item, hasBody }: LibraryDetailProps) {
                       <Text
                         as="blockquote"
                         key={i}
-                        className="border-l-2 border-primary bg-canvas-parchment py-sm pl-lg pr-md text-fg-muted dark:border-primary-on-dark dark:bg-surface-tile-2"
+                        className="border-l-2 border-primary bg-canvas-parchment py-sm pl-lg pr-md text-fg-muted dark:border-primary-on-dark"
                       >
                         {quote}
                       </Text>

@@ -12,7 +12,7 @@ interface ModalEmptyStateProps {
 export function ModalEmptyState({ message, action }: ModalEmptyStateProps) {
   return (
     <div className="flex flex-col items-center px-4.5 py-12 text-center text-fg-subtle">
-      <div className="mb-3.5 size-12 rounded-xl bg-canvas-parchment dark:bg-surface-tile-1" aria-hidden="true" />
+      <div className="mb-3.5 size-12 rounded-xl bg-canvas-parchment" aria-hidden="true" />
       <p className={action ? 'mb-3.5 text-label-md' : 'text-label-md'}>{message}</p>
       {action && (action.href
         ? (

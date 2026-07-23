@@ -54,9 +54,9 @@ export function SeriesSection({ series }: SeriesSectionProps) {
           <Link
             key={s.slug}
             href={`/series/${s.slug}`}
-            className="group block overflow-hidden rounded-lg border border-hairline bg-canvas focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-focus dark:bg-surface-tile-2"
+            className="group block overflow-hidden rounded-lg border border-hairline bg-canvas focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-focus"
           >
-            <div className="relative aspect-square w-full overflow-hidden bg-canvas-parchment dark:bg-surface-tile-2">
+            <div className="relative aspect-square w-full overflow-hidden bg-canvas-parchment">
               {s.thumbnail && (
                 <Image
                   src={s.thumbnail}

@@ -109,7 +109,7 @@ export function MobileMenu({ items }: MobileMenuProps) {
             role="dialog"
             aria-modal="true"
             aria-label="모바일 메뉴"
-            className={`absolute inset-x-0 top-0 flex flex-col bg-canvas pb-3 shadow-[0_16px_48px_rgba(0,0,0,0.06)] transition-opacity duration-200 ease-out dark:bg-surface-tile-1 ${
+            className={`absolute inset-x-0 top-0 flex flex-col bg-canvas pb-3 shadow-[0_16px_48px_rgba(0,0,0,0.06)] transition-opacity duration-200 ease-out ${
               shown ? 'opacity-100' : 'opacity-0'
             }`}
           >

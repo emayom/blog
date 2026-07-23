@@ -7,8 +7,8 @@ const tagVariants = cva(
   {
     variants: {
       variant: {
-        soft: 'bg-canvas-parchment text-fg-muted hover:bg-canvas-parchment/70 hover:text-primary dark:bg-surface-tile-1',
-        outline: 'border border-hairline bg-canvas text-fg hover:border-fg-subtle dark:bg-surface-tile-2',
+        soft: 'bg-canvas-parchment text-fg-muted hover:bg-canvas-parchment/70 hover:text-primary',
+        outline: 'border border-hairline bg-canvas text-fg hover:border-fg-subtle',
       },
       size: {
         sm: 'px-3 py-1 text-label-sm',

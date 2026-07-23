@@ -10,7 +10,7 @@ const buttonCva = cva(
       variant: {
         // primary 타이포는 body-lg 텍스트 스타일을 합성한다 (단일 원천: textStyles)
         primary: `rounded-pill bg-primary text-on-primary ${textStyles['body-lg']}`,
-        outline: 'border border-hairline bg-canvas text-fg hover:border-fg-subtle dark:bg-surface-tile-2',
+        outline: 'border border-hairline bg-canvas text-fg hover:border-fg-subtle',
         ghost: 'text-fg hover:text-primary',
       },
       size: {

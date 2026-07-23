@@ -96,6 +96,9 @@
   --color-fg: var(--color-body-on-dark);
   --color-fg-muted: var(--color-body-muted);
   --color-fg-subtle: var(--color-body-subtle);
+  --color-canvas: var(--color-surface-tile-2);
+  --color-canvas-parchment: var(--color-surface-tile-1);
+  --color-surface-pearl: var(--color-surface-tile-3);
   --color-divider-soft: var(--color-hairline-on-dark);
   --color-hairline: var(--color-hairline-on-dark);
   --color-callout-info: var(--color-primary-on-dark);

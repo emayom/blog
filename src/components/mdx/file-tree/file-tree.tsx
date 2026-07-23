@@ -50,7 +50,7 @@ function FileItem({ name, comment }: FileItemProps) {
 
 function FileTreeRoot({ children }: FileTreeProps) {
   return (
-    <div className="my-lg rounded-lg bg-canvas-parchment p-4 dark:bg-surface-tile-3">
+    <div className="my-lg rounded-lg bg-canvas-parchment p-4">
       <ul className="space-y-2">{children}</ul>
     </div>
   )

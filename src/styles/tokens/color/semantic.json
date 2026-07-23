@@ -24,9 +24,21 @@
       "$extensions": { "dark": "{color.body-subtle}" }
     },
 
-    "canvas": { "$value": "{color.white}", "$type": "color" },
-    "canvas-parchment": { "$value": "{color.gray.50}", "$type": "color" },
-    "surface-pearl": { "$value": "{color.gray.25}", "$type": "color" },
+    "canvas": {
+      "$value": "{color.white}",
+      "$type": "color",
+      "$extensions": { "dark": "{color.surface-tile-2}" }
+    },
+    "canvas-parchment": {
+      "$value": "{color.gray.50}",
+      "$type": "color",
+      "$extensions": { "dark": "{color.surface-tile-1}" }
+    },
+    "surface-pearl": {
+      "$value": "{color.gray.25}",
+      "$type": "color",
+      "$extensions": { "dark": "{color.surface-tile-3}" }
+    },
     "surface-tile-1": { "$value": "{color.near-black.1}", "$type": "color" },
     "surface-tile-2": { "$value": "{color.near-black.2}", "$type": "color" },
     "surface-tile-3": { "$value": "{color.near-black.3}", "$type": "color" },
