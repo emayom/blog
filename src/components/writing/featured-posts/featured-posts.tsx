@@ -18,9 +18,9 @@ export function FeaturedPosts({ posts }: FeaturedPostsProps) {
           <li key={post.slug}>
             <Link
               href={`/writing/${post.slug}`}
-              className="group flex h-full flex-col overflow-hidden bg-canvas dark:bg-surface-tile-2"
+              className="group flex h-full flex-col overflow-hidden bg-canvas"
             >
-              <div className="pointer-events-none relative aspect-[520/280] w-full overflow-hidden rounded-sm bg-canvas-parchment dark:bg-surface-tile-3">
+              <div className="pointer-events-none relative aspect-[520/280] w-full overflow-hidden rounded-sm bg-canvas-parchment">
                 {post.thumbnail && (
                   <Image
                     src={post.thumbnail}

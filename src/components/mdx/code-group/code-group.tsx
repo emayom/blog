@@ -33,7 +33,7 @@ export function CodeGroup({ labels, children }: CodeGroupProps) {
 
   return (
     <div className="my-lg overflow-hidden rounded-lg border border-hairline">
-      <div className="flex items-center gap-1 px-3 py-2 bg-canvas-parchment dark:bg-surface-tile-3">
+      <div className="flex items-center gap-1 px-3 py-2 bg-canvas-parchment">
         {labelList.map((label, i) => (
           <button
             key={label}

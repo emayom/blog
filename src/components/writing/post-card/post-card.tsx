@@ -12,7 +12,7 @@ interface PostCardProps {
 export function PostCard({ post, showTags = true, showDate = false }: PostCardProps) {
   const hasTags = showTags && post.tags.length > 0
   return (
-    <article className={`group cursor-pointer bg-canvas dark:bg-surface-tile-2 ${hasTags ? 'py-md' : 'py-lg'}`}>
+    <article className={`group cursor-pointer bg-canvas ${hasTags ? 'py-md' : 'py-lg'}`}>
       <h2 className="text-title-md">
         <Link
           href={`/writing/${post.slug}`}

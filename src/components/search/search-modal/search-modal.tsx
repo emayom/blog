@@ -134,7 +134,7 @@ export function SearchModal() {
         aria-modal="true"
         aria-labelledby={labelId}
         aria-label="검색"
-        className="relative z-10 flex w-full max-w-145 flex-col overflow-hidden rounded-[14px] border border-hairline bg-canvas shadow-[0_24px_60px_rgba(0,0,0,0.3)] dark:bg-surface-tile-2 max-h-[70vh]"
+        className="relative z-10 flex w-full max-w-145 flex-col overflow-hidden rounded-[14px] border border-hairline bg-canvas shadow-[0_24px_60px_rgba(0,0,0,0.3)] max-h-[70vh]"
         onClick={e => e.stopPropagation()}
       >
         {/* 검색 입력 행 */}
@@ -201,7 +201,7 @@ export function SearchModal() {
 
         {/* 키보드 단축키 footer */}
         {!isInitial && !isEmpty && (
-          <div className="flex items-center gap-4 border-t border-hairline bg-canvas-parchment px-4.5 py-2.5 text-label-sm text-fg-subtle dark:bg-surface-tile-1">
+          <div className="flex items-center gap-4 border-t border-hairline bg-canvas-parchment px-4.5 py-2.5 text-label-sm text-fg-subtle">
             <span>
               <Kbd>↑</Kbd>
               <Kbd>↓</Kbd>

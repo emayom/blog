@@ -73,7 +73,7 @@ export const mdxComponents: MDXComponents = {
     if ('data-language' in props) return <code className={className} {...props} />
     return (
       <code
-        className="rounded-xs border border-hairline bg-canvas-parchment px-0.5 py-0.5 font-mono dark:bg-surface-tile-2"
+        className="rounded-xs border border-hairline bg-canvas-parchment px-0.5 py-0.5 font-mono"
         {...props}
       />
     )
@@ -96,7 +96,7 @@ export const mdxComponents: MDXComponents = {
   },
   blockquote: (props: ComponentPropsWithoutRef<'blockquote'>) => (
     <blockquote
-      className="border-l-2 border-primary dark:border-primary-on-dark bg-canvas-parchment dark:bg-surface-tile-2 pl-lg pr-md py-sm my-lg text-fg-muted [&>p]:my-0"
+      className="border-l-2 border-primary dark:border-primary-on-dark bg-canvas-parchment pl-lg pr-md py-sm my-lg text-fg-muted [&>p]:my-0"
       {...props}
     />
   ),
@@ -136,7 +136,7 @@ export const mdxComponents: MDXComponents = {
   ),
   thead: (props: ComponentPropsWithoutRef<'thead'>) => (
     <thead
-      className="bg-canvas-parchment dark:bg-surface-tile-2"
+      className="bg-canvas-parchment"
       {...props}
     />
   ),

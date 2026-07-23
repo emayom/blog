@@ -4,7 +4,7 @@ import { cn } from '@/lib/cn'
 
 function EntryThumb({ src, alt, className }: { src?: string, alt: string, className?: string }) {
   return (
-    <div className={cn('relative flex shrink-0 items-center justify-center overflow-hidden bg-canvas-parchment dark:bg-surface-tile-2', className)}>
+    <div className={cn('relative flex shrink-0 items-center justify-center overflow-hidden bg-canvas-parchment', className)}>
       {src
         ? (
             <Image src={src} alt={alt} fill sizes="36px" className="object-contain" />

@@ -23,7 +23,7 @@ export function Callout({ type = 'info', title, children }: CalloutProps) {
 
   return (
     <div
-      className="my-lg flex gap-3 rounded-xl border border-hairline bg-canvas px-4 py-4 dark:bg-surface-tile-2"
+      className="my-lg flex gap-3 rounded-xl border border-hairline bg-canvas px-4 py-4"
       role="note"
     >
       <span className={cn('mt-0.5 shrink-0', iconColors[type])}>

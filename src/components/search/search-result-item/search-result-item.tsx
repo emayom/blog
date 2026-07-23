@@ -25,7 +25,7 @@ export function SearchResultItem({ post, active = false, onClick, onMouseEnter }
       data-active={active ? 'true' : undefined}
       className={cn(
         'block px-4.5 py-3.25 transition-colors hover:bg-canvas-parchment focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-focus dark:hover:bg-surface-tile-1',
-        active && 'bg-canvas-parchment dark:bg-surface-tile-1',
+        active && 'bg-canvas-parchment',
       )}
     >
       <p className="mb-1.5 text-label-md font-semibold text-fg">

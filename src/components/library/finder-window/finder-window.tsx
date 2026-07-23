@@ -54,12 +54,12 @@ export function FinderWindow({
   return (
     <div
       className={cn(
-        'flex min-h-0 flex-col overflow-hidden rounded-lg border border-hairline bg-canvas shadow-xl dark:bg-surface-tile-2',
+        'flex min-h-0 flex-col overflow-hidden rounded-lg border border-hairline bg-canvas shadow-xl',
         className,
       )}
     >
       <div className="flex min-h-0 flex-1 flex-col md:flex-row md:items-stretch">
-        <div className="flex flex-row border-b border-hairline bg-canvas-parchment md:w-36 md:shrink-0 md:flex-col md:justify-between md:border-b-0 md:border-r dark:bg-surface-tile-2">
+        <div className="flex flex-row border-b border-hairline bg-canvas-parchment md:w-36 md:shrink-0 md:flex-col md:justify-between md:border-b-0 md:border-r">
           <div className="hidden h-9 shrink-0 items-center gap-1.5 p-4 md:flex">
             <span aria-hidden="true" className="size-2.5 rounded-full bg-[#ff5f57]" />
             <span aria-hidden="true" className="size-2.5 rounded-full bg-[#febc2e]" />
@@ -77,7 +77,7 @@ export function FinderWindow({
                   className={cn(
                     'ml-auto flex items-center rounded-full transition-[width,background-color,padding] duration-200',
                     expanded
-                      ? 'w-44 gap-1.5 bg-canvas-parchment px-2 py-1 focus-within:ring-1 focus-within:ring-fg-subtle/30 dark:bg-surface-tile-3'
+                      ? 'w-44 gap-1.5 bg-canvas-parchment px-2 py-1 focus-within:ring-1 focus-within:ring-fg-subtle/30'
                       : 'h-7 w-7 cursor-pointer justify-center hover:bg-canvas-parchment dark:hover:bg-surface-tile-3',
                   )}
                   onClick={!expanded ? handleExpand : undefined}

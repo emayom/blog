@@ -147,7 +147,7 @@ export default async function SeriesDetailPage({ params }: Props) {
       </Text>
 
       {intro && (
-        <div className="mb-9 rounded-lg bg-canvas-parchment p-6 dark:bg-surface-tile-2">
+        <div className="mb-9 rounded-lg bg-canvas-parchment p-6">
           <p className="sr-only">
             시리즈 소개
           </p>

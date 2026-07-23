@@ -23,7 +23,7 @@ export default function AboutPage() {
     <main className="mx-auto max-w-4xl px-6 py-12">
       <div className="grid grid-cols-1 items-center gap-8 sm:grid-cols-[160px_1fr]">
         <div className="relative size-[150px]">
-          <div className="absolute inset-0 overflow-hidden rounded-full border border-hairline bg-canvas-parchment dark:bg-surface-tile-2">
+          <div className="absolute inset-0 overflow-hidden rounded-full border border-hairline bg-canvas-parchment">
             <Image
               src={profileImg}
               alt={`${siteConfig.name} 프로필`}
@@ -34,7 +34,7 @@ export default function AboutPage() {
               priority
             />
           </div>
-          <span className="absolute bottom-1 right-1 rounded-full border border-hairline bg-canvas px-2.5 py-1 text-label-sm text-fg dark:bg-surface-tile-1">
+          <span className="absolute bottom-1 right-1 rounded-full border border-hairline bg-canvas px-2.5 py-1 text-label-sm text-fg">
             Seoul
           </span>
         </div>

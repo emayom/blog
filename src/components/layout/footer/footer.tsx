@@ -22,14 +22,14 @@ export function Footer() {
     .filter(group => group.items.length > 0)
 
   return (
-    <footer className="border-t border-hairline bg-canvas-parchment py-16 dark:bg-surface-tile-3">
+    <footer className="border-t border-hairline bg-canvas-parchment py-16">
       <div className="mx-auto max-w-4xl px-6">
 
         {/* 메인: 좌측 Bio + 우측 Nav 컬럼 */}
         <div className="flex flex-col gap-12 sm:flex-row sm:justify-between sm:gap-16">
           {/* Bio */}
           <div className="flex flex-col gap-3">
-            <div className="relative size-16 overflow-hidden rounded-full border border-hairline bg-canvas-parchment dark:bg-surface-tile-2">
+            <div className="relative size-16 overflow-hidden rounded-full border border-hairline bg-canvas-parchment">
               <Image
                 src={profileImg}
                 alt={`${siteConfig.name} 프로필`}

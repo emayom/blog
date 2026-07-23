@@ -10,7 +10,7 @@ const iconBoxVariants = cva(
     variants: {
       variant: {
         empty:
-          'rounded-md border border-hairline bg-canvas-parchment text-fg-subtle dark:bg-surface-tile-2',
+          'rounded-md border border-hairline bg-canvas-parchment text-fg-subtle',
         error:
           'rounded-md border border-dashed border-fg-subtle text-fg-subtle',
       },
