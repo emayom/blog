@@ -14,7 +14,24 @@
 
 6. **텍스트 스타일은 DTCG typography composite** (`tokens/typography/text-styles.json`, 4축). fontFamily는 composite에 넣지 않는다. `--font-sans`·`--font-mono`는 next/font 런타임 변수라 토큰화 불가 — globals.css `@theme inline` 소관.
 
-7. **다크모드는 `$extensions.dark`로만.** 팔레트 라이트/다크 이중 정의 금지 — 다크 대응의 기본은 컴포넌트의 `dark:` 유틸리티.
+7. **색은 테마 인식 토큰으로 처리한다 — 컴포넌트에 `dark:`를 붙이지 않는다.**
+
+   토큰 하나가 라이트/다크 두 값을 갖게 한다. 그러면 컴포넌트는 `text-fg` 하나만 쓰고, 테마에 맞는 값은 토큰이 고른다.
+
+   ```
+   ✅  <p className="text-fg">          토큰이 라이트=#1d1d1f / 다크=#f5f5f7 전환
+   ❌  <p className="text-fg dark:text-body-on-dark">   컴포넌트마다 다크 값을 다시 지정
+   ```
+
+   `dark:`를 손으로 붙이면 새 컴포넌트마다 반복되고, 하나 빠뜨리면 그 자리만 라이트로 남는다. 다크 값은 토큰이 소유해야 한 곳에서 관리된다.
+
+   **토큰에 다크 값 정의하기** — semantic 토큰에 `$extensions.dark`를 추가한다:
+   ```json
+   "fg": { "$value": "{color.gray.900}", "$extensions": { "dark": "{color.body-on-dark}" } }
+   ```
+   단, 다크 값이 가리키는 대상도 semantic 토큰이어야 한다. base 팔레트(`{color.gray.400}` 등)는 CSS 변수로 출력되지 않아서, 다크에서 참조하면 깨진다. 그래서 `body-subtle`·`hairline-on-dark`처럼 다크 값을 담는 semantic 토큰을 먼저 둔다.
+
+   **예외** — 라이트에는 없고 다크에만 있는 스타일(반투명 상단 바 등)은 짝이 없으므로 `dark:` 유틸리티로 남긴다.
 
 ## 삭제 예약 (컴포넌트 마이그레이션 시 처리)
 
