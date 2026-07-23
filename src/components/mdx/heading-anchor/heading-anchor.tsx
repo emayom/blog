@@ -21,7 +21,7 @@ export function HeadingAnchor({ href, children }: ComponentPropsWithoutRef<'a'>)
         href={href}
         onClick={handleClick}
         aria-label={copied ? '복사되었습니다!' : '링크를 제목에 복사'}
-        className="opacity-0 group-hover:opacity-100 text-fg-subtle no-underline dark:text-body-muted"
+        className="opacity-0 group-hover:opacity-100 text-fg-subtle no-underline"
       >
         {children}
       </a>

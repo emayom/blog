@@ -56,7 +56,7 @@ export default async function ArchiveYearPage({ params }: Props) {
 
         <Heading as="h1" size="md" className="mb-[22px]">
           {year}
-          <span className="ml-2 text-title-lg font-normal text-fg-subtle dark:text-body-muted">
+          <span className="ml-2 text-title-lg font-normal text-fg-subtle">
             (
             {filtered.length}
             )
@@ -75,7 +75,7 @@ export default async function ArchiveYearPage({ params }: Props) {
           </section>
         )}
 
-        <ul className="flex flex-col divide-y divide-hairline dark:divide-fg-muted">
+        <ul className="flex flex-col divide-y divide-hairline">
           {filtered.map(post => (
             <li key={post.slug}>
               <PostCard post={post} />

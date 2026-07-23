@@ -134,12 +134,12 @@ export function SearchModal() {
         aria-modal="true"
         aria-labelledby={labelId}
         aria-label="검색"
-        className="relative z-10 flex w-full max-w-145 flex-col overflow-hidden rounded-[14px] border border-hairline bg-canvas shadow-[0_24px_60px_rgba(0,0,0,0.3)] dark:border-fg-muted dark:bg-surface-tile-2 max-h-[70vh]"
+        className="relative z-10 flex w-full max-w-145 flex-col overflow-hidden rounded-[14px] border border-hairline bg-canvas shadow-[0_24px_60px_rgba(0,0,0,0.3)] dark:bg-surface-tile-2 max-h-[70vh]"
         onClick={e => e.stopPropagation()}
       >
         {/* 검색 입력 행 */}
-        <div className="flex items-center gap-3 border-b border-hairline px-4.5 py-4 dark:border-fg-muted">
-          <SearchIcon size={16} className="shrink-0 text-fg-subtle dark:text-body-muted" />
+        <div className="flex items-center gap-3 border-b border-hairline px-4.5 py-4">
+          <SearchIcon size={16} className="shrink-0 text-fg-subtle" />
           <label id={labelId} htmlFor="search-input" className="sr-only">검색</label>
           <input
             ref={inputRef}
@@ -157,12 +157,12 @@ export function SearchModal() {
             autoCorrect="off"
             autoCapitalize="off"
             spellCheck={false}
-            className="flex-1 bg-transparent text-body-md text-fg placeholder:text-fg-subtle outline-none dark:text-body-on-dark dark:placeholder:text-body-muted [&::-webkit-search-cancel-button]:hidden"
+            className="flex-1 bg-transparent text-body-md text-fg placeholder:text-fg-subtle outline-none dark:placeholder:text-body-muted [&::-webkit-search-cancel-button]:hidden"
           />
         </div>
 
         {/* 스코프 라인 */}
-        <div className="border-b border-hairline px-4.5 py-2.25 text-label-sm text-fg-subtle dark:border-fg-muted dark:text-body-muted">
+        <div className="border-b border-hairline px-4.5 py-2.25 text-label-sm text-fg-subtle">
           {scopeLabel}
         </div>
 
@@ -184,7 +184,7 @@ export function SearchModal() {
             />
           )}
           {!isInitial && !isEmpty && (
-            <ul className="divide-y divide-hairline dark:divide-fg-muted">
+            <ul className="divide-y divide-hairline">
               {results.map((post, i) => (
                 <li key={post.slug}>
                   <SearchResultItem
@@ -201,7 +201,7 @@ export function SearchModal() {
 
         {/* 키보드 단축키 footer */}
         {!isInitial && !isEmpty && (
-          <div className="flex items-center gap-4 border-t border-hairline bg-canvas-parchment px-4.5 py-2.5 text-label-sm text-fg-subtle dark:border-fg-muted dark:bg-surface-tile-1 dark:text-body-muted">
+          <div className="flex items-center gap-4 border-t border-hairline bg-canvas-parchment px-4.5 py-2.5 text-label-sm text-fg-subtle dark:bg-surface-tile-1">
             <span>
               <Kbd>↑</Kbd>
               <Kbd>↓</Kbd>

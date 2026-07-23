@@ -40,7 +40,7 @@ describe('IconButton', () => {
 
   it('variant ghost는 text-fg를 포함한다', () => {
     render(<IconButton label="x" variant="ghost" />)
-    expect(screen.getByRole('button')).toHaveClass('text-fg', 'dark:text-body-on-dark')
+    expect(screen.getByRole('button')).toHaveClass('text-fg')
   })
 
   it('variant outline은 border·bg·fg-subtle을 포함한다', () => {

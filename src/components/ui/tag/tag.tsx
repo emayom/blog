@@ -7,8 +7,8 @@ const tagVariants = cva(
   {
     variants: {
       variant: {
-        soft: 'bg-canvas-parchment text-fg-muted hover:bg-canvas-parchment/70 hover:text-primary dark:bg-surface-tile-1 dark:text-body-muted dark:hover:text-primary-on-dark',
-        outline: 'border border-hairline bg-canvas text-fg hover:border-fg-subtle dark:border-fg-muted dark:bg-surface-tile-2 dark:text-body-on-dark',
+        soft: 'bg-canvas-parchment text-fg-muted hover:bg-canvas-parchment/70 hover:text-primary dark:bg-surface-tile-1',
+        outline: 'border border-hairline bg-canvas text-fg hover:border-fg-subtle dark:bg-surface-tile-2',
       },
       size: {
         sm: 'px-3 py-1 text-label-sm',
@@ -34,7 +34,7 @@ export function Tag({ href, label, count, variant, size, className, as, 'aria-cu
     <>
       {label}
       {count !== undefined && (
-        <span className="text-fg-subtle dark:text-body-muted">{count}</span>
+        <span className="text-fg-subtle">{count}</span>
       )}
     </>
   )

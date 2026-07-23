@@ -9,11 +9,11 @@ interface SeriesNavigationProps {
 }
 
 const itemLinkClass
-  = 'flex rounded-sm text-fg-muted transition-colors hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-focus dark:text-body-muted dark:hover:text-primary-on-dark'
+  = 'flex rounded-sm text-fg-muted transition-colors hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-focus'
 
 // weight prop 대신 font-semibold를 얹는다 — weight="semibold"는 title-md로 스냅해
 // 행간이 조여지고(1.3), 그러면 형제 링크(body-lg 1.47)와 목록 리듬이 어긋난다.
-const currentItemClass = 'flex font-semibold text-primary dark:text-primary-on-dark'
+const currentItemClass = 'flex font-semibold text-primary'
 
 export function SeriesNavigation({ series }: SeriesNavigationProps) {
   if (!series) return null
@@ -26,7 +26,7 @@ export function SeriesNavigation({ series }: SeriesNavigationProps) {
         <Heading size="md">
           {series.name}
           <span aria-hidden="true"> · </span>
-          <span className="font-normal text-fg-subtle dark:text-body-muted">
+          <span className="font-normal text-fg-subtle">
             {`${series.total}편 중 ${series.currentPosition}번째`}
           </span>
         </Heading>

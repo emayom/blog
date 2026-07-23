@@ -74,10 +74,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 // 번호가 매겨진 글 목록 — 단일 시리즈와 카테고리 섹션 양쪽에서 재사용한다.
 function PostOrderedList({ posts }: { posts: PostMeta[] }) {
   return (
-    <ol className="flex flex-col divide-y divide-hairline dark:divide-fg-muted">
+    <ol className="flex flex-col divide-y divide-hairline">
       {posts.map((post, index) => (
         <li key={post.slug} className="flex gap-3.5">
-          <span className="w-5 flex-none pt-lg text-label-md text-fg-subtle dark:text-body-muted">
+          <span className="w-5 flex-none pt-lg text-label-md text-fg-subtle">
             {index + 1}
           </span>
           <div className="flex-1">
@@ -114,7 +114,7 @@ export default async function SeriesDetailPage({ params }: Props) {
         <SeriesBreadcrumb name={category.name} />
 
         <Heading as="h1" size="md" className="mb-2">{category.name}</Heading>
-        <Text variant="label-md" className="mb-9 text-fg-subtle dark:text-body-muted">
+        <Text variant="label-md" className="mb-9 text-fg-subtle">
           {`${category.count}편`}
         </Text>
 
@@ -142,7 +142,7 @@ export default async function SeriesDetailPage({ params }: Props) {
       <SeriesBreadcrumb name={name} />
 
       <Heading as="h1" size="md" className="mb-2">{name}</Heading>
-      <Text variant="label-md" className="mb-7 text-fg-subtle dark:text-body-muted">
+      <Text variant="label-md" className="mb-7 text-fg-subtle">
         {`${seriesPosts.length}편`}
       </Text>
 
@@ -151,7 +151,7 @@ export default async function SeriesDetailPage({ params }: Props) {
           <p className="sr-only">
             시리즈 소개
           </p>
-          <div className="text-body-lg text-fg-muted dark:text-body-muted">
+          <div className="text-body-lg text-fg-muted">
             {intro}
           </div>
         </div>

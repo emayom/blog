@@ -10,7 +10,7 @@ function EntryThumb({ src, alt, className }: { src?: string, alt: string, classN
             <Image src={src} alt={alt} fill sizes="36px" className="object-contain" />
           )
         : (
-            <BuildingIcon size={18} className="text-fg-subtle dark:text-body-muted" />
+            <BuildingIcon size={18} className="text-fg-subtle" />
           )}
     </div>
   )
@@ -31,7 +31,7 @@ export function EntryRow({ image, alt, title, subtitle, meta, description, href 
     <li className="flex gap-3">
       <EntryThumb src={image} alt={alt} className="size-9 rounded-sm" />
       <div className="min-w-0 flex-1 text-body-lg">
-        <p className="font-medium text-fg dark:text-body-on-dark">
+        <p className="font-medium text-fg">
           {title}
           {href && (
             <a
@@ -39,22 +39,22 @@ export function EntryRow({ image, alt, title, subtitle, meta, description, href 
               aria-label={`${title} 링크`}
               target="_blank"
               rel="noopener noreferrer"
-              className="ml-1 inline-flex align-middle text-fg-subtle transition-colors hover:text-fg dark:text-body-muted dark:hover:text-body-on-dark"
+              className="ml-1 inline-flex align-middle text-fg-subtle transition-colors hover:text-fg"
             >
               <ArrowUpRightIcon size={16} />
             </a>
           )}
         </p>
         {subtitle && (
-          <p className="text-label-md text-fg-muted dark:text-body-muted">
+          <p className="text-label-md text-fg-muted">
             {subtitle}
           </p>
         )}
-        <p className="text-label-sm text-fg-subtle dark:text-body-muted">
+        <p className="text-label-sm text-fg-subtle">
           {meta}
         </p>
         {description && (
-          <p className="mt-1 text-label-md text-fg-muted dark:text-body-muted">
+          <p className="mt-1 text-label-md text-fg-muted">
             {description}
           </p>
         )}

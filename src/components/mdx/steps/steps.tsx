@@ -11,11 +11,11 @@ export function Step({ title, children }: StepProps) {
   return (
     <li>
       {title && (
-        <strong className="mb-2 block text-title-sm text-fg dark:text-body-on-dark">
+        <strong className="mb-2 block text-title-sm text-fg">
           {title}
         </strong>
       )}
-      <div className="text-body-md text-fg-muted dark:text-body-muted">
+      <div className="text-body-md text-fg-muted">
         {children}
       </div>
     </li>

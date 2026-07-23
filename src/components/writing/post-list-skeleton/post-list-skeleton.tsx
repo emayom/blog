@@ -2,7 +2,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 
 function CardSkeleton() {
   return (
-    <div className="rounded-lg border border-hairline px-5 py-md dark:border-fg-muted">
+    <div className="rounded-lg border border-hairline px-5 py-md">
       <Skeleton className="h-3 w-1/3" />
       <Skeleton className="mt-3 h-5 w-4/5" />
       <Skeleton className="mt-3 h-3 w-full" />

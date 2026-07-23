@@ -1,12 +1,28 @@
 {
   "color": {
-    "primary": { "$value": "{color.blue.600}", "$type": "color" },
+    "primary": {
+      "$value": "{color.blue.600}",
+      "$type": "color",
+      "$extensions": { "dark": "{color.primary-on-dark}" }
+    },
     "primary-focus": { "$value": "{color.blue.500}", "$type": "color" },
     "primary-on-dark": { "$value": "{color.blue.400}", "$type": "color" },
 
-    "fg": { "$value": "{color.gray.900}", "$type": "color" },
-    "fg-muted": { "$value": "{color.gray.800}", "$type": "color" },
-    "fg-subtle": { "$value": "{color.gray.500}", "$type": "color" },
+    "fg": {
+      "$value": "{color.gray.900}",
+      "$type": "color",
+      "$extensions": { "dark": "{color.body-on-dark}" }
+    },
+    "fg-muted": {
+      "$value": "{color.gray.800}",
+      "$type": "color",
+      "$extensions": { "dark": "{color.body-muted}" }
+    },
+    "fg-subtle": {
+      "$value": "{color.gray.500}",
+      "$type": "color",
+      "$extensions": { "dark": "{color.body-subtle}" }
+    },
 
     "canvas": { "$value": "{color.white}", "$type": "color" },
     "canvas-parchment": { "$value": "{color.gray.50}", "$type": "color" },
@@ -17,13 +33,23 @@
     "surface-black": { "$value": "{color.black}", "$type": "color" },
     "surface-chip-translucent": { "$value": "{color.gray.200}", "$type": "color" },
 
-    "body-on-dark": { "$value": "{color.white}", "$type": "color" },
-    "body-muted": { "$value": "{color.gray.300}", "$type": "color" },
+    "body-on-dark": { "$value": "{color.gray.50}", "$type": "color" },
+    "body-muted": { "$value": "{color.gray.400}", "$type": "color" },
+    "body-subtle": { "$value": "{color.gray.450}", "$type": "color" },
     "on-primary": { "$value": "{color.white}", "$type": "color" },
     "on-dark": { "$value": "{color.white}", "$type": "color" },
 
-    "divider-soft": { "$value": "{color.gray.100}", "$type": "color" },
-    "hairline": { "$value": "{color.gray.150}", "$type": "color" },
+    "divider-soft": {
+      "$value": "{color.gray.100}",
+      "$type": "color",
+      "$extensions": { "dark": "{color.hairline-on-dark}" }
+    },
+    "hairline": {
+      "$value": "{color.gray.150}",
+      "$type": "color",
+      "$extensions": { "dark": "{color.hairline-on-dark}" }
+    },
+    "hairline-on-dark": { "$value": "{color.gray.800}", "$type": "color" },
 
     "callout-info": {
       "$value": "{color.primary}",

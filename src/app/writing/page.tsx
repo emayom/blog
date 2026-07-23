@@ -28,7 +28,7 @@ export default function WritingPage() {
     <SearchProvider posts={posts}>
       <main className="mx-auto max-w-4xl px-6 py-12">
         <nav className="mb-4 text-label-sm text-fg-subtle">
-          <Link href="/" className="text-primary dark:text-primary-on-dark">
+          <Link href="/" className="text-primary">
             홈
           </Link>
           <span aria-hidden="true"> / 글</span>
@@ -38,7 +38,7 @@ export default function WritingPage() {
           <Heading as="h1" size="md">글</Heading>
           <SearchTrigger />
         </div>
-        <Text className="mb-7 text-fg-muted dark:text-body-muted">
+        <Text className="mb-7 text-fg-muted">
           개발, 경험, 생각을 기록합니다.
         </Text>
 

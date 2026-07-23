@@ -24,7 +24,7 @@ export function CategoryTabs({ active }: CategoryTabsProps) {
               'rounded-pill px-3 py-1 text-label-sm',
               isActive
                 ? 'bg-primary text-on-primary'
-                : 'bg-canvas-parchment text-fg-subtle dark:bg-surface-tile-2 dark:text-body-muted',
+                : 'bg-canvas-parchment text-fg-subtle dark:bg-surface-tile-2',
             )}
           >
             {tab.label}

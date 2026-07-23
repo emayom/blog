@@ -19,7 +19,7 @@ export function PostList({ posts, tags }: PostListProps) {
       {posts.length === 0
         ? <EmptyState variant="empty" title="아직 작성된 글이 없습니다." />
         : (
-            <ul className="flex flex-col divide-y divide-hairline dark:divide-fg-muted">
+            <ul className="flex flex-col divide-y divide-hairline">
               {posts.map(post => (
                 <li key={post.slug}>
                   <PostCard post={post} />

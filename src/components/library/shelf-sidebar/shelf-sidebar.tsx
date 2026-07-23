@@ -28,8 +28,8 @@ export function ShelfSidebar({ active }: ShelfSidebarProps) {
             className={cn(
               'flex shrink-0 items-center gap-2 rounded px-3 py-2 text-left text-label-md transition-colors md:px-2 md:py-1 md:text-label-sm',
               isActive
-                ? 'bg-fg/8 font-medium text-primary dark:text-primary-on-dark'
-                : 'text-fg-subtle hover:text-fg dark:text-body-muted dark:hover:text-body-on-dark',
+                ? 'bg-fg/8 font-medium text-primary'
+                : 'text-fg-subtle hover:text-fg',
             )}
           >
             <item.Icon className="size-4 flex-none md:size-3.5" />

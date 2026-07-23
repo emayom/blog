@@ -20,7 +20,7 @@ export function RecentPosts({ posts, className }: RecentPostsProps) {
         <Heading size="sm">최근 글</Heading>
         <Link
           href="/writing"
-          className="text-label-md text-primary hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-focus dark:text-primary-on-dark"
+          className="text-label-md text-primary hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-focus"
         >
           전체 →
         </Link>
@@ -35,7 +35,7 @@ export function RecentPosts({ posts, className }: RecentPostsProps) {
               {recent.map(post => (
                 <li
                   key={post.slug}
-                  className="border-b border-hairline lg:odd:pr-4 lg:even:pl-4 dark:border-fg-muted"
+                  className="border-b border-hairline lg:odd:pr-4 lg:even:pl-4"
                 >
                   <PostCard post={post} />
                 </li>

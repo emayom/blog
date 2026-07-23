@@ -32,7 +32,7 @@ export function FeaturedPosts({ posts }: FeaturedPostsProps) {
                 )}
               </div>
               <div className="flex flex-1 flex-col py-3">
-                <p className="line-clamp-2 break-keep text-title-md text-fg group-hover:text-primary dark:text-body-on-dark dark:group-hover:text-primary-on-dark">
+                <p className="line-clamp-2 break-keep text-title-md text-fg group-hover:text-primary">
                   {post.title}
                 </p>
               </div>

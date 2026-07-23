@@ -23,7 +23,7 @@ export function Breadcrumb({ items, className }: BreadcrumbProps) {
           {index > 0 && <span aria-hidden="true"> / </span>}
           {item.href
             ? (
-                <Link href={item.href} className="text-primary hover:underline dark:text-primary-on-dark">
+                <Link href={item.href} className="text-primary hover:underline">
                   {item.label}
                 </Link>
               )
