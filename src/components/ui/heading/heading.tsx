@@ -2,7 +2,7 @@ import type { HTMLAttributes } from 'react'
 import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '@/lib/cn'
 
-const headingVariants = cva('font-semibold text-fg dark:text-body-on-dark', {
+const headingVariants = cva('font-semibold text-fg', {
   variants: {
     size: {
       hero: 'font-display text-[34px] sm:text-[40px] lg:text-[56px] leading-[1.07] tracking-[-0.28px] text-balance',

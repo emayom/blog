@@ -50,7 +50,7 @@ export function LibraryDetail({ item, hasBody }: LibraryDetailProps) {
               )
             : (
                 <div className="flex h-full w-full items-center justify-center bg-neutral-200 p-2 dark:bg-neutral-700">
-                  <span className="text-center text-label-sm font-medium leading-tight text-fg-subtle dark:text-body-muted">
+                  <span className="text-center text-label-sm font-medium leading-tight text-fg-subtle">
                     {item.title}
                   </span>
                 </div>
@@ -63,13 +63,13 @@ export function LibraryDetail({ item, hasBody }: LibraryDetailProps) {
           </Heading>
 
           {item.author && (
-            <p className="text-title-md text-fg-muted dark:text-body-muted">
+            <p className="text-title-md text-fg-muted">
               {item.author}
             </p>
           )}
 
           {metaParts.length > 0 && (
-            <Text variant="label-md" className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-fg-subtle dark:text-body-muted">
+            <Text variant="label-md" className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-fg-subtle">
               {metaParts.map((part, i) => (
                 <span key={i} className="flex items-center gap-x-2">
                   {i > 0 && <span aria-hidden="true">·</span>}
@@ -98,7 +98,7 @@ export function LibraryDetail({ item, hasBody }: LibraryDetailProps) {
                       <Text
                         as="blockquote"
                         key={i}
-                        className="border-l-2 border-primary bg-canvas-parchment py-sm pl-lg pr-md text-fg-muted dark:border-primary-on-dark dark:bg-surface-tile-2 dark:text-body-muted"
+                        className="border-l-2 border-primary bg-canvas-parchment py-sm pl-lg pr-md text-fg-muted dark:border-primary-on-dark dark:bg-surface-tile-2"
                       >
                         {quote}
                       </Text>
@@ -112,7 +112,7 @@ export function LibraryDetail({ item, hasBody }: LibraryDetailProps) {
               {hasBody && (
                 <section>
                   <Heading as="h2" size="sm" className="mb-4">서평</Heading>
-                  <div className="text-body-lg text-fg-muted dark:text-body-muted [&_p]:mb-md">
+                  <div className="text-body-lg text-fg-muted [&_p]:mb-md">
                     {item.content}
                   </div>
                 </section>

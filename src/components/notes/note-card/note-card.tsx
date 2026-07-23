@@ -10,9 +10,9 @@ import type { NoteMeta } from '@/types/note'
 // 프레젠테이션 셸 — 본문 노드를 주입받아 sync로 렌더(유닛 테스트 대상)
 export function NoteCardShell({ note, children }: { note: NoteMeta, children: ReactNode }) {
   return (
-    <article className="break-inside-avoid mb-4 rounded-md border border-hairline bg-canvas p-lg dark:border-fg-muted dark:bg-surface-tile-2">
+    <article className="break-inside-avoid mb-4 rounded-md border border-hairline bg-canvas p-lg dark:bg-surface-tile-2">
       {note.pinned && (
-        <div className="mb-2 flex items-center gap-1 text-fg-subtle dark:text-body-muted">
+        <div className="mb-2 flex items-center gap-1 text-fg-subtle">
           <PinIcon />
           <Text as="span" variant="label-sm">고정</Text>
         </div>
@@ -25,7 +25,7 @@ export function NoteCardShell({ note, children }: { note: NoteMeta, children: Re
         {note.tags[0] !== undefined && (
           <Tag href={`/notes?tag=${encodeURIComponent(note.tags[0])}`} variant="soft" size="sm" label={note.tags[0]} />
         )}
-        <Text as="span" variant="label-sm" className="text-fg-subtle dark:text-body-muted ml-auto">
+        <Text as="span" variant="label-sm" className="text-fg-subtle ml-auto">
           {formatNoteDate(note.date)}
         </Text>
       </div>

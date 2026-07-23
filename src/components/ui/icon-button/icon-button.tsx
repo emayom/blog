@@ -21,8 +21,8 @@ const iconButtonCva = cva(
       },
       variant: {
         // ink→fg 값-동일 재작성 (fg #1d1d1f = ink, fg-subtle #7a7a7a = ink-muted-48, fg-muted #333333 = ink-muted-80)
-        ghost: 'text-fg dark:text-body-on-dark',
-        outline: 'border border-hairline bg-canvas text-fg-subtle dark:border-fg-muted dark:bg-surface-tile-1 dark:text-body-muted',
+        ghost: 'text-fg',
+        outline: 'border border-hairline bg-canvas text-fg-subtle dark:bg-surface-tile-1',
       },
     },
     defaultVariants: { size: 'md', shape: 'circle', variant: 'ghost' },

@@ -51,7 +51,7 @@ export function ShareButton({ url, title, className }: ShareButtonProps) {
       onClick={handleShare}
       label={copied ? '링크 복사됨' : '글 공유'}
       className={cn(
-        copied && 'text-primary dark:text-primary-on-dark',
+        copied && 'text-primary',
         className,
       )}
     >

@@ -15,7 +15,7 @@ export function ArchiveSidebar({ years }: ArchiveSidebarProps) {
         <Heading size="sm">아카이브</Heading>
         <Link
           href="/archive"
-          className="text-label-md text-primary hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-focus dark:text-primary-on-dark"
+          className="text-label-md text-primary hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-focus"
         >
           전체 →
         </Link>
@@ -28,7 +28,7 @@ export function ArchiveSidebar({ years }: ArchiveSidebarProps) {
           >
             <Link
               href={`/archive/${year}`}
-              className="min-w-9 shrink-0 text-label-md text-fg hover:text-primary dark:text-body-on-dark dark:hover:text-primary-on-dark"
+              className="min-w-9 shrink-0 text-label-md text-fg hover:text-primary"
             >
               {year}
             </Link>

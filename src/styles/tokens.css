@@ -34,12 +34,14 @@
   --color-surface-tile-3: #252527;
   --color-surface-black: #000000;
   --color-surface-chip-translucent: #d2d2d7;
-  --color-body-on-dark: #ffffff;
-  --color-body-muted: #cccccc;
+  --color-body-on-dark: #f5f5f7;
+  --color-body-muted: #a1a1a6;
+  --color-body-subtle: #8e8e93;
   --color-on-primary: #ffffff;
   --color-on-dark: #ffffff;
   --color-divider-soft: #f0f0f0;
   --color-hairline: #e0e0e0;
+  --color-hairline-on-dark: #333333;
   --color-callout-info: var(--color-primary);
   --color-callout-warning: var(--color-fg);
   --color-callout-tip: var(--color-fg-subtle);
@@ -90,6 +92,12 @@
 }
 
 .dark {
+  --color-primary: var(--color-primary-on-dark);
+  --color-fg: var(--color-body-on-dark);
+  --color-fg-muted: var(--color-body-muted);
+  --color-fg-subtle: var(--color-body-subtle);
+  --color-divider-soft: var(--color-hairline-on-dark);
+  --color-hairline: var(--color-hairline-on-dark);
   --color-callout-info: var(--color-primary-on-dark);
   --color-callout-warning: var(--color-body-on-dark);
 }

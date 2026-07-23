@@ -33,7 +33,7 @@ export function CopyButton({ code, className }: CopyButtonProps) {
       label={copied ? '복사됨' : '코드 복사'}
       className={cn(
         'absolute top-[12px] right-[12px]',
-        copied && 'text-primary dark:text-primary-on-dark',
+        copied && 'text-primary',
         className,
       )}
     >

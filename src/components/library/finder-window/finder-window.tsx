@@ -54,12 +54,12 @@ export function FinderWindow({
   return (
     <div
       className={cn(
-        'flex min-h-0 flex-col overflow-hidden rounded-lg border border-hairline bg-canvas shadow-xl dark:border-fg-muted dark:bg-surface-tile-2',
+        'flex min-h-0 flex-col overflow-hidden rounded-lg border border-hairline bg-canvas shadow-xl dark:bg-surface-tile-2',
         className,
       )}
     >
       <div className="flex min-h-0 flex-1 flex-col md:flex-row md:items-stretch">
-        <div className="flex flex-row border-b border-hairline bg-canvas-parchment md:w-36 md:shrink-0 md:flex-col md:justify-between md:border-b-0 md:border-r dark:border-fg-muted dark:bg-surface-tile-2">
+        <div className="flex flex-row border-b border-hairline bg-canvas-parchment md:w-36 md:shrink-0 md:flex-col md:justify-between md:border-b-0 md:border-r dark:bg-surface-tile-2">
           <div className="hidden h-9 shrink-0 items-center gap-1.5 p-4 md:flex">
             <span aria-hidden="true" className="size-2.5 rounded-full bg-[#ff5f57]" />
             <span aria-hidden="true" className="size-2.5 rounded-full bg-[#febc2e]" />
@@ -70,7 +70,7 @@ export function FinderWindow({
 
         <div className="flex min-h-0 min-w-0 flex-1 flex-col">
           {showHeader && (
-            <div className="hidden h-10 shrink-0 items-center gap-2 pl-4 pr-2 text-label-md font-semibold text-fg-subtle md:flex dark:text-body-muted">
+            <div className="hidden h-10 shrink-0 items-center gap-2 pl-4 pr-2 text-label-md font-semibold text-fg-subtle md:flex">
               {title && <span className="ml-1">{title}</span>}
               {onSearch && (
                 <div
@@ -97,7 +97,7 @@ export function FinderWindow({
                 >
                   <SearchIcon
                     size={14}
-                    className="shrink-0 text-fg-subtle dark:text-body-muted"
+                    className="shrink-0 text-fg-subtle"
                   />
                   <input
                     ref={inputRef}
@@ -109,7 +109,7 @@ export function FinderWindow({
                     placeholder={searchPlaceholder}
                     aria-label="검색"
                     className={cn(
-                      'min-w-0 border-0 bg-transparent text-label-sm text-fg outline-none placeholder:text-fg-subtle dark:text-body-on-dark dark:placeholder:text-body-muted',
+                      'min-w-0 border-0 bg-transparent text-label-sm text-fg outline-none placeholder:text-fg-subtle dark:placeholder:text-body-muted',
                       expanded ? 'flex-1 opacity-100' : 'pointer-events-none w-0 opacity-0',
                     )}
                     tabIndex={expanded ? 0 : -1}

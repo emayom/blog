@@ -14,7 +14,7 @@ export function BackLink({ href, children, className }: BackLinkProps) {
     <Link
       href={href}
       className={cn(
-        'inline-flex items-center gap-1 text-label-md text-primary dark:text-primary-on-dark',
+        'inline-flex items-center gap-1 text-label-md text-primary',
         className,
       )}
     >

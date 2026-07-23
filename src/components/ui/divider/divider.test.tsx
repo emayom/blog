@@ -15,7 +15,6 @@ describe('Divider', () => {
 
     expect(cls).toContain('border-t')
     expect(cls).toContain('border-hairline')
-    expect(cls).toContain('dark:border-fg-muted')
   })
 
   it('className으로 여백을 지정할 수 있다', () => {

@@ -19,7 +19,7 @@ export const mdxComponents: MDXComponents = {
     const isExternal = typeof props.href === 'string' && props.href.startsWith('http')
     return (
       <a
-        className="text-primary underline underline-offset-2 decoration-1 hover:decoration-2 dark:text-primary-on-dark"
+        className="text-primary underline underline-offset-2 decoration-1 hover:decoration-2"
         target={isExternal ? '_blank' : undefined}
         rel={isExternal ? 'noopener noreferrer' : undefined}
         {...props}
@@ -52,19 +52,19 @@ export const mdxComponents: MDXComponents = {
   ),
   h4: (props: ComponentPropsWithoutRef<'h4'>) => (
     <h4
-      className="group relative text-fg dark:text-body-on-dark text-title-md mt-lg mb-xs scroll-mt-[80px]"
+      className="group relative text-fg text-title-md mt-lg mb-xs scroll-mt-[80px]"
       {...props}
     />
   ),
   h5: (props: ComponentPropsWithoutRef<'h5'>) => (
     <h5
-      className="group relative text-fg dark:text-body-on-dark text-title-sm mt-5 mb-xs scroll-mt-[80px]"
+      className="group relative text-fg text-title-sm mt-5 mb-xs scroll-mt-[80px]"
       {...props}
     />
   ),
   h6: (props: ComponentPropsWithoutRef<'h6'>) => (
     <h6
-      className="group relative text-fg-muted dark:text-body-muted text-title-sm mt-4 mb-xs scroll-mt-[80px]"
+      className="group relative text-fg-muted text-title-sm mt-4 mb-xs scroll-mt-[80px]"
       {...props}
     />
   ),
@@ -73,7 +73,7 @@ export const mdxComponents: MDXComponents = {
     if ('data-language' in props) return <code className={className} {...props} />
     return (
       <code
-        className="rounded-xs border border-hairline bg-canvas-parchment px-0.5 py-0.5 font-mono dark:border-fg-muted dark:bg-surface-tile-2"
+        className="rounded-xs border border-hairline bg-canvas-parchment px-0.5 py-0.5 font-mono dark:bg-surface-tile-2"
         {...props}
       />
     )
@@ -87,7 +87,7 @@ export const mdxComponents: MDXComponents = {
     }
     return (
       <p
-        className="text-fg dark:text-body-on-dark text-prose-md sm:text-prose-lg my-md"
+        className="text-fg text-prose-md sm:text-prose-lg my-md"
         {...props}
       >
         {children}
@@ -96,13 +96,13 @@ export const mdxComponents: MDXComponents = {
   },
   blockquote: (props: ComponentPropsWithoutRef<'blockquote'>) => (
     <blockquote
-      className="border-l-2 border-primary dark:border-primary-on-dark bg-canvas-parchment dark:bg-surface-tile-2 pl-lg pr-md py-sm my-lg text-fg-muted dark:text-body-muted [&>p]:my-0"
+      className="border-l-2 border-primary dark:border-primary-on-dark bg-canvas-parchment dark:bg-surface-tile-2 pl-lg pr-md py-sm my-lg text-fg-muted [&>p]:my-0"
       {...props}
     />
   ),
   hr: (props: ComponentPropsWithoutRef<'hr'>) => (
     <hr
-      className="border-0 border-t border-hairline dark:border-fg-muted my-xxl"
+      className="border-0 border-t border-hairline my-xxl"
       {...props}
     />
   ),
@@ -120,7 +120,7 @@ export const mdxComponents: MDXComponents = {
   ),
   li: (props: ComponentPropsWithoutRef<'li'>) => (
     <li
-      className="text-fg dark:text-body-on-dark text-prose-md sm:text-prose-lg my-xs"
+      className="text-fg text-prose-md sm:text-prose-lg my-xs"
       {...props}
     />
   ),
@@ -143,19 +143,19 @@ export const mdxComponents: MDXComponents = {
   tbody: (props: ComponentPropsWithoutRef<'tbody'>) => <tbody {...props} />,
   tr: (props: ComponentPropsWithoutRef<'tr'>) => (
     <tr
-      className="border-b border-hairline dark:border-fg-muted last:border-0"
+      className="border-b border-hairline last:border-0"
       {...props}
     />
   ),
   th: (props: ComponentPropsWithoutRef<'th'>) => (
     <th
-      className="px-sm py-2.5 text-left font-semibold text-fg dark:text-body-on-dark"
+      className="px-sm py-2.5 text-left font-semibold text-fg"
       {...props}
     />
   ),
   td: (props: ComponentPropsWithoutRef<'td'>) => (
     <td
-      className="px-sm py-2.5 text-fg dark:text-body-on-dark"
+      className="px-sm py-2.5 text-fg"
       {...props}
     />
   ),

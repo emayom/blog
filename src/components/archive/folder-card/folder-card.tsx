@@ -36,10 +36,10 @@ export function FolderCard({ year, count }: FolderCardProps) {
       </span>
 
       <span className="text-center">
-        <span className="block text-label-sm font-semibold text-fg dark:text-body-on-dark">
+        <span className="block text-label-sm font-semibold text-fg">
           {year}
         </span>
-        <span className="mt-0.5 block text-label-sm text-fg-subtle dark:text-body-muted">
+        <span className="mt-0.5 block text-label-sm text-fg-subtle">
           {count}
           편
         </span>

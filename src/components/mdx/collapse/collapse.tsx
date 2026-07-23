@@ -10,9 +10,9 @@ export function Collapse({ title, open = false, children }: CollapseProps) {
   return (
     <details
       open={open}
-      className="my-lg rounded-md border border-hairline dark:border-fg-muted"
+      className="my-lg rounded-md border border-hairline"
     >
-      <summary className="flex cursor-pointer select-none list-none items-center justify-between px-4 py-3 text-title-sm text-fg dark:text-body-on-dark [&::-webkit-details-marker]:hidden">
+      <summary className="flex cursor-pointer select-none list-none items-center justify-between px-4 py-3 text-title-sm text-fg [&::-webkit-details-marker]:hidden">
         {title}
         <svg
           className="details-chevron size-4 shrink-0 text-fg-subtle"
@@ -28,7 +28,7 @@ export function Collapse({ title, open = false, children }: CollapseProps) {
           <path d="m9 18 6-6-6-6" />
         </svg>
       </summary>
-      <div className="border-t border-hairline px-4 pb-4 pt-3 text-body-md text-fg-muted dark:border-fg-muted dark:text-body-muted">
+      <div className="border-t border-hairline px-4 pb-4 pt-3 text-body-md text-fg-muted">
         {children}
       </div>
     </details>

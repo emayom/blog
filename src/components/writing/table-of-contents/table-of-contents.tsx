@@ -9,9 +9,9 @@ import type { TocItem } from '@/types/post'
 const linkVariants = cva('block text-label-md transition-colors', {
   variants: {
     active: {
-      true: 'font-semibold text-primary dark:text-primary-on-dark',
+      true: 'font-semibold text-primary',
       false:
-        'text-fg-subtle hover:text-fg dark:text-body-muted dark:hover:text-body-on-dark',
+        'text-fg-subtle hover:text-fg',
     },
   },
   defaultVariants: { active: false },
@@ -51,7 +51,7 @@ export function TableOfContents({ items }: TableOfContentsProps) {
 
   return (
     <nav aria-label="목차" className="space-y-2.5">
-      <Text variant="label-md" weight="semibold" className="text-fg dark:text-body-on-dark">
+      <Text variant="label-md" weight="semibold" className="text-fg">
         목차
       </Text>
       <ul className="space-y-2.5">

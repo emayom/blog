@@ -23,17 +23,17 @@ export function Callout({ type = 'info', title, children }: CalloutProps) {
 
   return (
     <div
-      className="my-lg flex gap-3 rounded-xl border border-hairline bg-canvas px-4 py-4 dark:border-fg-muted dark:bg-surface-tile-2"
+      className="my-lg flex gap-3 rounded-xl border border-hairline bg-canvas px-4 py-4 dark:bg-surface-tile-2"
       role="note"
     >
       <span className={cn('mt-0.5 shrink-0', iconColors[type])}>
         <Icon />
       </span>
       <div>
-        <strong className="mb-1 block text-label-md font-medium text-fg dark:text-body-on-dark">
+        <strong className="mb-1 block text-label-md font-medium text-fg">
           {title ?? defaultTitles[type]}
         </strong>
-        <div className="text-body-md text-fg-muted dark:text-body-muted">
+        <div className="text-body-md text-fg-muted">
           {children}
         </div>
       </div>
