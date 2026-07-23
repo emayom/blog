@@ -25,103 +25,64 @@ colors:
   on-primary: "#ffffff"
   on-dark: "#ffffff"
 
+# 스케일은 실사용에서 도출한다 (역할-크기 명명). fontFamily는 next/font 런타임 변수라
+# 토큰에 넣지 않는다 — globals.css @theme inline 소관.
 typography:
-  hero-display:
-    fontFamily: "SF Pro Display, system-ui, -apple-system, sans-serif"
-    fontSize: 56px
-    fontWeight: 600
-    lineHeight: 1.07
-    letterSpacing: -0.28px
   display-lg:
-    fontFamily: "SF Pro Display, system-ui, -apple-system, sans-serif"
     fontSize: 40px
     fontWeight: 600
     lineHeight: 1.1
-    letterSpacing: 0
+    letterSpacing: 0em
   display-md:
-    fontFamily: "SF Pro Text, system-ui, -apple-system, sans-serif"
     fontSize: 34px
     fontWeight: 600
-    lineHeight: 1.47
-    letterSpacing: -0.374px
-  lead:
-    fontFamily: "SF Pro Display, system-ui, -apple-system, sans-serif"
-    fontSize: 28px
-    fontWeight: 400
-    lineHeight: 1.14
-    letterSpacing: 0.196px
-  lead-airy:
-    fontFamily: "SF Pro Text, system-ui, -apple-system, sans-serif"
-    fontSize: 24px
-    fontWeight: 300
-    lineHeight: 1.5
-    letterSpacing: 0
-  tagline:
-    fontFamily: "SF Pro Display, system-ui, -apple-system, sans-serif"
-    fontSize: 21px
+    lineHeight: 1.15
+    letterSpacing: -0.011em
+  title-lg:
+    fontSize: 20px
     fontWeight: 600
-    lineHeight: 1.19
-    letterSpacing: 0.231px
-  body-strong:
-    fontFamily: "SF Pro Text, system-ui, -apple-system, sans-serif"
+    lineHeight: 1.2
+    letterSpacing: -0.011em
+  title-md:
     fontSize: 17px
+    fontWeight: 600
+    lineHeight: 1.3
+    letterSpacing: -0.022em
+  title-sm:
+    fontSize: 14px
     fontWeight: 600
     lineHeight: 1.24
-    letterSpacing: -0.374px
-  body:
-    fontFamily: "SF Pro Text, system-ui, -apple-system, sans-serif"
+    letterSpacing: -0.027em
+  body-lg:
     fontSize: 17px
     fontWeight: 400
     lineHeight: 1.47
-    letterSpacing: -0.374px
-  dense-link:
-    fontFamily: "SF Pro Text, system-ui, -apple-system, sans-serif"
-    fontSize: 17px
+    letterSpacing: -0.022em
+  body-md:
+    fontSize: 14px
     fontWeight: 400
-    lineHeight: 2.41
-    letterSpacing: 0
-  caption:
-    fontFamily: "SF Pro Text, system-ui, -apple-system, sans-serif"
+    lineHeight: 1.47
+    letterSpacing: -0.027em
+  label-md:
     fontSize: 14px
     fontWeight: 400
     lineHeight: 1.43
-    letterSpacing: -0.224px
-  caption-strong:
-    fontFamily: "SF Pro Text, system-ui, -apple-system, sans-serif"
-    fontSize: 14px
-    fontWeight: 600
-    lineHeight: 1.29
-    letterSpacing: -0.224px
-  button-large:
-    fontFamily: "SF Pro Text, system-ui, -apple-system, sans-serif"
-    fontSize: 18px
-    fontWeight: 300
-    lineHeight: 1.0
-    letterSpacing: 0
-  button-utility:
-    fontFamily: "SF Pro Text, system-ui, -apple-system, sans-serif"
-    fontSize: 14px
-    fontWeight: 400
-    lineHeight: 1.29
-    letterSpacing: -0.224px
-  fine-print:
-    fontFamily: "SF Pro Text, system-ui, -apple-system, sans-serif"
+    letterSpacing: -0.016em
+  label-sm:
     fontSize: 12px
     fontWeight: 400
-    lineHeight: 1.0
-    letterSpacing: -0.12px
-  micro-legal:
-    fontFamily: "SF Pro Text, system-ui, -apple-system, sans-serif"
-    fontSize: 10px
+    lineHeight: 1.4
+    letterSpacing: -0.01em
+  prose-lg:
+    fontSize: 17px
     fontWeight: 400
-    lineHeight: 1.3
-    letterSpacing: -0.08px
-  nav-link:
-    fontFamily: "SF Pro Text, system-ui, -apple-system, sans-serif"
-    fontSize: 12px
+    lineHeight: 1.7
+    letterSpacing: -0.022em
+  prose-md:
+    fontSize: 14px
     fontWeight: 400
-    lineHeight: 1.0
-    letterSpacing: -0.12px
+    lineHeight: 1.7
+    letterSpacing: -0.027em
 
 rounded:
   none: 0px
@@ -146,7 +107,7 @@ components:
   button-primary:
     backgroundColor: "{colors.primary}"
     textColor: "{colors.on-primary}"
-    typography: "{typography.body}"
+    typography: "{typography.body-lg}"
     rounded: "{rounded.pill}"
     padding: 11px 22px
   button-primary-focus:
@@ -160,25 +121,25 @@ components:
   button-secondary-pill:
     backgroundColor: "{colors.canvas}"
     textColor: "{colors.primary}"
-    typography: "{typography.body}"
+    typography: "{typography.body-lg}"
     rounded: "{rounded.pill}"
     padding: 11px 22px
   button-dark-utility:
     backgroundColor: "{colors.fg}"
     textColor: "{colors.on-dark}"
-    typography: "{typography.button-utility}"
+    typography: "{typography.label-md}"
     rounded: "{rounded.sm}"
     padding: 8px 15px
   button-pearl-capsule:
     backgroundColor: "{colors.surface-pearl}"
     textColor: "{colors.fg-muted}"
-    typography: "{typography.caption}"
+    typography: "{typography.label-md}"
     rounded: "{rounded.md}"
     padding: 8px 14px
   button-store-hero:
     backgroundColor: "{colors.primary}"
     textColor: "{colors.on-primary}"
-    typography: "{typography.button-large}"
+    typography: "{typography.title-md}"
     rounded: "{rounded.pill}"
     padding: 14px 28px
   button-icon-circular:
@@ -189,20 +150,20 @@ components:
   text-link:
     backgroundColor: transparent
     textColor: "{colors.primary}"
-    typography: "{typography.body}"
+    typography: "{typography.body-lg}"
   text-link-on-dark:
     backgroundColor: transparent
     textColor: "{colors.primary-on-dark}"
-    typography: "{typography.body}"
+    typography: "{typography.body-lg}"
   global-nav:
     backgroundColor: "{colors.surface-black}"
     textColor: "{colors.on-dark}"
-    typography: "{typography.nav-link}"
+    typography: "{typography.label-sm}"
     height: 44px
   sub-nav-frosted:
     backgroundColor: "{colors.canvas-parchment}"
     textColor: "{colors.fg}"
-    typography: "{typography.tagline}"
+    typography: "{typography.title-lg}"
     height: 52px
   product-tile-light:
     backgroundColor: "{colors.canvas}"
@@ -233,13 +194,13 @@ components:
   store-utility-card:
     backgroundColor: "{colors.canvas}"
     textColor: "{colors.fg}"
-    typography: "{typography.body-strong}"
+    typography: "{typography.title-md}"
     rounded: "{rounded.lg}"
     padding: 24px
   configurator-option-chip:
     backgroundColor: "{colors.canvas}"
     textColor: "{colors.fg}"
-    typography: "{typography.caption}"
+    typography: "{typography.label-md}"
     rounded: "{rounded.pill}"
     padding: 12px 16px
   configurator-option-chip-selected:
@@ -249,14 +210,14 @@ components:
   search-input:
     backgroundColor: "{colors.canvas}"
     textColor: "{colors.fg}"
-    typography: "{typography.body}"
+    typography: "{typography.body-lg}"
     rounded: "{rounded.pill}"
     padding: 12px 20px
     height: 44px
   floating-sticky-bar:
     backgroundColor: "{colors.canvas-parchment}"
     textColor: "{colors.fg}"
-    typography: "{typography.body}"
+    typography: "{typography.body-lg}"
     height: 64px
     padding: 12px 32px
   environment-quote-card:
@@ -268,7 +229,7 @@ components:
   footer:
     backgroundColor: "{colors.canvas-parchment}"
     textColor: "{colors.fg-muted}"
-    typography: "{typography.fine-print}"
+    typography: "{typography.label-sm}"
     padding: 64px
 ---
 
@@ -334,33 +295,29 @@ Store and shop surfaces retain the same chassis but switch modes. The product co
 
 ### Hierarchy
 
+역할(display · title · body · label · prose) × 크기(lg · md · sm)로 나눈다. `title`은 굵은 위계 텍스트(제목·강조), `body`는 UI 문단, `label`은 캡션·메타·버튼 라벨, `prose`는 글 본문(넉넉한 행간)이다.
+
 | Token | Size | Weight | Line Height | Letter Spacing | Use |
 |---|---|---|---|---|---|
-| `{typography.hero-display}` | 56px | 600 | 1.07 | -0.28px | Hero headline; the signature "Apple tight" tracking |
-| `{typography.display-lg}` | 40px | 600 | 1.10 | 0 | Tile headlines atop every product tile |
-| `{typography.display-md}` | 34px | 600 | 1.47 | -0.374px | Section heads (SF Pro Text at display proportions) |
-| `{typography.lead}` | 28px | 400 | 1.14 | 0.196px | Product tile subcopy |
-| `{typography.lead-airy}` | 24px | 300 | 1.5 | 0 | Environment-page lead paragraphs (the rare weight 300) |
-| `{typography.tagline}` | 21px | 600 | 1.19 | 0.231px | Sub-tile tagline; sub-nav category name |
-| `{typography.body-strong}` | 17px | 600 | 1.24 | -0.374px | Inline strong emphasis |
-| `{typography.body}` | 17px | 400 | 1.47 | -0.374px | Default paragraph |
-| `{typography.dense-link}` | 17px | 400 | 2.41 | 0 | Footer / store utility link lists (relaxed leading) |
-| `{typography.caption}` | 14px | 400 | 1.43 | -0.224px | Secondary captions, button text |
-| `{typography.caption-strong}` | 14px | 600 | 1.29 | -0.224px | Emphasized captions |
-| `{typography.button-large}` | 18px | 300 | 1.0 | 0 | Store hero CTAs (the rare weight 300) |
-| `{typography.button-utility}` | 14px | 400 | 1.29 | -0.224px | Utility/nav button labels |
-| `{typography.fine-print}` | 12px | 400 | 1.0 | -0.12px | Fine-print, footer body |
-| `{typography.micro-legal}` | 10px | 400 | 1.3 | -0.08px | Micro legal disclaimers |
-| `{typography.nav-link}` | 12px | 400 | 1.0 | -0.12px | Global nav menu items |
+| `{typography.display-lg}` | 40px | 600 | 1.10 | 0 | 페이지 최상단 헤드라인 |
+| `{typography.display-md}` | 34px | 600 | 1.15 | -0.011em | 섹션 헤드 · about h1 |
+| `{typography.title-lg}` | 20px | 600 | 1.20 | -0.011em | 소제목 · 아카이브 카운트 |
+| `{typography.title-md}` | 17px | 600 | 1.30 | -0.022em | 카드 제목 · 인라인 강조 |
+| `{typography.title-sm}` | 14px | 600 | 1.24 | -0.027em | 컬럼 제목 · MDX h4 |
+| `{typography.body-lg}` | 17px | 400 | 1.47 | -0.022em | 기본 문단 · 설명문 |
+| `{typography.body-md}` | 14px | 400 | 1.47 | -0.027em | 보조 문단 |
+| `{typography.label-md}` | 14px | 400 | 1.43 | -0.016em | UI 텍스트 · 캡션 · 메타 |
+| `{typography.label-sm}` | 12px | 400 | 1.40 | -0.01em | 마이크로 라벨 · 하단 바 |
+| `{typography.prose-lg}` | 17px | 400 | 1.70 | -0.022em | 글 본문 (데스크톱) |
+| `{typography.prose-md}` | 14px | 400 | 1.70 | -0.027em | 글 본문 (모바일) |
 
 ### Principles
 
-- **Negative letter-spacing at display sizes.** Every headline at 17px and up carries a slight tracking tighten (`-0.12 → -0.374px`). This produces the iconic "Apple tight" headline cadence. Never used at 12px or below.
-- **Body copy at 17px, not 16px.** Apple breaks the SaaS convention and runs paragraph text at 17px. The extra pixel gives the page an unmistakable "reading, not scanning" pace.
-- **Weight 300 is real and rare.** Used deliberately on a handful of large-size reads (`{typography.button-large}` at 18px/300 and `{typography.lead-airy}` at 24px/300). It's not an accident — it's a light-atmosphere cue reserved for moments where the content should feel airy.
-- **Weight 600, not 700, for headlines.** Apple's headlines sit at weight 600. Weight 700 is used sparingly for `{typography.tagline}` (21px) when a touch more assertion is needed.
-- **Line-height is context-specific.** Display sizes use 1.07–1.19 (tight). Body uses 1.47. Utility link stacks in the footer/store use an unusually relaxed 2.41 (`{typography.dense-link}`). The 2.41 is not a bug — it's how the footer's dense link columns breathe.
-- **Weight 500 is deliberately absent.** The ladder is 300 / 400 / 600 / 700. Mid-weight readings always use 600.
+- **Letter-spacing는 em으로 정의한다.** 절대 px는 특정 크기 기준이라 반응형으로 크기가 바뀌면 자간이 어긋난다. em은 크기에 비례해 따라온다 (17px × -0.022em = -0.374px). 큰 크기일수록 더 조인다(`-0.011 → -0.027em`).
+- **UI 텍스트는 14px, 글 본문은 17px.** 두 계층은 의도적으로 다른 크기다. 카드·메타·네비 같은 UI는 `label`/`body-md`(14px), 문단·설명은 `body-lg`(17px), 글 본문은 `prose`(17px, 넉넉한 1.7 행간)를 쓴다.
+- **글 본문은 행간 1.7.** UI 문단(1.47)보다 넉넉하다 — 긴 글을 읽는 호흡. 이 축이 `prose`를 `body`와 가르는 이유다.
+- **Weight 600, not 700, for headlines.** 제목은 weight 600(`title`·`display`). strong 강조는 굵기만 올리는 게 아니라 행간이 조여진 별도 토큰(`title-*`)으로 스냅한다.
+- **Weight 500은 쓰지 않는다.** 사다리는 300 / 400 / 600 / 700. 중간 굵기는 항상 600.
 
 ### Note on Font Substitutes
 SF Pro is Apple's proprietary system font. When building off-system:
@@ -378,7 +335,7 @@ SF Pro is Apple's proprietary system font. When building off-system:
 - **Section vertical padding:** `{spacing.section}` (80px) inside a product tile; tiles stack edge-to-edge with 0 gap (the color change provides the break).
 - **Card padding:** `{spacing.lg}` (24px) inside utility grid cards.
 - **Button padding:** 8–11px vertical, 15–22px horizontal.
-- **Universal rhythm constants:** the 17px body line-height multiplier (~25px line) and 21px tagline size show up on every analyzed page.
+- **Universal rhythm constants:** the 17px body line-height multiplier (~25px line) and 14px UI-text size show up across the app.
 
 ### Grid & Container
 - **Max content width:** ~980px on text-heavy sections (environment), ~1440px on product grids (store, accessories), full-bleed for product tiles (homepage).
@@ -429,23 +386,23 @@ Apple's whitespace is the product's pedestal. Every tile begins with at least 64
 
 ### Top Navigation
 
-**`global-nav`** — Persistent, ultra-thin black nav bar pinned to the top of every page. Background `{colors.surface-black}`, height 44px, text `{colors.on-dark}` in `{typography.nav-link}` (12px / 400 / -0.12px tracking). Links are quiet, spaced ~20px apart, running edge-to-edge across the top. Right-aligned cluster: Search, Bag icons — always visible. On mobile, collapses to hamburger at ~834px and the Apple logo centers.
+**`global-nav`** — Persistent, ultra-thin black nav bar pinned to the top of every page. Background `{colors.surface-black}`, height 44px, text `{colors.on-dark}` in `{typography.label-sm}` (12px / 400 / -0.12px tracking). Links are quiet, spaced ~20px apart, running edge-to-edge across the top. Right-aligned cluster: Search, Bag icons — always visible. On mobile, collapses to hamburger at ~834px and the Apple logo centers.
 
-**`sub-nav-frosted`** — Surface-specific nav that sticks below the global nav. Background `{colors.canvas-parchment}` at 80% opacity with backdrop-filter blur, creating a frosted-glass effect. Height 52px. Content on left: product category name ("iPhone", "Store", "Accessories") in `{typography.tagline}` (21px / 600). Content right: inline nav links in `{typography.button-utility}` (14px), ending in a persistent `{component.button-primary}` ("Buy") or a utility link.
+**`sub-nav-frosted`** — Surface-specific nav that sticks below the global nav. Background `{colors.canvas-parchment}` at 80% opacity with backdrop-filter blur, creating a frosted-glass effect. Height 52px. Content on left: product category name ("iPhone", "Store", "Accessories") in `{typography.title-lg}` (21px / 600). Content right: inline nav links in `{typography.label-md}` (14px), ending in a persistent `{component.button-primary}` ("Buy") or a utility link.
 
 ### Buttons
 
-**`button-primary`** — The signature Apple action. Background `{colors.primary}` (Action Blue #0066cc), text `{colors.on-primary}` in `{typography.body}` (SF Pro Text 17px / 400), rounded `{rounded.pill}` (full pill — capsule-shaped), padding 11px × 22px. The full-pill radius IS the brand action signal.
+**`button-primary`** — The signature Apple action. Background `{colors.primary}` (Action Blue #0066cc), text `{colors.on-primary}` in `{typography.body-lg}` (SF Pro Text 17px / 400), rounded `{rounded.pill}` (full pill — capsule-shaped), padding 11px × 22px. The full-pill radius IS the brand action signal.
 - Active state: `{component.button-primary-active}` — `transform: scale(0.95)` (the system-wide micro-interaction).
 - Focus state: `{component.button-primary-focus}` — 2px solid `{colors.primary-focus}` outline.
 
 **`button-secondary-pill`** — Used as the second CTA when two blue pills appear together ("Learn more" / "Buy"). Background transparent, text `{colors.primary}`, 1px solid `{colors.primary}` border, rounded `{rounded.pill}`, padding 11px × 22px. Reads as a "ghost pill."
 
-**`button-dark-utility`** — Global nav actions (Sign In, Bag, language selector). Background `{colors.fg}` (#1d1d1f), text `{colors.on-dark}` in `{typography.button-utility}` (14px / 400 / -0.224px tracking), rounded `{rounded.sm}` (8px), padding 8px × 15px. Active state shrinks via `transform: scale(0.95)`.
+**`button-dark-utility`** — Global nav actions (Sign In, Bag, language selector). Background `{colors.fg}` (#1d1d1f), text `{colors.on-dark}` in `{typography.label-md}` (14px / 400 / -0.224px tracking), rounded `{rounded.sm}` (8px), padding 8px × 15px. Active state shrinks via `transform: scale(0.95)`.
 
-**`button-pearl-capsule`** — Product-card secondary button. Background `{colors.surface-pearl}` (#fafafc), text `{colors.fg-muted}` in `{typography.caption}` (14px), 3px solid `{colors.divider-soft}` border (functions as a soft ring rather than a visible line), rounded `{rounded.md}` (11px), padding 8px × 14px.
+**`button-pearl-capsule`** — Product-card secondary button. Background `{colors.surface-pearl}` (#fafafc), text `{colors.fg-muted}` in `{typography.label-md}` (14px), 3px solid `{colors.divider-soft}` border (functions as a soft ring rather than a visible line), rounded `{rounded.md}` (11px), padding 8px × 14px.
 
-**`button-store-hero`** — A larger primary CTA used on store hero surfaces. Same Action Blue + Paper White as `{component.button-primary}`, but with `{typography.button-large}` (18px / 300 — note the rare weight 300) and slightly more padding (14px × 28px). Used sparingly on the store landing.
+**`button-store-hero`** — A larger primary CTA used on store hero surfaces. Same Action Blue + Paper White as `{component.button-primary}`, but with `{typography.title-md}` (18px / 300 — note the rare weight 300) and slightly more padding (14px × 28px). Used sparingly on the store landing.
 
 **`button-icon-circular`** — Floats over photography. 44 × 44px, background `{colors.surface-chip-translucent}` at ~64% alpha, icon in `{colors.fg}`, rounded `{rounded.full}`. Used for carousel controls, close buttons, and in-image controls (product image thumbnails on the iPhone buy page).
 
@@ -455,7 +412,7 @@ Apple's whitespace is the product's pedestal. Every tile begins with at least 64
 
 ### Cards & Containers
 
-**`product-tile-light`** — Full-bleed light tile. Background `{colors.canvas}` (white), text `{colors.fg}`, rounded `{rounded.none}` (0 — tiles touch edges), vertical padding `{spacing.section}` (80px). Centered stack: product name in `{typography.display-lg}` (40px / 600) → one-line tagline in `{typography.lead}` (28px / 400) → two `{component.button-primary}` CTAs ("Learn more" / "Buy") → product render resting on the surface with the system shadow.
+**`product-tile-light`** — Full-bleed light tile. Background `{colors.canvas}` (white), text `{colors.fg}`, rounded `{rounded.none}` (0 — tiles touch edges), vertical padding `{spacing.section}` (80px). Centered stack: product name in `{typography.display-lg}` (40px / 600) → one-line tagline in `{typography.title-lg}` (28px / 400) → two `{component.button-primary}` CTAs ("Learn more" / "Buy") → product render resting on the surface with the system shadow.
 
 **`product-tile-parchment`** — Same as `{component.product-tile-light}` but on `{colors.canvas-parchment}` (#f5f5f7). Used to break two consecutive white tiles.
 
@@ -465,32 +422,32 @@ Apple's whitespace is the product's pedestal. Every tile begins with at least 64
 
 **`product-tile-dark-3`** — Variant on `{colors.surface-tile-3}` (#252527). Used at the bottom of the stack and in embedded video/player frames.
 
-**`store-utility-card`** — Used in store grid and accessories grid. Background `{colors.canvas}` (white), 1px solid `{colors.hairline}` border, rounded `{rounded.lg}` (18px), padding `{spacing.lg}` (24px). Top: product image (1:1 crop with `{rounded.sm}` (8px) inner image radius). Below: product name in `{typography.body-strong}` (17px / 600), price in `{typography.body}` (17px / 400), and a `{component.text-link}` ("Buy" or "Learn more"). No shadow by default; product render itself carries the system product-shadow.
+**`store-utility-card`** — Used in store grid and accessories grid. Background `{colors.canvas}` (white), 1px solid `{colors.hairline}` border, rounded `{rounded.lg}` (18px), padding `{spacing.lg}` (24px). Top: product image (1:1 crop with `{rounded.sm}` (8px) inner image radius). Below: product name in `{typography.title-md}` (17px / 600), price in `{typography.body-lg}` (17px / 400), and a `{component.text-link}` ("Buy" or "Learn more"). No shadow by default; product render itself carries the system product-shadow.
 
-**`configurator-option-chip`** — Pill-shaped tappable cell used in the iPhone 17 Pro buy page. Background `{colors.canvas}`, text `{colors.fg}` in `{typography.caption}`, rounded `{rounded.pill}`, padding 12px × 16px. Contains a small product thumbnail + label + price delta. Arranged in a grid of 4–5 options per row.
+**`configurator-option-chip`** — Pill-shaped tappable cell used in the iPhone 17 Pro buy page. Background `{colors.canvas}`, text `{colors.fg}` in `{typography.label-md}`, rounded `{rounded.pill}`, padding 12px × 16px. Contains a small product thumbnail + label + price delta. Arranged in a grid of 4–5 options per row.
 
 **`configurator-option-chip-selected`** — Selected state. Border upgrades to 2px solid `{colors.primary-focus}`. Same shape, same content.
 
 **`environment-quote-card`** — A photographic-canvas hero specific to the environment page. Dark photographic backdrop (mountain vista at dawn) with `{colors.surface-tile-1}` as the fallback color, centered white-text headline in `{typography.display-lg}` (40px), small green "Apple 2030" pictographic logo above the headline, single `{component.button-primary}` below. Padding `{spacing.section}` (80px).
 
-**`floating-sticky-bar`** — Floats at the bottom of the viewport on the iPhone 17 Pro buy page during scroll. Background `{colors.canvas-parchment}` at 80% opacity with `backdrop-filter: blur(N)`, height 64px, padding 12px × 32px. Left: running price total in `{typography.body}`. Right: `{component.button-primary}` ("Add to Bag").
+**`floating-sticky-bar`** — Floats at the bottom of the viewport on the iPhone 17 Pro buy page during scroll. Background `{colors.canvas-parchment}` at 80% opacity with `backdrop-filter: blur(N)`, height 64px, padding 12px × 32px. Left: running price total in `{typography.body-lg}`. Right: `{component.button-primary}` ("Add to Bag").
 
 ### Inputs & Forms
 
-**`search-input`** — The accessories search input. Background `{colors.canvas}`, text `{colors.fg}` in `{typography.body}` (17px), 1px solid `rgba(0, 0, 0, 0.08)` border, rounded `{rounded.pill}` (full pill — search is also pill-shaped, matching the CTA grammar), padding 12px × 20px, height 44px. Leading icon: search glyph at 14px, muted tint.
+**`search-input`** — The accessories search input. Background `{colors.canvas}`, text `{colors.fg}` in `{typography.body-lg}` (17px), 1px solid `rgba(0, 0, 0, 0.08)` border, rounded `{rounded.pill}` (full pill — search is also pill-shaped, matching the CTA grammar), padding 12px × 20px, height 44px. Leading icon: search glyph at 14px, muted tint.
 
 Error and validation states were not surfaced in the analyzed pages.
 
 ### Footer
 
-**`footer`** — Background `{colors.canvas-parchment}` (#f5f5f7), text `{colors.fg-muted}`. Link columns in `{typography.dense-link}` (17px / 400 / 2.41 line-height — the relaxed leading is what makes the dense columns scannable). Column headings in `{typography.caption-strong}` (14px / 600). Legal row at the very bottom in `{typography.fine-print}` (12px / 400) with `{colors.fg-subtle}` text. Vertical padding 64px.
+**`footer`** — Background `{colors.canvas-parchment}` (#f5f5f7), text `{colors.fg-muted}`. Link columns in `{typography.label-md}` (17px / 400 / 2.41 line-height — the relaxed leading is what makes the dense columns scannable). Column headings in `{typography.title-sm}` (14px / 600). Legal row at the very bottom in `{typography.label-sm}` (12px / 400) with `{colors.fg-subtle}` text. Vertical padding 64px.
 
 ## Do's and Don'ts
 
 ### Do
 - Use `{colors.primary}` (Action Blue #0066cc) for every interactive element — links, pill CTAs, focus signals — and nothing else. The single accent is non-negotiable.
-- Set headlines in `{typography.hero-display}` or `{typography.display-lg}` with negative letter-spacing (`-0.28 → -0.374px`) to get the signature "Apple tight" cadence.
-- Run body copy at `{typography.body}` (17px / 400 / 1.47 / -0.374px) — not 16px. The extra pixel defines the brand's reading pace.
+- Set headlines in `{typography.display-lg}` or `{typography.display-lg}` with negative letter-spacing (`-0.28 → -0.374px`) to get the signature "Apple tight" cadence.
+- Run body copy at `{typography.body-lg}` (17px / 400 / 1.47 / -0.374px) — not 16px. The extra pixel defines the brand's reading pace.
 - Alternate `{component.product-tile-light}` (or parchment) and `{component.product-tile-dark}` for full-bleed section rhythm. The color change IS the divider.
 - Reserve `{rounded.pill}` for the primary blue CTA and any other element that should read as an "action" (configurator chips, search input, sticky bar CTA).
 - Apply the single product-shadow (`rgba(0, 0, 0, 0.22) 3px 5px 30px`) only to product renders resting on a surface — never on cards, buttons, or text.
@@ -534,7 +491,7 @@ The structural breakpoints that matter for agents: 1440px (content lock), 1068px
 - **Sub-nav**: category name + inline links + primary CTA → category name + primary CTA only at mobile; inline links move into a hamburger tray.
 - **Product tiles**: stack from 2-column to 1-column at 834px; vertical padding tightens from 80px → 48px at small-phone.
 - **Utility grids** (store, accessories): 5-col → 4-col (1440px) → 3-col (1068px) → 2-col (834px) → 1-col (640px).
-- **Hero typography**: `{typography.hero-display}` (56px) → `{typography.display-lg}` (40px) at 1068px → 34px at 640px → 28px at 419px.
+- **Hero typography**: `{typography.display-lg}` (56px) → `{typography.display-lg}` (40px) at 1068px → 34px at 640px → 28px at 419px.
 
 ### Image Behavior
 - All product imagery uses responsive `srcset` with breakpoint-matched crops.
