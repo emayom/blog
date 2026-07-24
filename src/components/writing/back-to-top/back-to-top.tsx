@@ -32,7 +32,7 @@ export function BackToTop() {
       onClick={scrollToTop}
       label="맨 위로"
       className={cn(
-        'fixed bottom-8 right-8 transition-opacity hover:text-fg motion-reduce:transition-none dark:bg-surface-tile-2',
+        'fixed bottom-8 right-8 transition-opacity hover:text-fg motion-reduce:transition-none',
         visible ? 'opacity-100' : 'pointer-events-none opacity-0',
       )}
     >

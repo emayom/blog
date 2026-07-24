@@ -19,17 +19,15 @@
   to   { opacity: 1; transform: translateX(0); }
 }
 
+/* 배경·전경은 테마 인식 토큰이 처리한다 — 다크는 color-scheme만 전환 */
 body {
   color-scheme: light;
-  background-color: var(--color-canvas);
+  background-color: var(--color-surface-base);
   color: var(--color-fg);
 }
 
-/* DESIGN.md Known Gaps — dark counterpart 미정의. 기존 토큰 재활용 */
 .dark body {
   color-scheme: dark;
-  background-color: var(--color-surface-tile-1);
-  color: var(--color-body-on-dark);
 }
 
 /* ── MDX 코드 블록 (rehype-pretty-code, keepBackground:false) ── */

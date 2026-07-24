@@ -8,7 +8,7 @@ export function Navbar() {
   const items = mainNav.filter(item => item.enabled)
 
   return (
-    <header className="sticky top-0 z-40 border-b border-hairline bg-canvas/72 backdrop-blur-[20px] backdrop-saturate-[180%] dark:bg-surface-tile-1/72">
+    <header className="sticky top-0 z-40 border-b border-hairline bg-surface-base/72 backdrop-blur-[20px] backdrop-saturate-[180%]">
       <div className="mx-auto flex h-[44px] max-w-4xl items-center justify-between px-6">
         <Link
           href="/"

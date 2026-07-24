@@ -43,7 +43,7 @@ export function CodeGroup({ labels, children }: CodeGroupProps) {
             className={cn(
               'rounded px-2.5 py-0.5 text-label-md transition-colors',
               active === i
-                ? 'bg-fg text-canvas dark:bg-surface-tile-2 dark:text-body-on-dark'
+                ? 'bg-fg text-canvas'
                 : 'text-fg-subtle hover:text-fg',
             )}
           >

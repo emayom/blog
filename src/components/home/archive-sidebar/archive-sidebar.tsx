@@ -41,7 +41,7 @@ export function ArchiveSidebar({ years }: ArchiveSidebarProps) {
                 {Array.from({ length: count }).map((_, i) => (
                   <span
                     key={i}
-                    className="h-3 w-1 bg-primary/70 dark:bg-primary-on-dark/70"
+                    className="h-3 w-1 bg-primary/70"
                   />
                 ))}
               </span>
