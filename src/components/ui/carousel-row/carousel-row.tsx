@@ -5,7 +5,7 @@ import { cn } from '@/lib/cn'
 import { IconButton } from '@/components/ui/icon-button'
 
 const navBtn
-  = 'absolute top-1/2 z-10 -translate-y-1/2 text-fg shadow-sm transition-all duration-150 hover:shadow-md disabled:pointer-events-none disabled:opacity-0 dark:bg-surface-tile-2'
+  = 'absolute top-1/2 z-10 -translate-y-1/2 text-fg bg-canvas shadow-sm transition-all duration-150 hover:shadow-md disabled:pointer-events-none disabled:opacity-0'
 
 interface CarouselRowProps<T> {
   items: T[]

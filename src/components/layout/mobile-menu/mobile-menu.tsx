@@ -98,7 +98,7 @@ export function MobileMenu({ items }: MobileMenuProps) {
         <div className="fixed inset-x-0 bottom-0 top-11 z-30 md:hidden">
           <div
             onClick={requestClose}
-            className={`absolute inset-0 bg-canvas/50 backdrop-blur-[3px] transition-opacity duration-200 ease-out dark:bg-surface-tile-1/50 ${
+            className={`absolute inset-0 bg-surface-base/50 backdrop-blur-[3px] transition-opacity duration-200 ease-out ${
               shown ? 'opacity-100' : 'opacity-0'
             }`}
             aria-hidden="true"

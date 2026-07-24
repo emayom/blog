@@ -78,7 +78,7 @@ export function CoverCard({
             </>
           )
         : (
-            <div className="flex h-full w-full items-center justify-center bg-neutral-200 p-2 dark:bg-neutral-700">
+            <div className="flex h-full w-full items-center justify-center bg-canvas-parchment p-2 ">
               <span className="text-center text-label-sm font-medium leading-tight text-fg-subtle">
                 {item.title}
               </span>
