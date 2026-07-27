@@ -55,6 +55,7 @@ export const footerNav: NavGroup[] = [
     title: '둘러보기',
     items: [
       { label: '책장', href: '/library', enabled: true },
+      { label: 'Foundations', href: '/foundations', enabled: true },
     ],
   },
   {

@@ -13,6 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: absoluteUrl('/writing'), lastModified: now, changeFrequency: 'weekly', priority: 0.6 },
     { url: absoluteUrl('/archive'), lastModified: now, changeFrequency: 'weekly', priority: 0.4 },
     { url: absoluteUrl('/about'), lastModified: now, changeFrequency: 'monthly', priority: 0.4 },
+    { url: absoluteUrl('/foundations'), lastModified: now, changeFrequency: 'monthly', priority: 0.2 },
   ]
 
   const postEntries: MetadataRoute.Sitemap = posts.map(post => ({
